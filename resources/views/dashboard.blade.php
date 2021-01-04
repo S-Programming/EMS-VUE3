@@ -1,7 +1,9 @@
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
+            <button style="float: right; border: 1px solid; border-radius: 3px; padding: 5px;" class="myBtn btn btn-info">Check In</button>
         </h2>
     </x-slot>
 
@@ -13,5 +15,28 @@
                 </div>
             </div>
         </div>
+
+    </div>
+    <div class="modal fade" id="MyPopup" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body"></div>
+            <div class="modal-footer" style="text-align: center;">
+              <button type="button" class="coci-btn btn btn-default" >Yes</button>
+              <button type="button" class="btn btn-default" >No</button>
+            </div>
+          </div>
+          
+        </div>
     </div>
 </x-app-layout>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script defer src="{{asset('js/custom.js')}}"></script>
