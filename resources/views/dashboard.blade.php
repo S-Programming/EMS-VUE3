@@ -17,6 +17,7 @@
         </div>
         <!-- END Hero -->
 
+<<<<<<< HEAD
         <!-- Page Content -->
         <div class="content">
             <div class="row justify-content-center">
@@ -38,6 +39,21 @@
                         </div>
                     </div>
                 </div>
+=======
+    </div>
+    <div class="modal fade" id="MyPopup" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+          
+        </div>
+        <div class="modal-body"></div>
+            <div class="modal-footer" style="text-align: center;">
+              <button type="button" class="yes-btn btn btn-default" >Yes</button>
+              <button type="button" class="no-btn btn btn-default" >No</button>
+>>>>>>> 27e5d67356107204b015dc4cb8cbb075cd2dd7b3
             </div>
         </div>
         <!-- END Page Content -->

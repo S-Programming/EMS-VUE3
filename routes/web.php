@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('check', [CicoController::class, 'index'])->name('cico.check');
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('checkintime','CicoController@index')->name('cico.checkintime');
 
+Route::post('ajax/checkintime','CicoController@checkin')->name('cico.checkintime');
+Route::post('ajax/checkouttime','CicoController@checkout')->name('cico.checkouttime');
 
 
 //Route::get('/dashboard', function () {

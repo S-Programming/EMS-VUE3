@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CicoModel;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Cico;
 use Carbon\Carbon;
-use Session 
+use Session; 
 
 class CicoController extends Controller
 {
@@ -14,19 +15,10 @@ class CicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-        dd("asdasdasdas");
-        $cioc = new CicoModel;
-        $cico->checkin = Carbon::now();; 
-      //  $cico->checkout = ;
-        $cico->description = $request->abc;
-        $cico->user_id = session()->getId();
-
-        $cico->save();
-
-        return back()->with('success','Data save successfully');
+        echo "sadddique";
     }
 
     /**
@@ -45,11 +37,30 @@ class CicoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function checkin(Request $request)
     {
-        //
-    }
 
+        $cico = new Cico;
+        $cico->checkin = Carbon::now();
+        $cico->user_id =  Auth::user()->id ?? 0;
+       // dd($cico);
+        $cico->save();
+        
+
+        return back()->with('success','Data save successfully');
+    }
+    public function checkout(Request $request)
+    {
+
+        $user_id =  Auth::user()->id ?? 0;
+        $cico = Cico::where('user_id',$user_id)->first();
+        $cico->checkout = Carbon::now();    
+        $cico->description = $request->description;
+        $cico->save();
+        
+
+        return back()->with('success','Data save successfully');
+    }
     /**
      * Display the specified resource.
      *
