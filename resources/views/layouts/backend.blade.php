@@ -23,8 +23,15 @@
         <!-- Scripts -->
         <script>var baseURL = <?php echo json_encode(url('/')); ?>  </script>
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
-        <script src="{{ asset('assets/js/custom.js') }}"></script>
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
     </head>
     <body>
         <!-- Page Container -->
@@ -333,7 +340,7 @@
                                     <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
                                         <span class="font-size-sm font-w500">Lock Account</span>
                                     </a>
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('logout') }}">
                                         <span class="font-size-sm font-w500">Log Out</span>
                                     </a>
                                 </div>
@@ -572,6 +579,7 @@
 
         <!-- Laravel Scaffolding JS -->
         <!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->
+        <script src="{{ asset('js/custom.js') }}"></script>
 
         @yield('js_after')
     </body>

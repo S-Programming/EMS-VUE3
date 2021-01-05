@@ -1,4 +1,8 @@
 <x-backend-layout>
+    <x-button class="btn btn-block btn-alt-primary" onclick="commonAjaxModel('test_open_modal',1)" data-validation="validation-span-id"
+              id="validation-span-id" >
+        {{ __('Open Modal') }}
+    </x-button>
     <!-- Hero -->
     <div class="bg-body-light">
         <div class="content content-full">
@@ -40,11 +44,9 @@
         </div>
         <div class="modal fade" id="MyPopup" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-
                     </div>
                     <div class="modal-body"></div>
                     <div class="modal-footer" style="text-align: center;">

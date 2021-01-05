@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\CicoController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Route\Http\Dashboard;
+use Route\Http\Test;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+/*
 Route::post('ajax/checkintime','CicoController@checkin')->name('cico.checkintime');
-Route::post('ajax/checkouttime','CicoController@checkout')->name('cico.checkouttime');
-
+Route::post('ajax/checkouttime','CicoController@checkout')->name('cico.checkouttime');*/
+Route::post('/checkin', [CicoController::class, 'checkin'])->middleware('auth')->name('checkin');
+Route::post('/checkout', [CicoController::class, 'checkout'])->middleware('auth')->name('checkout');
 
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
@@ -30,10 +35,14 @@ require __DIR__.'/auth.php';
 
 
 // Example Routes
-Route::view('/', 'landing');
-Route::match(['get', 'post'], '/dashboard', function(){
-    return view('dashboard');
+Route::get('/', function () {
+    $view = (Auth::check()) ? 'dashboard' : 'login';
+    return redirect()->route($view);
 });
 Route::view('/pages/slick', 'pages.slick');
 Route::view('/pages/datatables', 'pages.datatables');
 Route::view('/pages/blank', 'pages.blank');
+
+
+Dashboard::register();
+Test::register();

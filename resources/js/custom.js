@@ -183,3 +183,55 @@ function loadingImage() {
 function reload_page(url) {
     location.href = baseURL + url;
 }
+/**
+ * Created by Abbas Naumani on 2/5/2018.
+ */
+function commonAjaxModel(route, id, containerId) {
+    if (typeof(containerId) == "undefined" || containerId == '') {
+        containerId = 'common_popup_modal';
+    }
+    if (typeof(id) == "undefined" || id == '') {
+        id = 0;
+    }
+    if (typeof(route) == "undefined" || route == '') {
+        route = '';
+    }
+    if (route != '') {
+        var url = baseURL + '/' + route;
+        var dataToPost = {"containerId": containerId, "id": id};
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataToPost,
+            dataType: "json",
+            success: function (data) {
+                console.log('i m herer',data);
+                /*If Modal Div not defined*/
+                if (jQuery('#' + containerId + '_mp').length == 0) {
+                    console.log('i h containerId',containerId);
+                    jQuery("body").append('<div id="' + containerId + '_mp"></div>');
+                }
+                /*Put Modal HTML in Modal Placeholder*/
+                jQuery('#' + containerId + '_mp').html(data.html);
+                /*Show Modal*/
+                jQuery('#' + containerId).modal('show');
+            }, error: function (data) {
+                console.log('error');
+            }
+        });
+    } else {
+        notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+    }
+}
+
+/*
+ * TO CLOSE SPECIFIC MODAL
+ */
+function closeModalById(id) {
+    //$('#' + id + '_close').click();
+    jQuery('#'+ id).modal('hide');
+    setTimeout(function () {
+        jQuery('#' + id + '_mp').html('');
+    }, 1000);
+    uploadedFilesData = [];
+}
