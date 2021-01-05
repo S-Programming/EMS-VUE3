@@ -1,57 +1,79 @@
-<x-rogani-naan-layout>
+<x-guest-layout>
+    <!-- Page Content -->
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+        <div class="hero-static">
+            <div class="content">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-4">
+                        <!-- Sign In Block -->
+                        <div class="block block-rounded block-themed mb-0">
+                            <div class="block-header bg-primary-dark">
+                                <h3 class="block-title">Sign In</h3>
+                                <div class="block-options">
+                                    @if (Route::has('password.request'))
+                                        <a class="btn-block-option font-size-sm" href="{{ route('password.request') }}">
+                                            {{ __('Forgot your password?') }}
+                                        </a>
+                                    @endif
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                                    <a class="btn-block-option" href="{{ route('register') }}" data-toggle="tooltip"
+                                       data-placement="left" title="New Account">
+                                        <i class="fa fa-user-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="block-content">
+                                <div class="p-sm-3 px-lg-4 py-lg-5">
+                                    <h1 class="h2 mb-1">KodeStudio</h1>
+                                    <p class="text-muted">
+                                        Welcome, please login.
+                                    </p>
 
-        <form method="POST" action="{{ route('login') }}" id="login-form-id">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                                    <!-- Sign In Form -->
+                                    <!-- jQuery Validation (.js-validation-signin class is initialized in js/pages/op_auth_signin.min.js which was auto compiled from _js/pages/op_auth_signin.js) -->
+                                    <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                    <form method="POST" action="{{ route('login') }}" id="login-form-id">
+                                        @csrf
+                                        <div class="py-3">
+                                            <div class="form-group">
+                                                <x-input id="email" class="form-control form-control-alt form-control-lg" type="email" name="email" :value="old('email')" required autofocus />
+                                            </div>
+                                            <div class="form-group">
+                                                <x-input id="password" class="form-control form-control-alt form-control-lg"
+                                                         type="password"
+                                                         name="password"
+                                                         required autocomplete="current-password" />
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <x-input type="checkbox" class="custom-control-input" id="login-remember"
+                                                             name="login-remember" />
+                                                    <x-label class="custom-control-label font-w400" for="login-remember" :value="__('Remember Me')" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6 col-xl-5">
+                                                <x-button class="btn btn-block btn-alt-primary" onclick="validateFieldsByFormId(this)" data-validation="validation-span-id"
+                                                          id="validation-span-id" >
+                                                    <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Sign In') }}
+                                                </x-button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END Sign In Form -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Sign In Block -->
+                    </div>
+                </div>
             </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
+            <div class="content content-full font-size-sm text-muted text-center">
+                <strong>KodeStudio.net</strong> &copy; <span data-toggle="year-copy"></span>
             </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3" onclick="validateFieldsByFormId(this)" data-validation="validation-span-id"
-                          id="validation-span-id" >
-                    {{ __('Login') }}
-                </x-button>
-            </div>
-        </form>
+        </div>
     </x-auth-card>
-</x-rogani-naan-layout>
+    <!-- END Page Content -->
+</x-guest-layout>

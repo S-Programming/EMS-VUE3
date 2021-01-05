@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class RoganiNaanLayout extends Component
+class BackendLayout extends Component
 {
     public $name;
     /**
@@ -25,6 +25,6 @@ class RoganiNaanLayout extends Component
      */
     public function render()
     {
-        return view('layouts.rogani-naan');
+        return view('layouts.backend');
     }
 }

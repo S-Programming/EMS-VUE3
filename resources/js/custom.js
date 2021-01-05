@@ -9,7 +9,6 @@ function validateFieldsByFormId(e) {
     if (error.length > 0) {
         showErrors(error);
         flag = false;
-        console.log(error);
     }
     if (flag) {
         e.disabled = true;
@@ -26,23 +25,18 @@ function validateFieldsByFormId(e) {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
                     if (data.redirect_to != '' && typeof(data.redirect_to) != "undefined") {
-                        //  console.log('redirecting',data);
                         setTimeout(function() {
                             reload_page(data.redirect_to)
                         }, 2000);
-                        // setTimeout(, 12000);
                     } else {
                         console.log('not redirecting');
                     }
                 } else {
-                    console.log(data.message);
                     var errors = data.errors;
                     $.each(errors, function(i, val) {
-                        console.log(i, "iiii")
                         if (errors[i] != 'undefined' && errors[i] != null) {
                             let nowErrorMessage = errors[i];
                             if (i == 'errors') {
-                                console.log(errors[i], 'kaya hai');
                                 let newErrors = errors[i];
                                 $.each(newErrors, function(index, value) {
                                     nowErrorMessage = newErrors[index][0] ? newErrors[index][0] : '';
@@ -61,13 +55,10 @@ function validateFieldsByFormId(e) {
                 e.disabled = false;
                 // Error...
                 var errors = $.parseJSON(data.responseText);
-                console.log(errors, '1 mint mian bhi');
                 $.each(errors, function(i, val) {
-                    console.log(i, "iiii")
                     if (errors[i] != 'undefined' && errors[i] != null) {
                         let nowErrorMessage = errors[i];
                         if (i == 'errors') {
-                            console.log(errors[i], 'kaya hai');
                             let newErrors = errors[i];
                             $.each(newErrors, function(index, value) {
                                 nowErrorMessage = newErrors[index][0] ? newErrors[index][0] : '';
@@ -87,19 +78,14 @@ function validateFields(formId) {
     var fields = $("#" + formId + " :input").serializeArray();
     var error = [];
     var skipArray = ['action'];
-    var emailArray = ['email', 'notification_email', 'secondary_notification_email'];
-    var skipforEmpty = ['secondary_notification_email', 'start_date', 'end_date'];
+    var emailArray = ['email'];
+    var skipforEmpty = [];
     var fname = 'no_name';
-    /*var regexy = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;*/
-    /*## Ticket #1701*/
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     $.each(fields, function(i, field) {
         fname = field.name;
         if ($.inArray(fname, skipArray) == -1) {
-            // console.log(fname);
-            // console.log($.inArray(fname, emailArray));
             if ($.trim(field.value) == '') {
-                //error.push( { fname :  'Please enter '+fname} );
                 if ($.inArray(fname, skipforEmpty) == -1) {
                     var myregexp = /\[(.*?)\]/;
                     var match = myregexp.exec(fname);
