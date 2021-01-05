@@ -23,13 +23,12 @@
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
           
         </div>
         <div class="modal-body"></div>
             <div class="modal-footer" style="text-align: center;">
-              <button type="button" class="coci-btn btn btn-default" >Yes</button>
-              <button type="button" class="btn btn-default" >No</button>
+              <button type="button" class="yes-btn btn btn-default" >Yes</button>
+              <button type="button" class="no-btn btn btn-default" >No</button>
             </div>
           </div>
           
