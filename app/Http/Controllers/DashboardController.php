@@ -5,10 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Services\DashboardService;
 use http\Message\Body;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Cico;
-use Carbon\Carbon;
-use Session;
 
 class DashboardController extends Controller
 {
@@ -33,29 +29,6 @@ class DashboardController extends Controller
     }
 
     /**
-     * It will return a HTML for the Modal container
-     *
-     * @return Body
-     */
-    public function checkinModal(Request $request)
-    {
-        $containerId = $request->input('containerId', 'common_popup_modal');
-        $html = view('pages.user._partial._checkin_modal', ['id' => $containerId, 'data' => null])->render();
-        return $this->success('success', ['html' => $html]);
-    }
-    /**
-     * Checking Method for the users to checkin
-     *
-     * @return Body
-     */
-    public function confirmCheckin(Request $request)
-    {
-        $containerId = $request->input('containerId', 'common_popup_modal');
-        ## DB operations
-        return $this->success('success');
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -71,30 +44,7 @@ class DashboardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function checkin(Request $request)
-    {
 
-        $cico = new Cico;
-        $cico->checkin = Carbon::now();
-        $cico->user_id =  Auth::user()->id ?? 0;
-        // dd($cico);
-        $cico->save();
-
-
-        return back()->with('success','Data save successfully');
-    }
-    public function checkout(Request $request)
-    {
-
-        $user_id =  Auth::user()->id ?? 0;
-        $cico = Cico::where('user_id',$user_id)->first();
-        $cico->checkout = Carbon::now();
-        $cico->description = $request->description;
-        $cico->save();
-
-
-        return back()->with('success','Data save successfully');
-    }
     /**
      * Display the specified resource.
      *

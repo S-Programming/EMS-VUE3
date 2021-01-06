@@ -210,6 +210,7 @@ function commonAjaxModel(route, id, containerId) {
                     jQuery("body").append('<div id="' + containerId + '_mp"></div>');
                 }
                 /*Put Modal HTML in Modal Placeholder*/
+                //console.log(data.html);
                 jQuery('#' + containerId + '_mp').html(data.html);
                 /*Show Modal*/
                 jQuery('#' + containerId).modal('show');

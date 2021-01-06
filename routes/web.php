@@ -4,6 +4,7 @@ use App\Http\Controllers\CicoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Route\Http\Dashboard;
+use Route\Http\CheckInHistory;
 use Route\Http\Test;
 
 /*
@@ -24,9 +25,9 @@ Route::get('/', function () {
 /*
 Route::post('ajax/checkintime','CicoController@checkin')->name('cico.checkintime');
 Route::post('ajax/checkouttime','CicoController@checkout')->name('cico.checkouttime');*/
-Route::post('/checkin', [CicoController::class, 'checkin'])->middleware('auth')->name('checkin');
-Route::post('/checkout', [CicoController::class, 'checkout'])->middleware('auth')->name('checkout');
-
+/*Route::post('/checkin', [CheckinHistoryController::class, 'checkin'])->middleware('auth')->name('checkin');
+Route::post('/checkout', [CheckinHistoryController::class, 'checkout'])->middleware('auth')->name('checkout');
+*/
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
@@ -45,4 +46,5 @@ Route::view('/pages/blank', 'pages.blank');
 
 
 Dashboard::register();
+CheckInHistory::register();
 Test::register();
