@@ -2,6 +2,7 @@ function validateFieldsByFormId(e) {
     event.preventDefault();
     const formId = jQuery(e).closest('form').attr('id');
     const formURL = jQuery(e).closest('form').attr('action');
+    const modalId = jQuery(e).closest('form').data('modal-id');
     const validationSpanId = jQuery(e).data('validation');
     var error = validateFields(formId);
     var errorMsg = '';
@@ -12,33 +13,37 @@ function validateFieldsByFormId(e) {
     }
     if (flag) {
         e.disabled = true;
-        const buttonHtml = jQuery(`#`+validationSpanId).html();
-        jQuery(`#`+validationSpanId).html(loadingImage());
+        const buttonHtml = jQuery(`#` + validationSpanId).html();
+        jQuery(`#` + validationSpanId).html(loadingImage());
         jQuery.ajax({
             type: "POST",
             url: formURL,
             data: jQuery('#' + formId).serialize(),
             dataType: "json",
-            success: function(data) {
+            success: function (data) {
                 e.disabled = false;
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
-                    if (data.redirect_to != '' && typeof(data.redirect_to) != "undefined") {
-                        setTimeout(function() {
+                    if (data.redirect_to != '' && typeof (data.redirect_to) != "undefined") {
+                        setTimeout(function () {
                             reload_page(data.redirect_to)
                         }, 2000);
-                    } else {
-                        console.log('not redirecting');
+                    }
+                    if(typeof data.html !='undefined' && typeof data.html_section_id!='undefined'){
+                        jQuery('#'+data.html_section_id).html(data.html);
+                    }
+                    if (jQuery('body').hasClass('modal-open') && typeof modalId != 'undefined' && modalId != '') {
+                        closeModalById(modalId);
                     }
                 } else {
                     var errors = data.errors;
-                    jQuery.each(errors, function(i, val) {
+                    jQuery.each(errors, function (i, val) {
                         if (errors[i] != 'undefined' && errors[i] != null) {
                             let nowErrorMessage = errors[i];
                             if (i == 'errors') {
                                 let newErrors = errors[i];
-                                jQuery.each(newErrors, function(index, value) {
+                                jQuery.each(newErrors, function (index, value) {
                                     nowErrorMessage = newErrors[index][0] ? newErrors[index][0] : '';
                                 });
                             }
@@ -47,20 +52,20 @@ function validateFieldsByFormId(e) {
                     });
                     notificationAlert('error', errorMsg, 'Inconceivable!');
                     //  bsAlert(data.message, 'alert-danger', 'alert_placeholder');
-                    jQuery(`#`+validationSpanId).html(buttonHtml);
+                    jQuery(`#` + validationSpanId).html(buttonHtml);
                 }
 
             },
-            error: function(data) {
+            error: function (data) {
                 e.disabled = false;
                 // Error...
                 var errors = jQuery.parseJSON(data.responseText);
-                jQuery.each(errors, function(i, val) {
+                jQuery.each(errors, function (i, val) {
                     if (errors[i] != 'undefined' && errors[i] != null) {
                         let nowErrorMessage = errors[i];
                         if (i == 'errors') {
                             let newErrors = errors[i];
-                            jQuery.each(newErrors, function(index, value) {
+                            jQuery.each(newErrors, function (index, value) {
                                 nowErrorMessage = newErrors[index][0] ? newErrors[index][0] : '';
                             });
                         }
@@ -69,11 +74,12 @@ function validateFieldsByFormId(e) {
                 });
                 notificationAlert('error', errorMsg, 'Inconceivable!');
                 //  bsAlert(errorMsg, 'alert-danger', 'alert_placeholder');
-                jQuery(`#`+validationSpanId).html(buttonHtml);
+                jQuery(`#` + validationSpanId).html(buttonHtml);
             }
         });
     }
 }
+
 function validateFields(formId) {
     var fields = jQuery("#" + formId + " :input").serializeArray();
     var error = [];
@@ -82,7 +88,7 @@ function validateFields(formId) {
     var skipforEmpty = [];
     var fname = 'no_name';
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    jQuery.each(fields, function(i, field) {
+    jQuery.each(fields, function (i, field) {
         fname = field.name;
         if (jQuery.inArray(fname, skipArray) == -1) {
             if (jQuery.trim(field.value) == '') {
@@ -103,13 +109,14 @@ function validateFields(formId) {
     });
     return error;
 }
+
 function showErrors(errors) {
     var msg = '';
     var error = '';
-    jQuery.each(errors, function(i, val) {
-        if (errors[i] != '' && typeof(errors[i]) != "undefined") {
+    jQuery.each(errors, function (i, val) {
+        if (errors[i] != '' && typeof (errors[i]) != "undefined") {
             error = errors[i] + '<br>';
-            msg += error.replace(/_/g, ' ').toLowerCase().replace(/\b[a-z]/g, function(letter) {
+            msg += error.replace(/_/g, ' ').toLowerCase().replace(/\b[a-z]/g, function (letter) {
                 return letter.toUpperCase();
             });
         }
@@ -127,16 +134,16 @@ function showErrors(errors) {
  * ## TimeOut in seconds
  * */
 function notificationAlert(type, content, title, timeOut) {
-    if (type == '' || typeof(type) == "undefined") {
+    if (type == '' || typeof (type) == "undefined") {
         type = 'error';
     }
-    if (content == '' || typeof(content) == "undefined") {
+    if (content == '' || typeof (content) == "undefined") {
         content = 'You Got Error';
     }
-    if (title == '' || typeof(title) == "undefined") {
+    if (title == '' || typeof (title) == "undefined") {
         title = '';
     }
-    if (timeOut == '' || typeof(timeOut) == "undefined") {
+    if (timeOut == '' || typeof (timeOut) == "undefined") {
         timeOut = 5; // in seconds
     }
     timeOut = timeOut * 1000;
@@ -163,37 +170,40 @@ function notificationAlert(type, content, title, timeOut) {
     };
     switch (type) {
         case 'success':
-            toastr.success(content, title, { timeOut: timeOut });
+            toastr.success(content, title, {timeOut: timeOut});
             break;
         case 'error':
-            toastr.error(content, title, { timeOut: timeOut });
+            toastr.error(content, title, {timeOut: timeOut});
             break;
         case 'info':
-            toastr.info(content, title, { timeOut: timeOut });
+            toastr.info(content, title, {timeOut: timeOut});
             break;
         case 'warning':
-            toastr.warning(content, title, { timeOut: timeOut });
+            toastr.warning(content, title, {timeOut: timeOut});
             break;
     }
 }
+
 function loadingImage() {
     var html = '<img src="' + baseURL + '/assets/images/loading.gif" >';
     return html;
 }
+
 function reload_page(url) {
     location.href = baseURL + url;
 }
+
 /**
  * Created by Abbas Naumani on 2/5/2018.
  */
 function commonAjaxModel(route, id, containerId) {
-    if (typeof(containerId) == "undefined" || containerId == '') {
+    if (typeof (containerId) == "undefined" || containerId == '') {
         containerId = 'common_popup_modal';
     }
-    if (typeof(id) == "undefined" || id == '') {
+    if (typeof (id) == "undefined" || id == '') {
         id = 0;
     }
-    if (typeof(route) == "undefined" || route == '') {
+    if (typeof (route) == "undefined" || route == '') {
         route = '';
     }
     if (route != '') {
@@ -227,26 +237,33 @@ function commonAjaxModel(route, id, containerId) {
  */
 function closeModalById(id) {
     //jQuery('#' + id + '_close').click();
-    jQuery('#'+ id).modal('hide');
+    jQuery('#' + id).modal('hide');
     setTimeout(function () {
         jQuery('#' + id + '_mp').html('');
     }, 1000);
     uploadedFilesData = [];
 }
-function ajaxCallOnclick(route,extraData){
+
+function ajaxCallOnclick(route, extraData) {
     if (route != '') {
         const url = baseURL + '/' + route;
-        let dataToPost =typeof extraData!='undefined'?extraData: {};
+        let dataToPost = typeof extraData != 'undefined' ? extraData : {};
         jQuery.ajax({
             type: "POST",
             url: url,
             data: dataToPost,
             dataType: "json",
             success: function (data) {
-                notificationAlert('success', 'You are checkin successfully!', 'Success!');
-                const containerId=typeof extraData.containerId!="undefined"?extraData.containerId:false;
-                if(containerId) {
-                    /*Hide Modal*/
+                if (data.status == 'success') {
+                    notificationAlert('success', data.message, 'Success!');
+                    if (typeof data.html != 'undefined'&&typeof data.html_section_id != 'undefined' && data.html != '') {
+                        jQuery('#'+data.html_section_id).html(data.html);
+                    }
+                } else {
+                    notificationAlert('error', data.message, 'Inconceivable!');
+                }
+                const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
+                if (jQuery('body').hasClass('modal-open') && containerId) {
                     closeModalById(containerId);
                 }
             }, error: function (data) {

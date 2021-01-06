@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\CommonUtilsFacade;
 use App\Http\Services\DashboardService;
 use http\Message\Body;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class DashboardController extends Controller
         $this->middleware('auth');
         $this->dashboardService = $dashboardService;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +27,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.user.dashboard');
+        return view('pages.user.dashboard', ['is_checkin' => CommonUtilsFacade::isCheckIn()]);
     }
 
     /**
@@ -41,14 +43,14 @@ class DashboardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -59,7 +61,7 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -70,8 +72,8 @@ class DashboardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -82,7 +84,7 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

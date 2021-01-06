@@ -13,9 +13,9 @@ trait ApiResponse
 
     public function error($msg, $errors = [], $statusCode = 200)
     {
-        if (!is_countable($msg)) {
-            $msg = [$msg];
-        }
+//        if (!is_countable($msg)) {
+//            $msg = [$msg];
+//        }
         return response()->json(array_merge(['status' => 'error', 'message' => $msg], $errors), $statusCode);
     }
 

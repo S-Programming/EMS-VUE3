@@ -74,4 +74,16 @@ if (!function_exists('generate_random_string')) {
         }
         return ($id);
     }
+
+    if (!function_exists('isCheckIn')) {
+        /**
+         * Utility method to return true only if already checkin
+         *
+         * @return  bool  true if string is not null and not an empty string
+         */
+        function isCheckIn()
+        {
+            return intval(session('is_checkin', 0));
+        }
+    }
 }

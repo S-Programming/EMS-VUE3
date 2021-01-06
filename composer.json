@@ -43,9 +43,9 @@
             "Route\\":"routes/"
         },
         "files": [
-            "app/Http/Helpers/commonHelper.php",
-            "app/Http/Helpers/generalHelper.php",
-            "app/Http/Helpers/mediaFileHelper.php"
+            "app/Helpers/commonHelper.php",
+            "app/Helpers/generalHelper.php",
+            "app/Helpers/mediaFileHelper.php"
         ]
     },
     "autoload-dev": {

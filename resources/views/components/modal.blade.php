@@ -13,8 +13,7 @@
                         </button>
                     </div>
                 </div>
-               {{$modal_content??''}}
-                {{$action_buttons??''}}
+                {{$modal_content??''}}
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
         </div>
     </x-slot>
     <x-slot name="modal_content" >
-        <form method="POST" action="{{ route('confirm.checkout') }}" id="login-form-id">
+        <form method="POST" action="{{ route('confirm.checkout') }}" id="login-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
             @csrf
             <div class="py-3">
                 <div class="form-group">
@@ -23,6 +23,6 @@
                 </x-button>
             </div>
         </form>
-    
+
     </x-slot>
 </x-modal>

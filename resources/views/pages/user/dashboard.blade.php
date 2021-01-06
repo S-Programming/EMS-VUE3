@@ -2,7 +2,8 @@
     <!-- Hero -->
     <div class="bg-body-light">
         <div class="content content-full">
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2 text-center text-sm-left">
+            <div
+                class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2 text-center text-sm-left">
                 <div class="flex-sm-fill">
                     <h1 class="h3 font-w700 mb-2">
                         Main Dashboard
@@ -16,12 +17,14 @@
                         <i class="fa fa-cog"></i>
                     </button>
                     <div class="dropdown d-inline-block">
-                        <button type="button" class="btn btn-sm btn-alt-primary" id="dropdown-analytics-overview" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-sm btn-alt-primary" id="dropdown-analytics-overview"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-fw fa-calendar-alt"></i>
                             Last 30 days
                             <i class="fa fa-fw fa-angle-down"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-right font-size-sm" aria-labelledby="dropdown-analytics-overview">
+                        <div class="dropdown-menu dropdown-menu-right font-size-sm"
+                             aria-labelledby="dropdown-analytics-overview">
                             <a class="dropdown-item font-w500" href="javascript:void(0)">This Week</a>
                             <a class="dropdown-item font-w500" href="javascript:void(0)">Previous Week</a>
                             <div class="dropdown-divider"></div>
@@ -41,40 +44,39 @@
         <div class="row row-deck">
             <div class="col-sm-6 col-xl-3">
                 <!-- Pending Orders -->
-                <div class="block block-rounded d-flex flex-column">
-                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center" id="checkin-section">
-                        <dl class="mb-0">
-                            <dt class="font-size-h2 font-w700">Checkin</dt>
-                            <dd class="text-muted mb-0">Click here</dd>
-                        </dl>
-                        <x-button class="item item-rounded bg-body" onclick="commonAjaxModel('checkin_modal')" data-validation="validation-span-id"
-                                  id="validation-span-id" >
-                            <i class="fa fa-shopping-cart font-size-h3 text-primary"></i>
-                        </x-button>
-                    </div>
+                <div id="checkin-section" class="block block-rounded d-flex flex-column">
+                    @includeWhen(!$is_checkin,'pages.user._partial._checkin_html')
+                    @includeWhen($is_checkin,'pages.user._partial._checkout_html')
                 </div>
                 <!-- END Pending Orders -->
             </div>
             <div class="col-sm-6 col-xl-3">
-                <!-- New Customers -->
+                <!-- Messages -->
                 <div class="block block-rounded d-flex flex-column">
-                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <div
+                        class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="font-size-h2 font-w700">Checkout</dt>
-                            <dd class="text-muted mb-0">Click here</dd>
+                            <dt class="font-size-h2 font-w700">45</dt>
+                            <dd class="text-muted mb-0">Messages</dd>
                         </dl>
-                        <x-button class="item item-rounded bg-body" onclick="commonAjaxModel('checkout_modal')" data-validation="validation-span-id"
-                                  id="validation-span-id" >
-                            <i class="fa fa-shopping-cart font-size-h3 text-primary"></i>
-                        </x-button>
+                        <div class="item item-rounded bg-body">
+                            <i class="fa fa-inbox font-size-h3 text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                        <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
+                            View all messages
+                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                        </a>
                     </div>
                 </div>
-                <!-- END New Customers -->
+                <!-- END Messages -->
             </div>
             <div class="col-sm-6 col-xl-3">
                 <!-- Messages -->
                 <div class="block block-rounded d-flex flex-column">
-                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <div
+                        class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
                             <dt class="font-size-h2 font-w700">45</dt>
                             <dd class="text-muted mb-0">Messages</dd>
@@ -95,7 +97,8 @@
             <div class="col-sm-6 col-xl-3">
                 <!-- Conversion Rate -->
                 <div class="block block-rounded d-flex flex-column">
-                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <div
+                        class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
                             <dt class="font-size-h2 font-w700">4.5%</dt>
                             <dd class="text-muted mb-0">Conversion Rate</dd>
@@ -124,7 +127,8 @@
                     <div class="block-header block-header-default">
                         <h3 class="block-title">Earnings Summary</h3>
                         <div class="block-options">
-                            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                            <button type="button" class="btn-block-option" data-toggle="block-option"
+                                    data-action="state_toggle" data-action-mode="demo">
                                 <i class="si si-refresh"></i>
                             </button>
                             <button type="button" class="btn-block-option">
@@ -182,7 +186,8 @@
                                     <dd class="text-muted mb-0">Total Orders</dd>
                                 </dl>
                                 <div>
-                                    <div class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-danger bg-danger-light">
+                                    <div
+                                        class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-danger bg-danger-light">
                                         <i class="fa fa-caret-down mr-1"></i>
                                         2.2%
                                     </div>
@@ -214,7 +219,8 @@
                                     <dd class="text-muted mb-0">Total Earnings</dd>
                                 </dl>
                                 <div>
-                                    <div class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-success bg-success-light">
+                                    <div
+                                        class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-success bg-success-light">
                                         <i class="fa fa-caret-up mr-1"></i>
                                         4.2%
                                     </div>
@@ -246,7 +252,8 @@
                                     <dd class="text-muted mb-0">New Customers</dd>
                                 </dl>
                                 <div>
-                                    <div class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-success bg-success-light">
+                                    <div
+                                        class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-success bg-success-light">
                                         <i class="fa fa-caret-up mr-1"></i>
                                         9.3%
                                     </div>
@@ -281,37 +288,46 @@
             <div class="block-header block-header-default">
                 <h3 class="block-title">Recent Orders</h3>
                 <div class="block-options">
-                    <button type="button" class="btn btn-sm btn-alt-primary" data-toggle="class-toggle" data-target="#one-dashboard-search-orders" data-class="d-none">
+                    <button type="button" class="btn btn-sm btn-alt-primary" data-toggle="class-toggle"
+                            data-target="#one-dashboard-search-orders" data-class="d-none">
                         <i class="fa fa-search"></i>
                     </button>
                     <div class="dropdown d-inline-block">
-                        <button type="button" class="btn btn-sm btn-alt-primary" id="dropdown-recent-orders-filters" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-sm btn-alt-primary" id="dropdown-recent-orders-filters"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-fw fa-flask"></i>
                             Filters
                             <i class="fa fa-angle-down ml-1"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right font-size-sm" aria-labelledby="dropdown-recent-orders-filters">
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right font-size-sm"
+                             aria-labelledby="dropdown-recent-orders-filters">
+                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                               href="javascript:void(0)">
                                 Pending..
                                 <span class="badge badge-primary badge-pill">35</span>
                             </a>
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                               href="javascript:void(0)">
                                 Processing
                                 <span class="badge badge-primary badge-pill">15</span>
                             </a>
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                               href="javascript:void(0)">
                                 For Delivery
                                 <span class="badge badge-primary badge-pill">20</span>
                             </a>
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                               href="javascript:void(0)">
                                 Canceled
                                 <span class="badge badge-primary badge-pill">72</span>
                             </a>
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                               href="javascript:void(0)">
                                 Delivered
                                 <span class="badge badge-primary badge-pill">890</span>
                             </a>
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                               href="javascript:void(0)">
                                 All
                                 <span class="badge badge-primary badge-pill">997</span>
                             </a>
@@ -324,7 +340,8 @@
                 <form action="be_pages_dashboard.html" method="POST" onsubmit="return false;">
                     <div class="form-group push">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="one-ecom-orders-search" name="one-ecom-orders-search" placeholder="Search recent orders..">
+                            <input type="text" class="form-control" id="one-ecom-orders-search"
+                                   name="one-ecom-orders-search" placeholder="Search recent orders..">
                             <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-search"></i>
