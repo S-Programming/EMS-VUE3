@@ -40,11 +40,37 @@ class CheckinHistoryController extends Controller
     public function confirmCheckin(Request $request)
     {
         ## DB operations
-        $cico = new CheckinHistory;
-        $cico->checkin = Carbon::now();
-        $cico->user_id =  Auth::user()->id ?? 0;
-        $cico->save();
-        return $this->success('success');
+        $userid = Auth::user()->id;
+        
+        $checkin_history_data = CheckinHistory::where('user_id',$userid)->first();
+        if($checkin_history_data!=null)
+        {
+            $today =  Carbon::parse($checkin_history_data->checkin);
+            if($today->isToday())
+            {
+               // dd("user is checkin today already");
+                return;
+            }
+            else
+            {
+                //dd("user is already checkin previous day and did not check out");
+                $cico = new CheckinHistory;
+                $cico->checkin = Carbon::now();
+                $cico->user_id =  Auth::user()->id ?? 0;
+                $cico->save();
+                return $this->success('success');  
+            }
+        }  
+        else
+        {
+            //dd("For Other user");
+            $cico = new CheckinHistory;
+            $cico->checkin = Carbon::now();
+            $cico->user_id =  Auth::user()->id ?? 0;
+            $cico->save();
+            return $this->success('success');    
+        }  
+           
         
     }
     /**
@@ -66,13 +92,33 @@ class CheckinHistoryController extends Controller
      */
     public function confirmCheckout(Request $request)
     {
+       
+        $userid = Auth::user()->id;
         
-        $user_id =  Auth::user()->id ?? 0;
-        $cico = CheckinHistory::where('user_id',$user_id)->first();
-        $cico->checkout = Carbon::now();    
-        $cico->description = $request->description;
-        $cico->save();
-        return $this->success('success');
+        $checkin_history_data = CheckinHistory::where('user_id',$userid)->first();
+        if($checkin_history_data!=null)
+        {
+            $today =  Carbon::parse($checkin_history_data->checkin);
+            if($today->isToday())
+            {
+                //dd("user is checkin today already");
+                return;
+            }
+            else
+            {
+                return;
+                //dd("user is already checkin previous day and did not check out today");
+            }
+        }  
+        else
+        {
+            $user_id =  Auth::user()->id ?? 0;
+            $cico = CheckinHistory::where('user_id',$user_id)->first();
+            $cico->checkout = Carbon::now();    
+            $cico->description = $request->description;
+            $cico->save();
+            return $this->success('success');
+        }
         
     }
 }

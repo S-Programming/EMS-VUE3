@@ -1,8 +1,4 @@
 <x-backend-layout>
-    <x-button class="btn btn-block btn-alt-primary" onclick="commonAjaxModel('test_open_modal',1)" data-validation="validation-span-id"
-              id="validation-span-id" >
-        {{ __('Open Modal') }}
-    </x-button>
     <!-- Hero -->
     <div class="bg-body-light">
         <div class="content content-full">
