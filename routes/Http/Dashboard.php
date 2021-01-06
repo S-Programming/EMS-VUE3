@@ -11,6 +11,8 @@ class Dashboard
     {
         Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+            Route::post('/checkin_modal', [DashboardController::class, 'checkinModal'])->name('checkin.modal');
+            Route::post('/confirm_checkin', [DashboardController::class, 'confirmCheckin'])->name('confirm.checkin');
         });
     }
 }

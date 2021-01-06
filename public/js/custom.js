@@ -1,8 +1,8 @@
 function validateFieldsByFormId(e) {
     event.preventDefault();
-    const formId = $(e).closest('form').attr('id');
-    const formURL = $(e).closest('form').attr('action');
-    const validationSpanId = $(e).data('validation');
+    const formId = jQuery(e).closest('form').attr('id');
+    const formURL = jQuery(e).closest('form').attr('action');
+    const validationSpanId = jQuery(e).data('validation');
     var error = validateFields(formId);
     var errorMsg = '';
     var flag = true;
@@ -12,12 +12,12 @@ function validateFieldsByFormId(e) {
     }
     if (flag) {
         e.disabled = true;
-        const buttonHtml = $(`#${validationSpanId}`).html();
-        $(`#${validationSpanId}`).html(loadingImage());
-        $.ajax({
+        const buttonHtml = jQuery(`#`+validationSpanId).html();
+        jQuery(`#`+validationSpanId).html(loadingImage());
+        jQuery.ajax({
             type: "POST",
             url: formURL,
-            data: $('#' + formId).serialize(),
+            data: jQuery('#' + formId).serialize(),
             dataType: "json",
             success: function(data) {
                 e.disabled = false;
@@ -33,12 +33,12 @@ function validateFieldsByFormId(e) {
                     }
                 } else {
                     var errors = data.errors;
-                    $.each(errors, function(i, val) {
+                    jQuery.each(errors, function(i, val) {
                         if (errors[i] != 'undefined' && errors[i] != null) {
                             let nowErrorMessage = errors[i];
                             if (i == 'errors') {
                                 let newErrors = errors[i];
-                                $.each(newErrors, function(index, value) {
+                                jQuery.each(newErrors, function(index, value) {
                                     nowErrorMessage = newErrors[index][0] ? newErrors[index][0] : '';
                                 });
                             }
@@ -47,20 +47,20 @@ function validateFieldsByFormId(e) {
                     });
                     notificationAlert('error', errorMsg, 'Inconceivable!');
                     //  bsAlert(data.message, 'alert-danger', 'alert_placeholder');
-                    $(`#${validationSpanId}`).html(buttonHtml);
+                    jQuery(`#`+validationSpanId).html(buttonHtml);
                 }
 
             },
             error: function(data) {
                 e.disabled = false;
                 // Error...
-                var errors = $.parseJSON(data.responseText);
-                $.each(errors, function(i, val) {
+                var errors = jQuery.parseJSON(data.responseText);
+                jQuery.each(errors, function(i, val) {
                     if (errors[i] != 'undefined' && errors[i] != null) {
                         let nowErrorMessage = errors[i];
                         if (i == 'errors') {
                             let newErrors = errors[i];
-                            $.each(newErrors, function(index, value) {
+                            jQuery.each(newErrors, function(index, value) {
                                 nowErrorMessage = newErrors[index][0] ? newErrors[index][0] : '';
                             });
                         }
@@ -69,24 +69,24 @@ function validateFieldsByFormId(e) {
                 });
                 notificationAlert('error', errorMsg, 'Inconceivable!');
                 //  bsAlert(errorMsg, 'alert-danger', 'alert_placeholder');
-                $(`#${validationSpanId}`).html(buttonHtml);
+                jQuery(`#`+validationSpanId).html(buttonHtml);
             }
         });
     }
 }
 function validateFields(formId) {
-    var fields = $("#" + formId + " :input").serializeArray();
+    var fields = jQuery("#" + formId + " :input").serializeArray();
     var error = [];
     var skipArray = ['action'];
     var emailArray = ['email'];
     var skipforEmpty = [];
     var fname = 'no_name';
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    $.each(fields, function(i, field) {
+    jQuery.each(fields, function(i, field) {
         fname = field.name;
-        if ($.inArray(fname, skipArray) == -1) {
-            if ($.trim(field.value) == '') {
-                if ($.inArray(fname, skipforEmpty) == -1) {
+        if (jQuery.inArray(fname, skipArray) == -1) {
+            if (jQuery.trim(field.value) == '') {
+                if (jQuery.inArray(fname, skipforEmpty) == -1) {
                     var myregexp = /\[(.*?)\]/;
                     var match = myregexp.exec(fname);
                     if (match != null) {
@@ -94,7 +94,7 @@ function validateFields(formId) {
                     }
                     error[i] = 'Please enter ' + fname;
                 }
-            } else if ($.inArray(fname, emailArray) > -1) {
+            } else if (jQuery.inArray(fname, emailArray) > -1) {
                 if (!regexy.test(field.value)) {
                     error[i] = 'Please enter correct format of email (example@example.com)';
                 }
@@ -106,7 +106,7 @@ function validateFields(formId) {
 function showErrors(errors) {
     var msg = '';
     var error = '';
-    $.each(errors, function(i, val) {
+    jQuery.each(errors, function(i, val) {
         if (errors[i] != '' && typeof(errors[i]) != "undefined") {
             error = errors[i] + '<br>';
             msg += error.replace(/_/g, ' ').toLowerCase().replace(/\b[a-z]/g, function(letter) {
@@ -199,16 +199,14 @@ function commonAjaxModel(route, id, containerId) {
     if (route != '') {
         var url = baseURL + '/' + route;
         var dataToPost = {"containerId": containerId, "id": id};
-        $.ajax({
+        jQuery.ajax({
             type: "POST",
             url: url,
             data: dataToPost,
             dataType: "json",
             success: function (data) {
-                console.log('i m herer',data);
                 /*If Modal Div not defined*/
                 if (jQuery('#' + containerId + '_mp').length == 0) {
-                    console.log('i h containerId',containerId);
                     jQuery("body").append('<div id="' + containerId + '_mp"></div>');
                 }
                 /*Put Modal HTML in Modal Placeholder*/
@@ -228,10 +226,34 @@ function commonAjaxModel(route, id, containerId) {
  * TO CLOSE SPECIFIC MODAL
  */
 function closeModalById(id) {
-    //$('#' + id + '_close').click();
+    //jQuery('#' + id + '_close').click();
     jQuery('#'+ id).modal('hide');
     setTimeout(function () {
         jQuery('#' + id + '_mp').html('');
     }, 1000);
     uploadedFilesData = [];
+}
+function ajaxCallOnclick(route,extraData){
+    if (route != '') {
+        const url = baseURL + '/' + route;
+        let dataToPost =typeof extraData!='undefined'?extraData: {};
+        jQuery.ajax({
+            type: "POST",
+            url: url,
+            data: dataToPost,
+            dataType: "json",
+            success: function (data) {
+                notificationAlert('success', 'You are checkin successfully!', 'Success!');
+                const containerId=typeof extraData.containerId!="undefined"?extraData.containerId:false;
+                if(containerId) {
+                    /*Hide Modal*/
+                    closeModalById(containerId);
+                }
+            }, error: function (data) {
+                console.log('error');
+            }
+        });
+    } else {
+        notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+    }
 }

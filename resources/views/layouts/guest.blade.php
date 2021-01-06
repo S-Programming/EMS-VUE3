@@ -20,7 +20,7 @@
 
     <!-- Fonts and Styles -->
     @yield('css_before')
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
 
@@ -31,8 +31,14 @@
 <!-- Scripts -->
     <script>var baseURL = <?php echo json_encode(url('/')); ?>  </script>
     <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+    <script src="{{ mix('js/oneui.app.js') }}"></script>
+    <script type="text/javascript">
+        jQuery.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 </head>
 <body>
 <!-- Page Container -->
@@ -84,11 +90,13 @@ MAIN CONTENT LAYOUT
 <!-- END Page Container -->
 
 <!-- OneUI Core JS -->
-<script src="{{ mix('js/oneui.app.js') }}"></script>
+
 
 <!-- Laravel Scaffolding JS -->
  <script src="{{ mix('/js/laravel.app.js') }}"></script>
+<script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+
 @yield('js_after')
 </body>
 </html>

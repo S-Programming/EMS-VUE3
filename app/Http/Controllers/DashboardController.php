@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\DashboardService;
+use http\Message\Body;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cico;
@@ -28,7 +29,30 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        return view('pages.user.dashboard');
+    }
+
+    /**
+     * It will return a HTML for the Modal container
+     *
+     * @return Body
+     */
+    public function checkinModal(Request $request)
+    {
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $html = view('pages.user._partial._checkin_modal', ['id' => $containerId, 'data' => null])->render();
+        return $this->success('success', ['html' => $html]);
+    }
+    /**
+     * Checking Method for the users to checkin
+     *
+     * @return Body
+     */
+    public function confirmCheckin(Request $request)
+    {
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        ## DB operations
+        return $this->success('success');
     }
 
     /**
