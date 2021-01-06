@@ -49,7 +49,7 @@ class CheckinHistoryController extends Controller
             if($today->isToday())
             {
                // dd("user is checkin today already");
-                return;
+                return ("user is checkin today already");
             }
             else
             {
@@ -102,11 +102,11 @@ class CheckinHistoryController extends Controller
             if($today->isToday())
             {
                 //dd("user is checkin today already");
-                return;
+                return ("user is checkin today already");
             }
             else
             {
-                return;
+                return ("user is already checkin previous day and did not check out today");
                 //dd("user is already checkin previous day and did not check out today");
             }
         }  
