@@ -2,14 +2,19 @@
 
 namespace App\Helpers;
 
-class CommonUtils {
+use App\Http\Traits\AuthUser;
+use App\Models\CheckinHistory;
 
+class CommonUtils {
+use AuthUser;
     /**
      * Utility method to return true only if already checkin
      *
      * @return  bool  true if string is not null and not an empty string
      */
     public function isCheckIn() {
-        return intval(session('is_checkin', 0));
+        $userid=$this->isUserCheckin();
+        $checkinHistoryData = CheckinHistory::where('user_id', $userid)->latest()->first();
+        return (!is_null($checkinHistoryData) && is_null($checkinHistoryData->checkout));
     }
 }

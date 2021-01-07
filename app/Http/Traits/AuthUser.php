@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 trait AuthUser
 {
-    protected $data = null;
+    protected $authUserData = null;
 
     public function authUserToken($user)
     {
@@ -20,13 +20,18 @@ trait AuthUser
 
     public function getAuthUser()
     {
-        $user = Auth::check() ? Auth::user() : null;
-        return $this->data['auth_user'] = $user ?? null;
+        return $this->authUserData['auth_user'] = isset($this->authUserData['auth_user']) ? $this->authUserData['auth_user'] : (Auth::check() ? Auth::user() : null);
     }
 
     public function getAuthUserId()
     {
         $user = $this->getAuthUser();
-        return $this->data['user_id'] = $user->id ?? 0;
+        return $user->id ?? 0;
+    }
+    public function isUserCheckin()
+    {
+        $user = $this->getAuthUser();
+        $userLastCheckinRecord=$user->lastCheckin();
+        return !is_null($userLastCheckinRecord) && is_null($userLastCheckinRecord->checkout);
     }
 }

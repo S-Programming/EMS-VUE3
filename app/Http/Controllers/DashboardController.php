@@ -27,7 +27,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.user.dashboard', ['is_checkin' => CommonUtilsFacade::isCheckIn()]);
+        return view('pages.user.dashboard', ['is_checkin' => $this->isUserCheckin()]);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\CommonUtilsFacade;
+use App\Http\Services\CheckinHistoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CheckinHistory;
@@ -12,10 +13,12 @@ use Session;
 
 class CheckinHistoryController extends Controller
 {
-    public function __construct()
+    protected $checkinHistoryService;
+
+    public function __construct(CheckinHistoryService $checkinHistoryService)
     {
         $this->middleware('auth');
-
+        $this->checkinHistoryService = $checkinHistoryService;
     }
 
     public function index()
@@ -44,31 +47,7 @@ class CheckinHistoryController extends Controller
      */
     public function confirmCheckin(Request $request)
     {
-        $isMarkCheckIn=true;
-        ## DB operations
-        $userid = $this->getAuthUserId();
-        if ($userid > 0) {
-            $checkin_history_data = CheckinHistory::where('user_id', $userid)->latest()->first();
-            if (!is_null($checkin_history_data)) {
-                $today = Carbon::parse($checkin_history_data->checkin);
-                /*## Need to improve logic, If user already checkin then will not be able to checkin again*/
-                if ($today->isToday() && !$checkin_history_data->checkout) {
-                    session(['is_checkin'=>true]);
-                    return $this->error('You are already Checked-in');
-                } elseif (!$checkin_history_data->checkout) {
-                    return $this->error('forgot to logout', ['errors' => ['You forgot to checkout last day, please logout first']]);
-                }
-            }
-            if ($isMarkCheckIn) {
-                $cico = new CheckinHistory;
-                $cico->checkin = Carbon::now();
-                $cico->user_id = $userid;
-                $cico->save();
-                session(['is_checkin'=>true]);
-            }
-            $html=view('pages.user._partial._checkout_html')->render();
-            return $this->success('You are successfully checked-in',['html'=>$html,'html_section_id'=>'checkin-section']);
-        }
+        return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckin($request));
     }
 
     /**

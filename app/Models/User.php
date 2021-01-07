@@ -41,4 +41,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * A user can have many vendor profile answers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function checkinHistory() {
+
+        return $this->hasMany(CheckinHistory::class);
+    }
+    /**
+     * Return true if user can impersonate another user. Currently, only user
+     * with the role 'app_admin' can impersonate another user.
+     *
+     * @return bool
+     */
+    public function lastCheckin() {
+
+        return $this->checkinHistory()->latest()->first();
+    }
+
 }

@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class CheckinHistory extends Model
 {
     use HasFactory;
+
     protected $table = 'checkin_history';
+
+    public function getUserLastCheckIn()
+    {
+
+    }
 }
