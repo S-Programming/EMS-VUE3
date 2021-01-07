@@ -70,20 +70,6 @@ class CheckinHistoryController extends Controller
      */
     public function confirmCheckout(Request $request)
     {
-        $userid = $this->getAuthUserId();
-        if ($userid > 0) {
-            $html=view('pages.user._partial._checkin_html')->render();
-            $checkin_history_data = CheckinHistory::where('user_id', $userid)->latest()->first();
-            if ($checkin_history_data != null) {
-                session(['is_checkin'=>false]);
-                if (!$checkin_history_data->checkout) {
-                    $checkin_history_data->checkout = Carbon::now();
-                    $checkin_history_data->description = $request->description ?? '';
-                    $checkin_history_data->save();
-                    return $this->success('CheckOut Successfully!',['html'=>$html,'html_section_id'=>'checkin-section']);
-                }
-            }
-            return $this->error('Something went wrong, please contact support team, thanks', ['errors' => ['Something went wrong, please contact support team, thanks'],'html'=>$html]);
-        }
+        return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckout($request));
     }
 }

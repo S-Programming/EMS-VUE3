@@ -32,6 +32,7 @@
     <script>var baseURL = <?php echo json_encode(url('/')); ?>  </script>
     <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
     <script src="{{ mix('js/oneui.app.js') }}"></script>
+    
     <script type="text/javascript">
         jQuery.ajaxSetup({
             headers: {

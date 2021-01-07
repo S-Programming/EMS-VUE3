@@ -1,4 +1,4 @@
-<x-modal :id="$id??'common_popup_modal'" :class="$class??''" :extra="['cls'=>'bg-primary-dark']">
+<x-modal :id="$id??'common_popup_modal'" :class="$class??'modal-lg'" :extra="['cls'=>'bg-primary-dark']">
     <x-slot name="modal_header_content">
         <h3 class="block-title">CheckOut</h3>
     </x-slot>
@@ -12,7 +12,7 @@
             @csrf
             <div class="py-3">
                 <div class="form-group">
-                    <textarea id="description" class="form-control form-control-alt form-control-lg"  name="description"  required autofocus ></textarea>
+                    <textarea id="myTextareas" class="tinymce-editor-cls form-control form-control-alt form-control-lg"  name="description"  required autofocus ></textarea>
                 </div>
             </div>
             <div class="block-content block-content-full text-right border-top">

@@ -26,6 +26,7 @@
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
 {{--        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
         <script src="{{ mix('js/oneui.app.js') }}"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.1/tinymce.min.js"></script>
         <script type="text/javascript">
             jQuery.ajaxSetup({
                 headers: {

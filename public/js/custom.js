@@ -4,6 +4,10 @@ function validateFieldsByFormId(e) {
     const formURL = jQuery(e).closest('form').attr('action');
     const modalId = jQuery(e).closest('form').data('modal-id');
     const validationSpanId = jQuery(e).data('validation');
+    var description =  tinyMCE.activeEditor.getContent();
+    //tinyMCE.activeEditor.getContent({format : 'raw'});
+      //  tinymce.get('tinymce-editor-cls').getContent();
+    console.log(description);
     var error = validateFields(formId);
     var errorMsg = '';
     var flag = true;
@@ -90,6 +94,14 @@ function validateFields(formId) {
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     jQuery.each(fields, function (i, field) {
         fname = field.name;
+            let elementObj=jQuery("textarea[name='"+fname+"']");
+            if(elementObj){
+            if(elementObj.hasClass('tinymce-editor-cls')){
+            field.value =  tinyMCE.activeEditor.getContent();
+            elementObj.val(field.value);
+          }
+        }
+        
         if (jQuery.inArray(fname, skipArray) == -1) {
             if (jQuery.trim(field.value) == '') {
                 if (jQuery.inArray(fname, skipforEmpty) == -1) {
@@ -230,6 +242,7 @@ function commonAjaxModel(route, id, containerId) {
     } else {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
+    tinymce.remove('.tinymce-editor-cls');
 }
 
 /*
@@ -242,6 +255,7 @@ function closeModalById(id) {
         jQuery('#' + id + '_mp').html('');
     }, 1000);
     uploadedFilesData = [];
+
 }
 
 function ajaxCallOnclick(route, extraData) {
@@ -274,3 +288,4 @@ function ajaxCallOnclick(route, extraData) {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
+
