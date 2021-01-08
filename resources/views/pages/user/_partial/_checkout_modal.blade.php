@@ -10,9 +10,15 @@
     <x-slot name="modal_content" >
         <form method="POST" action="{{ route('confirm.checkout') }}" id="login-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
             @csrf
+            @php
+                $inyMceConfig = theme_tinyMCE_default_config();
+                $inyMceConfig['is_tiny_mce_modal'] = $id??'common_popup_modal';
+                $inyMceConfig['selector'] = '.tinymce-editor-cls';
+               echo theme_tinyMCE_script($inyMceConfig);
+            @endphp
             <div class="py-3">
                 <div class="form-group">
-                    <textarea id="myTextareas" class="tinymce-editor-cls form-control form-control-alt form-control-lg"  name="description"  required autofocus ></textarea>
+                    <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="description"  required autofocus ></textarea>
                 </div>
             </div>
             <div class="block-content block-content-full text-right border-top">
@@ -23,6 +29,5 @@
                 </x-button>
             </div>
         </form>
-
     </x-slot>
 </x-modal>

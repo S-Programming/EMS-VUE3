@@ -13,9 +13,9 @@ trait ApiResponse
 
     public function error($msg, $data = [], $statusCode = 200)
     {
-//        if (!is_countable($msg)) {
-//            $msg = [$msg];
-//        }
+        //        if (!is_countable($msg)) {
+        //            $msg = [$msg];
+        //        }
         $response = (isset($msg['status']) && trim($msg['status']) == 'error') ? $msg : $this->response(['message' => $msg]);
         return $this->sendJsonResponse($response, $data, $statusCode);
     }

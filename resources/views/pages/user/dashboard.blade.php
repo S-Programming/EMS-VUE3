@@ -45,9 +45,10 @@
             <div class="col-sm-6 col-xl-3">
                 <!-- Pending Orders -->
                 <div id="checkin-section" class="block block-rounded d-flex flex-column">
+
                     @includeWhen(!$is_checkin,'pages.user._partial._checkin_html')
                     @includeWhen($is_checkin,'pages.user._partial._checkout_html')
-                   
+ 
                 </div>
 
                 <!-- END Pending Orders -->
@@ -363,17 +364,26 @@
                     <table class="table table-borderless table-striped table-vcenter">
                         <thead>
                         <tr>
-                            <th class="text-center" style="width: 120px;">Order ID</th>
-                            <th class="d-none d-sm-table-cell">Created</th>
-                            <th class="d-none d-xl-table-cell">Customer</th>
-                            <th>Status</th>
-                            <th class="d-none d-xl-table-cell text-center">Products</th>
-                            <th class="d-none d-sm-table-cell text-center">Profit</th>
-                            <th class="d-none d-sm-table-cell text-right">Value</th>
+                            <th class="text-center" style="width: 120px;">User ID</th>
+                            <th class="d-none d-sm-table-cell">Check In Time</th>
+                            <th class="d-none d-xl-table-cell">Check Out Time</th>
+                            <th class="d-none d-sm-table-cell text-center">Day</th>
+                            <th>Description</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                            @if(isset($data) && !empty($data))
+                            @foreach($data as $key => $data)
+                                <tr>
+                                <th>{{$data->user_id}}</th>
+                                <th>{{$data->checkin}}</th>
+                                <th>{{$data->checkout ?? "Not CheckOut"}}</th>
+                                <th>{{$data->created_at->format('d M') ?? "No Description"}}</th>
+                                <th>{{$data->description ?? "No Description"}}</th>
+                                </tr>
+                            @endforeach
+                            @endif
+                        {{-- <tr>
                             <td class="text-center font-size-sm">
                                 <a class="font-w600" href="javascript:void(0)">
                                     <strong>ORD.00965</strong>
@@ -395,8 +405,8 @@
                             <td class="d-none d-sm-table-cell text-right font-size-sm">
                                 <strong>$614,69</strong>
                             </td>
-                        </tr>
-                        <tr>
+                        </tr> --}}
+                        {{-- <tr>
                             <td class="text-center font-size-sm">
                                 <a class="font-w600" href="javascript:void(0)">
                                     <strong>ORD.00964</strong>
@@ -579,7 +589,7 @@
                             <td class="d-none d-sm-table-cell text-right font-size-sm">
                                 <strong>$514,83</strong>
                             </td>
-                        </tr>
+                        </tr> --}}
                         </tbody>
                     </table>
                 </div>

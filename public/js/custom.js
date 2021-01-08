@@ -4,10 +4,6 @@ function validateFieldsByFormId(e) {
     const formURL = jQuery(e).closest('form').attr('action');
     const modalId = jQuery(e).closest('form').data('modal-id');
     const validationSpanId = jQuery(e).data('validation');
-   // var description =  tinyMCE.activeEditor.getContent();
-    //tinyMCE.activeEditor.getContent({format : 'raw'});
-      //  tinymce.get('tinymce-editor-cls').getContent();
-   // console.log(description);
     var error = validateFields(formId);
     var errorMsg = '';
     var flag = true;
@@ -101,7 +97,7 @@ function validateFields(formId) {
             elementObj.val(field.value);
           }
         }
-        
+
         if (jQuery.inArray(fname, skipArray) == -1) {
             if (jQuery.trim(field.value) == '') {
                 if (jQuery.inArray(fname, skipforEmpty) == -1) {
@@ -242,7 +238,7 @@ function commonAjaxModel(route, id, containerId) {
     } else {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
-    tinymce.remove('.tinymce-editor-cls');
+  //  tinymce.remove('.tinymce-editor-cls');
 }
 
 /*
@@ -289,44 +285,4 @@ function ajaxCallOnclick(route, extraData) {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
-function checkintimer(){
 
-    var countDownDate = new Date("Jan 8, 2021 6:37:25").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get today's date and time
-  var now = new Date().getTime();
-    
-  // Find the distance between now and the count down date
-  var distance = now - countDownDate;
-    
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("checkintimer").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-  console.log(document.getElementById("checkintimer").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ");
-   document.getElementById("demo32").innerHTML = new Date()
-    
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("checkintimer").innerHTML = "EXPIRED";
-  }
-}, 1000);
-
-}
-function myFunction(route,extraData)
-{
-    ajaxCallOnclick(route,extraData);
-    checkintimer();
-    
-
-}

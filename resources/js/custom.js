@@ -90,6 +90,14 @@ function validateFields(formId) {
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     jQuery.each(fields, function (i, field) {
         fname = field.name;
+        let elementObj=jQuery("textarea[name='"+fname+"']");
+        if(elementObj){
+            if(elementObj.hasClass('tinymce-editor-cls')){
+                field.value =  tinyMCE.activeEditor.getContent();
+                elementObj.val(field.value);
+            }
+        }
+
         if (jQuery.inArray(fname, skipArray) == -1) {
             if (jQuery.trim(field.value) == '') {
                 if (jQuery.inArray(fname, skipforEmpty) == -1) {
@@ -230,6 +238,7 @@ function commonAjaxModel(route, id, containerId) {
     } else {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
+    //  tinymce.remove('.tinymce-editor-cls');
 }
 
 /*
@@ -242,6 +251,7 @@ function closeModalById(id) {
         jQuery('#' + id + '_mp').html('');
     }, 1000);
     uploadedFilesData = [];
+
 }
 
 function ajaxCallOnclick(route, extraData) {
