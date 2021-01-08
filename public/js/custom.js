@@ -280,6 +280,7 @@ function ajaxCallOnclick(route, extraData) {
                 console.log('error');
             }
         });
+
     } else {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }

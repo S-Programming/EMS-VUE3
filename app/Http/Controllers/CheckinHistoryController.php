@@ -46,6 +46,7 @@ class CheckinHistoryController extends Controller
      */
     public function confirmCheckin(Request $request)
     {
+        
         return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckin($request));
     }
 
