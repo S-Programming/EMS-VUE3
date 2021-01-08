@@ -7,10 +7,13 @@ namespace App\Http\Services;
 use App\Http\Services\BaseService\BaseService;
 use App\Models\CheckinHistory;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
 class CheckinHistoryService extends BaseService
 {
+
     public function confirmCheckin(Request $request)
     {
         $isMarkCheckIn = true;
@@ -42,7 +45,7 @@ class CheckinHistoryService extends BaseService
     {
         $userid = $this->getAuthUserId();
         if ($userid > 0) {
-            $html=view('pages.user._partial._checkin_html')->render();
+            $html = view('pages.user._partial._checkin_html')->render();
             $checkin_history_data = CheckinHistory::where('user_id', $userid)->latest()->first();
             if ($checkin_history_data != null) {
                 //session(['is_checkin'=>false]);
@@ -50,10 +53,10 @@ class CheckinHistoryService extends BaseService
                     $checkin_history_data->checkout = Carbon::now();
                     $checkin_history_data->description = $request->description ?? '';
                     $checkin_history_data->save();
-                    return $this->successResponse('CheckOut Successfully!',['html'=>$html,'html_section_id'=>'checkin-section']);
+                    return $this->successResponse('CheckOut Successfully!', ['html' => $html, 'html_section_id' => 'checkin-section']);
                 }
             }
-            return $this->errorResponse('Something went wrong, please contact support team, thanks', ['errors' => ['Something went wrong, please contact support team, thanks'],'html'=>$html]);
+            return $this->errorResponse('Something went wrong, please contact support team, thanks', ['errors' => ['Something went wrong, please contact support team, thanks'], 'html' => $html]);
         }
     }
 }

@@ -6,9 +6,14 @@ use App\Facades\CommonUtilsFacade;
 use App\Http\Services\DashboardService;
 use http\Message\Body;
 use Illuminate\Http\Request;
+use App\Models\CheckinHistory;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+//use App\Http\Services\CheckinHistoryService;
 
 class DashboardController extends Controller
 {
+    protected $dashboardService;
     /**
      * Create a new controller instance.
      *
@@ -25,9 +30,25 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.user.dashboard', ['is_checkin' => $this->isUserCheckin()]);
+        // $weekMap = [
+        //     0 => 'SUNDAY',
+        //     1 => 'MONDAY',
+        //     2 => 'TUESDAY',
+        //     3 => 'WEDNESDAY',
+        //     4 => 'THURSDAY',
+        //     5 => 'FRIDAY',
+        //     6 => 'SATURDAY',
+        // ];
+        // $dayOfTheWeek = Carbon::now()->dayOfWeek;
+        // $weekday = $weekMap[$dayOfTheWeek];
+        // $user_id = Auth::user()->id;
+        // $loggedin_user = CheckinHistory::where('user_id', $user_id)->get();
+        // return view('pages.user.dashboard', ['is_checkin' => $this->isUserCheckin(), 'data' => $loggedin_user]);
+
+        return $this->dashboardService->showCheckinHistory($request);
+        // return $this->sendJsonResponse($this->dashboardService->showCheckinHistory($request));
     }
 
     /**
