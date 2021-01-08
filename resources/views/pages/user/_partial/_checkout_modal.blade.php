@@ -14,7 +14,7 @@
                 $inyMceConfig = theme_tinyMCE_default_config();
                 $inyMceConfig['is_tiny_mce_modal'] = $id??'common_popup_modal';
                 $inyMceConfig['selector'] = '.tinymce-editor-cls';
-                theme_tinyMCE_script($inyMceConfig);
+               echo theme_tinyMCE_script($inyMceConfig);
             @endphp
             <div class="py-3">
                 <div class="form-group">

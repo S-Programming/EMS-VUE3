@@ -4,10 +4,6 @@ function validateFieldsByFormId(e) {
     const formURL = jQuery(e).closest('form').attr('action');
     const modalId = jQuery(e).closest('form').data('modal-id');
     const validationSpanId = jQuery(e).data('validation');
-    var description =  tinyMCE.activeEditor.getContent();
-    //tinyMCE.activeEditor.getContent({format : 'raw'});
-    //  tinymce.get('tinymce-editor-cls').getContent();
-    console.log(description);
     var error = validateFields(formId);
     var errorMsg = '';
     var flag = true;
@@ -242,7 +238,7 @@ function commonAjaxModel(route, id, containerId) {
     } else {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
-    tinymce.remove('.tinymce-editor-cls');
+    //  tinymce.remove('.tinymce-editor-cls');
 }
 
 /*
