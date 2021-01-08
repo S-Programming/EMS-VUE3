@@ -21,7 +21,8 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-fw fa-calendar-alt"></i>
                             Last 30 days
-                            <i class="fa fa-fw fa-angle-down"></i>
+                            <i class="fa fa-fw fa-angle-down"> <div class="bg-body-light">
+   </i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right font-size-sm"
                              aria-labelledby="dropdown-analytics-overview">
@@ -48,7 +49,7 @@
                     @includeWhen(!$is_checkin,'pages.user._partial._checkin_html')
                     @includeWhen($is_checkin,'pages.user._partial._checkout_html')
                     <div id="checkintimer" class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                        
+
                 </div>
                 </div>
 
