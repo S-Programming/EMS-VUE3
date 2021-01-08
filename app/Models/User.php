@@ -64,4 +64,15 @@ class User extends Authenticatable
         return $this->checkinHistory()->latest()->first();
     }
 
+    /**
+     * User Roles Relation it will retuen the all user assigned roles
+     *
+     * @return bool
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+
 }

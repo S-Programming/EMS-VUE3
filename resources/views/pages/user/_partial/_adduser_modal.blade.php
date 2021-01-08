@@ -13,6 +13,7 @@
                     <x-input id="last_name" class="form-control form-control-alt form-control-lg" type="text" name="last_name" placeholder="Last Name" :value="old('last_name')" required autofocus />
                 </div>
             </div>
+            {{$rolesDropDown??''}}
             <div class="py-2">
                 <div class="form-group">
                     <x-input id="email" class="form-control form-control-alt form-control-lg" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus />

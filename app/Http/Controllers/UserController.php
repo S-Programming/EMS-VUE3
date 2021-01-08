@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Services\UserService;
 use App\Models\User;
@@ -35,7 +36,9 @@ class UserController extends Controller
 
 //        dd(CommonUtilsFacade::isCheckIn());
         $containerId = $request->input('containerId', 'common_popup_modal');
-        $html = view('pages.user._partial._adduser_modal', ['id' => $containerId, 'data' => null])->render();
+        $roles=Role::all();
+        $rolesDropDown=view('utils.roles',['roles'=>$roles??null])->render();
+        $html = view('pages.user._partial._adduser_modal', ['id' => $containerId, 'data' => null,'roles_dropdown'=>$rolesDropDown])->render();
         return $this->success('success', ['html' => $html]);
     }
 

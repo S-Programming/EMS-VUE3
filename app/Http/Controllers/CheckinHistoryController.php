@@ -33,7 +33,6 @@ class CheckinHistoryController extends Controller
      */
     public function checkinModal(Request $request)
     {
-//        dd(CommonUtilsFacade::isCheckIn());
         $containerId = $request->input('containerId', 'common_popup_modal');
         $html = view('pages.user._partial._checkin_modal', ['id' => $containerId, 'data' => null])->render();
         return $this->success('success', ['html' => $html]);
@@ -46,7 +45,7 @@ class CheckinHistoryController extends Controller
      */
     public function confirmCheckin(Request $request)
     {
-        
+
         return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckin($request));
     }
 

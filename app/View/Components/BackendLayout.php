@@ -2,22 +2,26 @@
 
 namespace App\View\Components;
 
+use App\Http\Traits\AuthUser;
 use Illuminate\View\Component;
 
 class BackendLayout extends Component
 {
-    public $name;
+    use AuthUser;
+    public $user;
+
     /**
      * Create the component instance.
      *
-     * @param  string  $type
-     * @param  string  $message
+     * @param string $type
+     * @param string $message
      * @return void
      */
-    public function __construct($name='')
+    public function __construct()
     {
-        $this->name = $name;
+        $this->user = $this->getAuthUser();
     }
+
     /**
      * Get the view / contents that represents the component.
      *

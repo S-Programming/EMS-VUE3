@@ -32,23 +32,9 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        // $weekMap = [
-        //     0 => 'SUNDAY',
-        //     1 => 'MONDAY',
-        //     2 => 'TUESDAY',
-        //     3 => 'WEDNESDAY',
-        //     4 => 'THURSDAY',
-        //     5 => 'FRIDAY',
-        //     6 => 'SATURDAY',
-        // ];
-        // $dayOfTheWeek = Carbon::now()->dayOfWeek;
-        // $weekday = $weekMap[$dayOfTheWeek];
-        // $user_id = Auth::user()->id;
-        // $loggedin_user = CheckinHistory::where('user_id', $user_id)->get();
-        // return view('pages.user.dashboard', ['is_checkin' => $this->isUserCheckin(), 'data' => $loggedin_user]);
-
-        return $this->dashboardService->showCheckinHistory($request);
-        // return $this->sendJsonResponse($this->dashboardService->showCheckinHistory($request));
+        $user = $this->getAuthUser();
+        $checkinHistory = $user ? $user->checkinHistory : null;
+         return view('pages.user.dashboard', ['is_checkin' => $this->isUserCheckin(), 'checkin_history' => $checkinHistory,'user'=>$user]);
     }
 
     /**

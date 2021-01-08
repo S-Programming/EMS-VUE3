@@ -9,7 +9,7 @@
                         Main Dashboard
                     </h1>
                     <h2 class="h6 font-w500 text-muted mb-0">
-                        Welcome <a class="font-w600" href="javascript:void(0)">Adam</a>, everything looks great.
+                        Welcome <a class="font-w600" href="javascript:void(0)">{{$user->first_name??''}}</a>, everything looks great.
                     </h2>
                 </div>
                 <div class="mt-3 mt-sm-0 ml-sm-3">
@@ -22,7 +22,7 @@
                             <i class="fa fa-fw fa-calendar-alt"></i>
                             Last 30 days
                             <i class="fa fa-fw fa-angle-down">
-                                <div class="bg-body-light">
+                                <div class="bg-body-light"></div>
                             </i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right font-size-sm"
@@ -295,7 +295,7 @@
         <!-- Recent Orders -->
         <div class="block block-rounded">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Recent Orders</h3>
+                <h3 class="block-title bold">My Checkin History</h3>
                 <div class="block-options">
                     <button type="button" class="btn btn-sm btn-alt-primary" data-toggle="class-toggle"
                             data-target="#one-dashboard-search-orders" data-class="d-none">
@@ -367,22 +367,22 @@
                     <table class="table table-borderless table-striped table-vcenter">
                         <thead>
                         <tr>
-                            <th class="text-center" style="width: 120px;">User ID</th>
-                            <th class="d-none d-sm-table-cell">Check In Time</th>
-                            <th class="d-none d-xl-table-cell">Check Out Time</th>
-                            <th class="d-none d-sm-table-cell text-center">Day</th>
+                            <th>User ID</th>
+                            <th>Check In Time</th>
+                            <th>Check Out Time</th>
+                            <th>Day</th>
                             <th>Description</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @if(isset($data) && !empty($data))
-                            @foreach($data as $key => $data)
+                        @if(isset($checkin_history) && !empty($checkin_history))
+                            @foreach($checkin_history as $data)
                                 <tr>
-                                    <th>{{$data->user_id}}</th>
-                                    <th>{{$data->checkin}}</th>
-                                    <th>{{$data->checkout ?? "Not CheckOut"}}</th>
-                                    <th>{{$data->created_at->format('d M') ?? "No Description"}}</th>
-                                    <th>{{$data->description ?? "No Description"}}</th>
+                                    <th>{{$data->user_id??''}}</th>
+                                    <th>{{$data->checkin??''}}</th>
+                                    <th>{{$data->checkout ?? ""}}</th>
+                                    <th>{{$data->created_at->format('d M') ?? ""}}</th>
+                                    <th>{!!$data->description??'' !!}</th>
                                 </tr>
                             @endforeach
                         @endif
