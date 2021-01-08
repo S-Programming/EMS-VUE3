@@ -87,3 +87,68 @@ if (!function_exists('generate_random_string')) {
         }
     }
 }
+function theme_tinyMCE_script($config = array())
+{
+    $config = ($config) ? $config : theme_tinyMCE_default_config();
+    $toolBar = (isset($config['toolbar']) && $config['toolbar']) ? true : false;
+    $readOnly = (isset($config['readonly']) && $config['readonly']) ? true : false;
+    $script = '';
+    $script .= '<script type="text/javascript">';
+    $script .= 'jQuery(function () {
+        tinymce.init({
+            selector: "' . $config['selector'] . '",
+            /*  mode: "exact", //textareas*/
+            ' . ((isset($config['editor_selector']) && $config['editor_selector'] != '') ? ('mode: "specific_textareas",editor_selector : "' . $config['editor_selector'] . '",') : '') . '
+            indentation : "' . $config['indentation'] . '",
+              /*elements: "email_body",*/
+            fontsize_formats: "' . $config['fontsize_formats'] . '",
+            theme: "' . $config['theme'] . '",
+            ' . ((isset($config['height']) && $config['height'] > 0) ? 'height:' . $config['height'] . ',' : '') . '
+             //height: 500,
+            plugins: ' . $config['plugins'] . ',
+            /*font_size_style_values: "' . $config['font_size_style_values'] . '",*/
+            toolbar1: "' . $config['toolbar1'] . '",
+            menubar: false,
+            toolbar_items_size: "' . $config['toolbar_items_size'] . '",
+            readonly : ' . ((isset($readOnly) && $readOnly) ? 'true' : 'false') . ',
+            toolbar : ' . ((isset($toolBar) && $toolBar) ? 'true' : 'false') . ',
+            convert_urls:true,
+            relative_urls:false,
+            remove_script_host:false,
+            browser_spellcheck: true,
+            contextmenu: false,
+            branding: false,
+            setup: function (ed) {
+                ed.on(\'init\', function () {
+                    // Font Size and Family Change According to the t #1617
+                    this.getDoc().body.style.fontSize = \'11pt\';
+                    this.getDoc().body.style.fontFamily = \'Verdana\';
+                });
+            }
+        });
+    });';
+    if (($config['is_tiny_mce_modal']) != '')
+        $script .= "jQuery('#" . $config['is_tiny_mce_modal'] . "').on('hide.bs.modal', function () {
+    tinymce.remove('.tinymce-modal');
+    });";
+    $script .= '</script>';
+    return $script;
+}
+
+function theme_tinyMCE_default_config()
+{
+    $config = array();
+    $config['selector'] = "textarea";
+    $config['indentation'] = "20pt";
+    $config['fontsize_formats'] = "8pt 9pt 10pt 11pt 12pt 13pt 14pt 15pt 16pt 17pt 18pt 19pt 20pt 21pt 22pt 23pt 24pt 25pt 26pt 27pt 28pt 29pt 30pt 31pt 32pt 33pt 34pt 35pt 36pt";
+    $config['theme'] = "silver";
+    $config['plugins'] = '["lists", "preview code", "textcolor"]';
+    $config['font_size_style_values'] = "10pt, 11pt, 12pt, 13pt, 18pt, 24pt, 36pt";
+    $config['toolbar1'] = "bold italic underline | alignleft aligncenter alignright alignjustify | fontselect fontsizeselect forecolor backcolor bullist numlist /*preview*/ code  undo redo ";
+//    $config['toolbar1'] = "insertfile undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image preview";
+    $config['toolbar_items_size'] = "small";
+    $config['is_tiny_mce_modal'] = '';
+    $config['readonly'] = false;
+    $config['toolbar'] = true;
+    return $config;
+}
