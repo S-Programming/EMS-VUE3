@@ -47,9 +47,7 @@
                 <div id="checkin-section" class="block block-rounded d-flex flex-column">
                     @includeWhen(!$is_checkin,'pages.user._partial._checkin_html')
                     @includeWhen($is_checkin,'pages.user._partial._checkout_html')
-                    <div id="checkintimer" class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                        
-                </div>
+                   
                 </div>
 
                 <!-- END Pending Orders -->
@@ -60,8 +58,10 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="font-size-h2 font-w700">45</dt>
-                            <dd class="text-muted mb-0">Messages</dd>
+                            <div id="checkintimer" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
+
+                            <!-- <dt class="font-size-h2 font-w700">45</dt>
+                            <dd class="text-muted mb-0">Messages</dd> -->
                         </dl>
                         <div class="item item-rounded bg-body">
                             <i class="fa fa-inbox font-size-h3 text-primary"></i>
@@ -82,8 +82,9 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="font-size-h2 font-w700">45</dt>
-                            <dd class="text-muted mb-0">Messages</dd>
+                            <!-- <dt class="font-size-h2 font-w700">45</dt>
+                            <dd class="text-muted mb-0">Messages</dd> -->
+                            <p id="demo32"></p>
                         </dl>
                         <div class="item item-rounded bg-body">
                             <i class="fa fa-inbox font-size-h3 text-primary"></i>

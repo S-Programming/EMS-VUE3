@@ -28,6 +28,7 @@ class CheckinHistoryService extends BaseService
                 }
             }
             if ($isMarkCheckIn) {
+                
                 $cico = new CheckinHistory;
                 $cico->checkin = Carbon::now();
                 $cico->user_id = $userid;

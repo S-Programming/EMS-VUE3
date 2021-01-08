@@ -8,10 +8,12 @@
         </div>
         <div class="block-content block-content-full text-right border-top">
             <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">No</button>
-            <button type="button" class="btn btn-primary"
-                    onclick="ajaxCallOnclick('confirm_checkin',{containerId:'{{"$id"??'common_popup_modal123'}}'})">Yes,
+            <button type="button" class="checkin-btn btn btn-primary"  onclick="myFunction('confirm_checkin',{containerId:'{{"$id"??'common_popup_modal123'}}'})" 
+                    >Yes,
                 Checkin
             </button>
+           
         </div>
     </x-slot>
+
 </x-modal>
