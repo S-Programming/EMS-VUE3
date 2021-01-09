@@ -33,13 +33,7 @@ class UserController extends Controller
      */
     public function userModal(Request $request)
     {
-
-//        dd(CommonUtilsFacade::isCheckIn());
-        $containerId = $request->input('containerId', 'common_popup_modal');
-        $roles=Role::all();
-        $rolesDropDown=view('utils.roles',['roles'=>$roles??null])->render();
-        $html = view('pages.user._partial._adduser_modal', ['id' => $containerId, 'data' => null,'roles_dropdown'=>$rolesDropDown])->render();
-        return $this->success('success', ['html' => $html]);
+        return $this->sendJsonResponse($this->userService->userModal($request));
     }
 
     /**
@@ -47,21 +41,29 @@ class UserController extends Controller
      *
      * @return Body
      */
-    public function confirmAdduser(Request $request)
+    public function confirmAddUser(Request $request)
     {
         return $this->sendJsonResponse($this->userService->confirmAdduser($request));
     }
 
 
     /**
-     * Display the specified resource.
+     * It will return a HTML for the Modal container for confirmation of deletion
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Body
      */
-    public function show($id)
+    public function userDeleteModal(Request $request)
     {
-        //
+        return $this->sendJsonResponse($this->userService->userDeleteModal($request));
+    }
+    /**
+     * Method for the Deleting Users
+     *
+     * @return Body
+     */
+    public function confirmDeleteUser(Request $request)
+    {
+        return $this->sendJsonResponse($this->userService->confirmDeleteUser($request));
     }
 
     /**

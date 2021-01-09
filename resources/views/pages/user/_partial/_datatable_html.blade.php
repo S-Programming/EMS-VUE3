@@ -14,6 +14,7 @@
             <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
             <th class="d-none d-sm-table-cell" style="width: 15%;">Access</th>
             <th style="width: 15%;">Registered</th>
+            <th style="width: 15%;">opertaion</th>
         </tr>
         </thead>
         <tbody>
@@ -31,35 +32,15 @@
                     <td>
                         <em class="text-muted font-size-sm">{{(isset($user->created_at)?$user->created_at->format('d M'):'')}}</em>
                     </td>
+                    <td>
+                         <button class="btn btn-info" onclick="commonAjaxModel('edituser_modal',{{$user->id}})"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger" onclick="commonAjaxModel('deleteuser_modal',{{$user->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+                    </td>
                 </tr>
             @endforeach
         @endif
-        <tr>
-            <td class="text-center font-size-sm">2</td>
-            <td class="font-w600 font-size-sm">Carl Wells</td>
-            <td class="d-none d-sm-table-cell font-size-sm">
-                client2<em class="text-muted">@example.com</em>
-            </td>
-            <td class="d-none d-sm-table-cell">
-                <span class="badge badge-warning">Trial</span>
-            </td>
-            <td>
-                <em class="text-muted font-size-sm">6 days ago</em>
-            </td>
-        </tr>
-        <tr>
-            <td class="text-center font-size-sm">3</td>
-            <td class="font-w600 font-size-sm">Scott Young</td>
-            <td class="d-none d-sm-table-cell font-size-sm">
-                client3<em class="text-muted">@example.com</em>
-            </td>
-            <td class="d-none d-sm-table-cell">
-                <span class="badge badge-success">VIP</span>
-            </td>
-            <td>
-                <em class="text-muted font-size-sm">9 days ago</em>
-            </td>
-        </tr>
+        
         </tbody>
     </table>
 </div>

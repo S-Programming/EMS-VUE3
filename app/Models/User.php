@@ -43,7 +43,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    
     /**
      * A user can have many vendor profile answers.
      *
@@ -73,6 +73,5 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
-
-
+ 
 }

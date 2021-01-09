@@ -12,7 +12,10 @@ class User
         Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/user', [UserController::class, 'index'])->name('user.list');
             Route::post('/adduser_modal', [UserController::class, 'userModal'])->name('user.modal');
-             Route::post('/confirm_adduser', [UserController::class, 'confirmAdduser'])->name('confirm.adduser');
+            Route::post('/edituser_modal', [UserController::class, 'userModal'])->name('user.modal');
+            Route::post('/deleteuser_modal', [UserController::class, 'userDeleteModal'])->name('delete.user.modal');
+             Route::post('/confirm_delete', [UserController::class, 'confirmDeleteUser'])->name('confirm.delete.user');
+             Route::post('/confirm_adduser', [UserController::class, 'confirmAddUser'])->name('confirm.adduser');
         });
 
     }

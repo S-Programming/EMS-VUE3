@@ -19,6 +19,7 @@ class UserService extends BaseService
             return $this->errorResponse('User Submittion Failed');
             }
             if (isset($request) && !empty($request)) {
+
                 $users = User::updateOrCreate([
                     'id' => $request->id,
                 ],[
@@ -28,19 +29,53 @@ class UserService extends BaseService
                     'phone_number' => $request->phone_number,
                     'password' => bcrypt('12345678')
                 ]);
+                
                 $user_id = $users->id;
-                $role = new Role;
-                $role->name = "User";
-                $role->route = "/user";
-                $role->save();
-                $role_id = $role->id;
                 $roleuser = new RoleUser;
                 $roleuser->user_id = $user_id;
-                $roleuser->role_id = $role_id;
+                $roleuser->role_id = $request->roles;
                 $roleuser->save();
                 $users = User::all();
             }
             $html = view('pages.user._partial._datatable_html',compact('users',$users))->render();
             return $this->successResponse('User has Successfully Added', ['html' => $html, 'html_section_id' => 'userlist-section']);
+    }
+    public function userModal(Request $request)
+    {
+        $user_id = $request->id;
+        $user_data = User::find($user_id);
+//        dd(CommonUtilsFacade::isCheckIn());
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $roles=Role::all();
+        $rolesDropDown=view('utils.roles',['roles'=>$roles??null])->render();
+        $html = view('pages.user._partial._adduser_modal', ['id' => $containerId, 'data' => null,'roles_dropdown'=>$rolesDropDown,'user_data'=>$user_data])->render();
+        
+        return $this->successResponse('success', ['html' => $html]);
+    }
+
+    public function userDeleteModal(Request $request)
+    {
+        $user_id = $request->id;
+//        dd(CommonUtilsFacade::isCheckIn());
+        $containerId = $request->input('containerId', 'common_popup_modal');
+       // $role_data=Role::find($user_id);
+        $html = view('pages.user._partial._delete_user_modal', ['id' => $containerId,'user_id'=>$user_id])->render();
+        
+        return $this->successResponse('success', ['html' => $html]);
+    }
+    public function confirmDeleteUser(Request $request)
+    {
+        $login_id = $this->getAuthUserId();
+        $user_id = $request->id;
+        if($user_id == $login_id)
+        {
+            return $this->errorResponse('You dont have Authorization to Delete this Account');
+        }
+        
+        $user_data = User::find($user_id); 
+        $user_data->delete();
+        $users = User::all();
+        $html = view('pages.user._partial._datatable_html',compact('users',$users))->render();
+        return $this->successResponse('User is Successfully Deleted', ['html' => $html]); 
     }
 }

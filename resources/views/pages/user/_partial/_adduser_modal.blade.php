@@ -5,21 +5,32 @@
     <x-slot name="modal_content">
         <form method="POST" action="{{ route('confirm.adduser') }}" id="login-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
             @csrf
+            
             <div class="py-2">
                 <div class="form-group">
-                    <x-input id="first_name" class="form-control form-control-alt form-control-lg" type="text" name="first_name" placeholder="First Name" :value="old('first_name')" required autofocus />
+                    <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden" name="id" value="{{$user_data->id??0}}" />
+                    <label for="first_name">&nbsp First Name</label>
+                    <x-input id="first_name" class="form-control form-control-alt form-control-lg" type="text" name="first_name" value="{{$user_data->first_name??''}}"   required autofocus />
                 </div>
                 <div class="form-group">
-                    <x-input id="last_name" class="form-control form-control-alt form-control-lg" type="text" name="last_name" placeholder="Last Name" :value="old('last_name')" required autofocus />
+                    <label for="last_name">&nbsp Last Name</label>
+                    <x-input id="last_name" class="form-control form-control-alt form-control-lg" type="text" name="last_name" value="{{$user_data->last_name??''}}"   required  />
                 </div>
             </div>
-            {{$rolesDropDown??''}}
-            <div class="py-2">
-                <div class="form-group">
-                    <x-input id="email" class="form-control form-control-alt form-control-lg" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus />
+           
+            
+            <div class="py-3">
+                 <div class="form-group">
+                    <label for="roles">&nbsp Role</label>
+                    {!!$roles_dropdown??''!!}
                 </div>
                 <div class="form-group">
-                    <x-input id="phone_number" class="form-control form-control-alt form-control-lg" type="text" name="phone_number" placeholder="Phone Number" :value="old('phone_number')" required autofocus />
+                    <label for="email">&nbsp Email</label>
+                    <x-input id="email" class="form-control form-control-alt form-control-lg" type="email" name="email" value="{{$user_data->email??''}}"   required  />
+                </div>
+                <div class="form-group">
+                    <label for="phone_number">&nbsp Phone Number</label>
+                    <x-input id="phone_number" class="form-control form-control-alt form-control-lg" type="text" name="phone_number" value="{{$user_data->phone_number??''}}"   required  />
                 </div>
             </div>
             <div class="block-content block-content-full text-right border-top">

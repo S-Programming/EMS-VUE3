@@ -66,6 +66,8 @@
 
                             <!-- <dt class="font-size-h2 font-w700">45</dt>
                             <dd class="text-muted mb-0">Messages</dd> -->
+                            <div id="checkintimer" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
+
                         </dl>
                         <div class="item item-rounded bg-body">
                             <i class="fa fa-inbox font-size-h3 text-primary"></i>
@@ -88,6 +90,8 @@
                         <dl class="mb-0">
                             <!-- <dt class="font-size-h2 font-w700">45</dt>
                             <dd class="text-muted mb-0">Messages</dd> -->
+                            <div id="demo32" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
+
                             <p id="demo32"></p>
                         </dl>
                         <div class="item item-rounded bg-body">
