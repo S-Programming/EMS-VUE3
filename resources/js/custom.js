@@ -1,6 +1,10 @@
 jQuery(function () {
-    var x = setInterval(function () {
-        document.getElementById("current-timer").innerHTML = new Date();
+    var currentIntervalRef = setInterval(function () {
+        if(jQuery('#current-timer' ).length>0) {
+            document.getElementById("current-timer").innerHTML = new Date();
+        }else{
+            clearInterval(currentIntervalRef);
+        }
     });
     if (isUserCheckin) {
         startCheckinTimer(userLastCheckinTime);
