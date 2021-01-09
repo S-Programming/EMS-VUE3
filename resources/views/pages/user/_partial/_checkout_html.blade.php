@@ -7,7 +7,7 @@
               id="validation-span-id" >
         <i class="fa fa-shopping-cart font-size-h3 text-primary"></i>
     </x-button>
-    
+
 </div>
-<div id="checkintimer" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
+<div id="checkin-timer" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
 

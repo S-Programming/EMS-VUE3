@@ -1,3 +1,12 @@
+jQuery(function () {
+    var x = setInterval(function () {
+        document.getElementById("current-timer").innerHTML = new Date();
+    });
+    if (isUserCheckin) {
+        startCheckinTimer(userLastCheckinTime);
+    }
+});
+
 function validateFieldsByFormId(e) {
     event.preventDefault();
     const formId = jQuery(e).closest('form').attr('id');
@@ -30,8 +39,8 @@ function validateFieldsByFormId(e) {
                             reload_page(data.redirect_to)
                         }, 2000);
                     }
-                    if(typeof data.html !='undefined' && typeof data.html_section_id!='undefined'){
-                        jQuery('#'+data.html_section_id).html(data.html);
+                    if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined') {
+                        jQuery('#' + data.html_section_id).html(data.html);
                     }
                     if (jQuery('body').hasClass('modal-open') && typeof modalId != 'undefined' && modalId != '') {
                         closeModalById(modalId);
@@ -90,12 +99,12 @@ function validateFields(formId) {
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     jQuery.each(fields, function (i, field) {
         fname = field.name;
-            let elementObj=jQuery("textarea[name='"+fname+"']");
-            if(elementObj){
-            if(elementObj.hasClass('tinymce-editor-cls')){
-            field.value =  tinyMCE.activeEditor.getContent();
-            elementObj.val(field.value);
-          }
+        let elementObj = jQuery("textarea[name='" + fname + "']");
+        if (elementObj) {
+            if (elementObj.hasClass('tinymce-editor-cls')) {
+                field.value = tinyMCE.activeEditor.getContent();
+                elementObj.val(field.value);
+            }
         }
 
         if (jQuery.inArray(fname, skipArray) == -1) {
@@ -238,7 +247,7 @@ function commonAjaxModel(route, id, containerId) {
     } else {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
-  //  tinymce.remove('.tinymce-editor-cls');
+    //  tinymce.remove('.tinymce-editor-cls');
 }
 
 /*
@@ -266,8 +275,11 @@ function ajaxCallOnclick(route, extraData) {
             success: function (data) {
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
-                    if (typeof data.html != 'undefined'&&typeof data.html_section_id != 'undefined' && data.html != '') {
-                        jQuery('#'+data.html_section_id).html(data.html);
+                    if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
+                        jQuery('#' + data.html_section_id).html(data.html);
+                    }
+                    if (typeof dataToPost.method_to_execute != 'undefined' && dataToPost.method_to_execute != '') {
+                        window[extraData.method_to_execute]();
                     }
                 } else {
                     notificationAlert('error', data.message, 'Inconceivable!');
@@ -285,74 +297,63 @@ function ajaxCallOnclick(route, extraData) {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
-function deleteRecord(route,id,extraData)
-{
+
+function deleteRecord(route, id, extraData) {
     jQuery.ajax({
-        
+
         url: route,
         type: 'POST',
-        data: { id:id },
-        success: function(data){
+        data: {id: id},
+        success: function (data) {
 
-            if(data.status == 'success'){
+            if (data.status == 'success') {
                 notificationAlert('success', data.message, 'Success!');
                 const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
                 if (jQuery('body').hasClass('modal-open') && containerId) {
                     closeModalById(containerId);
                 }
-                setTimeout(function(){
+                setTimeout(function () {
                     window.location.reload();
 
-                    }, 0)
-            }
-            else
-            {
+                }, 0)
+            } else {
                 notificationAlert('error', 'Route is not defined', 'Inconceivable!');
             }
-                  
-      }
+
+        }
     });
 }
- 
 
-function checkintimer(){
 
-    var countDownDate = new Date("Jan 8, 2021 6:37:25").getTime();
-
+var startCheckinTimer = function (startTime) {
+    const startDateTime = (typeof startTime != "undefined" && startTime != '' && startTime != null) ? startTime : null;
+    var countDownDate = startDateTime ? new Date(startDateTime).getTime() : new Date().getTime(); //"Jan 8, 2021 6:37:25"
 // Update the count down every 1 second
-var x = setInterval(function() {
+    const intervalRef = setInterval(function () {
 
-  // Get today's date and time
-  var now = new Date().getTime();
-    
-  // Find the distance between now and the count down date
-  var distance = now - countDownDate;
-    
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("checkintimer").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-  console.log(document.getElementById("checkintimer").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ");
-   document.getElementById("demo32").innerHTML = new Date()
-    
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("checkintimer").innerHTML = "EXPIRED";
-  }
-}, 1000);
+        // Get today's date and time
+        var now = new Date().getTime();
 
-}
-function myFunction(route,extraData)
-{
-    ajaxCallOnclick(route,extraData);
-    checkintimer();
-    
+        // Find the distance between now and the count down date
+        var distance = now - countDownDate;
 
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Output the result in an element with id="demo"
+        let DaysTimer = ((days > 1) ? days + ' Days, ' : ((days > 0) ? days + 'Day, ' : ''));
+        if(jQuery('#checkin-timer' ).length>0) {
+            document.getElementById("checkin-timer").innerHTML = DaysTimer + hours + "h "
+                + minutes + "m " + seconds + "s ";
+            // If the count down is over, write some text
+            if (distance < 0) {
+                clearInterval(intervalRef);
+                document.getElementById("checkin-timer").innerHTML = "EXPIRED";
+            }
+        }else{
+            clearInterval(intervalRef);
+        }
+    }, 1000);
 }
