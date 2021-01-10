@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Route\Http\Dashboard;
 use Route\Http\User;
+use Route\Http\Role;
 use Route\Http\CheckInHistory;
 use Route\Http\Test;
 
@@ -48,5 +49,6 @@ Route::view('/pages/blank', 'pages.blank');
 
 Dashboard::register();
 User::register();
+Role::register();
 CheckInHistory::register();
 Test::register();

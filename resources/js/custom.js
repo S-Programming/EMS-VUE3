@@ -328,6 +328,33 @@ function deleteRecord(route, id, extraData) {
     });
 }
 
+function deleteRoleRecord(route, id, extraData) {
+    console.log(route);
+    jQuery.ajax({
+
+        url: route,
+        type: 'POST',
+        data: {id: id},
+        success: function (data) {
+
+            if (data.status == 'success') {
+                notificationAlert('success', data.message, 'Success!');
+                const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
+                if (jQuery('body').hasClass('modal-open') && containerId) {
+                    closeModalById(containerId);
+                }
+                setTimeout(function () {
+                    window.location.reload();
+
+                }, 0)
+            } else {
+                notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+            }
+
+        }
+    });
+}
+
 
 var startCheckinTimer = function (startTime) {
     const startDateTime = (typeof startTime != "undefined" && startTime != '' && startTime != null) ? startTime : null;
