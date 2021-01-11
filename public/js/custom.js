@@ -287,6 +287,7 @@ function ajaxCallOnclick(route, extraData) {
 }
 function deleteRecord(route,id,extraData)
 {
+    if (route != '') {
     jQuery.ajax({
         
         url: route,
@@ -307,11 +308,17 @@ function deleteRecord(route,id,extraData)
             }
             else
             {
-                notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+                notificationAlert('error', data.message, 'Inconceivable!');
             }
-                  
-      }
+        }, error: function (data) {
+                console.log('error');
+            }
     });
+    }
+    else
+    {
+        notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+    }
 }
  
 

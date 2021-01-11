@@ -69,7 +69,7 @@ class UserService extends BaseService
         $user_id = $request->id;
         if($user_id == $login_id)
         {
-            return $this->errorResponse('You dont have Authorization to Delete this Account');
+            return $this->errorResponse('Authorization Required',['errors' => ['You dont have Authorization to Delete this Account']]);
         }
         
         $user_data = User::find($user_id); 
