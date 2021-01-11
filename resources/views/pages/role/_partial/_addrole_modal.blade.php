@@ -1,11 +1,11 @@
-<x-modal :id="$id??'common_popup_modal'" :class="$class??'modal-lg'" :extra="['cls'=>'bg-primary-dark']">
+<x-modal :id="$id??'common_popup_modal'" :class="$class??'modal-sm'" :extra="['cls'=>'bg-primary-dark']">
     <x-slot name="modal_header_content">
-        <h3 class="block-title">Add User</h3>
+        <h3 class="block-title">Add Role</h3>
     </x-slot>
     <x-slot name="modal_content">
         <div class="row">
             <div class="col-sm-10 offset-1">
-                <form method="POST" action="{{ route('confirm.adduser') }}" id="login-form-id"
+                <form method="POST" action="{{ route('confirm.addrole') }}" id="login-form-id"
                       data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
                     <div class="card">
@@ -13,21 +13,21 @@
                             <div class="py-2">
                                 <div class="form-group">
                                     <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden"
-                                             name="id" value="{{$user_data->id??0}}"/>
-                                    <label for="first_name">&nbsp First Name</label>
-                                    <x-input id="first_name" class="form-control form-control-alt form-control-lg"
+                                             name="id" value="{{$role_data->id??0}}"/>
+                                    <label for="role">&nbsp Role</label>
+                                    <x-input id="role" class="form-control form-control-alt form-control-lg"
                                              type="text"
-                                             name="first_name" value="{{$user_data->first_name??''}}" required
+                                             name="role" value="{{$role_data->name??''}}" required
                                              autofocus/>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="last_name">&nbsp Last Name</label>
                                     <x-input id="last_name" class="form-control form-control-alt form-control-lg"
                                              type="text"
                                              name="last_name" value="{{$user_data->last_name??''}}" required/>
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="py-3">
+                            <!-- <div class="py-3">
                                 <div class="form-group">
                                     <label for="roles">&nbsp Role</label>
                                     {!!$roles_dropdown??''!!}
@@ -44,7 +44,7 @@
                                              type="text"
                                              name="phone_number" value="{{$user_data->phone_number??''}}" required/>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="block-content block-content-full text-right border-top">

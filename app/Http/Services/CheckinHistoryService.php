@@ -31,14 +31,14 @@ class CheckinHistoryService extends BaseService
                 }
             }
             if ($isMarkCheckIn) {
-                
+
                 $cico = new CheckinHistory;
                 $cico->checkin = Carbon::now();
                 $cico->user_id = $userid;
                 $cico->save();
             }
             $html = view('pages.user._partial._checkout_html')->render();
-            return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section']);
+            return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section','module'=>'checkin']);
         }
     }
 

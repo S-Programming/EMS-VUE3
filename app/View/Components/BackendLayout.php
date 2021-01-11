@@ -8,7 +8,10 @@ use Illuminate\View\Component;
 class BackendLayout extends Component
 {
     use AuthUser;
+
     public $user;
+    public $is_user_checkin;
+    public $user_last_checkin;
 
     /**
      * Create the component instance.
@@ -20,6 +23,8 @@ class BackendLayout extends Component
     public function __construct()
     {
         $this->user = $this->getAuthUser();
+        $this->is_user_checkin = $this->isUserCheckin();
+        $this->user_last_checkin = $this->is_user_checkin ? $this->user->lastCheckin()->checkin : '';
     }
 
     /**

@@ -28,10 +28,18 @@ trait AuthUser
         $user = $this->getAuthUser();
         return $user->id ?? 0;
     }
+
     public function isUserCheckin()
     {
         $user = $this->getAuthUser();
-        $userLastCheckinRecord=$user->lastCheckin();
+        $userLastCheckinRecord = $user ? $user->lastCheckin() : null;
         return !is_null($userLastCheckinRecord) && is_null($userLastCheckinRecord->checkout);
+    }
+
+    public function userLastCheckinTime()
+    {
+        $user = $this->getAuthUser();
+        $userLastCheckinRecord = $user ? $user->lastCheckin() : null;
+        return (!is_null($userLastCheckinRecord) && !is_null($userLastCheckinRecord->checkin)) ? $userLastCheckinRecord->checkin : null;
     }
 }

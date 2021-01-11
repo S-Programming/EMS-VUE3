@@ -9,11 +9,13 @@ use Illuminate\Http\Request;
 use App\Models\CheckinHistory;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+
 //use App\Http\Services\CheckinHistoryService;
 
 class DashboardController extends Controller
 {
     protected $dashboardService;
+
     /**
      * Create a new controller instance.
      *
@@ -34,7 +36,12 @@ class DashboardController extends Controller
     {
         $user = $this->getAuthUser();
         $checkinHistory = $user ? $user->checkinHistory : null;
-         return view('pages.user.dashboard', ['is_checkin' => $this->isUserCheckin(), 'checkin_history' => $checkinHistory,'user'=>$user]);
+        $isCheckin = $this->isUserCheckin();
+        $responseData = ['is_checkin' => $isCheckin, 'checkin_history' => $checkinHistory, 'user' => $user];
+        if ($isCheckin) {
+            $responseData['user_last_checkin_time'] = $this->userLastCheckinTime();
+        }
+        return view('pages.user.dashboard', $responseData);
     }
 
     /**
