@@ -331,7 +331,7 @@ function deleteRecord(route,id,extraData)
                 console.log('error');
             }
         });
-    } 
+    }
     else
     {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
