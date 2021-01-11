@@ -34,6 +34,7 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+       // dd($request->all());
         $user = $this->getAuthUser();
         $checkinHistory = $user ? $user->checkinHistory : null;
         $isCheckin = $this->isUserCheckin();

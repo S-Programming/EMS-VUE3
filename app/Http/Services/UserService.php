@@ -90,4 +90,57 @@ class UserService extends BaseService
         $html = view('pages.user._partial._datatable_html', compact('users', $users))->render();
         return $this->successResponse('User is Successfully Deleted', ['html' => $html]);
     }
+
+    /*public function selfEditProfile()
+    {
+        $user_id = $this->getAuthUserId();
+        if( $user_id > 0)
+        {    
+            $user_data = User::find($user_id);
+            return $this->successResponse('success',[' user_data'=> $user_data]);
+        
+        }
+        else
+        {
+            return $this->errorResponse('Failed');   
+        }
+    }*/
+
+    public function selfUpdateProfile(Request $request)
+    {
+
+        if (isset($request) && !empty($request)) {
+            
+            $user_id =$this->getAuthUserId();
+            $user_data = User::find($user_id);
+            $user_data->first_name = $request->first_name;
+            $user_data->last_name = $request->last_name;
+            $user_data->email = $request->email;
+            $user_data->phone_number = $request->phone_number;
+            //$user_data->password = bcrypt($request->password);
+
+            $user_data->save();
+            return $this->successResponse('Profile is Successfully Updated',['redirect_to'=>'/dashboard']);
+        }
+        else{
+
+            return $this->errorResponse('Profile Updation Failed');   
+        }
+         
+    }
+    public function selfUpdatePassword(Request $request)
+    {
+        if (isset($request) && !empty($request)) 
+        {
+            $user_id = $this->getAuthUserId();
+            $user_data = User::find($user_id);
+            $user_data->password = bcrypt($request->password); 
+            $user_data->save();
+            return $this->successResponse('Password is Successfully Updated',['redirect_to'=>'/dashboard']);
+        }
+        else{
+
+            return $this->errorResponse('Password Updation Failed');   
+        }
+    }
 }
