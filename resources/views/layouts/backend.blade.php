@@ -267,9 +267,15 @@ MAIN CONTENT LAYOUT
                     </li>
                     <li class="nav-main-heading">More</li>
                     <li class="nav-main-item open">
-                        <a class="nav-main-link" href="/">
-                            <i class="nav-main-link-icon si si-globe"></i>
-                            <span class="nav-main-link-name">Landing</span>
+                        <a class="nav-main-link" href="{{route('user.list')}}">
+                            <i class="nav-main-link-icon fa fa-users"></i>
+                            <span class="nav-main-link-name">Users</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item open">
+                        <a class="nav-main-link" href="{{route('role.list')}}">
+                            <i class="nav-main-link-icon fa fa-user"></i>
+                            <span class="nav-main-link-name">Role</span>
                         </a>
                     </li>
                 </ul>
@@ -362,7 +368,7 @@ MAIN CONTENT LAYOUT
                                 <span class="badge badge-pill badge-primary ml-2">3</span>
                             </a>
                             <a class="dropdown-item d-flex align-items-center justify-content-between"
-                               href="javascript:void(0)">
+                               href="{{route('user.self.edit')}}">
                                 <span class="font-size-sm font-w500">Profile</span>
                                 <span class="badge badge-pill badge-primary ml-2">1</span>
                             </a>

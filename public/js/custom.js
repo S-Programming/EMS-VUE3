@@ -35,6 +35,7 @@ function validateFieldsByFormId(e) {
             dataType: "json",
             success: function (data) {
                 e.disabled = false;
+                console.log(data.redirect_to);
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
@@ -100,6 +101,9 @@ function validateFields(formId) {
     var emailArray = ['email'];
     var skipforEmpty = [];
     var fname = 'no_name';
+    var password = '[password]';
+    var confirm_password = '[confirm_password]';
+    var current_password = '[current_password]';
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     jQuery.each(fields, function (i, field) {
         fname = field.name;
@@ -301,8 +305,10 @@ function ajaxCallOnclick(route, extraData) {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
+function deleteRecord(route,id,extraData)
+{
+    if (route != '') {
 
-function deleteRecord(route, id, extraData) {
     jQuery.ajax({
 
         url: route,
@@ -319,40 +325,53 @@ function deleteRecord(route, id, extraData) {
                 setTimeout(function () {
                     window.location.reload();
 
-                }, 0)
-            } else {
-                notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+                    }, 0)
             }
-
-        }
-    });
+            else
+            {
+                notificationAlert('error', data.message, 'Inconceivable!');
+            }
+        }, error: function (data) {
+                console.log('error');
+            }
+        });
+    }
+    else
+    {
+        notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+    }
 }
 
 function deleteRoleRecord(route, id, extraData) {
-    console.log(route);
-    jQuery.ajax({
+    if (route != '') {
+        jQuery.ajax({
 
-        url: route,
-        type: 'POST',
-        data: {id: id},
-        success: function (data) {
+            url: route,
+            type: 'POST',
+            data: {id: id},
+            success: function (data) {
 
-            if (data.status == 'success') {
-                notificationAlert('success', data.message, 'Success!');
-                const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
-                if (jQuery('body').hasClass('modal-open') && containerId) {
-                    closeModalById(containerId);
+                if (data.status == 'success') {
+                    notificationAlert('success', data.message, 'Success!');
+                    const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
+                    if (jQuery('body').hasClass('modal-open') && containerId) {
+                        closeModalById(containerId);
+                    }
+                    setTimeout(function () {
+                        window.location.reload();
+
+                    }, 0)
+                } else {
+                    notificationAlert('error', 'Route is not defined', 'Inconceivable!');
                 }
-                setTimeout(function () {
-                    window.location.reload();
 
-                }, 0)
-            } else {
-                notificationAlert('error', 'Route is not defined', 'Inconceivable!');
             }
-
-        }
-    });
+        });
+    }
+    else
+    {
+        notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+    }   
 }
 
 

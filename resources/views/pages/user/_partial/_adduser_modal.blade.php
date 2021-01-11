@@ -50,7 +50,7 @@
                     <div class="block-content block-content-full text-right border-top">
                         <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">Cancel
                         </button>
-                        <x-button class="checkout-btn btn btn-primary" onclick="validateFieldsByFormId(this)"
+                        <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)"
                                   data-validation="validation-span-id"
                                   id="validation-span-id">
                             <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Submit') }}

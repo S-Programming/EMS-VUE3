@@ -6,6 +6,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Services\UserService;
 use App\Models\User;
+use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
@@ -65,16 +66,31 @@ class UserController extends Controller
     {
         return $this->sendJsonResponse($this->userService->confirmDeleteUser($request));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function selfEditProfile()
     {
-        //
+        $user_id = $this->getAuthUserId();
+        $user_data = User::find($user_id);
+        return view('pages.user.self_edit_profile',['user_data'=>$user_data]);
+
+       //return $this->sendJsonResponse($this->userService->selfEditProfile());
+       
+    }
+
+    /**
+     * Show the form for updating the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function selfUpdateProfile(Request $request)
+    {
+        return $this->sendJsonResponse($this->userService->selfUpdateProfile($request));
     }
 
     /**
@@ -84,9 +100,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function selfUpdatePassword(Request $request)
     {
-        //
+         return $this->sendJsonResponse($this->userService->selfUpdatePassword($request));
     }
 
     /**

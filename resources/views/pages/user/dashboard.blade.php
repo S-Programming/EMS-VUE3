@@ -88,7 +88,7 @@
                             <!-- <dt class="font-size-h2 font-w700">45</dt>
                             <dd class="text-muted mb-0">Messages</dd> -->
                             <div id="jQuery" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
-                            <p id="current-timer"></p>
+                            
                         </dl>
                         <div class="item item-rounded bg-body">
                             <i class="fa fa-inbox font-size-h3 text-primary"></i>
@@ -106,15 +106,10 @@
             <div class="col-sm-6 col-xl-3">
                 <!-- Conversion Rate -->
                 <div class="block block-rounded d-flex flex-column">
-                    <div
-                        class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                        <dl class="mb-0">
-                            <dt class="font-size-h2 font-w700">4.5%</dt>
-                            <dd class="text-muted mb-0">Conversion Rate</dd>
-                        </dl>
-                        <div class="item item-rounded bg-body">
-                            <i class="fa fa-chart-line font-size-h3 text-primary"></i>
-                        </div>
+                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                        <p id="current-timer"></p>
+                        
+                        
                     </div>
                     <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
                         <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">

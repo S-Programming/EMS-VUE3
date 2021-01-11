@@ -93,7 +93,7 @@ MAIN CONTENT LAYOUT
 
 
 <!-- Laravel Scaffolding JS -->
- <script src="{{ mix('/js/laravel.app.js') }}"></script>
+<script src="{{ mix('/js/laravel.app.js') }}"></script>
 <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 
