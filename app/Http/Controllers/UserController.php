@@ -78,8 +78,6 @@ class UserController extends Controller
         $user_data = User::find($user_id);
         return view('pages.user.self_edit_profile',['user_data'=>$user_data]);
 
-       //return $this->sendJsonResponse($this->userService->selfEditProfile());
-       
     }
 
     /**
