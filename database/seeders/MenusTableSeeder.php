@@ -20,5 +20,6 @@ class MenusTableSeeder extends Seeder
 
         ];
         DB::table('menus')->insert($menus);
+
     }
 }

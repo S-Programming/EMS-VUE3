@@ -36,7 +36,6 @@ Route::post('/checkout', [CheckinHistoryController::class, 'checkout'])->middlew
 
 require __DIR__.'/auth.php';
 
-
 // Example Routes
 Route::get('/', function () {
     $view = (Auth::check()) ? 'dashboard' : 'login';
