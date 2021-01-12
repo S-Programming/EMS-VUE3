@@ -19,6 +19,6 @@ class MenuRoleTableSeeder extends Seeder
             ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 3],
             ['is_allow' => 1, 'role_id' => 4, 'menu_id' => 4],
         ];
-        DB::table('menu_roles')->insert($menuRoles);
+        DB::table('menu_role')->insert($menuRoles);
     }
 }

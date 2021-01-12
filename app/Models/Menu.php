@@ -24,7 +24,7 @@ class Menu extends Model
 
     public function menusRole()
     {
-        return $this->belongsToMany(Menu::class);
+        return $this->belongsToMany(Role::class);
     }
 
 }

@@ -7,6 +7,7 @@ use App\Http\Services\DashboardService;
 use http\Message\Body;
 use Illuminate\Http\Request;
 use App\Models\CheckinHistory;
+use App\Models\Menu;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -34,14 +35,18 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+        $menu_data = Menu::with('menusRole')->get();
+        // dd($menu_data);
+
        // dd($request->all());
         $user = $this->getAuthUser();
         $checkinHistory = $user ? $user->checkinHistory : null;
         $isCheckin = $this->isUserCheckin();
-        $responseData = ['is_checkin' => $isCheckin, 'checkin_history' => $checkinHistory, 'user' => $user];
+        $responseData = ['is_checkin' => $isCheckin, 'checkin_history' => $checkinHistory, 'user' => $user, 'menu_data' => $menu_data];
         if ($isCheckin) {
             $responseData['user_last_checkin_time'] = $this->userLastCheckinTime();
         }
+
         return view('pages.user.dashboard', $responseData);
     }
 

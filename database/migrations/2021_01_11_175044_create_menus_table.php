@@ -19,7 +19,6 @@ class CreateMenusTable extends Migration
             $table->tinyInteger('is_parent_menu')->default('1');
             $table->unsignedInteger('parent_menu_id');
             $table->string('link');
-            $table->text('module');
             $table->string('sort_order');
             $table->string('class');
             $table->string('icon');
