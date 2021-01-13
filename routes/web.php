@@ -23,10 +23,12 @@ use Route\Http\Test;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/pages_user_userrecord', [App\Http\Controllers\UserController::class, 'userRecoed'])->name('userrecord');
 /* function () {
     return view('/pages.user.userrecord');
 }*/
+
 /*
 Route::post('ajax/checkintime','CicoController@checkin')->name('cico.checkintime');
 Route::post('ajax/checkouttime','CicoController@checkout')->name('cico.checkouttime');*/
