@@ -8,8 +8,11 @@ use http\Message\Body;
 use Illuminate\Http\Request;
 use App\Models\CheckinHistory;
 use App\Models\Menu;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Constraint\Callback;
 
 //use App\Http\Services\CheckinHistoryService;
 
@@ -36,9 +39,15 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $menu_data = Menu::with('menusRole')->get();
-        // dd($menu_data);
-
-       // dd($request->all());
+        $userId = $this->getAuthUserId();
+        $monthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
+            ->where('user_id', $userId)
+            ->get()->count();
+        //->subMonth()
+        //dd(Carbon::now()->endOfMonth()->subMonth()->toDateTimeString());
+        // dd($monthlyCheckins);
+        //dd(Carbon::now()->startOfMonth()->toDateTimeString());
+        // dd($request->all());
         $user = $this->getAuthUser();
         $checkinHistory = $user ? $user->checkinHistory : null;
         $isCheckin = $this->isUserCheckin();
@@ -46,8 +55,8 @@ class DashboardController extends Controller
         if ($isCheckin) {
             $responseData['user_last_checkin_time'] = $this->userLastCheckinTime();
         }
-
-        return view('pages.user.dashboard', $responseData);
+        $count = DB::table('users')->count();
+        return view('pages.user.dashboard', $responseData)->with(['count' => $count, 'monthlyCheckins' => $monthlyCheckins]);
     }
 
     /**
