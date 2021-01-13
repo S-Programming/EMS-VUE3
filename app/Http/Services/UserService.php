@@ -13,6 +13,9 @@ use Hash;
 
 class UserService extends BaseService
 {
+    // public function userRecoedById(Request $request){
+
+    // }
     public function confirmAdduser(Request $request)
     {
         ## DB operations
@@ -49,7 +52,7 @@ class UserService extends BaseService
     {
         $user_id = $request->id;
         $user_data = User::with('roles')->find($user_id);
-//        dd(CommonUtilsFacade::isCheckIn());
+        //        dd(CommonUtilsFacade::isCheckIn());
         $containerId = $request->input('containerId', 'common_popup_modal');
         $roles = Role::all();
         $userRoles = [];
@@ -69,7 +72,7 @@ class UserService extends BaseService
     public function userDeleteModal(Request $request)
     {
         $user_id = $request->id;
-//        dd(CommonUtilsFacade::isCheckIn());
+        //        dd(CommonUtilsFacade::isCheckIn());
         $containerId = $request->input('containerId', 'common_popup_modal');
         // $role_data=Role::find($user_id);
         $html = view('pages.user._partial._delete_user_modal', ['id' => $containerId, 'user_id' => $user_id])->render();
@@ -81,9 +84,8 @@ class UserService extends BaseService
     {
         $login_id = $this->getAuthUserId();
         $user_id = $request->id;
-        if($user_id == $login_id)
-        {
-            return $this->errorResponse('Authorization Required',['errors' => ['You dont have Authorization to Delete this Account']]);
+        if ($user_id == $login_id) {
+            return $this->errorResponse('Authorization Required', ['errors' => ['You dont have Authorization to Delete this Account']]);
         }
 
         $user_data = User::find($user_id);
@@ -113,7 +115,7 @@ class UserService extends BaseService
 
         if (isset($request) && !empty($request)) {
 
-            $user_id =$this->getAuthUserId();
+            $user_id = $this->getAuthUserId();
             $user_data = User::find($user_id);
             $user_data->first_name = $request->first_name;
             $user_data->last_name = $request->last_name;
@@ -123,19 +125,17 @@ class UserService extends BaseService
 
             $user_data->save();
             return $this->successResponse('Profile is Successfully Updated');
-        }
-        else{
+        } else {
 
             return $this->errorResponse('Profile Updation Failed');
         }
-
     }
     public function selfUpdatePassword(Request $request)
     {
-        if (isset($request) && !empty($request))
-        {
+        if (isset($request) && !empty($request)) {
             $user_id = $this->getAuthUserId();
             $user_data = User::find($user_id);
+<<<<<<< HEAD
             $db_password = $user_data->password;
             $current_password = $request->current_password;
             if(Hash::check($current_password, $db_password)) 
@@ -172,6 +172,12 @@ class UserService extends BaseService
            
         }
         else{
+=======
+            $user_data->password = bcrypt($request->password);
+            $user_data->save();
+            return $this->successResponse('Password is Successfully Updated', ['redirect_to' => '/dashboard']);
+        } else {
+>>>>>>> b40d3cf84a4a7bc90d0afcf6e88d54ba1e7a82fe
 
            
         }

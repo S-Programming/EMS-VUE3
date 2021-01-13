@@ -24,8 +24,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
+Route::get('/pages_user_userrecord', [App\Http\Controllers\UserController::class, 'userRecoed'])->name('userrecord');
+/* function () {
+    return view('/pages.user.userrecord');
+}*/
 
 /*
 Route::post('ajax/checkintime','CicoController@checkin')->name('cico.checkintime');
@@ -37,7 +39,7 @@ Route::post('/checkout', [CheckinHistoryController::class, 'checkout'])->middlew
 //    return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // Example Routes
 Route::get('/', function () {
@@ -47,6 +49,7 @@ Route::get('/', function () {
 Route::view('/pages/slick', 'pages.slick');
 Route::view('/pages/datatables', 'pages.datatables');
 Route::view('/pages/blank', 'pages.blank');
+
 
 
 Dashboard::register();

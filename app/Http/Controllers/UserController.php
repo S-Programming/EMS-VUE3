@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\CheckinHistory;
 use Illuminate\Http\Request;
 use App\Http\Services\UserService;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -25,9 +28,23 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('pages.user.users')->with('users',$users);
+        return view('pages.user.users')->with('users', $users);
     }
-     /**
+
+    public function userRecoed(Request $request)
+    {
+        //dd($this->getAuthUser());
+        $validator = Validator::make($request->all(), [
+            'specificUserId' => 'required | numeric',
+        ]);
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+        $userId = $request->specificUserId;
+        $userData = CheckinHistory::where('user_id', $userId)->get();
+        return view('pages.user.userrecord')->with('userData', $userData);
+    }
+    /**
      * It will return a HTML for the Modal container
      *
      * @return Body
@@ -76,8 +93,7 @@ class UserController extends Controller
     {
         $user_id = $this->getAuthUserId();
         $user_data = User::find($user_id);
-        return view('pages.user.self_edit_profile',['user_data'=>$user_data]);
-
+        return view('pages.user.self_edit_profile', ['user_data' => $user_data]);
     }
 
     /**
@@ -100,7 +116,7 @@ class UserController extends Controller
      */
     public function selfUpdatePassword(Request $request)
     {
-         return $this->sendJsonResponse($this->userService->selfUpdatePassword($request));
+        return $this->sendJsonResponse($this->userService->selfUpdatePassword($request));
     }
 
     /**

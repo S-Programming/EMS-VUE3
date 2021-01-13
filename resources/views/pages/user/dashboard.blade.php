@@ -59,23 +59,35 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <div id="checkintimer"
-                                 class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
+                            {{-- <div id="checkintimer"
+                                 class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div> --}}
 
                             <!-- <dt class="font-size-h2 font-w700">45</dt>
                             <dd class="text-muted mb-0">Messages</dd> -->
-                            <div id="checkintimer" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
+                            {{-- <div id="checkintimer" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
+                            <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                            </div> --}}
+                            <form method="GET" action="{{route('userrecord')}}">
+                            <input id="user-id" name="specificUserId" type="text" maxlength="6" size="6">
+                            <br>
+                            @error('specificUserId')
+                            <span style="color:red;font-weight:bold;">{{ $message }}</span>
+                            @enderror
+                            <input type="submit" class="btn btn-block btn-alt-success">
+                            </form>
 
                         </dl>
+
                         <div class="item item-rounded bg-body">
                             <i class="fa fa-inbox font-size-h3 text-primary"></i>
                         </div>
                     </div>
                     <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                        <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
-                            View all messages
+                        {{-- <a class="font-w500 d-flex align-items-center" href="{{ route('userrecord') }}">
+                              javascript:void(0)
+                            View specific Record
                             <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
                 <!-- END Messages -->
@@ -88,8 +100,9 @@
                         <dl class="mb-0">
                             <!-- <dt class="font-size-h2 font-w700">45</dt>
                             <dd class="text-muted mb-0">Messages</dd> -->
-                            <div id="jQuery" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
-                            
+                            <div id="jQuery" class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                                <p>Total Checkins:{{ $monthlyCheckins }}</p>
+                            </div>
                         </dl>
                         <div class="item item-rounded bg-body">
                             <i class="fa fa-inbox font-size-h3 text-primary"></i>
@@ -109,8 +122,8 @@
                 <div class="block block-rounded d-flex flex-column">
                     <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <p id="current-timer"></p>
-                        
-                        
+
+
                     </div>
                     <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
                         <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
@@ -188,7 +201,7 @@
                             <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between">
                                 <dl class="mb-0">
                                     <dt class="font-size-h2 font-w700">570</dt>
-                                    <dd class="text-muted mb-0">Total Orders</dd>
+                                    <dd class="text-muted mb-0">Total Users:{{$count}}</dd>
                                 </dl>
                                 <div>
                                     <div
@@ -382,213 +395,6 @@
                                 </tr>
                             @endforeach
                         @endif
-                        {{-- <tr>
-                            <td class="text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">
-                                    <strong>ORD.00965</strong>
-                                </a>
-                            </td>
-                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted">11 min ago</td>
-                            <td class="d-none d-xl-table-cell font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">Megan Fuller</a>
-                            </td>
-                            <td>
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded  bg-warning-light text-warning">Processing</span>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">5</a>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-center">
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded bg-body-dark">24%</span>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-right font-size-sm">
-                                <strong>$614,69</strong>
-                            </td>
-                        </tr> --}}
-                        {{-- <tr>
-                            <td class="text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">
-                                    <strong>ORD.00964</strong>
-                                </a>
-                            </td>
-                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted">15 min ago</td>
-                            <td class="d-none d-xl-table-cell font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">Judy Ford</a>
-                            </td>
-                            <td>
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded  bg-info-light text-info">For delivery</span>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">5</a>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-center">
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded bg-body-dark">21%</span>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-right font-size-sm">
-                                <strong>$411,58</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">
-                                    <strong>ORD.00963</strong>
-                                </a>
-                            </td>
-                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted">28 min ago</td>
-                            <td class="d-none d-xl-table-cell font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">Justin Hunt</a>
-                            </td>
-                            <td>
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded  bg-danger-light text-danger">Canceled</span>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">3</a>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-center">
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded bg-body-dark">24%</span>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-right font-size-sm">
-                                <strong>$1258,88</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">
-                                    <strong>ORD.00962</strong>
-                                </a>
-                            </td>
-                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted">18 min ago</td>
-                            <td class="d-none d-xl-table-cell font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">Jack Estrada</a>
-                            </td>
-                            <td>
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded  bg-danger-light text-danger">Canceled</span>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">5</a>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-center">
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded bg-body-dark">9%</span>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-right font-size-sm">
-                                <strong>$1429,94</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">
-                                    <strong>ORD.00961</strong>
-                                </a>
-                            </td>
-                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted">21 min ago</td>
-                            <td class="d-none d-xl-table-cell font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">David Fuller</a>
-                            </td>
-                            <td>
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded  bg-success-light text-success">Delivered</span>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">7</a>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-center">
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded bg-body-dark">25%</span>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-right font-size-sm">
-                                <strong>$1620,25</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">
-                                    <strong>ORD.00960</strong>
-                                </a>
-                            </td>
-                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted">11 min ago</td>
-                            <td class="d-none d-xl-table-cell font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">Amber Harvey</a>
-                            </td>
-                            <td>
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded  bg-success-light text-success">Delivered</span>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">9</a>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-center">
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded bg-body-dark">7%</span>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-right font-size-sm">
-                                <strong>$346,33</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">
-                                    <strong>ORD.00959</strong>
-                                </a>
-                            </td>
-                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted">9 min ago</td>
-                            <td class="d-none d-xl-table-cell font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">Alice Moore</a>
-                            </td>
-                            <td>
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded  bg-info-light text-info">For delivery</span>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">4</a>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-center">
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded bg-body-dark">4%</span>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-right font-size-sm">
-                                <strong>$63,66</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">
-                                    <strong>ORD.00958</strong>
-                                </a>
-                            </td>
-                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted">13 min ago</td>
-                            <td class="d-none d-xl-table-cell font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">Laura Carr</a>
-                            </td>
-                            <td>
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded  bg-danger-light text-danger">Canceled</span>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">8</a>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-center">
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded bg-body-dark">6%</span>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-right font-size-sm">
-                                <strong>$947,16</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">
-                                    <strong>ORD.00957</strong>
-                                </a>
-                            </td>
-                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted">26 min ago</td>
-                            <td class="d-none d-xl-table-cell font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">Lori Moore</a>
-                            </td>
-                            <td>
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded  bg-danger-light text-danger">Canceled</span>
-                            </td>
-                            <td class="d-none d-xl-table-cell text-center font-size-sm">
-                                <a class="font-w600" href="javascript:void(0)">5</a>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-center">
-                                <span class="font-size-sm font-w600 px-2 py-1 rounded bg-body-dark">8%</span>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-right font-size-sm">
-                                <strong>$514,83</strong>
-                            </td>
-                        </tr> --}}
                         </tbody>
                     </table>
                 </div>
