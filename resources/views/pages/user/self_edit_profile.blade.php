@@ -92,18 +92,18 @@
                         <div class="col-lg-8 col-xl-5">
                             <div class="form-group">
                                 <label for="current-password">Current Password</label>
-                                <input type="password" class="form-control" id="current-password" name="current-password">
+                                <input type="password" class="form-control" id="current_password" name="current_password">
                             </div>
                             <div class="form-group row">
                                 <div class="col-12">
                                     <label for="password">New Password</label>
-                                    <input type="password" class="form-control" id="password" name="password">
+                                    <input type="password" class="form-control" id="new_password" name="new_password">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-12">
                                     <label for="confirm-password">Confirm New Password</label>
-                                    <input type="password" class="form-control" id="confirm-password" name="confirm-password">
+                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                                 </div>
                             </div>
                             <div class="form-group">

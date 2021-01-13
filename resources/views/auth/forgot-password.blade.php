@@ -31,9 +31,9 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-6 col-xl-5">
-                                                <button type="submit" class="btn btn-block btn-alt-primary">
-                                                    <i class="fa fa-fw fa-envelope mr-1"></i> Send Mail
-                                                </button>
+                                                <x-button class="checkout-btn btn btn-primary" onclick="validateFieldsByFormId(this)" data-validation="validation-span-id" id="validation-span-id" >
+                                                    <i class="fa fa-fw fa-envelope mr-1"></i>{{ __('Send Mail') }}
+                                                </x-button>
                                             </div>
                                         </div>
                                     </form>

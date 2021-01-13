@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
 use Illuminate\Http\Request;
+use Hash;
 
 class UserService extends BaseService
 {
@@ -26,8 +27,9 @@ class UserService extends BaseService
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
+                'password' => bcrypt('12345678'),
                 'phone_number' => $request->phone_number,
-                'password' => bcrypt('12345678')
+                
             ]);
 
             $user_id = $user->id;
@@ -134,13 +136,44 @@ class UserService extends BaseService
         {
             $user_id = $this->getAuthUserId();
             $user_data = User::find($user_id);
-            $user_data->password = bcrypt($request->password);
-            $user_data->save();
-            return $this->successResponse('Password is Successfully Updated',['redirect_to'=>'/dashboard']);
+            $db_password = $user_data->password;
+            $current_password = $request->current_password;
+            if(Hash::check($current_password, $db_password)) 
+            {
+                $new_password = $request->new_password;
+                $confirm_password = $request->confirm_password;
+                if($current_password!=$new_password)
+                {
+                    if($new_password==$confirm_password)
+                    {
+                        $user_data->password = bcrypt($new_password);
+                        $user_data->save();
+                        return $this->successResponse('Password is Successfully Updated');
+                    }
+                    else
+                    {
+                         return $this->errorResponse('New Password and Confirm Password Not Match',['errors'=>['New Password and Confirm Password Not Match']]);
+                    }
+                }
+                else
+                {
+                     return $this->errorResponse('New Password and Current Password Does not Same',['errors'=>['New Password and Current Password Does not Same']]);
+                }
+                
+               
+            }
+            else
+            {
+                 return $this->errorResponse('Current Password is not correct',['errors'=>['Current Password is not correct']]);
+            }
+           
+            
+           
+           
         }
         else{
 
-            return $this->errorResponse('Password Updation Failed');
+           
         }
     }
 }
