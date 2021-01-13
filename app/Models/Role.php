@@ -15,5 +15,10 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class);
     }
+    
+    public function roleMenu()
+    {
+        return $this->belongsToMany(Menu::class);
+    }
 
 }

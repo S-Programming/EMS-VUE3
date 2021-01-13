@@ -95,14 +95,14 @@ class UserService extends BaseService
     {
         $user_id = $this->getAuthUserId();
         if( $user_id > 0)
-        {    
+        {
             $user_data = User::find($user_id);
             return $this->successResponse('success',[' user_data'=> $user_data]);
-        
+
         }
         else
         {
-            return $this->errorResponse('Failed');   
+            return $this->errorResponse('Failed');
         }
     }*/
 
@@ -110,7 +110,7 @@ class UserService extends BaseService
     {
 
         if (isset($request) && !empty($request)) {
-            
+
             $user_id =$this->getAuthUserId();
             $user_data = User::find($user_id);
             $user_data->first_name = $request->first_name;
@@ -120,27 +120,27 @@ class UserService extends BaseService
             //$user_data->password = bcrypt($request->password);
 
             $user_data->save();
-            return $this->successResponse('Profile is Successfully Updated',['redirect_to'=>'/dashboard']);
+            return $this->successResponse('Profile is Successfully Updated');
         }
         else{
 
-            return $this->errorResponse('Profile Updation Failed');   
+            return $this->errorResponse('Profile Updation Failed');
         }
-         
+
     }
     public function selfUpdatePassword(Request $request)
     {
-        if (isset($request) && !empty($request)) 
+        if (isset($request) && !empty($request))
         {
             $user_id = $this->getAuthUserId();
             $user_data = User::find($user_id);
-            $user_data->password = bcrypt($request->password); 
+            $user_data->password = bcrypt($request->password);
             $user_data->save();
             return $this->successResponse('Password is Successfully Updated',['redirect_to'=>'/dashboard']);
         }
         else{
 
-            return $this->errorResponse('Password Updation Failed');   
+            return $this->errorResponse('Password Updation Failed');
         }
     }
 }

@@ -1,4 +1,4 @@
-<x-backend-layout>   
+<x-backend-layout>
    <!-- Hero -->
     <div class="bg-image" style="background-image: url('assets/images/photo8@2x.jpg');">
         <div class="bg-black-75">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone_number">Phone Number</label>
-                                <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter your email.." value="{{$user_data->phone_number}}">
+                                <input type="text" oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" id="phone_number" name="phone_number" placeholder="Enter your Contact Number.." value="{{$user_data->phone_number}}">
                             </div>
                            <!--  <div class="form-group">
                                 <label>Your Avatar</label>
@@ -67,7 +67,7 @@
                                   id="validation-span-id">
                                     {{ __('Update') }}
                                 </x-button>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                                   id="validation-span-id">
                                     {{ __('Update') }}
                                 </x-button>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
         </div>
         <!-- END Change Password -->
 
-       
+
     </div>
     <!-- END Page Content -->
 </x-backend-layout>
