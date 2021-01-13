@@ -12,6 +12,7 @@ class BackendLayout extends Component
     public $user;
     public $is_user_checkin;
     public $user_last_checkin;
+    public $menu_data;
 
     /**
      * Create the component instance.
@@ -20,11 +21,12 @@ class BackendLayout extends Component
      * @param string $message
      * @return void
      */
-    public function __construct()
+    public function __construct($menu_data=[])
     {
         $this->user = $this->getAuthUser();
         $this->is_user_checkin = $this->isUserCheckin();
         $this->user_last_checkin = $this->is_user_checkin ? $this->user->lastCheckin()->checkin : '';
+        $this->menu_data = $menu_data;
     }
 
     /**

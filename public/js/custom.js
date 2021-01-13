@@ -16,7 +16,7 @@ function validateFieldsByFormId(e) {
     const formId = jQuery(e).closest('form').attr('id');
     const formURL = jQuery(e).closest('form').attr('action');
     const modalId = jQuery(e).closest('form').data('modal-id');
-    const validationSpanId = jQuery(e).data('validation'); //data-validation (validation-span-id)
+    const validationSpanId = jQuery(e).data('validation');
     var error = validateFields(formId);
     var errorMsg = '';
     var flag = true;
@@ -39,12 +39,8 @@ function validateFieldsByFormId(e) {
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
-                  
-                  //  To stop loading image on self edit profile 
-                    if(formId=="profile-form-id")
-                    {
-                        jQuery(`#` + validationSpanId).html(buttonHtml);
-                    }
+                    jQuery(`#` + validationSpanId).html(buttonHtml);
+
                     if (data.redirect_to != '' && typeof (data.redirect_to) != "undefined") {
                         setTimeout(function () {
                             reload_page(data.redirect_to)
@@ -108,7 +104,9 @@ function validateFields(formId) {
     var phoneNumber = ['phone_number'];
     var skipforEmpty = [];
     var fname = 'no_name';
-    var password = '[new_password]';
+    var password = '[password]';
+    var confirm_password = '[confirm_password]';
+    var current_password = '[current_password]';
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var regexp_number = /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/
     jQuery.each(fields, function (i, field) {
@@ -141,13 +139,6 @@ function validateFields(formId) {
                     error[i] = 'Please enter correct format of Phone number (+923123456789)';
                 }
             }
-            /*else if(jQuery.inArray(fname, password) == -1){
-                if(jQuery.trim(field.value).length < 8)
-                {
-                    error[i] = 'Password must be atleast 8 characters long';
-                }
-               
-            }*/
         }
 
     });
@@ -267,7 +258,6 @@ function commonAjaxModel(route, id, containerId) {
                 jQuery('#' + containerId + '_mp').html(data.html);
                 /*Show Modal*/
                 jQuery('#' + containerId).modal('show');
-
             }, error: function (data) {
                 console.log('error');
             }

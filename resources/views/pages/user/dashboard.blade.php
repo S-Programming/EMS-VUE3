@@ -1,4 +1,4 @@
-<x-backend-layout>
+<x-backend-layout :menu_data='$menu_data'>
 
     <!-- Hero -->
     <div class="bg-body-light">
@@ -200,8 +200,8 @@
                         <div class="block block-rounded d-flex flex-column">
                             <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between">
                                 <dl class="mb-0">
-                                    <dt class="font-size-h2 font-w700">570</dt>
-                                    <dd class="text-muted mb-0">Total Users:{{$count}}</dd>
+                                    <dt class="font-size-h2 font-w700">{{$count}}</dt>
+                                    <dd class="text-muted mb-0">Total Users</dd>
                                 </dl>
                                 <div>
                                     <div

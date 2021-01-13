@@ -27,7 +27,7 @@
                                     <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
                                     <form id="forget-form-id" class="js-validation-reminder" action="{{ route('password.email') }}" method="POST">
                                         <div class="form-group py-3">
-                                            <input type="text" class="form-control form-control-lg form-control-alt" id="reminder-credential" name="reminder-credential" placeholder="Username or Email">
+                                            <input type="text" class="form-control form-control-lg form-control-alt" id="reminder-credential" name="email" placeholder="Username or Email">
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-6 col-xl-5">
