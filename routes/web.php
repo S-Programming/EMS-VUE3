@@ -24,6 +24,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
 /*
 Route::post('ajax/checkintime','CicoController@checkin')->name('cico.checkintime');
 Route::post('ajax/checkouttime','CicoController@checkout')->name('cico.checkouttime');*/

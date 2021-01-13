@@ -60,4 +60,19 @@ class CheckinHistoryService extends BaseService
             return $this->errorResponse('Something went wrong, please contact support team, thanks', ['errors' => ['Something went wrong, please contact support team, thanks'], 'html' => $html]);
         }
     }
+
+    public function allCheckinList(Request $request)
+    {
+        $role_id = $this->getAuthUser()->roles->first()->id;
+        if($role_id == 1 || $role_id == 2)
+        {
+            $user_history = CheckinHistory::all();
+            return $this->successResponse('User History Fetch Successfully',['user_history'=>$user_history]);
+        }
+        else
+        {
+            return $this->errorResponse('Authorization Required',['errors' => 'You dont have Authorization to Access this !! ']);
+        }
+       
+    }
 }

@@ -1,36 +1,55 @@
-<x-guest-layout>
+ <x-guest-layout>
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+        <!-- Page Content -->
+        <div class="hero-static">
+            <div class="content">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-4">
+                        <!-- Reminder Block -->
+                        <div class="block block-rounded block-themed mb-0">
+                            <div class="block-header bg-primary-dark">
+                                <h3 class="block-title">Password Reminder</h3>
+                                <div class="block-options">
+                                    <a class="btn-block-option" href="op_auth_signin.html" data-toggle="tooltip" data-placement="left" title="Sign In">
+                                        <i class="fa fa-sign-in-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="block-content">
+                                <div class="p-sm-3 px-lg-4 py-lg-5">
+                                    <h1 class="h2 mb-1">OneUI</h1>
+                                    <p class="text-muted">
+                                        Please provide your account’s email and we will send you your password.
+                                    </p>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+                                    <!-- Reminder Form -->
+                                    <!-- jQuery Validation (.js-validation-reminder class is initialized in js/pages/op_auth_reminder.min.js which was auto compiled from _js/pages/op_auth_reminder.js) -->
+                                    <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                    <form id="forget-form-id" class="js-validation-reminder" action="{{ route('password.email') }}" method="POST">
+                                        <div class="form-group py-3">
+                                            <input type="text" class="form-control form-control-lg form-control-alt" id="reminder-credential" name="reminder-credential" placeholder="Username or Email">
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6 col-xl-5">
+                                                <button type="submit" class="btn btn-block btn-alt-primary">
+                                                    <i class="fa fa-fw fa-envelope mr-1"></i> Send Mail
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END Reminder Form -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Reminder Block -->
+                    </div>
+                </div>
+            </div>
+            <div class="content content-full font-size-sm text-muted text-center">
+                <strong>OneUI 4.8</strong> &copy; <span data-toggle="year-copy"></span>
+            </div>
         </div>
+        <!-- END Page Content -->
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
-            </div>
-        </form>
     </x-auth-card>
-</x-guest-layout>
+ </x-guest-layout>

@@ -278,6 +278,12 @@ MAIN CONTENT LAYOUT
                             <span class="nav-main-link-name">Role</span>
                         </a>
                     </li>
+                    <li class="nav-main-item open">
+                        <a class="nav-main-link" href="{{route('all.checkin.list')}}">
+                            <i class="nav-main-link-icon fa fa-times"></i>
+                            <span class="nav-main-link-name">Checkin History</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- END Side Navigation -->

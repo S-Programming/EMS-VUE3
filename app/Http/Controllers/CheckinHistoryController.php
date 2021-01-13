@@ -71,4 +71,19 @@ class CheckinHistoryController extends Controller
     {
         return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckout($request));
     }
+    /**
+     * It will display all the users checkin history to Super Admin and Admin
+     *
+     * @return Body
+     */
+    public function allCheckinList(Request $request)
+    {
+        $user_history = $this->checkinHistoryService->allCheckinList($request);
+       // dd($user_history);
+        if(isset($user_history['errors']) && !empty($user_history['errors']))
+        {
+             return redirect()->route('dashboard');
+        }
+        return view('pages.user.all_checkin_list')->with('user_history',$user_history);
+    }
 }
