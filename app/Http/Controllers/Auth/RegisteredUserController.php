@@ -48,9 +48,11 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]));
-
         event(new Registered($user));
+        return $request->wantsJson()
+            ? $this->success('Registration successfully', ['redirect_to' => '/dashboard']) : redirect(RouteServiceProvider::HOME);
 
-        return redirect(RouteServiceProvider::HOME);
+
+        //return redirect(RouteServiceProvider::HOME);
     }
 }

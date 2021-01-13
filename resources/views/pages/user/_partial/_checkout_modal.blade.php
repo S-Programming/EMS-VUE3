@@ -8,7 +8,7 @@
         </div>
     </x-slot>
     <x-slot name="modal_content" >
-        <form method="POST" action="{{ route('confirm.checkout') }}" id="login-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
+        <form method="POST" action="{{ route('confirm.checkout') }}" id="checkout-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
             @csrf
             @php
                 $inyMceConfig = theme_tinyMCE_default_config();

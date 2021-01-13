@@ -24,7 +24,7 @@
                                 <!-- Sign Up Form -->
                                 <!-- jQuery Validation (.js-validation-signup class is initialized in js/pages/op_auth_signup.min.js which was auto compiled from _js/pages/op_auth_signup.js) -->
                                 <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                                <form class="js-validation-signup" action="{{route('register')}}" method="POST">
+                                <form class="js-validation-signup" action="{{route('register')}}" method="POST" id="register-form-id">
                                     @csrf
                                     <div class="py-3">
                                         <div class="form-group">
@@ -54,7 +54,8 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-6 col-xl-5">
-                                            <button type="submit" class="btn btn-block btn-alt-success">
+                                            <button type="submit" class="btn btn-block btn-alt-success" onclick="validateFieldsByFormId(this)" data-validation="validation-span-id"
+                                            id="validation-span-id">
                                                 <i class="fa fa-fw fa-plus mr-1"></i> Sign Up
                                             </button>
                                         </div>

@@ -16,7 +16,7 @@ function validateFieldsByFormId(e) {
     const formId = jQuery(e).closest('form').attr('id');
     const formURL = jQuery(e).closest('form').attr('action');
     const modalId = jQuery(e).closest('form').data('modal-id');
-    const validationSpanId = jQuery(e).data('validation');
+    const validationSpanId = jQuery(e).data('validation'); //data-validation (validation-span-id)
     var error = validateFields(formId);
     var errorMsg = '';
     var flag = true;
@@ -248,6 +248,7 @@ function commonAjaxModel(route, id, containerId) {
                 jQuery('#' + containerId + '_mp').html(data.html);
                 /*Show Modal*/
                 jQuery('#' + containerId).modal('show');
+
             }, error: function (data) {
                 console.log('error');
             }
@@ -371,7 +372,7 @@ function deleteRoleRecord(route, id, extraData) {
     else
     {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
-    }   
+    }
 }
 
 
