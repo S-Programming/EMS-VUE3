@@ -95,21 +95,6 @@ class UserService extends BaseService
         return $this->successResponse('User is Successfully Deleted', ['html' => $html]);
     }
 
-    /*public function selfEditProfile()
-    {
-        $user_id = $this->getAuthUserId();
-        if( $user_id > 0)
-        {
-            $user_data = User::find($user_id);
-            return $this->successResponse('success',[' user_data'=> $user_data]);
-
-        }
-        else
-        {
-            return $this->errorResponse('Failed');
-        }
-    }*/
-
     public function selfUpdateProfile(Request $request)
     {
 
@@ -135,7 +120,6 @@ class UserService extends BaseService
         if (isset($request) && !empty($request)) {
             $user_id = $this->getAuthUserId();
             $user_data = User::find($user_id);
-<<<<<<< HEAD
             $db_password = $user_data->password;
             $current_password = $request->current_password;
             if(Hash::check($current_password, $db_password)) 
@@ -166,20 +150,6 @@ class UserService extends BaseService
             {
                  return $this->errorResponse('Current Password is not correct',['errors'=>['Current Password is not correct']]);
             }
-           
-            
-           
-           
-        }
-        else{
-=======
-            $user_data->password = bcrypt($request->password);
-            $user_data->save();
-            return $this->successResponse('Password is Successfully Updated', ['redirect_to' => '/dashboard']);
-        } else {
->>>>>>> b40d3cf84a4a7bc90d0afcf6e88d54ba1e7a82fe
-
-           
         }
     }
 }

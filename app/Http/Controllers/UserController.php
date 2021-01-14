@@ -81,6 +81,7 @@ class UserController extends Controller
      */
     public function confirmDeleteUser(Request $request)
     {
+        //dd($request);
         return $this->sendJsonResponse($this->userService->confirmDeleteUser($request));
     }
     /**
