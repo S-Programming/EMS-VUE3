@@ -282,10 +282,11 @@ function closeModalById(id) {
 }
 
 function ajaxCallOnclick(route, extraData) {
-    console.log(extraData);
+    console.log(route);
     if (route != '') {
         const url = baseURL + '/' + route;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
+        console.log(dataToPost.user_id);
         jQuery.ajax({
             type: "POST",
             url: url,

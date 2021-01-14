@@ -67,8 +67,8 @@ class CheckinHistoryService extends BaseService
         if($role_id == 1 || $role_id == 2)
         {
             $user_history = CheckinHistory::all();
-            $html = view('pages.user._partial._checkin_history_html')->render();
-            return $this->successResponse('User History Fetch Successfully',['html' => $html, 'html_section_id' => 'checkin-history','user_history'=>$user_history]);
+            $html = view('pages.user._partial._checkin_history_html',['user_history'=>$user_history])->render();
+            return $this->successResponse('User History Fetch Successfully',['html' => $html, 'html_section_id' => 'checkin-history']);
         }
         else
         {
@@ -79,11 +79,11 @@ class CheckinHistoryService extends BaseService
     public function getUserCheckinRecord(Request $request)
     {
         $user_id = $request->user_id;
-       // dd($user_id);
-        $user_history = CheckinHistory::where('user_id',$user_id);
-        $html = view('pages.user._partial._checkin_history_html')->render();
+        $user_history = CheckinHistory::where('user_id',$user_id)->get();
+        $html = view('pages.user._partial._checkin_history_html',['user_history'=>$user_history])->render();
+       // dd($user_history);
         
-        return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-history','user_history'=>$user_history]);
+        return $this->successResponse('User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
         
     }
 }

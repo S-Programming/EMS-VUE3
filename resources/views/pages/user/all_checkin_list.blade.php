@@ -5,7 +5,7 @@
             <div class="block-options">
                 <form method="POST" action="{{ route('get.user.checkin') }}" id="usercheckinhistory-form-id">
                     @csrf
-                    <select class="form-control" onchange="ajaxCallOnclick('get_user_checkin',this.options[this.selectedIndex].value)" name="user_id">
+                    <select class="form-control" onchange="ajaxCallOnclick('get_user_checkin',{user_id:this.options[this.selectedIndex].value})" name="user_id">
                         <option>Users</option>
                         @if(isset($users) && !empty($users))
                             @foreach($users as $user)
@@ -17,6 +17,7 @@
                 </form>
             </div>
         </div>
+        
         <!-- <div id="one-dashboard-search-orders" class="block-content border-bottom d-none" >
             <form action="be_pages_dashboard.html" method="POST" onsubmit="return false;">
                 <div class="form-group push">
