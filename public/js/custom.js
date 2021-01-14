@@ -1,12 +1,12 @@
 jQuery(function () {
     var currentIntervalRef = setInterval(function () {
-        if(jQuery('#current-timer' ).length>0) {
+        if (jQuery('#current-timer').length > 0) {
             document.getElementById("current-timer").innerHTML = new Date();
-        }else{
+        } else {
             clearInterval(currentIntervalRef);
         }
     });
-    if (isUserCheckin) {
+    if (typeof isUserCheckin != 'undefined' && isUserCheckin) {
         startCheckinTimer(userLastCheckinTime);
     }
 });
@@ -35,7 +35,7 @@ function validateFieldsByFormId(e) {
             dataType: "json",
             success: function (data) {
                 e.disabled = false;
-               // console.log(data.redirect_to);
+                // console.log(data.redirect_to);
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
@@ -101,9 +101,10 @@ function validateFields(formId) {
     var error = [];
     var skipArray = ['action'];
     var emailArray = ['email'];
-    var phoneNumber = ['phone_number'];
+    var phoneNumberArray = ['phone_number'];
     var skipforEmpty = [];
     var fname = 'no_name';
+    var passwordArray = ['password', 'confirm_password'];
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var regexp_number = /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/
     jQuery.each(fields, function (i, field) {
@@ -115,7 +116,6 @@ function validateFields(formId) {
                 elementObj.val(field.value);
             }
         }
-
         if (jQuery.inArray(fname, skipArray) == -1) {
             if (jQuery.trim(field.value) == '') {
                 if (jQuery.inArray(fname, skipforEmpty) == -1) {
@@ -130,10 +130,13 @@ function validateFields(formId) {
                 if (!regexy.test(field.value)) {
                     error[i] = 'Please enter correct format of email (example@example.com)';
                 }
-            }
-            else if(jQuery.inArray(fname, phoneNumber) > -1){
+            } else if (jQuery.inArray(fname, phoneNumberArray) > -1) {
                 if (!regexp_number.test(field.value)) {
                     error[i] = 'Please enter correct format of Phone number (+923123456789)';
+                }
+            } else if (jQuery.inArray(fname, passwordArray) > -1) {
+                if ((field.value.length < 8)) {
+                    error[i] = 'Please enter at least 8 Characters for the password';
                 }
             }
         }
@@ -279,6 +282,7 @@ function closeModalById(id) {
 }
 
 function ajaxCallOnclick(route, extraData) {
+    console.log(extraData);
     if (route != '') {
         const url = baseURL + '/' + route;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
@@ -312,12 +316,11 @@ function ajaxCallOnclick(route, extraData) {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
-function deleteRecord(route,id,extraData)
-{
+
+function deleteRecord(route, id, extraData) {
     if (route != '') {
 
-    jQuery.ajax({
-
+        jQuery.ajax({
         url: route,
         type: 'POST',
         data: {id: id},
@@ -332,18 +335,14 @@ function deleteRecord(route,id,extraData)
                     window.location.reload();
 
                     }, 0)
-            }
-            else
-            {
-                notificationAlert('error', data.message, 'Inconceivable!');
-            }
-        }, error: function (data) {
+                } else {
+                    notificationAlert('error', data.message, 'Inconceivable!');
+                }
+            }, error: function (data) {
                 console.log('error');
             }
         });
-    }
-    else
-    {
+    } else {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
@@ -373,9 +372,7 @@ function deleteRoleRecord(route, id, extraData) {
 
             }
         });
-    }
-    else
-    {
+    } else {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
@@ -400,7 +397,7 @@ var startCheckinTimer = function (startTime) {
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
         // Output the result in an element with id="demo"
         let DaysTimer = ((days > 1) ? days + ' Days, ' : ((days > 0) ? days + 'Day, ' : ''));
-        if(jQuery('#checkin-timer' ).length>0) {
+        if (jQuery('#checkin-timer').length > 0) {
             document.getElementById("checkin-timer").innerHTML = DaysTimer + hours + "h "
                 + minutes + "m " + seconds + "s ";
             // If the count down is over, write some text
@@ -408,7 +405,7 @@ var startCheckinTimer = function (startTime) {
                 clearInterval(intervalRef);
                 document.getElementById("checkin-timer").innerHTML = "EXPIRED";
             }
-        }else{
+        } else {
             clearInterval(intervalRef);
         }
     }, 1000);

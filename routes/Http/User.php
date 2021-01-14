@@ -20,6 +20,7 @@ class User
              Route::post('/update_self_profile', [UserController::class, 'selfUpdateProfile'])->name('user.self.update');
              Route::post('/update_self_password', [UserController::class, 'selfUpdatePassword'])->name('update.self.password');
             
+            
         });
 
     }

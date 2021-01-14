@@ -1,12 +1,12 @@
 jQuery(function () {
     var currentIntervalRef = setInterval(function () {
-        if(jQuery('#current-timer' ).length>0) {
+        if (jQuery('#current-timer').length > 0) {
             document.getElementById("current-timer").innerHTML = new Date();
-        }else{
+        } else {
             clearInterval(currentIntervalRef);
         }
     });
-    if (isUserCheckin) {
+    if (typeof isUserCheckin != 'undefined' && isUserCheckin) {
         startCheckinTimer(userLastCheckinTime);
     }
 });
@@ -35,9 +35,12 @@ function validateFieldsByFormId(e) {
             dataType: "json",
             success: function (data) {
                 e.disabled = false;
+                // console.log(data.redirect_to);
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
+                    jQuery(`#` + validationSpanId).html(buttonHtml);
+
                     if (data.redirect_to != '' && typeof (data.redirect_to) != "undefined") {
                         setTimeout(function () {
                             reload_page(data.redirect_to)
@@ -49,6 +52,7 @@ function validateFieldsByFormId(e) {
                     if (jQuery('body').hasClass('modal-open') && typeof modalId != 'undefined' && modalId != '') {
                         closeModalById(modalId);
                     }
+
                 } else {
                     var errors = data.errors;
                     jQuery.each(errors, function (i, val) {
@@ -67,7 +71,6 @@ function validateFieldsByFormId(e) {
                     //  bsAlert(data.message, 'alert-danger', 'alert_placeholder');
                     jQuery(`#` + validationSpanId).html(buttonHtml);
                 }
-
             },
             error: function (data) {
                 e.disabled = false;
@@ -98,9 +101,12 @@ function validateFields(formId) {
     var error = [];
     var skipArray = ['action'];
     var emailArray = ['email'];
+    var phoneNumberArray = ['phone_number'];
     var skipforEmpty = [];
     var fname = 'no_name';
+    var passwordArray = ['password', 'confirm_password'];
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var regexp_number = /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/
     jQuery.each(fields, function (i, field) {
         fname = field.name;
         let elementObj = jQuery("textarea[name='" + fname + "']");
@@ -110,7 +116,6 @@ function validateFields(formId) {
                 elementObj.val(field.value);
             }
         }
-
         if (jQuery.inArray(fname, skipArray) == -1) {
             if (jQuery.trim(field.value) == '') {
                 if (jQuery.inArray(fname, skipforEmpty) == -1) {
@@ -125,8 +130,17 @@ function validateFields(formId) {
                 if (!regexy.test(field.value)) {
                     error[i] = 'Please enter correct format of email (example@example.com)';
                 }
+            } else if (jQuery.inArray(fname, phoneNumberArray) > -1) {
+                if (!regexp_number.test(field.value)) {
+                    error[i] = 'Please enter correct format of Phone number (+923123456789)';
+                }
+            } else if (jQuery.inArray(fname, passwordArray) > -1) {
+                if ((field.value.length < 8)) {
+                    error[i] = 'Please enter at least 8 Characters for the password';
+                }
             }
         }
+
     });
     return error;
 }
@@ -303,56 +317,65 @@ function ajaxCallOnclick(route, extraData) {
 }
 
 function deleteRecord(route, id, extraData) {
-    jQuery.ajax({
+    if (route != '') {
 
-        url: route,
-        type: 'POST',
-        data: {id: id},
-        success: function (data) {
+        jQuery.ajax({
 
-            if (data.status == 'success') {
-                notificationAlert('success', data.message, 'Success!');
-                const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
-                if (jQuery('body').hasClass('modal-open') && containerId) {
-                    closeModalById(containerId);
+            url: route,
+            type: 'POST',
+            data: {id: id},
+            success: function (data) {
+
+                if (data.status == 'success') {
+                    notificationAlert('success', data.message, 'Success!');
+                    const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
+                    if (jQuery('body').hasClass('modal-open') && containerId) {
+                        closeModalById(containerId);
+                    }
+                    setTimeout(function () {
+                        window.location.reload();
+
+                    }, 0)
+                } else {
+                    notificationAlert('error', data.message, 'Inconceivable!');
                 }
-                setTimeout(function () {
-                    window.location.reload();
-
-                }, 0)
-            } else {
-                notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+            }, error: function (data) {
+                console.log('error');
             }
-
-        }
-    });
+        });
+    } else {
+        notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+    }
 }
 
 function deleteRoleRecord(route, id, extraData) {
-    console.log(route);
-    jQuery.ajax({
+    if (route != '') {
+        jQuery.ajax({
 
-        url: route,
-        type: 'POST',
-        data: {id: id},
-        success: function (data) {
+            url: route,
+            type: 'POST',
+            data: {id: id},
+            success: function (data) {
 
-            if (data.status == 'success') {
-                notificationAlert('success', data.message, 'Success!');
-                const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
-                if (jQuery('body').hasClass('modal-open') && containerId) {
-                    closeModalById(containerId);
+                if (data.status == 'success') {
+                    notificationAlert('success', data.message, 'Success!');
+                    const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
+                    if (jQuery('body').hasClass('modal-open') && containerId) {
+                        closeModalById(containerId);
+                    }
+                    setTimeout(function () {
+                        window.location.reload();
+
+                    }, 0)
+                } else {
+                    notificationAlert('error', 'Route is not defined', 'Inconceivable!');
                 }
-                setTimeout(function () {
-                    window.location.reload();
 
-                }, 0)
-            } else {
-                notificationAlert('error', 'Route is not defined', 'Inconceivable!');
             }
-
-        }
-    });
+        });
+    } else {
+        notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+    }
 }
 
 
@@ -375,7 +398,7 @@ var startCheckinTimer = function (startTime) {
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
         // Output the result in an element with id="demo"
         let DaysTimer = ((days > 1) ? days + ' Days, ' : ((days > 0) ? days + 'Day, ' : ''));
-        if(jQuery('#checkin-timer' ).length>0) {
+        if (jQuery('#checkin-timer').length > 0) {
             document.getElementById("checkin-timer").innerHTML = DaysTimer + hours + "h "
                 + minutes + "m " + seconds + "s ";
             // If the count down is over, write some text
@@ -383,7 +406,7 @@ var startCheckinTimer = function (startTime) {
                 clearInterval(intervalRef);
                 document.getElementById("checkin-timer").innerHTML = "EXPIRED";
             }
-        }else{
+        } else {
             clearInterval(intervalRef);
         }
     }, 1000);

@@ -30,20 +30,7 @@ class UserController extends Controller
         $users = User::all();
         return view('pages.user.users')->with('users', $users);
     }
-
-    public function userRecoed(Request $request)
-    {
-        //dd($this->getAuthUser());
-        $validator = Validator::make($request->all(), [
-            'specificUserId' => 'required | numeric',
-        ]);
-        if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator);
-        }
-        $userId = $request->specificUserId;
-        $userData = CheckinHistory::where('user_id', $userId)->get();
-        return view('pages.user.userrecord')->with('userData', $userData);
-    }
+   
     /**
      * It will return a HTML for the Modal container
      *
