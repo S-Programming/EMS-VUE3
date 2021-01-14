@@ -5,9 +5,11 @@ namespace App\Http\Services;
 
 
 use App\Http\Services\BaseService\BaseService;
+use App\Models\CheckinHistory;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Hash;
 
@@ -16,6 +18,51 @@ class UserService extends BaseService
     // public function userRecoedById(Request $request){
 
     // }
+    public function userReportHistory(Request $request)
+    {
+        $userId = $this->getAuthUserId();
+        //$check = $request->dataToPost;
+        if ($request->dataToPost == 'currentMonth') {
+            $currentmonthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
+                ->where('user_id', $userId)
+                ->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $currentmonthlyCheckins])->render();
+            //return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } elseif ($request->dataToPost == 'previoustMonth') {
+            //Previous Month Checkins
+            $previousMonthCheckins = CheckinHistory::whereMonth(
+                'checkin',
+                '=',
+                Carbon::now()->subMonth()->month
+            )->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $previousMonthCheckins])->render();
+            // return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } elseif ($request->dataToPost == 'currentWeek') {
+            // current week
+            $NowDate = Carbon::now()->format('Y-m-d');
+            $currentStartWeekDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1); // gives 2016-01-3
+            $currentWeekCheckins = CheckinHistory::whereBetween('checkin', array($currentStartWeekDate, $NowDate))
+                ->where('user_id', $userId)
+                ->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $currentWeekCheckins])->render();
+            // return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } elseif ($request->dataToPost == 'previousWeek') {
+            // Past Week Checkins (Today is not included)
+            $previousWeekStartDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->subWeek()->format('Y-m-d'); // gives 2016-01-31
+            $previousWeekEndDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek)->format('Y-m-d');
+            $pastWeekCheckins = CheckinHistory::whereBetween('checkin', array($previousWeekStartDate, $previousWeekEndDate))
+                ->where('user_id', $userId)
+                ->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $pastWeekCheckins])->render();
+            // return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } else {
+            dd('huhahahahahah');
+        }
+    }
     public function confirmAdduser(Request $request)
     {
         ## DB operations
@@ -32,7 +79,7 @@ class UserService extends BaseService
                 'email' => $request->email,
                 'password' => bcrypt('12345678'),
                 'phone_number' => $request->phone_number,
-                
+
             ]);
 
             $user_id = $user->id;
@@ -135,51 +182,25 @@ class UserService extends BaseService
         if (isset($request) && !empty($request)) {
             $user_id = $this->getAuthUserId();
             $user_data = User::find($user_id);
-<<<<<<< HEAD
             $db_password = $user_data->password;
             $current_password = $request->current_password;
-            if(Hash::check($current_password, $db_password)) 
-            {
+            if (Hash::check($current_password, $db_password)) {
                 $new_password = $request->new_password;
                 $confirm_password = $request->confirm_password;
-                if($current_password!=$new_password)
-                {
-                    if($new_password==$confirm_password)
-                    {
+                if ($current_password != $new_password) {
+                    if ($new_password == $confirm_password) {
                         $user_data->password = bcrypt($new_password);
                         $user_data->save();
                         return $this->successResponse('Password is Successfully Updated');
+                    } else {
+                        return $this->errorResponse('New Password and Confirm Password Not Match', ['errors' => ['New Password and Confirm Password Not Match']]);
                     }
-                    else
-                    {
-                         return $this->errorResponse('New Password and Confirm Password Not Match',['errors'=>['New Password and Confirm Password Not Match']]);
-                    }
+                } else {
+                    return $this->errorResponse('New Password and Current Password Does not Same', ['errors' => ['New Password and Current Password Does not Same']]);
                 }
-                else
-                {
-                     return $this->errorResponse('New Password and Current Password Does not Same',['errors'=>['New Password and Current Password Does not Same']]);
-                }
-                
-               
+            } else {
+                return $this->errorResponse('Current Password is not correct', ['errors' => ['Current Password is not correct']]);
             }
-            else
-            {
-                 return $this->errorResponse('Current Password is not correct',['errors'=>['Current Password is not correct']]);
-            }
-           
-            
-           
-           
-        }
-        else{
-=======
-            $user_data->password = bcrypt($request->password);
-            $user_data->save();
-            return $this->successResponse('Password is Successfully Updated', ['redirect_to' => '/dashboard']);
-        } else {
->>>>>>> b40d3cf84a4a7bc90d0afcf6e88d54ba1e7a82fe
-
-           
         }
     }
 }

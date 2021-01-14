@@ -23,7 +23,6 @@ class CheckinHistoryController extends Controller
 
     public function index()
     {
-
     }
 
     /**
@@ -45,7 +44,6 @@ class CheckinHistoryController extends Controller
      */
     public function confirmCheckin(Request $request)
     {
-
         return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckin($request));
     }
 
@@ -59,7 +57,6 @@ class CheckinHistoryController extends Controller
         $containerId = $request->input('containerId', 'common_popup_modal');
         $html = view('pages.user._partial._checkout_modal', ['id' => $containerId, 'data' => null])->render();
         return $this->success('success', ['html' => $html]);
-
     }
 
     /**
@@ -79,11 +76,10 @@ class CheckinHistoryController extends Controller
     public function allCheckinList(Request $request)
     {
         $user_history = $this->checkinHistoryService->allCheckinList($request);
-       // dd($user_history);
-        if(isset($user_history['errors']) && !empty($user_history['errors']))
-        {
-             return redirect()->route('dashboard');
+        // dd($user_history);
+        if (isset($user_history['errors']) && !empty($user_history['errors'])) {
+            return redirect()->route('dashboard');
         }
-        return view('pages.user.all_checkin_list')->with('user_history',$user_history);
+        return view('pages.user.all_checkin_list')->with('user_history', $user_history);
     }
 }

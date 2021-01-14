@@ -35,9 +35,12 @@ function validateFieldsByFormId(e) {
             dataType: "json",
             success: function (data) {
                 e.disabled = false;
+               // console.log(data.redirect_to);
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
+                    jQuery(`#` + validationSpanId).html(buttonHtml);
+
                     if (data.redirect_to != '' && typeof (data.redirect_to) != "undefined") {
                         setTimeout(function () {
                             reload_page(data.redirect_to)
@@ -49,6 +52,7 @@ function validateFieldsByFormId(e) {
                     if (jQuery('body').hasClass('modal-open') && typeof modalId != 'undefined' && modalId != '') {
                         closeModalById(modalId);
                     }
+
                 } else {
                     var errors = data.errors;
                     jQuery.each(errors, function (i, val) {
@@ -67,7 +71,6 @@ function validateFieldsByFormId(e) {
                     //  bsAlert(data.message, 'alert-danger', 'alert_placeholder');
                     jQuery(`#` + validationSpanId).html(buttonHtml);
                 }
-
             },
             error: function (data) {
                 e.disabled = false;
@@ -98,9 +101,14 @@ function validateFields(formId) {
     var error = [];
     var skipArray = ['action'];
     var emailArray = ['email'];
+    var phoneNumber = ['phone_number'];
     var skipforEmpty = [];
     var fname = 'no_name';
+    var password = '[password]';
+    var confirm_password = '[confirm_password]';
+    var current_password = '[current_password]';
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var regexp_number = /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/
     jQuery.each(fields, function (i, field) {
         fname = field.name;
         let elementObj = jQuery("textarea[name='" + fname + "']");
@@ -126,7 +134,13 @@ function validateFields(formId) {
                     error[i] = 'Please enter correct format of email (example@example.com)';
                 }
             }
+            else if(jQuery.inArray(fname, phoneNumber) > -1){
+                if (!regexp_number.test(field.value)) {
+                    error[i] = 'Please enter correct format of Phone number (+923123456789)';
+                }
+            }
         }
+
     });
     return error;
 }
@@ -301,8 +315,10 @@ function ajaxCallOnclick(route, extraData) {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
+function deleteRecord(route,id,extraData)
+{
+    if (route != '') {
 
-function deleteRecord(route, id, extraData) {
     jQuery.ajax({
 
         url: route,
@@ -319,40 +335,53 @@ function deleteRecord(route, id, extraData) {
                 setTimeout(function () {
                     window.location.reload();
 
-                }, 0)
-            } else {
-                notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+                    }, 0)
             }
-
-        }
-    });
+            else
+            {
+                notificationAlert('error', data.message, 'Inconceivable!');
+            }
+        }, error: function (data) {
+                console.log('error');
+            }
+        });
+    }
+    else
+    {
+        notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+    }
 }
 
 function deleteRoleRecord(route, id, extraData) {
-    console.log(route);
-    jQuery.ajax({
+    if (route != '') {
+        jQuery.ajax({
 
-        url: route,
-        type: 'POST',
-        data: {id: id},
-        success: function (data) {
+            url: route,
+            type: 'POST',
+            data: {id: id},
+            success: function (data) {
 
-            if (data.status == 'success') {
-                notificationAlert('success', data.message, 'Success!');
-                const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
-                if (jQuery('body').hasClass('modal-open') && containerId) {
-                    closeModalById(containerId);
+                if (data.status == 'success') {
+                    notificationAlert('success', data.message, 'Success!');
+                    const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
+                    if (jQuery('body').hasClass('modal-open') && containerId) {
+                        closeModalById(containerId);
+                    }
+                    setTimeout(function () {
+                        window.location.reload();
+
+                    }, 0)
+                } else {
+                    notificationAlert('error', 'Route is not defined', 'Inconceivable!');
                 }
-                setTimeout(function () {
-                    window.location.reload();
 
-                }, 0)
-            } else {
-                notificationAlert('error', 'Route is not defined', 'Inconceivable!');
             }
-
-        }
-    });
+        });
+    }
+    else
+    {
+        notificationAlert('error', 'Route is not defined', 'Inconceivable!');
+    }
 }
 
 
@@ -387,4 +416,23 @@ var startCheckinTimer = function (startTime) {
             clearInterval(intervalRef);
         }
     }, 1000);
+}
+
+function userReport(route, check){
+    const url = baseURL + '/' + route;
+    var dataToPost = check;
+    jQuery.ajax({
+     url: url,
+     type:'POST',
+     data: {
+        dataToPost : dataToPost
+     },
+     success:function(response){
+        console.log(response.currentmonthlyCheckins);
+        jQuery('#filter-checkins-div').html(response.html);
+     },
+     error:function(response){
+        console.log(response);
+     }
+    });
 }
