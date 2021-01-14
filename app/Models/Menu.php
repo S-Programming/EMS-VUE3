@@ -41,5 +41,9 @@ class Menu extends Model
     {
         return static::with(implode('.', array_fill(0, 100, 'children')))->where('parent_id', '=', '0')->orderBy('sort_order')->get();
     }
+    public function scopeParent()
+    {
+        return $this->where('parent_menu_id',0)->orderBy('sort_order');
+    }
 
 }

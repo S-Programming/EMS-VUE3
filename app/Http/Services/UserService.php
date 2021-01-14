@@ -5,6 +5,8 @@ namespace App\Http\Services;
 
 
 use App\Http\Services\BaseService\BaseService;
+use App\Models\Menu;
+use App\Models\MenuRole;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
@@ -156,5 +158,57 @@ class UserService extends BaseService
                 return $this->errorResponse('Current Password is not correct', ['errors' => ['Current Password is not correct']]);
             }
         }
+    }
+
+    public function menuRole($requestData = [])
+    {
+        $parentId = $requestData['parent_id'] ?? 0;
+        $parentMenus = MenuRole::with('menu')->whereIn('role_id', $this->userRoles())->whereHas('menu', function ($query) use ($parentId) {
+            $query->where('parent_id', $parentId);
+        })->get();
+        return $parentMenus ? $parentMenus->toArray() : [];
+    }
+
+    public function userMenus()
+    {
+        $parentMenus=$this->menuRole();
+    }
+
+    public function userMenus_()
+    {
+        $user = $this->getAuthUser();
+        $menus = [];
+        $childMenus = [];
+        $userRoles = $user->roles;
+
+        if (isset($userRoles) && !empty($userRoles)) {
+            foreach ($userRoles as $userRole) {
+
+                $userRoleParentMenus = $userRole->parentMenus ?? [];
+                if (isset($userRoleParentMenus) && count($userRoleParentMenus) > 0) {
+                    foreach ($userRoleParentMenus as $userRoleParentMenu) {
+                        $menus[$userRoleParentMenu->id] = $userRoleParentMenu;
+
+                        if ($userRoleParentMenu->id == 3) {
+                            $child = $userRole->childMenusByParentId(3)->get() ?? [];
+                            dd($userRoleParentMenu->id, 'asd', $child, $userRole);
+                        }
+                        $child = $userRole->childMenusByParentId(3)->get() ?? [];
+                        //dd($child,$userRoleParentMenu->id,'test');
+
+                        $menus[$userRoleParentMenu->id]['child'] = $userRole->childMenusByParentId(3)->get() ?? [];
+                    }
+                }
+            }
+        }
+
+
+        dd($menus);
+
+        dd($user->roles, $user->roles->first()->childMenusByParentId(1)->get()->toArray(), 'user menus');
+        dd($user->roles->first()->parentMenus->toArray(), $user->roles->first()->childMenusByParentId(1)->get()->toArray(), 'user menus');
+        //dd($user->roles->first()->parentMenus->toArray(),'user menus');
+        //   dd($user->roles->first()->menus()->parent()->get()->toArray(),'user menus');
+        //dd($user->roles->first()->menus()->children()->get()->toArray(),'user menus');
     }
 }
