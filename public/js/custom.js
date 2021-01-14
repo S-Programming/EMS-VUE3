@@ -282,6 +282,7 @@ function closeModalById(id) {
 }
 
 function ajaxCallOnclick(route, extraData) {
+    console.log(extraData);
     if (route != '') {
         const url = baseURL + '/' + route;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
@@ -320,20 +321,18 @@ function deleteRecord(route, id, extraData) {
     if (route != '') {
 
         jQuery.ajax({
-
-            url: route,
-            type: 'POST',
-            data: {id: id},
-            success: function (data) {
-
-                if (data.status == 'success') {
-                    notificationAlert('success', data.message, 'Success!');
-                    const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
-                    if (jQuery('body').hasClass('modal-open') && containerId) {
-                        closeModalById(containerId);
-                    }
-                    setTimeout(function () {
-                        window.location.reload();
+        url: route,
+        type: 'POST',
+        data: {id: id},
+        success: function (data) {
+            if (data.status == 'success') {
+                notificationAlert('success', data.message, 'Success!');
+                const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
+                if (jQuery('body').hasClass('modal-open') && containerId) {
+                    closeModalById(containerId);
+                }
+                setTimeout(function () {
+                    window.location.reload();
 
                     }, 0)
                 } else {
@@ -410,4 +409,23 @@ var startCheckinTimer = function (startTime) {
             clearInterval(intervalRef);
         }
     }, 1000);
+}
+
+function userReport(route, check){
+    const url = baseURL + '/' + route;
+    var dataToPost = check;
+    jQuery.ajax({
+     url: url,
+     type:'POST',
+     data: {
+        dataToPost : dataToPost
+     },
+     success:function(response){
+        console.log(response.currentmonthlyCheckins);
+        jQuery('#filter-checkins-div').html(response.html);
+     },
+     error:function(response){
+        console.log(response);
+     }
+    });
 }

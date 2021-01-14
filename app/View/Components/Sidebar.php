@@ -40,10 +40,10 @@ class Sidebar extends Component
                 if (isset($subMenus) && !empty($subMenus)) {
                     $innerHtml = $this->sidebarHtml($subMenus);
                     if ($innerHtml != '') {
-                        $html = view('utils._partial.parent_menus', ['data' => ($menu['menu'] ?? []), 'inner_html' => $innerHtml])->render();
+                        $html .= view('utils._partial.parent_menus', ['data' => ($menu['menu'] ?? []), 'inner_html' => $innerHtml])->render();
                     }
                 } else {
-                    $html = view('utils._partial.menu', ['data' => ($menu['menu'] ?? [])])->render();
+                    $html .= view('utils._partial.menu', ['data' => ($menu['menu'] ?? [])])->render();
                 }
             }
         }

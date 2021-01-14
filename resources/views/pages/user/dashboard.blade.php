@@ -28,11 +28,16 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right font-size-sm"
                              aria-labelledby="dropdown-analytics-overview">
-                            <a class="dropdown-item font-w500" href="javascript:void(0)">This Week</a>
-                            <a class="dropdown-item font-w500" href="javascript:void(0)">Previous Week</a>
+                            <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'currentWeek']) }}">This Week</a>
+                            <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'previousWeek']) }}">Previous Week</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item font-w500" href="javascript:void(0)">This Month</a>
-                            <a class="dropdown-item font-w500" href="javascript:void(0)">Previous Month</a>
+                            <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'currentMonth']) }}">This Month</a>
+                            <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'previousMonth']) }}">Previous Month</a>
+                            <a class="dropdown-item font-w500" onclick="userReport('user_report_history' , 'currentMonth')">This Month By Ajax</a>
+                            <a class="dropdown-item font-w500" onclick="userReport('user_report_history' , 'previoustMonth')">Previous Month By Ajax</a>
+                            <a class="dropdown-item font-w500" onclick="userReport('user_report_history' , 'currentWeek')">This Week By Ajax</a>
+                            <a class="dropdown-item font-w500" onclick="userReport('user_report_history' , 'previousWeek')">Previous Week By Ajax</a>
+                       {{-- <a class="dropdown-item font-w500" href="javascript:void(0)">This Month</a> --}}
                         </div>
                     </div>
                 </div>
@@ -67,14 +72,14 @@
                             {{-- <div id="checkintimer" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
                             <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
                             </div> --}}
-                            <form method="GET" action="{{route('userrecord')}}">
+                        {{--   <!--  <form method="GET" action="{{route('userrecord')}}">
                             <input id="user-id" name="specificUserId" type="text" maxlength="6" size="6">
                             <br>
                             @error('specificUserId')
                             <span style="color:red;font-weight:bold;">{{ $message }}</span>
                             @enderror
                             <input type="submit" class="btn btn-block btn-alt-success">
-                            </form>
+                            </form> -->--}}
 
                         </dl>
 
@@ -370,7 +375,7 @@
                 </form>
                 <!-- END Search Form -->
             </div>
-            <div class="block-content">
+            <div class="block-content" id="filter-checkins-div">
                 <!-- Recent Orders Table -->
                 <div class="table-responsive">
                     <table class="table table-borderless table-striped table-vcenter">

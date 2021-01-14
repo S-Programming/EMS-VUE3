@@ -67,12 +67,23 @@ class CheckinHistoryService extends BaseService
         if($role_id == 1 || $role_id == 2)
         {
             $user_history = CheckinHistory::all();
-            return $this->successResponse('User History Fetch Successfully',['user_history'=>$user_history]);
+            $html = view('pages.user._partial._checkin_history_html')->render();
+            return $this->successResponse('User History Fetch Successfully',['html' => $html, 'html_section_id' => 'checkin-history','user_history'=>$user_history]);
         }
         else
         {
             return $this->errorResponse('Authorization Required',['errors' => 'You dont have Authorization to Access this !! ']);
         }
        
+    }
+    public function getUserCheckinRecord(Request $request)
+    {
+        $user_id = $request->user_id;
+       // dd($user_id);
+        $user_history = CheckinHistory::where('user_id',$user_id);
+        $html = view('pages.user._partial._checkin_history_html')->render();
+        
+        return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-history','user_history'=>$user_history]);
+        
     }
 }

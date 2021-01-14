@@ -39,15 +39,12 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $menu_data = Menu::with('menusRole')->get();
+        // Current Month Checkins
         $userId = $this->getAuthUserId();
         $monthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
             ->where('user_id', $userId)
             ->get()->count();
-        //->subMonth()
-        //dd(Carbon::now()->endOfMonth()->subMonth()->toDateTimeString());
-        // dd($monthlyCheckins);
-        //dd(Carbon::now()->startOfMonth()->toDateTimeString());
-        // dd($request->all());
+
         $user = $this->getAuthUser();
         $checkinHistory = $user ? $user->checkinHistory : null;
         $isCheckin = $this->isUserCheckin();

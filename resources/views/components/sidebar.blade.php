@@ -104,37 +104,7 @@
         <!-- Side Navigation -->
         <div class="content-side">
             <ul class="nav-main">
-
-                <li class="nav-main-item">
-                    <a class="nav-main-link{{ request()->is('dashboard') ? ' active' : '' }}" href="/dashboard">
-                        <i class="nav-main-link-icon si si-cursor"></i>
-                        <span class="nav-main-link-name">Dashboard</span>
-                    </a>
-                </li>
                 {!! $menus??'' !!}
-{{--                <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">--}}
-{{--                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"--}}
-{{--                       aria-expanded="true" href="#">--}}
-{{--                        <i class="nav-main-link-icon si si-bulb"></i>--}}
-{{--                        <span class="nav-main-link-name">Examples</span>--}}
-{{--                    </a>--}}
-
-
-{{--                    <ul class="nav-main-submenu">--}}
-
-
-{{--                        <li class="nav-main-item">--}}
-{{--                            <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}"--}}
-{{--                               href="/pages/datatables">--}}
-{{--                                <span class="nav-main-link-name">DataTables</span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-
-
-{{--                    </ul>--}}
-
-
-{{--                </li>--}}
             </ul>
         </div>
         <!-- END Side Navigation -->

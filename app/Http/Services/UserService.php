@@ -7,9 +7,12 @@ namespace App\Http\Services;
 use App\Http\Services\BaseService\BaseService;
 use App\Models\Menu;
 use App\Models\MenuRole;
+
+use App\Models\CheckinHistory;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Hash;
 
@@ -18,6 +21,52 @@ class UserService extends BaseService
     // public function userRecoedById(Request $request){
 
     // }
+    public function userReportHistory(Request $request)
+    {
+        $userId = $this->getAuthUserId();
+        //$check = $request->dataToPost;
+        if ($request->dataToPost == 'currentMonth') {
+            $currentmonthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
+                ->where('user_id', $userId)
+                ->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $currentmonthlyCheckins])->render();
+            //return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } elseif ($request->dataToPost == 'previoustMonth') {
+            //Previous Month Checkins
+            $previousMonthCheckins = CheckinHistory::whereMonth(
+                'checkin',
+                '=',
+                Carbon::now()->subMonth()->month
+            )->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $previousMonthCheckins])->render();
+            // return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } elseif ($request->dataToPost == 'currentWeek') {
+            // current week
+            $NowDate = Carbon::now()->format('Y-m-d');
+            $currentStartWeekDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1); // gives 2016-01-3
+            $currentWeekCheckins = CheckinHistory::whereBetween('checkin', array($currentStartWeekDate, $NowDate))
+                ->where('user_id', $userId)
+                ->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $currentWeekCheckins])->render();
+            // return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } elseif ($request->dataToPost == 'previousWeek') {
+            // Past Week Checkins (Today is not included)
+            $previousWeekStartDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->subWeek()->format('Y-m-d'); // gives 2016-01-31
+            $previousWeekEndDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek)->format('Y-m-d');
+            $pastWeekCheckins = CheckinHistory::whereBetween('checkin', array($previousWeekStartDate, $previousWeekEndDate))
+                ->where('user_id', $userId)
+                ->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $pastWeekCheckins])->render();
+            // return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } else {
+            dd('huhahahahahah');
+        }
+    }
+
     public function confirmAdduser(Request $request)
     {
         ## DB operations
@@ -97,21 +146,6 @@ class UserService extends BaseService
         return $this->successResponse('User is Successfully Deleted', ['html' => $html]);
     }
 
-    /*public function selfEditProfile()
-    {
-        $user_id = $this->getAuthUserId();
-        if( $user_id > 0)
-        {
-            $user_data = User::find($user_id);
-            return $this->successResponse('success',[' user_data'=> $user_data]);
-
-        }
-        else
-        {
-            return $this->errorResponse('Failed');
-        }
-    }*/
-
     public function selfUpdateProfile(Request $request)
     {
 
@@ -158,57 +192,5 @@ class UserService extends BaseService
                 return $this->errorResponse('Current Password is not correct', ['errors' => ['Current Password is not correct']]);
             }
         }
-    }
-
-    public function menuRole($requestData = [])
-    {
-        $parentId = $requestData['parent_id'] ?? 0;
-        $parentMenus = MenuRole::with('menu')->whereIn('role_id', $this->userRoles())->whereHas('menu', function ($query) use ($parentId) {
-            $query->where('parent_id', $parentId);
-        })->get();
-        return $parentMenus ? $parentMenus->toArray() : [];
-    }
-
-    public function userMenus()
-    {
-        $parentMenus=$this->menuRole();
-    }
-
-    public function userMenus_()
-    {
-        $user = $this->getAuthUser();
-        $menus = [];
-        $childMenus = [];
-        $userRoles = $user->roles;
-
-        if (isset($userRoles) && !empty($userRoles)) {
-            foreach ($userRoles as $userRole) {
-
-                $userRoleParentMenus = $userRole->parentMenus ?? [];
-                if (isset($userRoleParentMenus) && count($userRoleParentMenus) > 0) {
-                    foreach ($userRoleParentMenus as $userRoleParentMenu) {
-                        $menus[$userRoleParentMenu->id] = $userRoleParentMenu;
-
-                        if ($userRoleParentMenu->id == 3) {
-                            $child = $userRole->childMenusByParentId(3)->get() ?? [];
-                            dd($userRoleParentMenu->id, 'asd', $child, $userRole);
-                        }
-                        $child = $userRole->childMenusByParentId(3)->get() ?? [];
-                        //dd($child,$userRoleParentMenu->id,'test');
-
-                        $menus[$userRoleParentMenu->id]['child'] = $userRole->childMenusByParentId(3)->get() ?? [];
-                    }
-                }
-            }
-        }
-
-
-        dd($menus);
-
-        dd($user->roles, $user->roles->first()->childMenusByParentId(1)->get()->toArray(), 'user menus');
-        dd($user->roles->first()->parentMenus->toArray(), $user->roles->first()->childMenusByParentId(1)->get()->toArray(), 'user menus');
-        //dd($user->roles->first()->parentMenus->toArray(),'user menus');
-        //   dd($user->roles->first()->menus()->parent()->get()->toArray(),'user menus');
-        //dd($user->roles->first()->menus()->children()->get()->toArray(),'user menus');
     }
 }

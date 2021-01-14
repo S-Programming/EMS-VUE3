@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/pages_user_userrecord', [App\Http\Controllers\UserController::class, 'userRecoed'])->name('userrecord');
+
 /* function () {
     return view('/pages.user.userrecord');
 }*/
