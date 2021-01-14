@@ -5,15 +5,15 @@
             <div class="block-options">
                 <form method="POST" action="{{ route('get.user.checkin') }}" id="usercheckinhistory-form-id">
                     @csrf
-                    <select class="form-control" onchange="ajaxCallOnclick('get_user_checkin',{user_id:this.options[this.selectedIndex].value})" name="user_id">
-                        <option>Users</option>
+                    <select class="form-control" onchange="ajaxCallOnclick('get_user_checkin',{user_id:this.options[this.selectedIndex].value??'All'})" name="user_id">
                         @if(isset($users) && !empty($users))
+                        <option>Select Role</option>
+                            <option value="All">All</option>
                             @foreach($users as $user)
-                            <option value="{{$user->id}}">{{$user->first_name}}{{" "}}{{$user->last_name}}</option>
+                                <option value="{{$user->id}}">{{$user->first_name}}{{" "}}{{$user->last_name}}</option>
                             @endforeach
                         @endif
                     </select>
-                   
                 </form>
             </div>
         </div>

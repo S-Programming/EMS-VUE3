@@ -282,11 +282,11 @@ function closeModalById(id) {
 }
 
 function ajaxCallOnclick(route, extraData) {
-    console.log(route);
+    //console.log(extraData.user_id,route);
     if (route != '') {
         const url = baseURL + '/' + route;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
-        console.log(dataToPost.user_id);
+        // console.log(dataToPost.user_id);
         jQuery.ajax({
             type: "POST",
             url: url,
