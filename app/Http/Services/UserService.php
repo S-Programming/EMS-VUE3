@@ -177,6 +177,7 @@ class UserService extends BaseService
             return $this->errorResponse('Profile Updation Failed');
         }
     }
+
     public function selfUpdatePassword(Request $request)
     {
         if (isset($request) && !empty($request)) {
