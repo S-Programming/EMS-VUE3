@@ -32,7 +32,7 @@ class UserService extends BaseService
                 'email' => $request->email,
                 'password' => bcrypt('12345678'),
                 'phone_number' => $request->phone_number,
-                
+
             ]);
 
             $user_id = $user->id;
@@ -130,56 +130,31 @@ class UserService extends BaseService
             return $this->errorResponse('Profile Updation Failed');
         }
     }
+
     public function selfUpdatePassword(Request $request)
     {
         if (isset($request) && !empty($request)) {
             $user_id = $this->getAuthUserId();
             $user_data = User::find($user_id);
-<<<<<<< HEAD
             $db_password = $user_data->password;
             $current_password = $request->current_password;
-            if(Hash::check($current_password, $db_password)) 
-            {
+            if (Hash::check($current_password, $db_password)) {
                 $new_password = $request->new_password;
                 $confirm_password = $request->confirm_password;
-                if($current_password!=$new_password)
-                {
-                    if($new_password==$confirm_password)
-                    {
+                if ($current_password != $new_password) {
+                    if ($new_password == $confirm_password) {
                         $user_data->password = bcrypt($new_password);
                         $user_data->save();
                         return $this->successResponse('Password is Successfully Updated');
+                    } else {
+                        return $this->errorResponse('New Password and Confirm Password Not Match', ['errors' => ['New Password and Confirm Password Not Match']]);
                     }
-                    else
-                    {
-                         return $this->errorResponse('New Password and Confirm Password Not Match',['errors'=>['New Password and Confirm Password Not Match']]);
-                    }
+                } else {
+                    return $this->errorResponse('New Password and Current Password Does not Same', ['errors' => ['New Password and Current Password Does not Same']]);
                 }
-                else
-                {
-                     return $this->errorResponse('New Password and Current Password Does not Same',['errors'=>['New Password and Current Password Does not Same']]);
-                }
-                
-               
+            } else {
+                return $this->errorResponse('Current Password is not correct', ['errors' => ['Current Password is not correct']]);
             }
-            else
-            {
-                 return $this->errorResponse('Current Password is not correct',['errors'=>['Current Password is not correct']]);
-            }
-           
-            
-           
-           
-        }
-        else{
-=======
-            $user_data->password = bcrypt($request->password);
-            $user_data->save();
-            return $this->successResponse('Password is Successfully Updated', ['redirect_to' => '/dashboard']);
-        } else {
->>>>>>> b40d3cf84a4a7bc90d0afcf6e88d54ba1e7a82fe
-
-           
         }
     }
 }
