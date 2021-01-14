@@ -35,6 +35,7 @@ function validateFieldsByFormId(e) {
             dataType: "json",
             success: function (data) {
                 e.disabled = false;
+                // console.log(data.redirect_to);
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
@@ -100,7 +101,6 @@ function validateFields(formId) {
     var error = [];
     var skipArray = ['action'];
     var emailArray = ['email'];
-
     var phoneNumberArray = ['phone_number'];
     var skipforEmpty = [];
     var fname = 'no_name';
@@ -137,11 +137,6 @@ function validateFields(formId) {
             } else if (jQuery.inArray(fname, passwordArray) > -1) {
                 if ((field.value.length < 8)) {
                     error[i] = 'Please enter at least 8 Characters for the password';
-                }
-            }
-            else if(jQuery.inArray(fname, phoneNumber) > -1){
-                if (!regexp_number.test(field.value)) {
-                    error[i] = 'Please enter correct format of Phone number (+923123456789)';
                 }
             }
         }
@@ -287,9 +282,11 @@ function closeModalById(id) {
 }
 
 function ajaxCallOnclick(route, extraData) {
+    console.log(route);
     if (route != '') {
         const url = baseURL + '/' + route;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
+        console.log(dataToPost.user_id);
         jQuery.ajax({
             type: "POST",
             url: url,
@@ -320,23 +317,23 @@ function ajaxCallOnclick(route, extraData) {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
-function deleteRecord(route,id,extraData)
-{
-    if (route != '') {
-        jQuery.ajax({
 
-            url: route,
-            type: 'POST',
-            data: {id: id},
-            success: function (data) {
-                if (data.status == 'success') {
-                    notificationAlert('success', data.message, 'Success!');
-                    const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
-                    if (jQuery('body').hasClass('modal-open') && containerId) {
-                        closeModalById(containerId);
-                    }
-                    setTimeout(function () {
-                        window.location.reload();
+function deleteRecord(route, id, extraData) {
+    if (route != '') {
+
+        jQuery.ajax({
+        url: route,
+        type: 'POST',
+        data: {id: id},
+        success: function (data) {
+            if (data.status == 'success') {
+                notificationAlert('success', data.message, 'Success!');
+                const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
+                if (jQuery('body').hasClass('modal-open') && containerId) {
+                    closeModalById(containerId);
+                }
+                setTimeout(function () {
+                    window.location.reload();
 
                     }, 0)
                 } else {
@@ -347,7 +344,6 @@ function deleteRecord(route,id,extraData)
             }
         });
     } else {
-
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
@@ -377,9 +373,7 @@ function deleteRoleRecord(route, id, extraData) {
 
             }
         });
-
     } else {
-
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }

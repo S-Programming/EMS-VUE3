@@ -88,7 +88,6 @@ class CheckinHistoryController extends Controller
 
     public function getUserCheckinRecord(Request $request)
     {
-        dd($request);
          return $this->sendJsonResponse($this->checkinHistoryService->getUserCheckinRecord($request));
         // dd($user_history);
         if (isset($user_history['errors']) && !empty($user_history['errors'])) {

@@ -38,7 +38,7 @@ class CheckinHistoryService extends BaseService
                 $cico->save();
             }
             $html = view('pages.user._partial._checkout_html')->render();
-            return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section','module'=>'checkin']);
+            return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section', 'module' => 'checkin']);
         }
     }
 
@@ -64,26 +64,32 @@ class CheckinHistoryService extends BaseService
     public function allCheckinList(Request $request)
     {
         $role_id = $this->getAuthUser()->roles->first()->id;
-        if($role_id == 1 || $role_id == 2)
-        {
+        if ($role_id == 1 || $role_id == 2) {
             $user_history = CheckinHistory::all();
-            $html = view('pages.user._partial._checkin_history_html')->render();
-            return $this->successResponse('User History Fetch Successfully',['html' => $html, 'html_section_id' => 'checkin-history','user_history'=>$user_history]);
+            $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
+            return $this->successResponse('User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
+        } else {
+            return $this->errorResponse('Authorization Required', ['errors' => 'You dont have Authorization to Access this !! ']);
         }
-        else
-        {
-            return $this->errorResponse('Authorization Required',['errors' => 'You dont have Authorization to Access this !! ']);
-        }
-       
     }
     public function getUserCheckinRecord(Request $request)
     {
+        //dd($request->user_id);
         $user_id = $request->user_id;
-       // dd($user_id);
-        $user_history = CheckinHistory::where('user_id',$user_id);
-        $html = view('pages.user._partial._checkin_history_html')->render();
-        
-        return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-history','user_history'=>$user_history]);
-        
+        if ($user_id == 'All') {
+            $user_history = CheckinHistory::all();
+            $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
+            // dd($user_history);
+
+            return $this->successResponse('All User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
+        }
+        elseif($user_id == 'Select Role'){
+            return $this->errorResponse('Select Any Role', ['errors' => 'Select Any Role']);
+        }
+        $user_history = CheckinHistory::where('user_id', $user_id)->get();
+        $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
+        // dd($user_history);
+
+        return $this->successResponse('User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
     }
 }

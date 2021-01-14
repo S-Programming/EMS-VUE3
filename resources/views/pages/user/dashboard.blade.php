@@ -72,15 +72,6 @@
                             {{-- <div id="checkintimer" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
                             <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
                             </div> --}}
-                        {{--   <!--  <form method="GET" action="{{route('userrecord')}}">
-                            <input id="user-id" name="specificUserId" type="text" maxlength="6" size="6">
-                            <br>
-                            @error('specificUserId')
-                            <span style="color:red;font-weight:bold;">{{ $message }}</span>
-                            @enderror
-                            <input type="submit" class="btn btn-block btn-alt-success">
-                            </form> -->--}}
-
                         </dl>
 
                         <div class="item item-rounded bg-body">
