@@ -5,9 +5,11 @@ namespace App\Http\Services;
 
 
 use App\Http\Services\BaseService\BaseService;
+use App\Models\CheckinHistory;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Hash;
 
@@ -16,6 +18,51 @@ class UserService extends BaseService
     // public function userRecoedById(Request $request){
 
     // }
+    public function userReportHistory(Request $request)
+    {
+        $userId = $this->getAuthUserId();
+        //$check = $request->dataToPost;
+        if ($request->dataToPost == 'currentMonth') {
+            $currentmonthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
+                ->where('user_id', $userId)
+                ->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $currentmonthlyCheckins])->render();
+            //return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } elseif ($request->dataToPost == 'previoustMonth') {
+            //Previous Month Checkins
+            $previousMonthCheckins = CheckinHistory::whereMonth(
+                'checkin',
+                '=',
+                Carbon::now()->subMonth()->month
+            )->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $previousMonthCheckins])->render();
+            // return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } elseif ($request->dataToPost == 'currentWeek') {
+            // current week
+            $NowDate = Carbon::now()->format('Y-m-d');
+            $currentStartWeekDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1); // gives 2016-01-3
+            $currentWeekCheckins = CheckinHistory::whereBetween('checkin', array($currentStartWeekDate, $NowDate))
+                ->where('user_id', $userId)
+                ->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $currentWeekCheckins])->render();
+            // return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } elseif ($request->dataToPost == 'previousWeek') {
+            // Past Week Checkins (Today is not included)
+            $previousWeekStartDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->subWeek()->format('Y-m-d'); // gives 2016-01-31
+            $previousWeekEndDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek)->format('Y-m-d');
+            $pastWeekCheckins = CheckinHistory::whereBetween('checkin', array($previousWeekStartDate, $previousWeekEndDate))
+                ->where('user_id', $userId)
+                ->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $pastWeekCheckins])->render();
+            // return $this->success('success', ['html' => $html]);
+            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+        } else {
+            dd('huhahahahahah');
+        }
+    }
     public function confirmAdduser(Request $request)
     {
         ## DB operations

@@ -35,7 +35,6 @@ function validateFieldsByFormId(e) {
             dataType: "json",
             success: function (data) {
                 e.disabled = false;
-                // console.log(data.redirect_to);
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
@@ -101,6 +100,7 @@ function validateFields(formId) {
     var error = [];
     var skipArray = ['action'];
     var emailArray = ['email'];
+
     var phoneNumberArray = ['phone_number'];
     var skipforEmpty = [];
     var fname = 'no_name';
@@ -137,6 +137,11 @@ function validateFields(formId) {
             } else if (jQuery.inArray(fname, passwordArray) > -1) {
                 if ((field.value.length < 8)) {
                     error[i] = 'Please enter at least 8 Characters for the password';
+                }
+            }
+            else if(jQuery.inArray(fname, phoneNumber) > -1){
+                if (!regexp_number.test(field.value)) {
+                    error[i] = 'Please enter correct format of Phone number (+923123456789)';
                 }
             }
         }
@@ -315,17 +320,15 @@ function ajaxCallOnclick(route, extraData) {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
-
-function deleteRecord(route, id, extraData) {
+function deleteRecord(route,id,extraData)
+{
     if (route != '') {
-
         jQuery.ajax({
 
             url: route,
             type: 'POST',
             data: {id: id},
             success: function (data) {
-
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
@@ -344,6 +347,7 @@ function deleteRecord(route, id, extraData) {
             }
         });
     } else {
+
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
@@ -373,7 +377,9 @@ function deleteRoleRecord(route, id, extraData) {
 
             }
         });
+
     } else {
+
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
 }
@@ -410,4 +416,23 @@ var startCheckinTimer = function (startTime) {
             clearInterval(intervalRef);
         }
     }, 1000);
+}
+
+function userReport(route, check){
+    const url = baseURL + '/' + route;
+    var dataToPost = check;
+    jQuery.ajax({
+     url: url,
+     type:'POST',
+     data: {
+        dataToPost : dataToPost
+     },
+     success:function(response){
+        console.log(response.currentmonthlyCheckins);
+        jQuery('#filter-checkins-div').html(response.html);
+     },
+     error:function(response){
+        console.log(response);
+     }
+    });
 }
