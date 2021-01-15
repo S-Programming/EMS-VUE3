@@ -31,11 +31,6 @@
                     <td>
                         <em class="text-muted font-size-sm">{!!$record->description??'' !!}</em>
                     </td>
-                    <td>
-                         {{-- <button class="btn btn-info" onclick="commonAjaxModel('edituser_modal',{{$user->id}})"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger" onclick="commonAjaxModel('deleteuser_modal',{{$user->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button> --}}
-
-                    </td>
                 </tr>
             @endforeach
         @endif

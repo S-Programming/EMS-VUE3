@@ -18,21 +18,16 @@ use Hash;
 
 class UserService extends BaseService
 {
-    // public function userRecoedById(Request $request){
-
-    // }
     public function userReportHistory(Request $request)
     {
         $userId = $this->getAuthUserId();
-        //$check = $request->dataToPost;
-        if ($request->dataToPost == 'currentMonth') {
+        if ($request->history_report == 'Current Month') {
             $currentmonthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
                 ->where('user_id', $userId)
                 ->get();
             $html = view('pages.report._partial._checkinhistory_table', ['records' => $currentmonthlyCheckins])->render();
-            //return $this->success('success', ['html' => $html]);
-            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
-        } elseif ($request->dataToPost == 'previoustMonth') {
+            return $this->successResponse('Current Month Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'self-checkin-history']);
+        } elseif ($request->history_report == 'Previous Month') {
             //Previous Month Checkins
             $previousMonthCheckins = CheckinHistory::whereMonth(
                 'checkin',
@@ -40,9 +35,8 @@ class UserService extends BaseService
                 Carbon::now()->subMonth()->month
             )->get();
             $html = view('pages.report._partial._checkinhistory_table', ['records' => $previousMonthCheckins])->render();
-            // return $this->success('success', ['html' => $html]);
-            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
-        } elseif ($request->dataToPost == 'currentWeek') {
+            return $this->successResponse('Previous Month Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'self-checkin-history']);
+        } elseif ($request->history_report == 'Current Week') {
             // current week
             $NowDate = Carbon::now()->format('Y-m-d');
             $currentStartWeekDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1); // gives 2016-01-3
@@ -50,9 +44,8 @@ class UserService extends BaseService
                 ->where('user_id', $userId)
                 ->get();
             $html = view('pages.report._partial._checkinhistory_table', ['records' => $currentWeekCheckins])->render();
-            // return $this->success('success', ['html' => $html]);
-            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
-        } elseif ($request->dataToPost == 'previousWeek') {
+            return $this->successResponse('Current Week Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'self-checkin-history']);
+        } elseif ($request->history_report == 'Previous Week') {
             // Past Week Checkins (Today is not included)
             $previousWeekStartDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->subWeek()->format('Y-m-d'); // gives 2016-01-31
             $previousWeekEndDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek)->format('Y-m-d');
@@ -60,10 +53,11 @@ class UserService extends BaseService
                 ->where('user_id', $userId)
                 ->get();
             $html = view('pages.report._partial._checkinhistory_table', ['records' => $pastWeekCheckins])->render();
-            // return $this->success('success', ['html' => $html]);
-            return $this->successResponse('You are successfully Receive data', ['html' => $html]);
+            return $this->successResponse('Previous Week Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'self-checkin-history']);
         } else {
-            dd('huhahahahahah');
+            $all_checkin_history = CheckinHistory::where('user_id', $userId)->get();
+            $html = view('pages.report._partial._checkinhistory_table', ['records' => $all_checkin_history])->render();
+            return $this->successResponse('All Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'self-checkin-history']);
         }
     }
 
