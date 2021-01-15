@@ -82,7 +82,7 @@
                 <h3 class="block-title">Change Password</h3>
             </div>
             <div class="block-content">
-                <form id="password-form-id" action="{{route('update.self.password')}}" method="POST" >
+                <form id="password-form-id" action="{{route('user.update.self.password')}}" method="POST" >
                     <div class="row push">
                         <div class="col-lg-4">
                             <p class="font-size-sm text-muted">

@@ -78,10 +78,10 @@ class CheckinHistoryController extends Controller
     {
         $user_history = $this->checkinHistoryService->allCheckinList($request);
         $users = User::all();
-        if(isset($user_history['errors']) && !empty($user_history['errors']))
+        /*if(isset($user_history['errors']) && !empty($user_history['errors']))
         {
              return redirect()->route('dashboard');
-        }
+        }*/
         //dd($user_history['user_history']);
         return view('pages.user.all_checkin_list')->with('user_history',$user_history)->with('users',$users);
     }

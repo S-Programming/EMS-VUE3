@@ -39,7 +39,11 @@ function validateFieldsByFormId(e) {
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
-                    jQuery(`#` + validationSpanId).html(buttonHtml);
+                     if(formId=="profile-form-id")
+                    {
+                        jQuery(`#` + validationSpanId).html(buttonHtml);
+                    }
+                    
 
                     if (data.redirect_to != '' && typeof (data.redirect_to) != "undefined") {
                         setTimeout(function () {
@@ -412,21 +416,3 @@ var startCheckinTimer = function (startTime) {
     }, 1000);
 }
 
-function userReport(route, check){
-    const url = baseURL + '/' + route;
-    var dataToPost = check;
-    jQuery.ajax({
-     url: url,
-     type:'POST',
-     data: {
-        dataToPost : dataToPost
-     },
-     success:function(response){
-        console.log(response.currentmonthlyCheckins);
-        jQuery('#filter-checkins-div').html(response.html);
-     },
-     error:function(response){
-        console.log(response);
-     }
-    });
-}

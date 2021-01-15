@@ -11,11 +11,11 @@ class Dashboard
     {
         Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-            Route::get('/dashboard1', function(){
+           /* Route::get('/dashboard1', function(){
             	dd(2);
-            })->name('dashboard1');
-            Route::post('/checkin_modal', [DashboardController::class, 'checkinModal'])->name('checkin.modal');
-            Route::post('/confirm_checkin', [DashboardController::class, 'confirmCheckin'])->name('confirm.checkin');
+            })->name('dashboard1');*/
+            /*Route::post('/checkin_modal', [DashboardController::class, 'checkinModal'])->name('checkin.modal');
+            Route::post('/confirm_checkin', [DashboardController::class, 'confirmCheckin'])->name('confirm.checkin');*/
         });
     }
 }

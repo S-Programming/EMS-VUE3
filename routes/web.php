@@ -25,19 +25,6 @@ Route::get('/', function () {
 });
 
 
-/* function () {
-    return view('/pages.user.userrecord');
-}*/
-
-/*
-Route::post('ajax/checkintime','CicoController@checkin')->name('cico.checkintime');
-Route::post('ajax/checkouttime','CicoController@checkout')->name('cico.checkouttime');*/
-/*Route::post('/checkin', [CheckinHistoryController::class, 'checkin'])->middleware('auth')->name('checkin');
-Route::post('/checkout', [CheckinHistoryController::class, 'checkout'])->middleware('auth')->name('checkout');
-*/
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
 

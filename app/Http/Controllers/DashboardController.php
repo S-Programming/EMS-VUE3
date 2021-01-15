@@ -44,6 +44,8 @@ class DashboardController extends Controller
         $monthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
             ->where('user_id', $userId)
             ->get()->count();
+        // Total Users
+        $count = DB::table('users')->count();
 
         $user = $this->getAuthUser();
         $checkinHistory = $user ? $user->checkinHistory : null;
@@ -52,7 +54,7 @@ class DashboardController extends Controller
         if ($isCheckin) {
             $responseData['user_last_checkin_time'] = $this->userLastCheckinTime();
         }
-        $count = DB::table('users')->count();
+        
         return view('pages.user.dashboard', $responseData)->with(['count' => $count, 'monthlyCheckins' => $monthlyCheckins]);
     }
 

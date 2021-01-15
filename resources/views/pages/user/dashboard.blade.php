@@ -18,15 +18,49 @@
                         <i class="fa fa-cog"></i>
                     </button>
                     <div class="d-inline-block">
-                    <select class="dropdown form-control " onchange="ajaxCallOnclick('user_report_history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_id">
-                        <option>All Checkin History</option>
-                        <option>Previous Week</option>
-                        <option>Current Week</option>
-                        <option>Previous Month</option>
-                        <option>Current Month</option>
-                        {{-- <option value="All">All</option> --}}
-                    </select>
-                </div>
+                        
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn btn-sm btn-alt-primary" id="dropdown-recent-orders-filters"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-fw fa-flask"></i>
+                                Filters
+                                <i class="fa fa-angle-down ml-1"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right font-size-sm"
+                                 aria-labelledby="dropdown-recent-orders-filters">
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0)">
+                                    Pending..
+                                    <span class="badge badge-primary badge-pill">35</span>
+                                </a>
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0)">
+                                    Processing
+                                    <span class="badge badge-primary badge-pill">15</span>
+                                </a>
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0)">
+                                    For Delivery
+                                    <span class="badge badge-primary badge-pill">20</span>
+                                </a>
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0)">
+                                    Canceled
+                                    <span class="badge badge-primary badge-pill">72</span>
+                                </a>
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0)">
+                                    Delivered
+                                    <span class="badge badge-primary badge-pill">890</span>
+                                </a>
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0)">
+                                    All
+                                    <span class="badge badge-primary badge-pill">997</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -289,49 +323,21 @@
             <div class="block-header block-header-default">
                 <h3 class="block-title bold">My Checkin History</h3>
                 <div class="block-options">
-                    <button type="button" class="btn btn-sm btn-alt-primary" data-toggle="class-toggle"
-                            data-target="#one-dashboard-search-orders" data-class="d-none">
-                        <i class="fa fa-search"></i>
-                    </button>
-                    <div class="dropdown d-inline-block">
-                        <button type="button" class="btn btn-sm btn-alt-primary" id="dropdown-recent-orders-filters"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-fw fa-flask"></i>
-                            Filters
-                            <i class="fa fa-angle-down ml-1"></i>
+                   
+                    <div class="mt-3 mt-sm-0 ml-sm-3">
+                        <button type="button" class="btn btn-sm btn-alt-primary" data-toggle="class-toggle"
+                                data-target="#one-dashboard-search-orders" data-class="d-none">
+                            <i class="fa fa-search"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right font-size-sm"
-                             aria-labelledby="dropdown-recent-orders-filters">
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                               href="javascript:void(0)">
-                                Pending..
-                                <span class="badge badge-primary badge-pill">35</span>
-                            </a>
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                               href="javascript:void(0)">
-                                Processing
-                                <span class="badge badge-primary badge-pill">15</span>
-                            </a>
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                               href="javascript:void(0)">
-                                For Delivery
-                                <span class="badge badge-primary badge-pill">20</span>
-                            </a>
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                               href="javascript:void(0)">
-                                Canceled
-                                <span class="badge badge-primary badge-pill">72</span>
-                            </a>
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                               href="javascript:void(0)">
-                                Delivered
-                                <span class="badge badge-primary badge-pill">890</span>
-                            </a>
-                            <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                               href="javascript:void(0)">
-                                All
-                                <span class="badge badge-primary badge-pill">997</span>
-                            </a>
+                        <div class="d-inline-block">
+                            <select class="dropdown form-control " onchange="ajaxCallOnclick('user_report_history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_id">
+                                <option>All</option>
+                                <option>Previous Week</option>
+                                <option>Current Week</option>
+                                <option>Previous Month</option>
+                                <option>Current Month</option>
+                                {{-- <option value="All">All</option> --}}
+                            </select>
                         </div>
                     </div>
                 </div>

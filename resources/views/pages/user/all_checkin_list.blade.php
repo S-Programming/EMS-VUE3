@@ -3,7 +3,7 @@
         <div class="block-header block-header-default" >
             <h3 class="block-title bold">Checkin History</h3>
             <div class="block-options">
-                <form method="POST" action="{{ route('get.user.checkin') }}" id="usercheckinhistory-form-id">
+                <form method="POST" action="{{ route('checkin.history.user') }}" id="usercheckinhistory-form-id">
                     @csrf
                     <select class="form-control" onchange="ajaxCallOnclick('get_user_checkin',{user_id:this.options[this.selectedIndex].value??'All'})" name="user_id">
                         @if(isset($users) && !empty($users))

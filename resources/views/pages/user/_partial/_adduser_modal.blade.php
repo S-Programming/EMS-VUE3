@@ -5,7 +5,7 @@
     <x-slot name="modal_content">
         <div class="row">
             <div class="col-sm-10 offset-1">
-                <form method="POST" action="{{ route('confirm.adduser') }}" id="login-form-id"
+                <form method="POST" action="{{ route('user.confirm.adduser') }}" id="login-form-id"
                       data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
                     <div class="card">
