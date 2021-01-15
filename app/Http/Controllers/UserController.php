@@ -28,6 +28,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->userService->userMenus();
         $users = User::all();
         return view('pages.user.users')->with('users', $users);
     }
@@ -131,6 +132,7 @@ class UserController extends Controller
      */
     public function confirmDeleteUser(Request $request)
     {
+        //dd($request);
         return $this->sendJsonResponse($this->userService->confirmDeleteUser($request));
     }
     /**

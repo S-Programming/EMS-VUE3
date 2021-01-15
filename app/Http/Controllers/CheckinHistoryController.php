@@ -7,6 +7,7 @@ use App\Http\Services\CheckinHistoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CheckinHistory;
+use App\Models\User;
 use http\Message\Body;
 use Carbon\Carbon;
 use Session;
@@ -76,6 +77,18 @@ class CheckinHistoryController extends Controller
     public function allCheckinList(Request $request)
     {
         $user_history = $this->checkinHistoryService->allCheckinList($request);
+        $users = User::all();
+        if(isset($user_history['errors']) && !empty($user_history['errors']))
+        {
+             return redirect()->route('dashboard');
+        }
+        //dd($user_history['user_history']);
+        return view('pages.user.all_checkin_list')->with('user_history',$user_history)->with('users',$users);
+    }
+
+    public function getUserCheckinRecord(Request $request)
+    {
+         return $this->sendJsonResponse($this->checkinHistoryService->getUserCheckinRecord($request));
         // dd($user_history);
         if (isset($user_history['errors']) && !empty($user_history['errors'])) {
             return redirect()->route('dashboard');

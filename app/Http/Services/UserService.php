@@ -5,6 +5,9 @@ namespace App\Http\Services;
 
 
 use App\Http\Services\BaseService\BaseService;
+use App\Models\Menu;
+use App\Models\MenuRole;
+
 use App\Models\CheckinHistory;
 use App\Models\User;
 use App\Models\Role;
@@ -63,6 +66,7 @@ class UserService extends BaseService
             dd('huhahahahahah');
         }
     }
+
     public function confirmAdduser(Request $request)
     {
         ## DB operations
@@ -141,21 +145,6 @@ class UserService extends BaseService
         $html = view('pages.user._partial._datatable_html', compact('users', $users))->render();
         return $this->successResponse('User is Successfully Deleted', ['html' => $html]);
     }
-
-    /*public function selfEditProfile()
-    {
-        $user_id = $this->getAuthUserId();
-        if( $user_id > 0)
-        {
-            $user_data = User::find($user_id);
-            return $this->successResponse('success',[' user_data'=> $user_data]);
-
-        }
-        else
-        {
-            return $this->errorResponse('Failed');
-        }
-    }*/
 
     public function selfUpdateProfile(Request $request)
     {

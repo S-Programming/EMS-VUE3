@@ -76,7 +76,7 @@ class RoleService extends BaseService
         $login_id = $this->getAuthUserId();
         $role_id = $request->id;
         if ($role_id == $login_id) {
-            return $this->errorResponse('You dont have Authorization to Delete this Account');
+            return $this->errorResponse('You dont have Authorization to Delete this Role');
         }
 
         $role_data = Role::find($role_id);

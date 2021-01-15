@@ -42,4 +42,11 @@ trait AuthUser
         $userLastCheckinRecord = $user ? $user->lastCheckin() : null;
         return (!is_null($userLastCheckinRecord) && !is_null($userLastCheckinRecord->checkin)) ? $userLastCheckinRecord->checkin : null;
     }
+
+    public function userRoles()
+    {
+        $user = $this->getAuthUser();
+        $userRoles = $user ? $user->roles : null;
+        return $userRoles ? (array_column($userRoles->toArray(), 'id')) : [];
+    }
 }

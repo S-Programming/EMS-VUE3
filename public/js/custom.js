@@ -282,9 +282,11 @@ function closeModalById(id) {
 }
 
 function ajaxCallOnclick(route, extraData) {
+    //console.log(extraData.user_id,route);
     if (route != '') {
         const url = baseURL + '/' + route;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
+        // console.log(dataToPost.user_id);
         jQuery.ajax({
             type: "POST",
             url: url,
@@ -320,20 +322,18 @@ function deleteRecord(route, id, extraData) {
     if (route != '') {
 
         jQuery.ajax({
-
-            url: route,
-            type: 'POST',
-            data: {id: id},
-            success: function (data) {
-
-                if (data.status == 'success') {
-                    notificationAlert('success', data.message, 'Success!');
-                    const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
-                    if (jQuery('body').hasClass('modal-open') && containerId) {
-                        closeModalById(containerId);
-                    }
-                    setTimeout(function () {
-                        window.location.reload();
+        url: route,
+        type: 'POST',
+        data: {id: id},
+        success: function (data) {
+            if (data.status == 'success') {
+                notificationAlert('success', data.message, 'Success!');
+                const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
+                if (jQuery('body').hasClass('modal-open') && containerId) {
+                    closeModalById(containerId);
+                }
+                setTimeout(function () {
+                    window.location.reload();
 
                     }, 0)
                 } else {
