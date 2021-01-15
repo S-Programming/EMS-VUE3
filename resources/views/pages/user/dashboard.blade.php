@@ -17,29 +17,16 @@
                     <button type="button" class="btn btn-sm btn-alt-primary">
                         <i class="fa fa-cog"></i>
                     </button>
-                    <div class="dropdown d-inline-block">
-                        <button type="button" class="btn btn-sm btn-alt-primary" id="dropdown-analytics-overview"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-fw fa-calendar-alt"></i>
-                            Last 30 days
-                            <i class="fa fa-fw fa-angle-down">
-                                <div class="bg-body-light"></div>
-                            </i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right font-size-sm"
-                             aria-labelledby="dropdown-analytics-overview">
-                            {{-- <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'currentWeek']) }}">This Week</a>
-                            <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'previousWeek']) }}">Previous Week</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'currentMonth']) }}">This Month</a>
-                            <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'previousMonth']) }}">Previous Month</a> --}}
-                            <a class="dropdown-item font-w500" onclick="userReport('user_report_history' , 'currentMonth')">This Month By Ajax</a>
-                            <a class="dropdown-item font-w500" onclick="userReport('user_report_history' , 'previoustMonth')">Previous Month By Ajax</a>
-                            <a class="dropdown-item font-w500" onclick="userReport('user_report_history' , 'currentWeek')">This Week By Ajax</a>
-                            <a class="dropdown-item font-w500" onclick="userReport('user_report_history' , 'previousWeek')">Previous Week By Ajax</a>
-                       {{-- <a class="dropdown-item font-w500" href="javascript:void(0)">This Month</a> --}}
-                        </div>
-                    </div>
+                    <div class="d-inline-block">
+                    <select class="dropdown form-control " onchange="ajaxCallOnclick('user_report_history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_id">
+                        <option>All Checkin History</option>
+                        <option>Previous Week</option>
+                        <option>Current Week</option>
+                        <option>Previous Month</option>
+                        <option>Current Month</option>
+                        {{-- <option value="All">All</option> --}}
+                    </select>
+                </div>
                 </div>
             </div>
         </div>
@@ -366,9 +353,9 @@
                 </form>
                 <!-- END Search Form -->
             </div>
-            <div class="block-content" id="filter-checkins-div">
+            <div class="block-content" id="self-checkin-history">
                 <!-- Recent Orders Table -->
-                <div class="table-responsive">
+                {{-- <div class="table-responsive">
                     <table class="table table-borderless table-striped table-vcenter">
                         <thead>
                         <tr>
@@ -393,11 +380,11 @@
                         @endif
                         </tbody>
                     </table>
-                </div>
+                </div> --}}
                 <!-- END Recent Orders Table -->
 
                 <!-- Pagination -->
-                <nav aria-label="Photos Search Navigation">
+                {{-- <nav aria-label="Photos Search Navigation">
                     <ul class="pagination pagination-sm justify-content-end mt-2">
                         <li class="page-item">
                             <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-label="Previous">
@@ -422,7 +409,7 @@
                             </a>
                         </li>
                     </ul>
-                </nav>
+                </nav> --}}
                 <!-- END Pagination -->
             </div>
         </div>
