@@ -18,7 +18,7 @@
         </tr>
         </thead>
         <tbody>
-        @if($users)
+        @if(isset($users))
             @foreach($users as $user)
                 <tr>
                     <td class="text-center font-size-sm">{{$user->id}}</td>
@@ -27,7 +27,7 @@
                         <em class="text-muted">{{$user->email}}</em>
                     </td>
                     <td class="d-none d-sm-table-cell">
-                        <span class="badge badge-primary">Personal</span>
+                        <span class="badge badge-primary">{{$user->roles[0]->name}}</span>
                     </td>
                     <td>
                         <em class="text-muted font-size-sm">{{(isset($user->created_at)?$user->created_at->format('d M'):'')}}</em>

@@ -12,6 +12,7 @@ class User
         Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/user_report', [UserController::class, 'userReport'])->name('user.report');
             Route::post('/user_report_history', [UserController::class, 'userReportHistory'])->name('user.report.history');
+          
             Route::get('/user', [UserController::class, 'index'])->name('user.list');
             Route::post('/adduser_modal', [UserController::class, 'userModal'])->name('user.modal');
             Route::post('/edituser_modal', [UserController::class, 'userModal'])->name('user.modal');
