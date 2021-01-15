@@ -28,11 +28,11 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right font-size-sm"
                              aria-labelledby="dropdown-analytics-overview">
-                            <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'currentWeek']) }}">This Week</a>
+                            {{-- <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'currentWeek']) }}">This Week</a>
                             <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'previousWeek']) }}">Previous Week</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'currentMonth']) }}">This Month</a>
-                            <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'previousMonth']) }}">Previous Month</a>
+                            <a class="dropdown-item font-w500" href="{{ route('user.report',['duration' => 'previousMonth']) }}">Previous Month</a> --}}
                             <a class="dropdown-item font-w500" onclick="userReport('user_report_history' , 'currentMonth')">This Month By Ajax</a>
                             <a class="dropdown-item font-w500" onclick="userReport('user_report_history' , 'previoustMonth')">Previous Month By Ajax</a>
                             <a class="dropdown-item font-w500" onclick="userReport('user_report_history' , 'currentWeek')">This Week By Ajax</a>
