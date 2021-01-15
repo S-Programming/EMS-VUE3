@@ -39,7 +39,7 @@ function validateFieldsByFormId(e) {
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
-                     if(formId=="profile-form-id")
+                    if(formId=="profile-form-id")
                     {
                         jQuery(`#` + validationSpanId).html(buttonHtml);
                     }
