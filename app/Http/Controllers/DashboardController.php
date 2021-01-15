@@ -44,6 +44,22 @@ class DashboardController extends Controller
         $monthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
             ->where('user_id', $userId)
             ->get()->count();
+        $previousMonthCheckins = CheckinHistory::whereMonth(
+            'checkin',
+            '=',
+            Carbon::now()->subMonth()->month
+        )->get()->count();
+
+        $NowDate = Carbon::now()->format('Y-m-d');
+        $currentStartWeekDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1); // gives 2016-01-3
+        $currentWeekCheckins = CheckinHistory::whereBetween('checkin', array($currentStartWeekDate, $NowDate))
+            ->where('user_id', $userId)
+            ->get()->count();
+        $previousWeekStartDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->subWeek()->format('Y-m-d'); // gives 2016-01-31
+        $previousWeekEndDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek)->format('Y-m-d');
+        $pastWeekCheckins = CheckinHistory::whereBetween('checkin', array($previousWeekStartDate, $previousWeekEndDate))
+            ->where('user_id', $userId)
+            ->get()->count();
         // Total Users
         $count = DB::table('users')->count();
 
@@ -54,8 +70,8 @@ class DashboardController extends Controller
         if ($isCheckin) {
             $responseData['user_last_checkin_time'] = $this->userLastCheckinTime();
         }
-        
-        return view('pages.user.dashboard', $responseData)->with(['count' => $count, 'monthlyCheckins' => $monthlyCheckins]);
+
+        return view('pages.user.dashboard', $responseData)->with(['count' => $count, 'monthlyCheckins' => $monthlyCheckins,'previousMonthCheckins' => $previousMonthCheckins, 'currentWeekCheckins' => $currentWeekCheckins, 'pastWeekCheckins' => $pastWeekCheckins]);
     }
 
     /**

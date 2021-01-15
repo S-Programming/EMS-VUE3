@@ -118,7 +118,10 @@
                             <!-- <dt class="font-size-h2 font-w700">45</dt>
                             <dd class="text-muted mb-0">Messages</dd> -->
                             <div id="jQuery" class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                                <p>Total Checkins:{{ $monthlyCheckins }}</p>
+                                <p>This Month : {{$monthlyCheckins}}</p>
+                                <p>Previous Month : {{$previousMonthCheckins}}</p>
+                                <p>Current Week : {{$currentWeekCheckins}}</p>
+                                <p>Past Week : {{$pastWeekCheckins}}</p>
                             </div>
                         </dl>
                         <div class="item item-rounded bg-body">
