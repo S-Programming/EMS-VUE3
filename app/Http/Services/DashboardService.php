@@ -21,28 +21,20 @@ class DashboardService extends BaseService
      * @return void
      */
 
-    public function getDashboard()
+    public function getDashboard(Request $request)
     {
-        if (Auth::check()) {
-            $user = Auth::user();
-            if ($user) {
-                $userRoles = $this->userRoles();
-                if (in_array(RoleUser::SuperAdmin, $userRoles)) {
-
-                }
-
-
-                /*switch ($roleId) {
-                    case RoleUser::SuperAdmin:
-                        return view('admin.index');
-                    case RoleUser::Admin:
-                        return view('admin.index');
-                }*/
+        $user = $this->getAuthUser();
+        if ($user) {
+            $userRoles = $this->userRoles();
+            if (in_array(RoleUser::SuperAdmin, $userRoles) || in_array(RoleUser::Admin, $userRoles)) {
+                return $this->adminDashboard($request);
+            } else {
+                return $this->userDashboard($request);
             }
         }
     }
 
-    public function index(Request $request)
+    public function userDashboard(Request $request)
     {
         // Current Month Checkins count
         $userId = $this->getAuthUserId();
@@ -74,17 +66,25 @@ class DashboardService extends BaseService
         $menu_data = Menu::with('menusRole')->get();
         // dd($menu_data[0]->menusRole[0]->pivot->role_id);
         $user = $this->getAuthUser();
-        $checkinHistory = $user ? $user->checkinHistory : null;
         $isCheckin = $this->isUserCheckin();
-        $responseData = ['is_checkin' => $isCheckin, 'checkin_history' => $checkinHistory, 'user' => $user, 'menu_data' => $menu_data];
+        $responseData = ['is_checkin' => $isCheckin, 'user' => $user, 'menu_data' => $menu_data, 'count' => $totalUsers, 'monthlyCheckins' => $monthlyCheckins, 'previousMonthCheckins' => $previousMonthCheckins, 'currentWeekCheckins' => $currentWeekCheckins, 'pastWeekCheckins' => $pastWeekCheckins];
+        $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
         if ($isCheckin) {
             $responseData['user_last_checkin_time'] = $this->userLastCheckinTime();
         }
         //Checkin History Record show at Bottom
-        $checkin_history = CheckinHistory::where('user_id', $userId)->get();
-        $checkin_history_html = view('pages.report._partial._checkinhistory_table', ['records' => $checkin_history]);
-        $dashboardView = view('pages.user.dashboard', $responseData)->with(['checkin_history_html' => $checkin_history_html, 'count' => $totalUsers, 'monthlyCheckins' => $monthlyCheckins, 'previousMonthCheckins' => $previousMonthCheckins, 'currentWeekCheckins' => $currentWeekCheckins, 'pastWeekCheckins' => $pastWeekCheckins]);
-        return $dashboardView;
-
+        //$checkin_history_html = view('pages.report._partial._checkinhistory_table', ['records' => $checkin_history]);
+        //$html = view('pages.user._partial._checkin_history_html', ['user_history' =>  $responseData['checkin_history']])->render();
+        return view('pages.user.dashboard', $responseData);
     }
+
+    public function adminDashboard(Request $request)
+    {
+        $totalUsers = User::all()->count();
+        $user = $this->getAuthUser();
+        $responseData = ['user' => $user, 'total_user_count' => $totalUsers];
+        $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
+        return view('pages.admin.dashboard', $responseData);
+    }
+
 }

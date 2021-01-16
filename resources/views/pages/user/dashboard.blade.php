@@ -220,7 +220,7 @@
                         <div class="block block-rounded d-flex flex-column">
                             <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between">
                                 <dl class="mb-0">
-                                    <dt class="font-size-h2 font-w700">{{$count}}</dt>
+                                    <dt class="font-size-h2 font-w700">{{$total_user_count??0}}</dt>
                                     <dd class="text-muted mb-0">Total Users</dd>
                                 </dl>
                                 <div>
@@ -363,7 +363,7 @@
                 <!-- END Search Form -->
             </div>
             <div class="block-content" id="self-checkin-history">
-                {!!$checkin_history_html!!}
+                {!!$checkin_history_html ??''!!}
                 <!-- Recent Orders Table -->
                 {{-- <div class="table-responsive">
                     <table class="table table-borderless table-striped table-vcenter">

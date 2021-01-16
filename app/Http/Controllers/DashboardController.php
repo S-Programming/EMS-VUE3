@@ -33,12 +33,11 @@ class DashboardController extends Controller
 
     /**
      * Display a listing of the resource.
-     * Display dashboard
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        return $this->dashboardService->index($request);
+
     }
 
     /**
@@ -46,9 +45,9 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        return $this->dashboardService->getDashboard();
+        return $this->dashboardService->getDashboard($request);
 
 
 

@@ -22,12 +22,12 @@
             @foreach($users as $user)
                 <tr>
                     <td class="text-center font-size-sm">{{$user->id}}</td>
-                    <td class="font-w600 font-size-sm">{{$user->first_name}}{{" "}}{{$user->last_name}}</td>
+                    <td class="font-w600 font-size-sm">{{$user->first_name}} {{$user->last_name}}</td>
                     <td class="d-none d-sm-table-cell font-size-sm">
                         <em class="text-muted">{{$user->email}}</em>
                     </td>
                     <td class="d-none d-sm-table-cell">
-                        <span class="badge badge-primary">{{$user->roles[0]->name}}</span>
+                        <span class="badge badge-primary">{{$user->roles[0]->name??''}}</span>
                     </td>
                     <td>
                         <em class="text-muted font-size-sm">{{(isset($user->created_at)?$user->created_at->format('d M'):'')}}</em>
@@ -40,7 +40,7 @@
                 </tr>
             @endforeach
         @endif
-        
+
         </tbody>
     </table>
 </div>
