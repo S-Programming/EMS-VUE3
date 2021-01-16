@@ -3,9 +3,22 @@
         <div class="block-header block-header-default" >
             <h3 class="block-title bold">Checkin History</h3>
             <div class="block-options">
-                {{-- <form method="POST" action="{{ route('checkin.history.user') }}" id="usercheckinhistory-form-id">
-                    @csrf --}}
-                    <select class="form-control" onchange="ajaxCallOnclick('get_user_checkin',{user_id:this.options[this.selectedIndex].value??'All'})" name="user_id">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                    <select class="dropdown form-control " onchange="ajaxCallOnclick('get_user_checkin',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_days">
+                        <option>All</option>
+                        <option>Previous Week</option>
+                        <option>Current Week</option>
+                        <option>Previous Month</option>
+                        <option>Current Month</option>
+                    </select>
+                    </div>
+                <div class="col-sm-6">
+
+                <!-- <form method="POST" action="{{ route('checkin.history.user') }}" id="usercheckinhistory-form-id">
+                    @csrf -->
+                    <select class="dropdown form-control" onchange="ajaxCallOnclick('get_user_checkin',{user_id:this.options[this.selectedIndex].value??'All'})" name="user_id">
                         @if(isset($users) && !empty($users))
                         <option value="All">All</option>
                             @foreach($users as $user)
@@ -13,7 +26,10 @@
                             @endforeach
                         @endif
                     </select>
-                {{-- </form> --}}
+
+                </div>
+                </div>
+               <!--  </form> -->
             </div>
         </div>
 
@@ -35,32 +51,8 @@
         </div> -->
 		<div id="checkin-history" class="block-content">
         <!-- Recent Orders Table -->
-	        <div class="table-responsive">
-                <table class="table table-borderless table-striped table-vcenter">
-                    <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Check In Time</th>
-                        <th>Check Out Time</th>
-                        <th>Day</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                        <tbody>
-                        @if(isset($user_history) && !empty($user_history))
-                            @foreach($user_history as $data)
-                                <tr>
-                                    <th>{{$data->user_id??''}}</th>
-                                    <th>{{$data->checkin??''}}</th>
-                                    <th>{{$data->checkout ??''}}</th>
-                                    <th>{{$data->created_at->format('d M') ??''}}</th>
-                                    <th>{!!$data->description??'' !!}</th>
-                                </tr>
-                            @endforeach
-                        @endif
-                        </tbody>
-                </table>
-            </div>
+        {!! $user_history_html??''!!}
+
 	        <nav aria-label="Photos Search Navigation">
                 <ul class="pagination pagination-sm justify-content-end mt-2">
                     <li class="page-item">
