@@ -18,7 +18,7 @@
                         <i class="fa fa-cog"></i>
                     </button>
                     <div class="d-inline-block">
-                        
+
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn btn-sm btn-alt-primary" id="dropdown-recent-orders-filters"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -326,7 +326,7 @@
             <div class="block-header block-header-default">
                 <h3 class="block-title bold">My Checkin History</h3>
                 <div class="block-options">
-                   
+
                     <div class="mt-3 mt-sm-0 ml-sm-3">
                         <button type="button" class="btn btn-sm btn-alt-primary" data-toggle="class-toggle"
                                 data-target="#one-dashboard-search-orders" data-class="d-none">
@@ -363,6 +363,7 @@
                 <!-- END Search Form -->
             </div>
             <div class="block-content" id="self-checkin-history">
+                {!!$checkin_history_html!!}
                 <!-- Recent Orders Table -->
                 {{-- <div class="table-responsive">
                     <table class="table table-borderless table-striped table-vcenter">
