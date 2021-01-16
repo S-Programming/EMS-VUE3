@@ -7,6 +7,7 @@
             <th>Check Out Time</th>
             <th>Day</th>
             <th>Description</th>
+            <th>Actions</th>
         </tr>
         </thead>
             <tbody>
@@ -18,6 +19,7 @@
                         <th>{{$data->checkout ??''}}</th>
                         <th>{{$data->created_at->format('d M') ??''}}</th>
                         <th>{!!$data->description??'' !!}</th>
+                        <th><button>Click Me</button></th>
                     </tr>
                 @endforeach
             @endif

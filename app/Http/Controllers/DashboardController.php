@@ -38,7 +38,6 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $menu_data = Menu::with('menusRole')->get();
         // Current Month Checkins
         $userId = $this->getAuthUserId();
         $monthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
@@ -49,7 +48,6 @@ class DashboardController extends Controller
             '=',
             Carbon::now()->subMonth()->month
         )->get()->count();
-
         $NowDate = Carbon::now()->format('Y-m-d');
         $currentStartWeekDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1); // gives 2016-01-3
         $currentWeekCheckins = CheckinHistory::whereBetween('checkin', array($currentStartWeekDate, $NowDate))
@@ -62,17 +60,26 @@ class DashboardController extends Controller
             ->get()->count();
         // Total Users
         $count = DB::table('users')->count();
-
         $user = $this->getAuthUser();
-        $checkinHistory = $user ? $user->checkinHistory : null;
-        $isCheckin = $this->isUserCheckin();
-        $responseData = ['is_checkin' => $isCheckin, 'checkin_history' => $checkinHistory, 'user' => $user, 'menu_data' => $menu_data];
-        if ($isCheckin) {
+        $responseData = ['is_checkin' => $this->isUserCheckin(),'user' => $user,'count' => $count, 'monthlyCheckins' => $monthlyCheckins, 'previousMonthCheckins' => $previousMonthCheckins, 'currentWeekCheckins' => $currentWeekCheckins, 'pastWeekCheckins' => $pastWeekCheckins];
+        $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
+        $responseData['is_checkin'] = $this->isUserCheckin();
+        if ($responseData['is_checkin']) {
             $responseData['user_last_checkin_time'] = $this->userLastCheckinTime();
         }
-
-        return view('pages.user.dashboard', $responseData)->with(['count' => $count, 'monthlyCheckins' => $monthlyCheckins,'previousMonthCheckins' => $previousMonthCheckins, 'currentWeekCheckins' => $currentWeekCheckins, 'pastWeekCheckins' => $pastWeekCheckins]);
+        return view('pages.user.dashboard', $responseData);
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function dashboard()
+    {
+        return $this->dashboardService->getDashboard();
+    }
+
 
     /**
      * Show the form for creating a new resource.
