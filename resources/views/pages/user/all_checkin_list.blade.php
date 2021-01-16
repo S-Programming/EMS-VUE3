@@ -5,7 +5,7 @@
             <div class="block-options">
                 <div class="row">
                     <div class="col-sm-6">
-                    <select class="dropdown form-control " onchange="ajaxCallOnclick('get_user_checkin',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_days">
+                    <select class="dropdown form-control " onchange="ajaxCallOnclick('get_user_checkin',{user_id:$users[0]->id,history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_days">
                         <option>All</option>
                         <option>Previous Week</option>
                         <option>Current Week</option>
