@@ -63,33 +63,32 @@ class CheckinHistoryService extends BaseService
 
     public function allCheckinList(Request $request)
     {
-       // $role_id = $this->getAuthUser()->roles->first()->id;
-        //if ($role_id == 1 || $role_id == 2) {
-            $user_history = CheckinHistory::all();
-            $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-            return $this->successResponse('User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
-        /*} else {
-            return $this->errorResponse('Authorization Required', ['errors' => 'You dont have Authorization to Access this !! ']);
-        }*/
+        $user_history = CheckinHistory::all();
+        return $this->successResponse('User History Fetch Successfully',['user_history' => $user_history]);
     }
     public function getUserCheckinRecord(Request $request)
     {
-        //dd($request->user_id);
+        
         $user_id = $request->user_id;
-        if ($user_id == 'All') {
+        
+        if($user_id == 'All')
+        {
             $user_history = CheckinHistory::all();
             $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-            // dd($user_history);
-
             return $this->successResponse('All User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
         }
-        elseif($user_id == 'Select Role'){
-            return $this->errorResponse('Select Any Role', ['errors' => 'Select Any Role']);
-        }
         $user_history = CheckinHistory::where('user_id', $user_id)->get();
+       
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-        // dd($user_history);
-
-        return $this->successResponse('User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
+        $validate = count($user_history);
+        if($validate)
+        {
+            return $this->successResponse('User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
+        }
+        else 
+        {
+            return $this->errorResponse('User History Record Not Found', ['errors' => ['User History Record Not Found'],'html' => $html]);
+        }
+        
     }
 }

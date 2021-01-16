@@ -7,8 +7,7 @@
                     @csrf
                     <select class="form-control" onchange="ajaxCallOnclick('get_user_checkin',{user_id:this.options[this.selectedIndex].value??'All'})" name="user_id">
                         @if(isset($users) && !empty($users))
-                        <option>Select Role</option>
-                            <option value="All">All</option>
+                        <option value="All">All</option>
                             @foreach($users as $user)
                                 <option value="{{$user->id}}">{{$user->first_name}}{{" "}}{{$user->last_name}}</option>
                             @endforeach
@@ -36,7 +35,32 @@
         </div> -->
 		<div id="checkin-history" class="block-content">
         <!-- Recent Orders Table -->
-	        
+	        <div class="table-responsive">
+                <table class="table table-borderless table-striped table-vcenter">
+                    <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Check In Time</th>
+                        <th>Check Out Time</th>
+                        <th>Day</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                        <tbody>
+                        @if(isset($user_history) && !empty($user_history))
+                            @foreach($user_history['user_history'] as $data)
+                                <tr>
+                                    <th>{{$data->user_id??''}}</th>
+                                    <th>{{$data->checkin??''}}</th>
+                                    <th>{{$data->checkout ??''}}</th>
+                                    <th>{{$data->created_at->format('d M') ??''}}</th>
+                                    <th>{!!$data->description??'' !!}</th>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                </table>
+            </div>
 	        <nav aria-label="Photos Search Navigation">
                 <ul class="pagination pagination-sm justify-content-end mt-2">
                     <li class="page-item">

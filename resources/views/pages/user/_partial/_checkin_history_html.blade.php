@@ -15,8 +15,8 @@
                     <tr>
                         <th>{{$data->user_id??''}}</th>
                         <th>{{$data->checkin??''}}</th>
-                        <th>{{$data->checkout ?? ""}}</th>
-                        <th>{{$data->created_at->format('d M') ?? ""}}</th>
+                        <th>{{$data->checkout ??''}}</th>
+                        <th>{{$data->created_at->format('d M') ??''}}</th>
                         <th>{!!$data->description??'' !!}</th>
                     </tr>
                 @endforeach
