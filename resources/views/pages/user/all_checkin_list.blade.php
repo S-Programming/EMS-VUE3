@@ -48,7 +48,7 @@
                     </thead>
                         <tbody>
                         @if(isset($user_history) && !empty($user_history))
-                            @foreach($user_history['user_history'] as $data)
+                            @foreach($user_history as $data)
                                 <tr>
                                     <th>{{$data->user_id??''}}</th>
                                     <th>{{$data->checkin??''}}</th>
