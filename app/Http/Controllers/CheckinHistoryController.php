@@ -76,11 +76,10 @@ class CheckinHistoryController extends Controller
      */
     public function allCheckinList(Request $request)
     {
-        $user_history_data = $this->checkinHistoryService->allCheckinList($request);
-        $user_history = $user_history_data['user_history'];
+        $user_history = CheckinHistory::all();
         $users = User::all();
-      //  dd($user_history);
-        return view('pages.user.all_checkin_list')->with('user_history',$user_history)->with('users',$users);
+        $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
+        return view('pages.user.all_checkin_list',['user_history_html' => $html,'users'=>$users]);
     }
 
     public function getUserCheckinRecord(Request $request)
