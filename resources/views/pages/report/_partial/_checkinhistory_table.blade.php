@@ -1,5 +1,6 @@
 <div class="block-header">
-    <h3 class="block-title">Dynamic Table <small>{{ $totalCheckins }} Checkins</small></h3>
+    <h3 class="block-title">Dynamic Table <small> Checkins</small></h3>
+    {{-- {{ $totalCheckins }} --}}
     {{-- <x-button class="btn btn-primary" onclick="commonAjaxModel('adduser_modal')" data-validation="validation-span-id"
               id="validation-span-id">Add
     </x-button> --}}

@@ -33,7 +33,7 @@ class DashboardController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
+     * Display dashboard
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)

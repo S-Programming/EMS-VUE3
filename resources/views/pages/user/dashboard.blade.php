@@ -363,6 +363,7 @@
                 <!-- END Search Form -->
             </div>
             <div class="block-content" id="self-checkin-history">
+                {!!$checkin_history_html!!}
                 <!-- Recent Orders Table -->
                 {{-- <div class="table-responsive">
                     <table class="table table-borderless table-striped table-vcenter">

@@ -19,8 +19,7 @@ class Menu extends Model
         'class',
         'icon',
         'is_count',
-        'is_active'*/
-    ];
+        'is_active'*/];
 
     public function menusRole()
     {
@@ -43,7 +42,10 @@ class Menu extends Model
     }
     public function scopeParent()
     {
-        return $this->where('parent_menu_id',0)->orderBy('sort_order');
+        return $this->where('parent_menu_id', 0)->orderBy('sort_order');
     }
-
+    public function getTableColumns()
+    {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 }
