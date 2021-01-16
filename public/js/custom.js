@@ -43,7 +43,7 @@ function validateFieldsByFormId(e) {
                     {
                         jQuery(`#` + validationSpanId).html(buttonHtml);
                     }
-                    
+
 
                     if (data.redirect_to != '' && typeof (data.redirect_to) != "undefined") {
                         setTimeout(function () {
@@ -298,10 +298,10 @@ function ajaxCallOnclick(route, extraData) {
             dataType: "json",
             success: function (data) {
                 if (data.status == 'success') {
-                    notificationAlert('success', data.message, 'Success!');
                     if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
                         jQuery('#' + data.html_section_id).html(data.html);
                     }
+                    notificationAlert('success', data.message, 'Success!');
                     if (typeof dataToPost.method_to_execute != 'undefined' && dataToPost.method_to_execute != '') {
                         window[extraData.method_to_execute]();
                     }

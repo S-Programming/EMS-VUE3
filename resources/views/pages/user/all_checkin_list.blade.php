@@ -3,41 +3,43 @@
         <div class="block-header block-header-default">
             <h3 class="block-title bold">Checkin History</h3>
             <div class="block-options">
-<<<<<<< HEAD
                 <form method="POST" action="{{ route('checkin.history.user') }}" id="usercheckinhistory-form-id">
                     @csrf
                     <select class="form-control"
                             onchange="ajaxCallOnclick('get_user_checkin',{user_id:this.options[this.selectedIndex].value??'All'})"
                             name="user_id">
-=======
 
-                <div class="row">
-                    <div class="col-sm-6">
-                    <select class="dropdown form-control " onchange="ajaxCallOnclick('get_user_checkin',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_days">
-                        <option>All</option>
-                        <option>Previous Week</option>
-                        <option>Current Week</option>
-                        <option>Previous Month</option>
-                        <option>Current Month</option>
-                    </select>
-                    </div>
-                <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <select class="dropdown form-control "
+                                        onchange="ajaxCallOnclick('get_user_checkin',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})"
+                                        name="user_days">
+                                    <option>All</option>
+                                    <option>Previous Week</option>
+                                    <option>Current Week</option>
+                                    <option>Previous Month</option>
+                                    <option>Current Month</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
 
-                <!-- <form method="POST" action="{{ route('checkin.history.user') }}" id="usercheckinhistory-form-id">
+                            <!-- <form method="POST" action="{{ route('checkin.history.user') }}" id="usercheckinhistory-form-id">
                     @csrf -->
-                    <select class="dropdown form-control" onchange="ajaxCallOnclick('get_user_checkin',{user_id:this.options[this.selectedIndex].value??'All'})" name="user_id">
->>>>>>> 65c0770a9280d1480832eda59312612a88682da9
-                        @if(isset($users) && !empty($users))
-                            <option value="All">All</option>
-                            @foreach($users as $user)
-                                <option value="{{$user->id}}">{{$user->first_name}}{{" "}}{{$user->last_name}}</option>
-                            @endforeach
-                        @endif
-                    </select>
+                                <select class="dropdown form-control"
+                                        onchange="ajaxCallOnclick('get_user_checkin',{user_id:this.options[this.selectedIndex].value??'All'})"
+                                        name="user_id">
+                                    @if(isset($users) && !empty($users))
+                                        <option value="All">All</option>
+                                        @foreach($users as $user)
+                                            <option
+                                                value="{{$user->id}}">{{$user->first_name}}{{" "}}{{$user->last_name}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
 
-                </div>
-                </div>
-               <!--  </form> -->
+                            </div>
+                        </div>
+                        <!--  </form> -->
             </div>
         </div>
 
@@ -58,13 +60,8 @@
 
         </div> -->
         <div id="checkin-history" class="block-content">
-        {!! $user_history_html??'' !!}
-        <!-- Recent Orders Table -->
-<<<<<<< HEAD
-=======
-        {!! $user_history_html??''!!}
-
-	        <nav aria-label="Photos Search Navigation">
+            {!! $user_history_html??'' !!}
+            <nav aria-label="Photos Search Navigation">
                 <ul class="pagination pagination-sm justify-content-end mt-2">
                     <li class="page-item">
                         <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-label="Previous">
@@ -90,9 +87,7 @@
                     </li>
                 </ul>
             </nav>
->>>>>>> 65c0770a9280d1480832eda59312612a88682da9
             <!-- END Pagination -->
         </div>
     </div>
-
 </x-backend-layout>
