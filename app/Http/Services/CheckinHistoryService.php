@@ -6,6 +6,7 @@ namespace App\Http\Services;
 
 use App\Http\Services\BaseService\BaseService;
 use App\Models\CheckinHistory;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,18 +63,19 @@ class CheckinHistoryService extends BaseService
 
     public function getUserCheckinRecord(Request $request)
     {
-
+        //dd($request->all());
         $user_id = $request->user_id;
 
         if ($user_id == 'All') {
             $user_history = CheckinHistory::all();
+
             $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
             $validate = count($user_history);
             if ($validate) {
 
                 return $this->successResponse('All User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
             } else {
-                return $this->errorResponse('User History Record Not Found', ['errors' => ['User History Record Not Found'], 'html' => $html]);
+                return $this->errorResponse('User History Record Not Found', ['errors' => ['User History Record Not Found'], 'html' => $html, 'html_section_id' => 'checkin-history']);
             }
            /* else
             {
@@ -81,34 +83,35 @@ class CheckinHistoryService extends BaseService
             }*/
             
         }
-        $user_history = CheckinHistory::where('user_id', $user_id)->get();
+        /*$user_history = CheckinHistory::where('user_id', $user_id)->get();
        
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
         $validate = count($user_history);
         if($validate)
         {
             return $this->successResponse('User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
-        }   
-        else 
+        }*/   
+        /*else 
         {
             return $this->errorResponse('User History Record Not Found', ['errors' => ['User History Record Not Found'],'html' => $html,'html_section_id' => 'checkin-history']);
-        }
+        }*/
 
-        /*if ($request->history_report == 'Current Month') {
-
+        if ($request->user_days == 'Current Month') {
+           // dd("sadd");
+           //  $user_id = $request->user_id;
             $currentmonthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
                 ->where('user_id', $user_id)
                 ->get();
-                dd($user_id);
+              //  dd($user_id);
             $count = $currentmonthlyCheckins->count();
-            $html = view('pages.user._partial._checkin_history_html', ['records' => $currentmonthlyCheckins, 'totalCheckins' => $count])->render();
-            dd($currentmonthlyCheckins);
+            $html = view('pages.user._partial._checkin_history_html', ['user_history' => $currentmonthlyCheckins, 'totalCheckins' => $count])->render();
+           // dd($currentmonthlyCheckins);
             if ($count > 0) {
                 return $this->successResponse('Current Month Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
             } else {
-                return $this->errorResponse('Current Month Checkin_History Not Exists', ['errors' => ['History Not Exists']]);
+                return $this->errorResponse('Current Month Checkin_History Not Exists', ['errors' => ['Current Month Checkin_History Not Exists'],'html' => $html,'html_section_id' => 'checkin-history']);
             }
-        } elseif ($request->history_report == 'Previous Month') {
+        } elseif ($request->user_days == 'Previous Month') {
             //Previous Month Checkins
             $previousMonthCheckins = CheckinHistory::whereMonth(
                 'checkin',
@@ -116,13 +119,13 @@ class CheckinHistoryService extends BaseService
                 Carbon::now()->subMonth()->month
             )->get();
             $count = $previousMonthCheckins->count();
-            $html = view('pages.user._partial._checkin_history_html', ['records' => $previousMonthCheckins, 'totalCheckins' => $count])->render();
+            $html = view('pages.user._partial._checkin_history_html', ['user_history' => $previousMonthCheckins, 'totalCheckins' => $count])->render();
             if ($count > 0) {
                 return $this->successResponse('Previous Month Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
             } else {
-                return $this->errorResponse('Previous Month Checkin_History Not Exists', ['errors' => ['History Not Exists']]);
+                return $this->errorResponse('Previous Month Checkin_History Not Exists', ['errors' => ['History Not Exists'],'html' => $html,'html_section_id' => 'checkin-history']);
             }
-        } elseif ($request->history_report == 'Current Week') {
+        } elseif ($request->user_days == 'Current Week') {
             // current week
             $NowDate = Carbon::now()->format('Y-m-d');
             $currentStartWeekDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1); // gives 2016-01-3
@@ -130,13 +133,13 @@ class CheckinHistoryService extends BaseService
                 ->where('user_id', $user_id)
                 ->get();
             $count = $currentWeekCheckins->count();
-            $html = view('pages.user._partial._checkin_history_html', ['records' => $currentWeekCheckins, 'totalCheckins' => $count])->render();
+            $html = view('pages.user._partial._checkin_history_html', ['user_history' => $currentWeekCheckins, 'totalCheckins' => $count])->render();
             if ($count > 0) {
                 return $this->successResponse('Current Week Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
             } else {
-                return $this->errorResponse('Current Week Checkin_History Not Exists', ['errors' => ['History Not Exists']]);
+                return $this->errorResponse('Current Week Checkin_History Not Exists', ['errors' => ['History Not Exists'],'html' => $html,'html_section_id' => 'checkin-history']);
             }
-        } elseif ($request->history_report == 'Previous Week') {
+        } elseif ($request->user_days == 'Previous Week') {
             // Past Week Checkins (Today is not included)
             $previousWeekStartDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->subWeek()->format('Y-m-d'); // gives 2016-01-31
             $previousWeekEndDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek)->format('Y-m-d');
@@ -144,26 +147,50 @@ class CheckinHistoryService extends BaseService
                 ->where('user_id', $user_id)
                 ->get();
             $count = $pastWeekCheckins->count();
-            $html = view('pages.user._partial._checkin_history_html', ['records' => $pastWeekCheckins, 'totalCheckins' => $count])->render();
+            $html = view('pages.user._partial._checkin_history_html', ['user_history' => $pastWeekCheckins, 'totalCheckins' => $count])->render();
             if ($count > 0) {
                 return $this->successResponse('Previous Week Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
             } else {
-                return $this->errorResponse('Previous Week Checkin_History Not Exists', ['errors' => ['History Not Exists']]);
+                return $this->errorResponse('Previous Week Checkin_History Not Exists', ['errors' => ['History Not Exists'],'html' => $html,'html_section_id' => 'checkin-history']);
             }
         } else {
             $all_checkin_history = CheckinHistory::where('user_id', $user_id)->get();
             $count = $all_checkin_history->count();
-            $html = view('pages.user._partial._checkin_history_html', ['records' => $all_checkin_history, 'totalCheckins' => $count])->render();
+            $html = view('pages.user._partial._checkin_history_html', ['user_history' => $all_checkin_history, 'totalCheckins' => $count])->render();
             if ($count > 0) {
                 return $this->successResponse('All Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
             } else {
-                return $this->errorResponse('Checkin_History Not Exists', ['errors' => ['History Not Exists']]);
+                return $this->errorResponse('Checkin_History Not Exists', ['errors' => ['History Not Exists'],'html' => $html,'html_section_id' => 'checkin-history']);
             }
 
         }
-        
-        }*/
+    }
 
+    public function deleteCheckinUserModal(Request $request)
+    {
+        $checkin_id = $request->id;
+        //        dd(CommonUtilsFacade::isCheckIn());
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        // $role_data=Role::find($user_id);
+        $html = view('pages.admin._partial._delete_user_checkin_modal', ['id' => $containerId, 'checkin_id' => $checkin_id])->render();
 
+        return $this->successResponse('success', ['html' => $html]);
+    }
+
+    public function deleteConfirmCheckinUser(Request $request)
+    {
+        //$login_id = $this->getAuthUserId();
+        $checkin_id = $request->checkin_id;
+        /*if ($user_id == $login_id) {
+            return $this->errorResponse('Authorization Required', ['errors' => ['You dont have Authorization to Delete this Account']]);
+        }
+*/
+       // dd($checkin_id);
+        $user_data = CheckinHistory::find($checkin_id);
+        $user_data->delete();
+        $users = User::all();
+        $user_history = CheckinHistory::all();
+        $html = view('pages.user._partial._checkin_history_html', ['users'=> $users,'user_history'=>$user_history])->render();
+        return $this->successResponse('User is Successfully Deleted', ['html' => $html]);
     }
 }
