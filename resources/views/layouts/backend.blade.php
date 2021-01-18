@@ -375,7 +375,7 @@ MAIN CONTENT LAYOUT
                                 <span class="badge badge-pill badge-primary ml-2">3</span>
                             </a>
                             <a class="dropdown-item d-flex align-items-center justify-content-between"
-                               href="{{route('user.self.edit')}}">
+                               href="{{route('user.edit.profile')}}">
                                 <span class="font-size-sm font-w500">Profile</span>
                                 <span class="badge badge-pill badge-primary ml-2">1</span>
                             </a>

@@ -114,7 +114,7 @@ class UserService extends BaseService
                         $roleuser->save();*/
             $users = User::all();
         }
-        $html = view('pages.user._partial._datatable_html', compact('users', $users))->render();
+        $html = view('pages.user._partial._users_datatable_html', compact('users', $users))->render();
         return $this->successResponse('User has Successfully Added', ['html' => $html, 'html_section_id' => 'userlist-section']);
     }
 
@@ -134,7 +134,7 @@ class UserService extends BaseService
             }
         }
         $rolesDropDown = view('utils.roles', ['roles' => ($roles ?? null), 'user_roles' => $userRoles])->render();
-        $html = view('pages.user._partial._adduser_modal', ['id' => $containerId, 'data' => null, 'roles_dropdown' => $rolesDropDown, 'user_data' => $user_data])->render();
+        $html = view('pages.user._partial._add_user_modal', ['id' => $containerId, 'data' => null, 'roles_dropdown' => $rolesDropDown, 'user_data' => $user_data])->render();
 
         return $this->successResponse('success', ['html' => $html]);
     }
@@ -161,11 +161,11 @@ class UserService extends BaseService
         $user_data = User::find($user_id);
         $user_data->delete();
         $users = User::all();
-        $html = view('pages.user._partial._datatable_html', compact('users', $users))->render();
+        $html = view('pages.user._partial._users_datatable_html', compact('users', $users))->render();
         return $this->successResponse('User is Successfully Deleted', ['html' => $html]);
     }
 
-    public function selfUpdateProfile(Request $request)
+    public function userUpdateProfile(Request $request)
     {
 
         if (isset($request) && !empty($request)) {
@@ -186,7 +186,7 @@ class UserService extends BaseService
         }
     }
 
-    public function selfUpdatePassword(Request $request)
+    public function userUpdatePassword(Request $request)
     {
         if (isset($request) && !empty($request)) {
             $user_id = $this->getAuthUserId();

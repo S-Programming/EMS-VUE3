@@ -35,7 +35,7 @@ class RoleService extends BaseService
                         $roleuser->save();*/
             $roles = Role::all();
         }
-        $html = view('pages.role._partial._datatable_html', compact('roles', $roles))->render();
+        $html = view('pages.role._partial._roles_datatable_html', compact('roles', $roles))->render();
         return $this->successResponse('Role has Successfully Added', ['html' => $html, 'html_section_id' => 'userlist-section']);
     }
 
@@ -55,7 +55,7 @@ class RoleService extends BaseService
         //     }
         // }
         // $rolesDropDown = view('utils.roles', ['roles' => ($roles ?? null), 'user_roles' => $userRoles])->render();
-        $html = view('pages.role._partial._addrole_modal', ['id' => $containerId, 'data' => null, 'role_data' => $role_data])->render();
+        $html = view('pages.role._partial._add_role_modal', ['id' => $containerId, 'data' => null, 'role_data' => $role_data])->render();
 
         return $this->successResponse('success', ['html' => $html]);
     }
@@ -82,7 +82,7 @@ class RoleService extends BaseService
         $role_data = Role::find($role_id);
         $role_data->delete();
         $roles = Role::all();
-        $html = view('pages.role._partial._datatable_html', compact('roles', $roles))->render();
+        $html = view('pages.role._partial._roles_datatable_html', compact('roles', $roles))->render();
         return $this->successResponse('Role is Successfully Deleted', ['html' => $html]);
     }
 }

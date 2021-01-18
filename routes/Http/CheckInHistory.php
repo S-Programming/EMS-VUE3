@@ -15,9 +15,15 @@ class CheckInHistory
             Route::post('/checkout_modal', [CheckinHistoryController::class, 'checkoutModal'])->name('checkout.modal');
             Route::post('/confirm_checkout', [CheckinHistoryController::class, 'confirmCheckout'])->name('confirm.checkout');
             
-            Route::get('/all_checkin_list', [CheckinHistoryController::class,'allCheckinList'])->name('checkin.history.all.user');
+            Route::get('/users_checkin_report', [CheckinHistoryController::class,'userCheckinList'])->name('checkin.users.report');
             
             Route::post('/get_user_checkin', [CheckinHistoryController::class,'getUserCheckinRecord'])->name('checkin.history.user');
+            
+            Route::post('/delete_checkin_user_modal', [CheckinHistoryController::class,'deleteCheckinUserModal'])->name('checkin.delete.user');
+
+            Route::post('/confirm_delete_checkin_user', [CheckinHistoryController::class,'deleteConfirmCheckinUser'])->name('checkin.confirm.delete.user');
+
+
         });
     }
 }

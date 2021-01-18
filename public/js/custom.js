@@ -36,10 +36,13 @@ function validateFieldsByFormId(e) {
             success: function (data) {
                 e.disabled = false;
                 // console.log(data.redirect_to);
+                 if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
+                        jQuery('#' + data.html_section_id).html(data.html);
+                    }
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
-                    if(formId=="profile-form-id")
+                    if(formId=="profile-form-id" || formId=="filter-form-id")
                     {
                         jQuery(`#` + validationSpanId).html(buttonHtml);
                     }
@@ -290,13 +293,17 @@ function ajaxCallOnclick(route, extraData) {
     if (route != '') {
         const url = baseURL + '/' + route;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
-        //console.log(dataToPost.user_id);
+        console.log(dataToPost);
         jQuery.ajax({
             type: "POST",
             url: url,
             data: dataToPost,
             dataType: "json",
             success: function (data) {
+                console.log('RN',data)
+                   if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
+                        jQuery('#' + data.html_section_id).html(data.html);
+                    }
                 if (data.status == 'success') {
                     if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
                         jQuery('#' + data.html_section_id).html(data.html);

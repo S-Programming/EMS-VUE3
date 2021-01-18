@@ -1,6 +1,6 @@
 <div class="block-header">
     <h3 class="block-title">Dynamic Table <small>Full pagination</small></h3>
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('adduser_modal')" data-validation="validation-span-id"
+    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_user_modal')" data-validation="validation-span-id"
               id="validation-span-id">Add
     </x-button>
 </div>
@@ -33,8 +33,8 @@
                         <em class="text-muted font-size-sm">{{(isset($user->created_at)?$user->created_at->format('d M'):'')}}</em>
                     </td>
                     <td>
-                         <button class="btn btn-info" onclick="commonAjaxModel('edituser_modal',{{$user->id}})"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger" onclick="commonAjaxModel('deleteuser_modal',{{$user->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                         <button class="btn btn-info" onclick="commonAjaxModel('edit_user_modal',{{$user->id}})"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger" onclick="commonAjaxModel('delete_user_modal',{{$user->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                     </td>
                 </tr>

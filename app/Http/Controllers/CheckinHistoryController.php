@@ -75,21 +75,27 @@ class CheckinHistoryController extends Controller
      *
      * @return Body
      */
-    public function allCheckinList(Request $request)
+    public function userCheckinList(Request $request)
     {
         $user_history = CheckinHistory::all();
         $users = User::all();
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-        return view('pages.user.all_checkin_list', ['user_history' => ($user_history ?? null),'user_history_html' => $html, 'users' => $users]);
+        return view('pages.user.users_checkin_report', ['user_history' => ($user_history ?? null),'user_history_html' => $html, 'users' => $users]);
     }
 
     public function getUserCheckinRecord(Request $request)
     {
         return $this->sendJsonResponse($this->checkinHistoryService->getUserCheckinRecord($request));
-        // dd($user_history);
-        /*if (isset($user_history['errors']) && !empty($user_history['errors'])) {
-            return redirect()->route('dashboard');
-        }
-        return view('pages.user.all_checkin_list')->with('user_history', $user_history);*/
+    }
+
+
+    public function deleteCheckinUserModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->checkinHistoryService->deleteCheckinUserModal($request));
+    }
+
+    public function deleteConfirmCheckinUser(Request $request)
+    {
+        return $this->sendJsonResponse($this->checkinHistoryService->deleteConfirmCheckinUser($request));
     }
 }
