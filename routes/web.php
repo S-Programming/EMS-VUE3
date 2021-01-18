@@ -7,6 +7,7 @@ use Route\Http\Dashboard;
 use Route\Http\User;
 use Route\Http\Role;
 use Route\Http\CheckInHistory;
+use Route\Http\Leave;
 use Route\Http\Test;
 
 /*
@@ -43,4 +44,5 @@ Dashboard::register();
 User::register();
 Role::register();
 CheckInHistory::register();
+Leave::register();
 Test::register();

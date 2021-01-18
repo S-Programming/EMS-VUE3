@@ -1,5 +1,7 @@
 <?php
+
 namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -27,8 +29,8 @@ class MenuRoleTableSeeder extends Seeder
             ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 5],
             ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 6],
             ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 1], // Developer
-            ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 3], 
-            ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 5], 
+            ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 3],
+            ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 5],
         ];
         DB::table('menu_role')->insert($menuRoles);
     }

@@ -66,6 +66,7 @@ class DashboardService extends BaseService
         $menu_data = Menu::with('menusRole')->get();
         // dd($menu_data[0]->menusRole[0]->pivot->role_id);
         $user = $this->getAuthUser();
+        // dd($user->checkinHistory);
         $isCheckin = $this->isUserCheckin();
         $responseData = ['is_checkin' => $isCheckin, 'user' => $user, 'menu_data' => $menu_data, 'count' => $totalUsers, 'monthlyCheckins' => $monthlyCheckins, 'previousMonthCheckins' => $previousMonthCheckins, 'currentWeekCheckins' => $currentWeekCheckins, 'pastWeekCheckins' => $pastWeekCheckins];
         $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
@@ -86,5 +87,4 @@ class DashboardService extends BaseService
         $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
         return view('pages.admin.dashboard', $responseData);
     }
-
 }

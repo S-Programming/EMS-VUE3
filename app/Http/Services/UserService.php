@@ -150,6 +150,7 @@ class UserService extends BaseService
         return $this->successResponse('success', ['html' => $html]);
     }
 
+
     public function confirmDeleteUser(Request $request)
     {
         $login_id = $this->getAuthUserId();

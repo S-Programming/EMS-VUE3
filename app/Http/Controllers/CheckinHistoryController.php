@@ -80,7 +80,7 @@ class CheckinHistoryController extends Controller
         $user_history = CheckinHistory::all();
         $users = User::all();
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-        return view('pages.user.users_checkin_report', ['user_history' => ($user_history ?? null),'user_history_html' => $html, 'users' => $users]);
+        return view('pages.user.users_checkin_report', ['user_history' => ($user_history ?? null), 'user_history_html' => $html, 'users' => $users]);
     }
 
     public function getUserCheckinRecord(Request $request)
@@ -97,5 +97,24 @@ class CheckinHistoryController extends Controller
     public function deleteConfirmCheckinUser(Request $request)
     {
         return $this->sendJsonResponse($this->checkinHistoryService->deleteConfirmCheckinUser($request));
+    }
+
+    /**
+     * It will return a HTML for the Modal container to update checkin hitory of user
+     *
+     * @return Body
+     */
+
+    //user checkin history edit modal by Admin
+    public function editCheckinUserModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->checkinHistoryService->editCheckinUserModal($request));
+        //dd($user_data);
+    }
+
+    //Update user checkin history by Admin
+    public function updateCheckinUser(Request $request)
+    {
+        return $this->sendJsonResponse($this->checkinHistoryService->updateCheckinUser($request));
     }
 }
