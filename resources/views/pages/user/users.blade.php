@@ -25,7 +25,7 @@
 	    <!-- Dynamic Table Full Pagination -->
 	    <div id="userlist-section" class="block block-rounded">
 
-	    @include('pages.user._partial._datatable_html',['users' => $users])
+	    @include('pages.user._partial._users_datatable_html',['users' => $users])
 		</div>
 	    <!-- END Dynamic Table Full Pagination -->
 

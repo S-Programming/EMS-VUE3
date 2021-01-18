@@ -60,17 +60,6 @@ class CheckinHistoryService extends BaseService
         }
     }
 
-    public function allCheckinList(Request $request)
-    {
-        $user_history = CheckinHistory::all();
-        $validate = count($user_history);
-        if ($validate) {
-            return $this->successResponse('User History Fetch Successfully', ['user_history' => $user_history]);
-        } else {
-            return $this->errorResponse('User History Record Not Found', ['errors' => ['User History Record Not Found']]);
-        }
-    }
-
     public function getUserCheckinRecord(Request $request)
     {
 

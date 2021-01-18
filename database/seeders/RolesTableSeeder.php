@@ -15,8 +15,8 @@ class RolesTableSeeder extends Seeder
         $roles = [
             ['id' => 1, 'name' => 'Super admin', 'route' => '/dashboard'],
             ['id' => 2, 'name' => 'Admin', 'route' => '/dashboard'],
-            ['id' => 3, 'name' => 'UIDeveloper', 'route' => '/dashboard'],
-            ['id' => 4, 'name' => 'Developer', 'route' => '/dashboard'],
+            ['id' => 3, 'name' => 'Developer', 'route' => '/dashboard'],
+            ['id' => 4, 'name' => 'UIDeveloper', 'route' => '/dashboard'],
             ['id' => 5, 'name' => 'UIDesigner', 'route' => '/dashboard'],
             ['id' => 6, 'name' => 'QualityAssurance', 'route' => '/dashboard'],
         ];

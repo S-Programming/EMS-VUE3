@@ -26,7 +26,7 @@
                 <h3 class="block-title">User Profile</h3>
             </div>
             <div class="block-content">
-                <form action="{{route('user.self.update')}}" method="POST" id="profile-form-id" enctype="multipart/form-data">
+                <form action="{{route('user.update.profile')}}" method="POST" id="profile-form-id" enctype="multipart/form-data">
                     <div class="row push">
                         <div class="col-lg-4">
                             <p class="font-size-sm text-muted">
@@ -82,7 +82,7 @@
                 <h3 class="block-title">Change Password</h3>
             </div>
             <div class="block-content">
-                <form id="password-form-id" action="{{route('user.update.self.password')}}" method="POST" >
+                <form id="password-form-id" action="{{route('user.update.password')}}" method="POST" >
                     <div class="row push">
                         <div class="col-lg-4">
                             <p class="font-size-sm text-muted">

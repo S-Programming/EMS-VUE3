@@ -88,11 +88,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function selfEditProfile()
+    public function userEditProfile()
     {
         $user_id = $this->getAuthUserId();
         $user_data = User::find($user_id);
-        return view('pages.user.self_edit_profile', ['user_data' => $user_data]);
+        return view('pages.user.user_edit_profile', ['user_data' => $user_data]);
     }
 
     /**
@@ -101,9 +101,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function selfUpdateProfile(Request $request)
+    public function userUpdateProfile(Request $request)
     {
-        return $this->sendJsonResponse($this->userService->selfUpdateProfile($request));
+        return $this->sendJsonResponse($this->userService->userUpdateProfile($request));
     }
 
     /**
@@ -113,9 +113,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function selfUpdatePassword(Request $request)
+    public function userUpdatePassword(Request $request)
     {
-        return $this->sendJsonResponse($this->userService->selfUpdatePassword($request));
+        return $this->sendJsonResponse($this->userService->userUpdatePassword($request));
     }
 
 }
