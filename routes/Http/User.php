@@ -13,11 +13,7 @@ class User
             Route::get('/user', [UserController::class, 'index'])->name('user.list');
         });
         Route::group(['middleware' => ['auth:sanctum']], function () {
-            //my route
-            Route::post('/edit_checkin_history_modal', [UserController::class, 'userCheckinHistoryModal'])->name('user.edit.checkin.history.modal');
-            Route::post('/checkin_update', [UserController::class, 'updateCheckinHistory'])->name('user.checkin.update');
-            Route::post('/checkin_delete_modal', [UserController::class, 'deleteCheckinHistoryModal'])->name('user.checkin.delete.modal');
-            Route::post('/delete_checkin_history_record', [UserController::class, 'deleteCheckinHistoryRecord'])->name('user.delete.checkin.history.record');
+
             Route::post('/add_user_modal', [UserController::class, 'userModal'])->name('user.modal');
             Route::post('/edit_user_modal', [UserController::class, 'userModal'])->name('user.edit.modal');
             Route::post('/delete_user_modal', [UserController::class, 'userDeleteModal'])->name('user.delete.modal');

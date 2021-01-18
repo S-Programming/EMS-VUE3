@@ -12,7 +12,7 @@
                         <div class="card-body">
                             <div class="py-2">
                                 <div class="form-group">
-                                    <x-input id="id" class="form-control form-control-alt form-control-lg" type=""
+                                    <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden"
                                              name="id" value="{{$user_checkin_data->id??0}}"/>
                                     <label for="checkin-time">&nbsp Check In Time</label>
                                     <x-input id="checkin-time" class="form-control form-control-alt form-control-lg"

@@ -20,8 +20,8 @@
                         <td>{{$data->created_at->format('d M') ?? ''}}</td>
                         <td>{!!$data->description??'' !!}</td>
                         <td>
-                            <button class="btn btn-info" onclick="commonAjaxModel('edit_checkin_history_modal', {{$data->id}})"><i class="fa fa-edit"></i></button>
-                           <button class="btn btn-danger" onclick="commonAjaxModel('checkin_delete_modal',{{$data->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            <button class="btn btn-info" onclick="commonAjaxModel('edit_checkin_user_modal', {{$data->id}})"><i class="fa fa-edit"></i></button>
+                           <button class="btn btn-danger" onclick="commonAjaxModel('delete_checkin_user_modal',{{$data->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                        </td>
                     </tr>
