@@ -12,8 +12,6 @@
                     >Yes,
                 Checkin
             </button>
-
         </div>
     </x-slot>
-
 </x-modal>

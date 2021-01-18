@@ -69,6 +69,7 @@ class CheckinHistoryController extends Controller
     {
         return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckout($request));
     }
+
     /**
      * It will display all the users checkin history to Super Admin and Admin
      *
@@ -79,12 +80,12 @@ class CheckinHistoryController extends Controller
         $user_history = CheckinHistory::all();
         $users = User::all();
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-        return view('pages.user.all_checkin_list',['user_history_html' => $html,'users'=>$users]);
+        return view('pages.user.all_checkin_list', ['user_history' => ($user_history ?? null),'user_history_html' => $html, 'users' => $users]);
     }
 
     public function getUserCheckinRecord(Request $request)
     {
-         return $this->sendJsonResponse($this->checkinHistoryService->getUserCheckinRecord($request));
+        return $this->sendJsonResponse($this->checkinHistoryService->getUserCheckinRecord($request));
         // dd($user_history);
         /*if (isset($user_history['errors']) && !empty($user_history['errors'])) {
             return redirect()->route('dashboard');

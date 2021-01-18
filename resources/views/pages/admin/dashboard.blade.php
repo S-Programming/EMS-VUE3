@@ -1,5 +1,4 @@
 <x-backend-layout>
-
     <!-- Hero -->
     <div class="bg-body-light">
         <div class="content content-full">
@@ -7,10 +6,11 @@
                 class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2 text-center text-sm-left">
                 <div class="flex-sm-fill">
                     <h1 class="h3 font-w700 mb-2">
-                        Main Dashboard
+                        Admin Dashboard
                     </h1>
                     <h2 class="h6 font-w500 text-muted mb-0">
-                        Welcome <a class="font-w600" href="javascript:void(0)">{{$user->first_name??''}}</a>, everything looks great.
+                        Welcome <a class="font-w600" href="javascript:void(0)">{{$user->first_name??''}}</a>, everything
+                        looks great.
                     </h2>
                 </div>
                 <div class="mt-3 mt-sm-0 ml-sm-3">
@@ -18,7 +18,6 @@
                         <i class="fa fa-cog"></i>
                     </button>
                     <div class="d-inline-block">
-
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn btn-sm btn-alt-primary" id="dropdown-recent-orders-filters"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,94 +68,6 @@
 
     <!-- Page Content -->
     <div class="content">
-        <!-- Overview -->
-        <div class="row row-deck">
-            <div class="col-sm-6 col-xl-3">
-                <!-- Pending Orders -->
-                <div id="checkin-section" class="block block-rounded d-flex flex-column">
-                    @includeWhen(!$is_checkin,'pages.user._partial._checkin_html')
-                    @includeWhen($is_checkin,'pages.user._partial._checkout_html')
-                </div>
-                <!-- END Pending Orders -->
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <!-- Messages -->
-                <div class="block block-rounded d-flex flex-column">
-                    <div
-                        class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                        <dl class="mb-0">
-                            {{-- <div id="checkintimer"
-                                 class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div> --}}
-
-                            <!-- <dt class="font-size-h2 font-w700">45</dt>
-                            <dd class="text-muted mb-0">Messages</dd> -->
-                            {{-- <div id="checkintimer" class="block-content block-content-full block-content-sm bg-body-light font-size-sm"></div>
-                            <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                            </div> --}}
-                        </dl>
-
-                        <div class="item item-rounded bg-body">
-                            <i class="fa fa-inbox font-size-h3 text-primary"></i>
-                        </div>
-                    </div>
-                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                        {{-- <a class="font-w500 d-flex align-items-center" href="{{ route('userrecord') }}">
-                              javascript:void(0)
-                            View specific Record
-                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
-                        </a> --}}
-                    </div>
-                </div>
-                <!-- END Messages -->
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <!-- Messages -->
-                <div class="block block-rounded d-flex flex-column">
-                    <div
-                        class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                        <dl class="mb-0">
-                            <!-- <dt class="font-size-h2 font-w700">45</dt>
-                            <dd class="text-muted mb-0">Messages</dd> -->
-                            <div id="jQuery" class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                                <p>This Month : {{$monthlyCheckins}}</p>
-                                <p>Previous Month : {{$previousMonthCheckins}}</p>
-                                <p>Current Week : {{$currentWeekCheckins}}</p>
-                                <p>Past Week : {{$pastWeekCheckins}}</p>
-                            </div>
-                        </dl>
-                        <div class="item item-rounded bg-body">
-                            <i class="fa fa-inbox font-size-h3 text-primary"></i>
-                        </div>
-                    </div>
-                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                        <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
-                            View all messages
-                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- END Messages -->
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <!-- Conversion Rate -->
-                <div class="block block-rounded d-flex flex-column">
-                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                        <p id="current-timer"></p>
-
-
-                    </div>
-                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                        <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
-                            View statistics
-                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- END Conversion Rate-->
-            </div>
-        </div>
-        <!-- END Overview -->
-
         <!-- Statistics -->
         <div class="row">
             <div class="col-xl-8 d-flex flex-column">
@@ -333,7 +244,9 @@
                             <i class="fa fa-search"></i>
                         </button>
                         <div class="d-inline-block">
-                            <select class="dropdown form-control " onchange="ajaxCallOnclick('user_report_history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_id">
+                            <select class="dropdown form-control "
+                                    onchange="ajaxCallOnclick('user_report_history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})"
+                                    name="user_id">
                                 <option>All</option>
                                 <option>Previous Week</option>
                                 <option>Current Week</option>
@@ -363,64 +276,63 @@
                 <!-- END Search Form -->
             </div>
             <div class="block-content" id="self-checkin-history">
-                {!!$checkin_history_html ??''!!}
-                <!-- Recent Orders Table -->
-                {{-- <div class="table-responsive">
-                    <table class="table table-borderless table-striped table-vcenter">
-                        <thead>
-                        <tr>
-                            <th>User ID</th>
-                            <th>Check In Time</th>
-                            <th>Check Out Time</th>
-                            <th>Day</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if(isset($checkin_history) && !empty($checkin_history))
-                            @foreach($checkin_history as $data)
-                                <tr>
-                                    <th>{{$data->user_id??''}}</th>
-                                    <th>{{$data->checkin??''}}</th>
-                                    <th>{{$data->checkout ?? ""}}</th>
-                                    <th>{{$data->created_at->format('d M') ?? ""}}</th>
-                                    <th>{!!$data->description??'' !!}</th>
-                                </tr>
-                            @endforeach
-                        @endif
-                        </tbody>
-                    </table>
-                </div> --}}
-                <!-- END Recent Orders Table -->
+            <!-- Recent Orders Table -->
+            {{-- <div class="table-responsive">
+                <table class="table table-borderless table-striped table-vcenter">
+                    <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Check In Time</th>
+                        <th>Check Out Time</th>
+                        <th>Day</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if(isset($checkin_history) && !empty($checkin_history))
+                        @foreach($checkin_history as $data)
+                            <tr>
+                                <th>{{$data->user_id??''}}</th>
+                                <th>{{$data->checkin??''}}</th>
+                                <th>{{$data->checkout ?? ""}}</th>
+                                <th>{{$data->created_at->format('d M') ?? ""}}</th>
+                                <th>{!!$data->description??'' !!}</th>
+                            </tr>
+                        @endforeach
+                    @endif
+                    </tbody>
+                </table>
+            </div> --}}
+            <!-- END Recent Orders Table -->
 
                 <!-- Pagination -->
-                {{-- <nav aria-label="Photos Search Navigation">
-                    <ul class="pagination pagination-sm justify-content-end mt-2">
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-label="Previous">
-                                Prev
-                            </a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="javascript:void(0)">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">4</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)" aria-label="Next">
-                                Next
-                            </a>
-                        </li>
-                    </ul>
-                </nav> --}}
-                <!-- END Pagination -->
+            {{-- <nav aria-label="Photos Search Navigation">
+                <ul class="pagination pagination-sm justify-content-end mt-2">
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-label="Previous">
+                            Prev
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="javascript:void(0)">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)">4</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </nav> --}}
+            <!-- END Pagination -->
             </div>
         </div>
         <!-- END Recent Orders -->

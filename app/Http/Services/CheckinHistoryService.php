@@ -49,7 +49,6 @@ class CheckinHistoryService extends BaseService
             $html = view('pages.user._partial._checkin_html')->render();
             $checkin_history_data = CheckinHistory::where('user_id', $userid)->latest()->first();
             if ($checkin_history_data != null) {
-                //session(['is_checkin'=>false]);
                 if (!$checkin_history_data->checkout) {
                     $checkin_history_data->checkout = Carbon::now();
                     $checkin_history_data->description = $request->description ?? '';
@@ -65,30 +64,27 @@ class CheckinHistoryService extends BaseService
     {
         $user_history = CheckinHistory::all();
         $validate = count($user_history);
-        if($validate)
-        {
-            return $this->successResponse('User History Fetch Successfully',['user_history' => $user_history]);
-        }
-        else
-        {
+        if ($validate) {
+            return $this->successResponse('User History Fetch Successfully', ['user_history' => $user_history]);
+        } else {
             return $this->errorResponse('User History Record Not Found', ['errors' => ['User History Record Not Found']]);
         }
-        
     }
+
     public function getUserCheckinRecord(Request $request)
     {
-        
+
         $user_id = $request->user_id;
-        
-        if($user_id == 'All')
-        {
+
+        if ($user_id == 'All') {
             $user_history = CheckinHistory::all();
             $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
             $validate = count($user_history);
-            if($validate)
-            {
-                
+            if ($validate) {
+
                 return $this->successResponse('All User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
+            } else {
+                return $this->errorResponse('User History Record Not Found', ['errors' => ['User History Record Not Found'], 'html' => $html]);
             }
            /* else
             {
@@ -106,10 +102,10 @@ class CheckinHistoryService extends BaseService
         }   
         else 
         {
-            return $this->errorResponse('User History Record Not Found', ['errors' => ['User History Record Not Found'],'html' => $html]);
+            return $this->errorResponse('User History Record Not Found', ['errors' => ['User History Record Not Found'],'html' => $html,'html_section_id' => 'checkin-history']);
         }
 
-        if ($request->history_report == 'Current Month') {
+        /*if ($request->history_report == 'Current Month') {
 
             $currentmonthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
                 ->where('user_id', $user_id)
@@ -174,7 +170,11 @@ class CheckinHistoryService extends BaseService
             } else {
                 return $this->errorResponse('Checkin_History Not Exists', ['errors' => ['History Not Exists']]);
             }
+
         }
         
+        }*/
+
+
     }
 }

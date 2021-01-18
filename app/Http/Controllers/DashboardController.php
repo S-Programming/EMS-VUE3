@@ -33,46 +33,26 @@ class DashboardController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $menu_data = Menu::with('menusRole')->get();
-        // Current Month Checkins
-        $userId = $this->getAuthUserId();
-        $monthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
-            ->where('user_id', $userId)
-            ->get()->count();
-        $previousMonthCheckins = CheckinHistory::whereMonth(
-            'checkin',
-            '=',
-            Carbon::now()->subMonth()->month
-        )->get()->count();
 
-        $NowDate = Carbon::now()->format('Y-m-d');
-        $currentStartWeekDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1); // gives 2016-01-3
-        $currentWeekCheckins = CheckinHistory::whereBetween('checkin', array($currentStartWeekDate, $NowDate))
-            ->where('user_id', $userId)
-            ->get()->count();
-        $previousWeekStartDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->subWeek()->format('Y-m-d'); // gives 2016-01-31
-        $previousWeekEndDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek)->format('Y-m-d');
-        $pastWeekCheckins = CheckinHistory::whereBetween('checkin', array($previousWeekStartDate, $previousWeekEndDate))
-            ->where('user_id', $userId)
-            ->get()->count();
-        // Total Users
-        $count = DB::table('users')->count();
-
-        $user = $this->getAuthUser();
-        $checkinHistory = $user ? $user->checkinHistory : null;
-        $isCheckin = $this->isUserCheckin();
-        $responseData = ['is_checkin' => $isCheckin, 'checkin_history' => $checkinHistory, 'user' => $user, 'menu_data' => $menu_data];
-        if ($isCheckin) {
-            $responseData['user_last_checkin_time'] = $this->userLastCheckinTime();
-        }
-
-        return view('pages.user.dashboard', $responseData)->with(['count' => $count, 'monthlyCheckins' => $monthlyCheckins,'previousMonthCheckins' => $previousMonthCheckins, 'currentWeekCheckins' => $currentWeekCheckins, 'pastWeekCheckins' => $pastWeekCheckins]);
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function dashboard(Request $request)
+    {
+        return $this->dashboardService->getDashboard($request);
+
+
+
+    }
+
 
     /**
      * Show the form for creating a new resource.

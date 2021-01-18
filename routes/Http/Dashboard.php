@@ -10,7 +10,7 @@ class Dashboard
     static function register()
     {
         Route::group(['middleware' => ['auth:sanctum']], function () {
-            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+            Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
            /* Route::get('/dashboard1', function(){
             	dd(2);
             })->name('dashboard1');*/

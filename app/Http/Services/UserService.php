@@ -105,8 +105,8 @@ class UserService extends BaseService
 
             ]);
 
-            $user_id = $user->id;
-            $user->roles()->sync($request->roles);
+            //$user_id = $user->id; // last insert id of user
+            $user->roles()->sync($request->roles); // for pivot data
             $user->save();
             /*            $roleuser = new RoleUser;
                         $roleuser->user_id = $user_id;
