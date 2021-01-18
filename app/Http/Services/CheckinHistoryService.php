@@ -66,8 +66,18 @@ class CheckinHistoryService extends BaseService
         //dd($request->all());
         $user_id = $request->user_id;
 
-        if ($user_id == 'All') {
+        if ($request->user_days == 'All' && $request->user_id == 'All') {
             $user_history = CheckinHistory::all();
+            $count = $user_history->count();
+            $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history, 'totalCheckins' => $count])->render();
+            if ($count > 0) {
+                return $this->successResponse('All Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
+            } else {
+                return $this->errorResponse('Checkin_History Not Exists', ['errors' => ['History Not Exists'],'html' => $html,'html_section_id' => 'checkin-history']);
+            }
+
+
+            /*$user_history = CheckinHistory::all();
 
             $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
             $validate = count($user_history);
@@ -76,7 +86,7 @@ class CheckinHistoryService extends BaseService
                 return $this->successResponse('All User History Fetch Successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
             } else {
                 return $this->errorResponse('User History Record Not Found', ['errors' => ['User History Record Not Found'], 'html' => $html, 'html_section_id' => 'checkin-history']);
-            }
+            }*/
            /* else
             {
                 return $this->errorResponse('User History Record Not Found', ['errors' => ['User History Record Not Found'],'html' => $html]);
@@ -117,7 +127,8 @@ class CheckinHistoryService extends BaseService
                 'checkin',
                 '=',
                 Carbon::now()->subMonth()->month
-            )->get();
+            )->where('user_id', $user_id)
+            ->get();
             $count = $previousMonthCheckins->count();
             $html = view('pages.user._partial._checkin_history_html', ['user_history' => $previousMonthCheckins, 'totalCheckins' => $count])->render();
             if ($count > 0) {
