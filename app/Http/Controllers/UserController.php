@@ -51,6 +51,24 @@ class UserController extends Controller
     {
         return $this->sendJsonResponse($this->userService->userModal($request));
     }
+    /**
+     * It will return a HTML for the Modal container to update checkin hitory of user
+     *
+     * @return Body
+     */
+
+    //user checkin history edit modal by Admin
+    public function userCheckinHistoryModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->userService->userCheckinHistoryModal($request));
+        //dd($user_data);
+    }
+
+    //Update user checkin history by Admin
+    public function updateCheckinHistory(Request $request)
+    {
+        return $this->sendJsonResponse($this->userService->updateCheckinHistory($request));
+    }
 
     /**
      * Method for the Adding Users
@@ -117,5 +135,4 @@ class UserController extends Controller
     {
         return $this->sendJsonResponse($this->userService->userUpdatePassword($request));
     }
-
 }

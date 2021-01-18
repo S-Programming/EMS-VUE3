@@ -43,7 +43,7 @@ function validateFieldsByFormId(e) {
                     {
                         jQuery(`#` + validationSpanId).html(buttonHtml);
                     }
-                    
+
 
                     if (data.redirect_to != '' && typeof (data.redirect_to) != "undefined") {
                         setTimeout(function () {
@@ -236,6 +236,8 @@ function reload_page(url) {
  * Created by Abbas Naumani on 2/5/2018.
  */
 function commonAjaxModel(route, id, containerId) {
+    // console.log('abc');
+    alert('fhjkh');
     if (typeof (containerId) == "undefined" || containerId == '') {
         containerId = 'common_popup_modal';
     }

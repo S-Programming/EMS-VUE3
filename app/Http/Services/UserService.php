@@ -150,6 +150,32 @@ class UserService extends BaseService
         return $this->successResponse('success', ['html' => $html]);
     }
 
+    //user checkin history edit modal by Admin
+    public function userCheckinHistoryModal(Request $request)
+    {
+        $user_id = $request->id;
+        $user_checkin_data = CheckinHistory::find($user_id);
+        // dd($user_checkin_data);
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $html = view('pages.user._partial._edit_checkin_history_modal', ['id' => $containerId, 'data' => null, 'user_checkin_data' => $user_checkin_data])->render();
+
+        return $this->successResponse('success', ['html' => $html]);
+    }
+    //Update user checkin history by Admin
+    public function updateCheckinHistory(Request $request)
+    {
+        $record_id = $request->input('id');
+        $user_record_to_update = CheckinHistory::where(['id' => $record_id])->first();
+        $user_record_to_update->checkin = $request->input('checkin-time');
+        $user_record_to_update->checkout = $request->input('checkout-time');
+        $user_record_to_update->description = $request->input('description');
+        $user_record_to_update->save();
+        // $html = view('pages.user._partial._users_datatable_html', compact('users', $users))->render();
+        // return $this->successResponse('User has Successfully Added', ['html' => $html, 'html_section_id' => 'userlist-section']);
+        return $this->successResponse('Checkin History Record Successfully Updated', ['redirect_to' => 'users_checkin_report']);
+    }
+
+
     public function confirmDeleteUser(Request $request)
     {
         $login_id = $this->getAuthUserId();
