@@ -31,7 +31,7 @@
                     <div class="col-sm-4">
                         <x-button class="checkout-btn btn btn-primary" onclick="validateFieldsByFormId(this)" data-validation=" validation-span-id"
                               id="validation-span-id" >
-                        <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Submit') }}
+                        <i class="fa fa-fw fa-search-in-alt mr-1"></i>{{ __('Search') }}
                         </x-button>
                     </div>
                 

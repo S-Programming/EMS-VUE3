@@ -318,10 +318,6 @@ function ajaxCallOnclick(route, extraData) {
                 const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
                 if (jQuery('body').hasClass('modal-open') && containerId) {
                     closeModalById(containerId);
-                     //jQuery(this).closest('tr').css('background','tomato');
-                    // jQuery(this).closest('tr').fadeOut(800,function(){
-                    //    jQuery(this).remove();
-                    //    });
                 }
             }, error: function (data) {
                 console.log('error');

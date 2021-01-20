@@ -292,6 +292,7 @@ function ajaxCallOnclick(route, extraData) {
     //console.log(extraData);
     if (route != '') {
         const url = baseURL + '/' + route;
+        var el = this;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
         console.log(dataToPost);
         jQuery.ajax({
