@@ -18,7 +18,7 @@ class CreateLeaveHistoryTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('leave_type_id');
             $table->dateTime('date');
-            $table->string('status')->nullable();
+            $table->string('status')->default('Pending');
             $table->string('description')->nullable();
             $table->string('comments')->nullable();
             $table->timestamps();

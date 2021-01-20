@@ -5,7 +5,7 @@
     <x-slot name="modal_content">
         <div class="row">
             <div class="col-sm-10 offset-1">
-                <form method="POST" action="{{ route('confirm.add.leave') }}" id="login-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
+                <form method="POST" action="{{ route('leave.confirm.add') }}" id="leave-add-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
                     @php
                     $inyMceConfig = theme_tinyMCE_default_config();

@@ -20,8 +20,8 @@
                 <td class="text-center font-size-sm">{{$leave_type->id}}</td>
                 <td class="font-w600 font-size-sm">{{$leave_type->type}}</td>
                 <td>
-                    <button class="btn btn-info" onclick="commonAjaxModel('edit_role_modal',{{$leave_type->id}})"><i class="fa fa-edit"></i></button>
-                    <button class="btn btn-danger" onclick="commonAjaxModel('delete_role_modal',{{$leave_type->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button class="btn btn-info" onclick="commonAjaxModel('edit_leave_type_modal',{{$leave_type->id}})"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-danger" onclick="commonAjaxModel('delete_leave_type_modal',{{$leave_type->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                 </td>
             </tr>

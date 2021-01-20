@@ -16,7 +16,7 @@ class RoleService extends BaseService
     {
         ## DB operations
         if (!isset($request) && empty($request)) { // what will be condition
-            return $this->errorResponse('User Submittion Failed');
+            return $this->errorResponse('Role Submittion Failed');
         }
         if (isset($request) && !empty($request)) {
 
@@ -35,7 +35,7 @@ class RoleService extends BaseService
                         $roleuser->save();*/
             $roles = Role::all();
         }
-        $html = view('pages.role._partial._roles_datatable_html', compact('roles', $roles))->render();
+        $html = view('pages.role._partial._roles_list_table_html', compact('roles', $roles))->render();
         return $this->successResponse('Role has Successfully Added', ['html' => $html, 'html_section_id' => 'userlist-section']);
     }
 
@@ -82,7 +82,7 @@ class RoleService extends BaseService
         $role_data = Role::find($role_id);
         $role_data->delete();
         $roles = Role::all();
-        $html = view('pages.role._partial._roles_datatable_html', compact('roles', $roles))->render();
+        $html = view('pages.role._partial._roles_list_table_html', compact('roles', $roles))->render();
         return $this->successResponse('Role is Successfully Deleted', ['html' => $html]);
     }
 }

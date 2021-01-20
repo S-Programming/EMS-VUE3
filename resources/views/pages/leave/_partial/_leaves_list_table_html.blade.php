@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            @if($leaves)
+            @if(isset($leaves) && !empty($leaves))
             @foreach($leaves as $leave)
             <tr>
                 <td class="font-w600 font-size-sm">{{$leave->date}}</td>

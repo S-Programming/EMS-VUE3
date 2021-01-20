@@ -105,9 +105,12 @@ class CheckinHistoryController extends Controller
         return $this->sendJsonResponse($this->checkinHistoryService->checkinHistoryBtDates($request));
     }
 
-    public function deleteCheckinUserModal(Request $request)
+    public function deleteCheckinUserModal(Request $request, CheckinHistory $checkinHistory)
     {
-        return $this->sendJsonResponse($this->checkinHistoryService->deleteCheckinUserModal($request));
+        if($this->authorize('delete', $checkinHistory))
+        {
+            return $this->sendJsonResponse($this->checkinHistoryService->deleteCheckinUserModal($request));
+        }
     }
 
     public function deleteConfirmCheckinUser(Request $request)
@@ -122,10 +125,18 @@ class CheckinHistoryController extends Controller
      */
 
     //user checkin history edit modal by Admin
-    public function editCheckinUserModal(Request $request)
+    public function editCheckinUserModal(Request $request, CheckinHistory $checkinHistory)
     {
-        return $this->sendJsonResponse($this->checkinHistoryService->editCheckinUserModal($request));
-        //dd($user_data);
+       /* $user=$this->getAuthUser();
+       $tt= $user->can('update',$checkinHistory);
+      $authddd= $this->authorize('update', $checkinHistory);
+        dd($authddd,$tt,'Rogani Naan',$user);*/
+      //  dd($checkinHistory);
+        if($this->authorize('update', $checkinHistory))
+        {
+            return $this->sendJsonResponse($this->checkinHistoryService->editCheckinUserModal($request));
+        }
+        
     }
 
     //Update user checkin history by Admin

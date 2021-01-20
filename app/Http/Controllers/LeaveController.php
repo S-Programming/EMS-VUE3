@@ -50,6 +50,7 @@ class LeaveController extends Controller
     {
         return $this->sendJsonResponse($this->leaveService->confirmAddLeave($request));
     }
+   
     /**
      * It will return a Leave Type List
      *
@@ -83,6 +84,24 @@ class LeaveController extends Controller
     {
         return $this->sendJsonResponse($this->leaveService->leaveTypeConfirmAdd($request));
     }
+   /**
+    * Method for Editing Leave Type on Modal PoPUP
+    *
+    * @return Body
+    */
+    public function editLeaveType(Request $request)
+    {
+        return $this->sendJsonResponse($this->leaveService->editLeaveType($request));
+    }
+    /**
+    * Method for Update Leave Type 
+    *
+    * @return Body
+    */
+    public function leaveTypeUpdate(Request $request)
+    {
+        return $this->sendJsonResponse($this->leaveService->leaveTypeUpdate($request));   
+    }
 
     /**
      * It will return a Approve Leave List
@@ -99,18 +118,18 @@ class LeaveController extends Controller
      *
      * @return Body
      */
-    public function roleDeleteModal(Request $request)
+    public function leaveTypeDeleteModal(Request $request)
     {
-        return $this->sendJsonResponse($this->roleService->roleDeleteModal($request));
+        return $this->sendJsonResponse($this->leaveService->leaveTypeDeleteModal($request));
     }
     /**
      * Method for the Deleting Users
      *
      * @return Body
      */
-    public function confirmDeleteRole(Request $request)
+    public function leaveTypeDeleteConfirm(Request $request)
     {
-        return $this->sendJsonResponse($this->roleService->confirmDeleteRole($request));
+        return $this->sendJsonResponse($this->leaveService->leaveTypeDeleteConfirm($request));
     }
 
     /**
