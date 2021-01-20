@@ -74,7 +74,7 @@ class CheckinHistoryService extends BaseService
             if ($count > 0) {
                 return $this->successResponse('All Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'checkin-history']);
             } else {
-                return $this->errorResponse('Checkin_History Not Exists', ['errors' => ['History Not Exists'],'html' => $html,'html_section_id' => 'checkin-history']);
+                return $this->errorResponse('Checkin_History Not Exists', ['errors' => ['History Not Exists'], 'html' => $html, 'html_section_id' => 'checkin-history']);
             }
 
 
@@ -128,7 +128,7 @@ class CheckinHistoryService extends BaseService
                 '=',
                 Carbon::now()->subMonth()->month
             )->where('user_id', $user_id)
-            ->get();
+                ->get();
             $count = $previousMonthCheckins->count();
             $html = view('pages.user._partial._checkin_history_html', ['user_history' => $previousMonthCheckins, 'totalCheckins' => $count])->render();
             if ($count > 0) {
@@ -194,9 +194,12 @@ class CheckinHistoryService extends BaseService
         // }
         $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
         $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
-        // $result = CheckinHistory::whereBetween('checkin', [$dateS->format('Y-m-d') . " 00:00:00", $dateE->format('Y-m-d') . " 23:59:59"])->get();
-        $result = CheckinHistory::whereBetween('checkin', [$startDate, $endDate])->get();
-        // dd($result);
+        // End date User Record not included
+        // $result = CheckinHistory::whereBetween('checkin', [$startDate, $endDate])->get();
+
+        ## End Date User Record Included
+        $result = CheckinHistory::whereDate('checkin', '>=', $startDate)->whereDate('checkin', '<=', $endDate)->get();
+
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $result])->render();
         if ($result->count() > 0) {
             return $this->successResponse('Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'self-checkin-history']);

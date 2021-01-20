@@ -5,7 +5,7 @@
     <x-slot name="modal_content">
         <div class="row">
             <div class="col-sm-10 offset-1">
-                <form method="POST" action="{{ route('user.checkin.update') }}" id="login-form-id"
+                <form method="POST" action="{{ route('checkin.update.user') }}" id="login-form-id"
                       data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
                     <div class="card">

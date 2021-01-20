@@ -59,6 +59,15 @@ class UserController extends Controller
      */
     public function confirmAddUser(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|min:3|max:50',
+            'last_name' => 'required|string|min:3|max:50',
+            'email' => 'required|email',   // |unique:users,email
+            'phone_number' => 'required|min:11|numeric',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->userService->confirmAdduser($request));
     }
 
@@ -103,6 +112,15 @@ class UserController extends Controller
      */
     public function userUpdateProfile(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|min:3|max:50',
+            'last_name' => 'required|string|min:3|max:50',
+            'email' => 'required|email',   // |unique:users,email
+            'phone_number' => 'required|min:11|numeric',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->userService->userUpdateProfile($request));
     }
 
@@ -115,6 +133,14 @@ class UserController extends Controller
      */
     public function userUpdatePassword(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required',
+            'new_password' => 'required|min:8',
+            'confirm_password' => 'required_with:new_password|same:new_password|min:8',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->userService->userUpdatePassword($request));
     }
 }
