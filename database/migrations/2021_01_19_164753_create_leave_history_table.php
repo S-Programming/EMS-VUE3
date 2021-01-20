@@ -20,6 +20,7 @@ class CreateLeaveHistoryTable extends Migration
             $table->dateTime('date');
             $table->string('status')->nullable();
             $table->string('description')->nullable();
+            $table->string('comments')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('leave_type_id')->references('id')->on('leave_type')->onDelete('cascade');

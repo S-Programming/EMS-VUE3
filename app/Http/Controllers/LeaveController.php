@@ -85,6 +85,16 @@ class LeaveController extends Controller
     }
 
     /**
+     * It will return a Approve Leave List
+     *
+     * @return Body
+     */
+    public function approveLeave()
+    {
+        $approve_leaves = LeaveHistory::with('type')->with('user')->get();
+        return view('pages.approveLeave.approve_leave_list')->with('approve_leaves', $approve_leaves);
+    }
+    /**
      * It will return a HTML for the Modal container for confirmation of deletion
      *
      * @return Body
