@@ -16,7 +16,7 @@ class RoleService extends BaseService
     {
         ## DB operations
         if (!isset($request) && empty($request)) { // what will be condition
-            return $this->errorResponse('User Submittion Failed');
+            return $this->errorResponse('Role Submittion Failed');
         }
         if (isset($request) && !empty($request)) {
 
