@@ -25,7 +25,7 @@
 	    <!-- Dynamic Table Full Pagination -->
 	    <div id="userlist-section" class="block block-rounded">
 
-	    @include('pages.leave._partial._leaves_list_table_html')
+	    @include('pages.leave._partial._leaves_datatable_html',['leaves' => $leaves])
 		</div>
 	    <!-- END Dynamic Table Full Pagination -->
 

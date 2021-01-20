@@ -13,8 +13,9 @@ class LeaveHistory extends Model
      * @var array
      */
     protected $table = 'leave_history';
-    protected $fillable = [
+    public $fillable = [
         'user_id',
+        'leave_type_id',
         'date',
         'status',
         'description',
@@ -31,9 +32,14 @@ class LeaveHistory extends Model
      *
      * @return bool
      */
-    public function types()
-    {
-        return $this->belongsToMany(LeaveType::class);
+
+
+    public function type(){
+        return $this->belongsTo(LeaveType::class,'leave_type_id','id');
     }
 
+    // public function types()
+    // {
+    //     return $this->belongsTo(LeaveType::class);
+    // }
 }

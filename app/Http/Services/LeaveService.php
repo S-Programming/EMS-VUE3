@@ -5,6 +5,8 @@ namespace App\Http\Services;
 
 
 use App\Http\Services\BaseService\BaseService;
+use App\Models\LeaveHistory;
+use App\Models\LeaveType;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
@@ -12,38 +14,36 @@ use Illuminate\Http\Request;
 
 class LeaveService extends BaseService
 {
-    public function confirmAddRole(Request $request)
+    public function confirmAddLeave(Request $request)
     {
-        ## DB operations
         if (!isset($request) && empty($request)) { // what will be condition
             return $this->errorResponse('User Submittion Failed');
         }
         if (isset($request) && !empty($request)) {
+            $user_id = $this->getAuthUserId();
+            $leave = LeaveHistory::Create([
+                'user_id' => $user_id,
+                'leave_type_id' => $request->leave_types,
+                'date' => $request->date,
+                'description' => $request->description,
 
-            $role = Role::updateOrCreate([
-                'id' => $request->id,
-            ], [
-                'name' => $request->role
             ]);
-            $role->route = '/dashboard';
-            // $role_id = $role->id;
-            // $role->$request->roles;
-            $role->save();
-            /*            $roleuser = new RoleUser;
-                        $roleuser->user_id = $user_id;
-                        $roleuser->role_id = $request->roles;
-                        $roleuser->save();*/
-            $roles = Role::all();
+            $leave->save();
+            $leaves = LeaveType::with('history')->get();
+            // $leaves = LeaveHistory::all();
         }
-        $html = view('pages.role._partial._datatable_html', compact('roles', $roles))->render();
+        $html = view('pages.leave._partial._leaves_datatable_html', compact('leaves', $leaves))->render();
         return $this->successResponse('Role has Successfully Added', ['html' => $html, 'html_section_id' => 'userlist-section']);
     }
 
-    public function roleModal(Request $request)
+    public function addLeaveModal(Request $request)
     {
-        $role_id = $request->id;
-        $role_data = Role::find($role_id);
-        //        dd(CommonUtilsFacade::isCheckIn());
+        // dd('test');
+        // $leave_id = $request->id;
+        $leave_types_data = LeaveType::all();
+        // dd($leave_type_data);
+//        dd(CommonUtilsFacade::isCheckIn());
+
         $containerId = $request->input('containerId', 'common_popup_modal');
         // $roles = Role::all();
         // $userRoles = [];
@@ -54,8 +54,8 @@ class LeaveService extends BaseService
         //         }
         //     }
         // }
-        // $rolesDropDown = view('utils.roles', ['roles' => ($roles ?? null), 'user_roles' => $userRoles])->render();
-        $html = view('pages.role._partial._addrole_modal', ['id' => $containerId, 'data' => null, 'role_data' => $role_data])->render();
+        $leave_types_dropdown = view('utils.leave_types', ['leave_types' => ($roles ?? null), 'leave_types_data' => $leave_types_data])->render();
+        $html = view('pages.leave._partial._add_leave_modal', ['id' => $containerId, 'data' => null, 'leave_types_dropdown' => $leave_types_dropdown])->render();
 
         return $this->successResponse('success', ['html' => $html]);
     }

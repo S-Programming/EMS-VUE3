@@ -12,7 +12,7 @@ class LeaveType extends Model
      * @var array
      */
     protected $table = 'leave_type';
-    protected $fillable = [
+    public $fillable = [
         'type',
     ];
 
@@ -29,7 +29,11 @@ class LeaveType extends Model
      */
     public function history()
     {
-        return $this->belongsToMany(LeaveHistory::class);
+        return $this->hasMany(LeaveHistory::class);
     }
+    // public function history()
+    // {
+    //     return $this->hasMany(HistoryLeave::class,'leave_type_id','id');
+    // }
 
 }
