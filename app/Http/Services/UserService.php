@@ -189,6 +189,7 @@ class UserService extends BaseService
 
     public function userUpdatePassword(Request $request)
     {
+
         if (isset($request) && !empty($request)) {
             $user_id = $this->getAuthUserId();
             $user_data = User::find($user_id);

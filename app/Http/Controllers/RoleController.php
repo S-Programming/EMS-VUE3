@@ -6,6 +6,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Services\RoleService;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class RoleController extends Controller
 {
@@ -24,9 +25,9 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('pages.role.roles')->with('roles',$roles);
+        return view('pages.role.roles')->with('roles', $roles);
     }
-     /**
+    /**
      * It will return a HTML for the Modal container
      *
      * @return Body
@@ -43,6 +44,12 @@ class RoleController extends Controller
      */
     public function confirmAddRole(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'role' => 'required|min:3|max:30'
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->roleService->confirmAddRole($request));
     }
 

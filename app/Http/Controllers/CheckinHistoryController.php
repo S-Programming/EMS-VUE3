@@ -68,6 +68,12 @@ class CheckinHistoryController extends Controller
      */
     public function confirmCheckout(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'description' => 'required|max:50',   //min:3 not working
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckout($request));
     }
 
@@ -88,20 +94,20 @@ class CheckinHistoryController extends Controller
     {
         return $this->sendJsonResponse($this->checkinHistoryService->getUserCheckinRecord($request));
     }
-    // Checkin History Between Two Dates
+    /**
+     * It will display users checkin history Between Two Dates
+     * It will also Validate start and end date
+     * @return Body
+     */
     public function checkinHistoryBtDates(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'start_date' => 'after:yesterday|before:end_date',
-        //     'end_date'  => 'date_format:Y-m-d|after:yesterday',
-        // ]);
-        // if ($validator->fails()) {
-        //     //dd("sada");
-        //     return redirect('/pages.user.dashboard')
-        //         ->withInput()
-        //         ->withErrors($validator);
-        //     // return view('/pages.user.dashboard', ['validator' => $validator]);
-        // }
+        $validator = Validator::make($request->all(), [
+            'start_date' => 'required|date_format:Y-m-d|before:today|before:end_date',
+            'end_date'  => 'required|date_format:Y-m-d|before_or_equal:tomorrow'
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->checkinHistoryService->checkinHistoryBtDates($request));
     }
 
@@ -142,6 +148,15 @@ class CheckinHistoryController extends Controller
     //Update user checkin history by Admin
     public function updateCheckinUser(Request $request)
     {
+        //required_if:callback_type, 4|date_format:H:i
+        $validator = Validator::make($request->all(), [
+            'checkin-time' => 'required',
+            'checkout-time' => 'required',
+            'description' => 'required|min:3|max:50',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->checkinHistoryService->updateCheckinUser($request));
     }
 }
