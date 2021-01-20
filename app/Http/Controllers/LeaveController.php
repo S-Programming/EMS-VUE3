@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\LeaveService;
+use App\Models\HistoryLeave;
 use App\Models\LeaveHistory;
 use App\Models\LeaveType;
 use App\Models\HistoryLeaveType;
 
 class LeaveController extends Controller
 {
-    protected $roleService;
+    protected $leaveService;
 
     public function __construct(LeaveService $leaveService)
     {
         $this->middleware('auth');
-        $this->roleService = $leaveService;
+        $this->leaveService = $leaveService;
     }
     /**
      * Display a listing of the resource.
@@ -24,20 +25,20 @@ class LeaveController extends Controller
      */
     public function index()
     {
-        // dd('iam in leave');
-        //$roles = Role::all();
-        $leave_history_type = HistoryLeaveType::first();
-        dd($leave_history_type->history->status);
-        return view('pages.leave.leaves_list');
+        $user_id = $this->getAuthUserId();
+        //$leaves = LeaveType::with('history')->get();
+        $leaves = LeaveHistory::with('type')->where('user_id',$user_id)->get();
+        // dd($leaves);
+        return view('pages.leave.leaves_list')->with('leaves',$leaves);
     }
     /**
      * It will return a HTML for the Modal container
      *
      * @return Body
      */
-    public function roleModal(Request $request)
+    public function addLeaveModal(Request $request)
     {
-        return $this->sendJsonResponse($this->roleService->roleModal($request));
+        return $this->sendJsonResponse($this->leaveService->addLeaveModal($request));
     }
 
     /**
@@ -45,9 +46,9 @@ class LeaveController extends Controller
      *
      * @return Body
      */
-    public function confirmAddRole(Request $request)
+    public function confirmAddLeave(Request $request)
     {
-        return $this->sendJsonResponse($this->roleService->confirmAddRole($request));
+        return $this->sendJsonResponse($this->leaveService->confirmAddLeave($request));
     }
 
 
