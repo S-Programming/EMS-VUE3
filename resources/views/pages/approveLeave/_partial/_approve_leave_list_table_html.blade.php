@@ -24,7 +24,7 @@
                 <td class="font-w600 font-size-sm">{{$approve_leave->type->type}}</td>
                 <td class="font-w600 font-size-sm">{{$approve_leave->description}}</td>
                 <td>
-                    <button class="btn btn-success" onclick="commonAjaxModel('edit_role_modal',{{$approve_leave->id}})">Approve</button>
+                    <button class="btn btn-success" onclick="commonAjaxModel('approve_leave_modal',{{$approve_leave->id}})">Approve</button>
                     <!-- <button class="btn btn-danger" onclick="commonAjaxModel('delete_role_modal',{{$approve_leave->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
 
                 </td>

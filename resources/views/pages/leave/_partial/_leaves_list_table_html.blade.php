@@ -8,10 +8,11 @@
     <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
         <thead>
             <tr>
-                <th>Date</th>
+                <th style="width: 15%;">Date</th>
                 <th style="width: 15%;">Type</th>
-                <th class="d-none d-sm-table-cell" style="width: 30%;">Status</th>
-                <th class="d-none d-sm-table-cell" style="width: 15%;">Description</th>
+                <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
+                <th class="d-none d-sm-table-cell" style="width: 30%;">Description</th>
+                <th class="d-none d-sm-table-cell" style="width: 30%;">Comments</th>
             </tr>
         </thead>
         <tbody>
@@ -20,8 +21,9 @@
             <tr>
                 <td class="font-w600 font-size-sm">{{$leave->date}}</td>
                 <td class="font-w600 font-size-sm">{{$leave->type->type}}</td>
-                <td class="font-w600 font-size-sm">{{$leave->status}}</td>
+                <td class="font-w600 font-size-sm">{{$leave->status->status}}</td>
                 <td class="font-w600 font-size-sm">{{$leave->description}}</td>
+                <td class="font-w600 font-size-sm">{{$leave->comments}}</td>
                 <!-- <td>
                     <button class="btn btn-info" onclick="commonAjaxModel('edit_role_modal',{{$leave->id}})"><i class="fa fa-edit"></i></button>
                     <button class="btn btn-danger" onclick="commonAjaxModel('delete_role_modal',{{$leave->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>

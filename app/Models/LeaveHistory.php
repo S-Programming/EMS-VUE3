@@ -28,7 +28,7 @@ class LeaveHistory extends Model
      */
 
     /**
-     * Leave Type Relation it will retuen the all leave assigned type
+     * Leave History Relation it will retuen the all leave assigned type
      *
      * @return bool
      */
@@ -38,14 +38,21 @@ class LeaveHistory extends Model
         return $this->belongsTo(LeaveType::class,'leave_type_id','id');
     }
 
-/**
-     * Leave Type Relation it will retuen the all leave assigned user
+    /**
+     * Leave History Relation it will retuen the all leave assigned user
      *
      * @return bool
      */
-
-
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');
+    }
+
+    /**
+     * Leave History Relation it will retuen the all leave assigned status
+     *
+     * @return bool
+     */
+    public function status(){
+        return $this->belongsTo(LeaveStatus::class,'leave_status_id','id');
     }
 }
