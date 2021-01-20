@@ -10,6 +10,7 @@ use App\Models\CheckinHistory;
 use App\Models\User;
 use http\Message\Body;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 use Session;
 
 class CheckinHistoryController extends Controller
@@ -80,14 +81,29 @@ class CheckinHistoryController extends Controller
         $user_history = CheckinHistory::all();
         $users = User::all();
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-        return view('pages.user.users_checkin_report', ['user_history' => ($user_history ?? null),'user_history_html' => $html, 'users' => $users]);
+        return view('pages.user.users_checkin_report', ['user_history' => ($user_history ?? null), 'user_history_html' => $html, 'users' => $users]);
     }
 
     public function getUserCheckinRecord(Request $request)
     {
         return $this->sendJsonResponse($this->checkinHistoryService->getUserCheckinRecord($request));
     }
-
+    // Checkin History Between Two Dates
+    public function checkinHistoryBtDates(Request $request)
+    {
+        // $validator = Validator::make($request->all(), [
+        //     'start_date' => 'after:yesterday|before:end_date',
+        //     'end_date'  => 'date_format:Y-m-d|after:yesterday',
+        // ]);
+        // if ($validator->fails()) {
+        //     //dd("sada");
+        //     return redirect('/pages.user.dashboard')
+        //         ->withInput()
+        //         ->withErrors($validator);
+        //     // return view('/pages.user.dashboard', ['validator' => $validator]);
+        // }
+        return $this->sendJsonResponse($this->checkinHistoryService->checkinHistoryBtDates($request));
+    }
 
     public function deleteCheckinUserModal(Request $request)
     {
@@ -97,5 +113,24 @@ class CheckinHistoryController extends Controller
     public function deleteConfirmCheckinUser(Request $request)
     {
         return $this->sendJsonResponse($this->checkinHistoryService->deleteConfirmCheckinUser($request));
+    }
+
+    /**
+     * It will return a HTML for the Modal container to update checkin hitory of user
+     *
+     * @return Body
+     */
+
+    //user checkin history edit modal by Admin
+    public function editCheckinUserModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->checkinHistoryService->editCheckinUserModal($request));
+        //dd($user_data);
+    }
+
+    //Update user checkin history by Admin
+    public function updateCheckinUser(Request $request)
+    {
+        return $this->sendJsonResponse($this->checkinHistoryService->updateCheckinUser($request));
     }
 }

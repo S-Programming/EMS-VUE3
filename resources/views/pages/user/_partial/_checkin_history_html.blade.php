@@ -7,23 +7,26 @@
             <th>Check Out Time</th>
             <th>Day</th>
             <th>Description</th>
-            <th>Actions</th>
+            {{-- @if(isset($id) && !empty($id)) --}}
+            <th>opertaion</th>
+            {{-- @endif --}}
         </tr>
         </thead>
             <tbody>
             @if(isset($user_history) && !empty($user_history))
                 @foreach($user_history as $data)
                     <tr>
-                        <th>{{$data->user_id??''}}</th>
-                        <th>{{$data->checkin??''}}</th>
-                        <th>{{$data->checkout ??''}}</th>
-                        <th>{{$data->created_at->format('d M') ?? ''}}</th>
-                        <th>{!!$data->description??'' !!}</th>
-                        <th>
-                         <button class="btn btn-info" onclick="commonAjaxModel('edit_user_modal',{{$data->id}})"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger" onclick="commonAjaxModel('delete_checkin_user_modal',{{$data->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
-
-                        </th>
+                        <td>{{$data->user_id??''}}</td>
+                        <td>{{$data->checkin??''}}</td>
+                        <td>{{$data->checkout ??''}}</td>
+                        <td>{{$data->created_at->format('d M') ?? ''}}</td>
+                        <td>{!!$data->description??'' !!}</td>
+                        <td>
+                            {{-- @if(isset($id) && !empty($id)) --}}
+                           <button class="btn btn-info" onclick="commonAjaxModel('edit_checkin_user_modal', {{$data->id}})"><i class="fa fa-edit"></i></button>
+                           <button class="btn btn-danger" onclick="commonAjaxModel('delete_checkin_user_modal',{{$data->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            {{-- @endif --}}
+                       </td>
                     </tr>
                 @endforeach
             @endif

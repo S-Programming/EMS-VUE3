@@ -43,6 +43,7 @@ class LeaveService extends BaseService
         $leave_types_data = LeaveType::all();
         // dd($leave_type_data);
 //        dd(CommonUtilsFacade::isCheckIn());
+
         $containerId = $request->input('containerId', 'common_popup_modal');
         // $roles = Role::all();
         // $userRoles = [];
@@ -62,7 +63,7 @@ class LeaveService extends BaseService
     public function roleDeleteModal(Request $request)
     {
         $role_id = $request->id;
-//        dd(CommonUtilsFacade::isCheckIn());
+        //        dd(CommonUtilsFacade::isCheckIn());
         $containerId = $request->input('containerId', 'common_popup_modal');
         // $role_data=Role::find($user_id);
         $html = view('pages.role._partial._delete_role_modal', ['id' => $containerId, 'role_id' => $role_id])->render();

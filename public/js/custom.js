@@ -289,9 +289,10 @@ function closeModalById(id) {
 }
 
 function ajaxCallOnclick(route, extraData) {
-    console.log(extraData);
+    //console.log(extraData);
     if (route != '') {
         const url = baseURL + '/' + route;
+        var el = this;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
         console.log(dataToPost);
         jQuery.ajax({
@@ -300,7 +301,7 @@ function ajaxCallOnclick(route, extraData) {
             data: dataToPost,
             dataType: "json",
             success: function (data) {
-                console.log('RN',data)
+                // console.log('RN',data)
                    if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
                         jQuery('#' + data.html_section_id).html(data.html);
                     }
@@ -318,6 +319,10 @@ function ajaxCallOnclick(route, extraData) {
                 const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
                 if (jQuery('body').hasClass('modal-open') && containerId) {
                     closeModalById(containerId);
+                     //jQuery(this).closest('tr').css('background','tomato');
+                    // jQuery(this).closest('tr').fadeOut(800,function(){
+                    //    jQuery(this).remove();
+                    //    });
                 }
             }, error: function (data) {
                 console.log('error');
@@ -422,4 +427,14 @@ var startCheckinTimer = function (startTime) {
         }
     }, 1000);
 }
+
+
+
+jQuery(function() {
+    One.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'rangeslider']);
+});
+jQuery(".js-datepicker").datepicker({
+    todayHighlight: true,
+    autoclose: true
+});
 
