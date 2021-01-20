@@ -17,7 +17,9 @@ class Leave
             // Route::post('/confirm_delete_role', [RoleController::class, 'confirmDeleteRole'])->name('role.confirm.delete.role');
             // Route::post('/editrole_modal', [RoleController::class, 'roleModal'])->name('role.edit.modal');
             
-            
+            Route::get('/leave_type_list', [LeaveController::class, 'leaveType'])->name('leave.type.list');
+            Route::post('/add_leave_type_modal', [LeaveController::class, 'addLeaveTypeModal'])->name('add.leave.type.modal');
+            Route::post('/leave_type_confirm_add', [LeaveController::class, 'leaveTypeConfirmAdd'])->name('leave.type.confirm.add');
             
         });
 
