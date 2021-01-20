@@ -27,7 +27,9 @@ class CheckInHistory
             Route::post('/confirm_delete_checkin_user', [CheckinHistoryController::class, 'deleteConfirmCheckinUser'])->name('checkin.confirm.delete.user');
 
             Route::post('/edit_checkin_user_modal', [CheckinHistoryController::class, 'editCheckinUserModal'])->name('checkin.edit.user.modal');
+            
             Route::post('/update_checkin_user', [CheckinHistoryController::class, 'updateCheckinUser'])->name('checkin.update.user');
+            Route::get('/test', [CheckinHistoryController::class, 'show'])->name('checkin.test');
         });
     }
 }

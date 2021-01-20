@@ -60,7 +60,8 @@ function validateFieldsByFormId(e) {
                         closeModalById(modalId);
                     }
 
-                } else {
+                }  
+                else {
                     var errors = data.errors;
                     jQuery.each(errors, function (i, val) {
                         if (errors[i] != 'undefined' && errors[i] != null) {
@@ -111,7 +112,7 @@ function validateFields(formId) {
     var phoneNumberArray = ['phone_number'];
     var skipforEmpty = [];
     var fname = 'no_name';
-    var passwordArray = ['password', 'confirm_password'];
+    var passwordArray = ['new_password', 'confirm_password'];
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var regexp_number = /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/
     jQuery.each(fields, function (i, field) {
@@ -257,6 +258,7 @@ function commonAjaxModel(route, id, containerId) {
             data: dataToPost,
             dataType: "json",
             success: function (data) {
+                 if (data.status == 'success') {
                 /*If Modal Div not defined*/
                 if (jQuery('#' + containerId + '_mp').length == 0) {
                     jQuery("body").append('<div id="' + containerId + '_mp"></div>');
@@ -265,8 +267,15 @@ function commonAjaxModel(route, id, containerId) {
                 jQuery('#' + containerId + '_mp').html(data.html);
                 /*Show Modal*/
                 jQuery('#' + containerId).modal('show');
+            }
+             if (data.status == 'error') {
+
+        notificationAlert('error', data.message, 'Inconceivable!');
+             }
+          
             }, error: function (data) {
-                console.log('error');
+                console.log('error',data);
+        notificationAlert('error', data.responseJSON.message, 'Inconceivable!');
             }
         });
     } else {
@@ -323,6 +332,10 @@ function ajaxCallOnclick(route, extraData) {
                     // jQuery(this).closest('tr').fadeOut(800,function(){
                     //    jQuery(this).remove();
                     //    });
+                }
+                if (data.status == 'error') {
+
+                    notificationAlert('error', data.message, 'Inconceivable!');
                 }
             }, error: function (data) {
                 console.log('error');

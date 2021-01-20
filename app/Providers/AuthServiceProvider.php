@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Models\CheckinHistory;
+use App\Policies\CheckinHistoryPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,10 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+         CheckinHistory::class => CheckinHistoryPolicy::class,
+        //CheckinHistory::class => CheckinHistoryPolicy::class,
+
+
     ];
 
     /**
@@ -24,7 +29,16 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
+       /* Gate::define('isAdmin', function($user) {
+            return $user->roles()->first()->name == 'Admin';
+         });
+        
+         //define a author user role 
+         Gate::define('isDeveloper', function($user) {
+             return $user->roles()->name == 'Developer';
+         });*/
+       
+        
         //
     }
 }

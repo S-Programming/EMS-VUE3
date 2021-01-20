@@ -7,9 +7,7 @@
             <th>Check Out Time</th>
             <th>Day</th>
             <th>Description</th>
-            {{-- @if(isset($id) && !empty($id)) --}}
             <th>opertaion</th>
-            {{-- @endif --}}
         </tr>
         </thead>
             <tbody>
@@ -22,10 +20,8 @@
                         <td>{{$data->created_at->format('d M') ?? ''}}</td>
                         <td>{!!$data->description??'' !!}</td>
                         <td>
-                            {{-- @if(isset($id) && !empty($id)) --}}
                            <button class="btn btn-info" onclick="commonAjaxModel('edit_checkin_user_modal', {{$data->id}})"><i class="fa fa-edit"></i></button>
                            <button class="btn btn-danger" onclick="commonAjaxModel('delete_checkin_user_modal',{{$data->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                            {{-- @endif --}}
                        </td>
                     </tr>
                 @endforeach

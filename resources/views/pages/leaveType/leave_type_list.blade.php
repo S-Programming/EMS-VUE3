@@ -23,9 +23,9 @@
 	<!-- Page Content -->
 	<div class="content">
 	    <!-- Dynamic Table Full Pagination -->
-	    <div id="leavelist-section" class="block block-rounded">
+	    <div id="leave-type-section" class="block block-rounded">
 
-	    @include('pages.leave._partial._leaves_list_table_html',['leaves' => $leaves])
+	    @include('pages.leaveType._partial._leave_type_list_table_html',['leaves_type' => $leaves_type])
 		</div>
 	    <!-- END Dynamic Table Full Pagination -->
 
