@@ -27,9 +27,9 @@ class LeaveController extends Controller
     {
         $user_id = $this->getAuthUserId();
         //$leaves = LeaveType::with('history')->get();
-        $leaves = LeaveHistory::with('type')->where('user_id',$user_id)->get();
+        $leaves = LeaveHistory::with('type')->where('user_id', $user_id)->get();
         // dd($leaves);
-        return view('pages.leave.leaves_list')->with('leaves',$leaves);
+        return view('pages.leave.leaves_list')->with('leaves', $leaves);
     }
     /**
      * It will return a HTML for the Modal container
@@ -42,7 +42,7 @@ class LeaveController extends Controller
     }
 
     /**
-     * Method for the Adding Users
+     * Method for the Adding Leaves
      *
      * @return Body
      */
@@ -50,7 +50,39 @@ class LeaveController extends Controller
     {
         return $this->sendJsonResponse($this->leaveService->confirmAddLeave($request));
     }
+    /**
+     * It will return a Leave Type List
+     *
+     * @return Body
+     */
+    public function leaveType()
+    {
 
+        //$leaves = LeaveType::with('history')->get();
+        $leaves_type = LeaveType::all();
+        // dd($leave_type);
+        return view('pages.leaveType.leave_type_list')->with('leaves_type', $leaves_type);
+    }
+
+    /**
+     * It will return a HTML for the Leave Type Modal container
+     *
+     * @return Body
+     */
+    public function addLeaveTypeModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->leaveService->addLeaveTypeModal($request));
+    }
+
+    /**
+     * Method for the Adding Leaves
+     *
+     * @return Body
+     */
+    public function leaveTypeConfirmAdd(Request $request)
+    {
+        return $this->sendJsonResponse($this->leaveService->leaveTypeConfirmAdd($request));
+    }
 
     /**
      * It will return a HTML for the Modal container for confirmation of deletion
