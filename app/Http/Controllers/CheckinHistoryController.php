@@ -117,4 +117,19 @@ class CheckinHistoryController extends Controller
     {
         return $this->sendJsonResponse($this->checkinHistoryService->updateCheckinUser($request));
     }
+    public function show()
+    {
+        $checkinHistory = new CheckinHistory;
+        $user = Auth::user();
+
+        if ($user->can('view',$checkinHistory)) {
+            //user is authorized now
+            dd("Chal Gea");
+        }
+        else
+        {
+            dd("nai chala");
+        }
+        
+    }
 }

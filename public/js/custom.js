@@ -111,7 +111,7 @@ function validateFields(formId) {
     var phoneNumberArray = ['phone_number'];
     var skipforEmpty = [];
     var fname = 'no_name';
-    var passwordArray = ['password', 'confirm_password'];
+    var passwordArray = ['new_password', 'confirm_password'];
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var regexp_number = /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/
     jQuery.each(fields, function (i, field) {
