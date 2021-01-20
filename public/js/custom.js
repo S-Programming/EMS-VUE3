@@ -257,6 +257,7 @@ function commonAjaxModel(route, id, containerId) {
             data: dataToPost,
             dataType: "json",
             success: function (data) {
+                 if (data.status == 'success') {
                 /*If Modal Div not defined*/
                 if (jQuery('#' + containerId + '_mp').length == 0) {
                     jQuery("body").append('<div id="' + containerId + '_mp"></div>');
@@ -265,8 +266,15 @@ function commonAjaxModel(route, id, containerId) {
                 jQuery('#' + containerId + '_mp').html(data.html);
                 /*Show Modal*/
                 jQuery('#' + containerId).modal('show');
+            }
+             if (data.status == 'error') {
+
+        notificationAlert('error', data.message, 'Inconceivable!');
+             }
+          
             }, error: function (data) {
-                console.log('error');
+                console.log('error',data);
+        notificationAlert('error', data.responseJSON.message, 'Inconceivable!');
             }
         });
     } else {
@@ -289,7 +297,7 @@ function closeModalById(id) {
 }
 
 function ajaxCallOnclick(route, extraData) {
-    console.log(extraData);
+    //console.log(extraData);
     if (route != '') {
         const url = baseURL + '/' + route;
         var el = this;
@@ -301,7 +309,7 @@ function ajaxCallOnclick(route, extraData) {
             data: dataToPost,
             dataType: "json",
             success: function (data) {
-                console.log('RN',data)
+                // console.log('RN',data)
                    if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
                         jQuery('#' + data.html_section_id).html(data.html);
                     }
@@ -427,4 +435,14 @@ var startCheckinTimer = function (startTime) {
         }
     }, 1000);
 }
+
+
+
+jQuery(function() {
+    One.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'rangeslider']);
+});
+jQuery(".js-datepicker").datepicker({
+    todayHighlight: true,
+    autoclose: true
+});
 

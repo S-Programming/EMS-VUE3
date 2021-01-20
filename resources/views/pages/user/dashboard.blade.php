@@ -1,5 +1,10 @@
 <x-backend-layout>
-
+    @section('css_after')
+        <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
+    @endsection
+    @section('js_before')
+        <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    @endsection
     <!-- Hero -->
     <div class="bg-body-light">
         <div class="content content-full">
@@ -322,108 +327,96 @@
         <!-- END Statistics -->
 
         <!-- Recent Orders -->
+
+
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <h3 class="block-title bold">My Checkin History</h3>
-                <div class="block-options">
-
-                    <div class="mt-3 mt-sm-0 ml-sm-3">
-                        <button type="button" class="btn btn-sm btn-alt-primary" data-toggle="class-toggle"
-                                data-target="#one-dashboard-search-orders" data-class="d-none">
-                            <i class="fa fa-search"></i>
-                        </button>
-                        <div class="d-inline-block">
-                            <select class="dropdown form-control " onchange="ajaxCallOnclick('user_report_history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_id">
-                                <option>All</option>
-                                <option>Previous Week</option>
-                                <option>Current Week</option>
-                                <option>Previous Month</option>
-                                <option>Current Month</option>
-                                {{-- <option value="All">All</option> --}}
-                            </select>
+            </div>
+            <div class="block-content block-content-full">
+                <div class="row items-push">
+                    <div class="col-lg-8">
+                        <form action="{{ route('checkin.checkin.history.bt.dates') }}" method="POST" id="filter-form-id-bt-dates">
+                            @csrf
+                            <div class="form-group row">
+                                <div class="col-5">
+                                    <label for="">Start Date: </label>
+                                    <input type="text" id="start_date" name="start_date" class="js-datepicker form-control js-datepicker-enabled" data-autoclose="true" data-today-highlight="true" data-date-format="yyyy-mm-dd" readonly />
+                                    @if($errors->has('start_date'))
+                                        <div class="error">{{ $errors->first('start_date') }}</div>
+                                    @endif
+                                    {{-- @error('start_date')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror --}}
+                                </div>
+                                <div class="col-5">
+                                    <label for="d2">End Date: </label>
+                                    <input type="text" name="end_date" id="end_date" class="js-datepicker form-control js-datepicker-enabled" data-autoclose="true" data-today-highlight="true" data-date-format="yyyy-mm-dd" readonly />
+                                    {{-- @if($errors->has('end_date'))
+                                        <div class="error">{{ $errors->first('end_date') }}</div>
+                                    @endif --}}
+                                    @error('end_date')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-2">
+                                    <label>&nbsp;</label>
+                                    <button type="submit" class="btn btn-dark btn-sm form-control" onclick="validateFieldsByFormId(this)"
+                                    data-validation="validation-span-id"
+                                    id="validation-span-id">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="block-options">
+                            <div class="mt-3 mt-sm-0 ml-sm-3">
+                                {{-- <button type="button" class="btn btn-sm btn-alt-primary" data-toggle="class-toggle"
+                                        data-target="#one-dashboard-search-orders" data-class="d-none">
+                                    <i class="fa fa-search"></i>
+                                </button> --}}
+                                <label>Choose History</label>
+                                <div class="Zd-inline-block">
+                                    <select class="dropdown form-control " onchange="ajaxCallOnclick('user_report_history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_id">
+                                        <option>All</option>
+                                        <option>Previous Week</option>
+                                        <option>Current Week</option>
+                                        <option>Previous Month</option>
+                                        <option>Current Month</option>
+                                        {{-- <option value="All">All</option> --}}
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="one-dashboard-search-orders" class="block-content border-bottom d-none">
-                <!-- Search Form -->
-                <form action="be_pages_dashboard.html" method="POST" onsubmit="return false;">
-                    <div class="form-group push">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="one-ecom-orders-search"
-                                   name="one-ecom-orders-search" placeholder="Search recent orders..">
-                            <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-search"></i>
-                                            </span>
+            <div class="block-content bg-body-light">
+                <div id="one-dashboard-search-orders" class="block-content border-bottom d-none">
+                    <!-- Search Form -->
+                    <form action="be_pages_dashboard.html" method="POST" onsubmit="return false;">
+                        <div class="form-group push">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="one-ecom-orders-search"
+                                       name="one-ecom-orders-search" placeholder="Search recent orders..">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-                <!-- END Search Form -->
-            </div>
-            <div class="block-content" id="self-checkin-history">
-                {!!$checkin_history_html ??''!!}
-                <!-- Recent Orders Table -->
-                {{-- <div class="table-responsive">
-                    <table class="table table-borderless table-striped table-vcenter">
-                        <thead>
-                        <tr>
-                            <th>User ID</th>
-                            <th>Check In Time</th>
-                            <th>Check Out Time</th>
-                            <th>Day</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if(isset($checkin_history) && !empty($checkin_history))
-                            @foreach($checkin_history as $data)
-                                <tr>
-                                    <th>{{$data->user_id??''}}</th>
-                                    <th>{{$data->checkin??''}}</th>
-                                    <th>{{$data->checkout ?? ""}}</th>
-                                    <th>{{$data->created_at->format('d M') ?? ""}}</th>
-                                    <th>{!!$data->description??'' !!}</th>
-                                </tr>
-                            @endforeach
-                        @endif
-                        </tbody>
-                    </table>
-                </div> --}}
-                <!-- END Recent Orders Table -->
-
-                <!-- Pagination -->
-                {{-- <nav aria-label="Photos Search Navigation">
-                    <ul class="pagination pagination-sm justify-content-end mt-2">
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-label="Previous">
-                                Prev
-                            </a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="javascript:void(0)">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">4</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)" aria-label="Next">
-                                Next
-                            </a>
-                        </li>
-                    </ul>
-                </nav> --}}
-                <!-- END Pagination -->
+                    </form>
+                    <!-- END Search Form -->
+                </div>
+                <div class="block-content" id="self-checkin-history">
+                    {!!$checkin_history_html ??''!!}
+                </div>
             </div>
         </div>
-        <!-- END Recent Orders -->
     </div>
-    <!-- END Page Content -->
+    <!-- END Recent Orders -->
+</div>
+<!-- END Page Content -->
 </x-backend-layout>
+

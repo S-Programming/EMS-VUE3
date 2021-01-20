@@ -239,8 +239,6 @@ function reload_page(url) {
  * Created by Abbas Naumani on 2/5/2018.
  */
 function commonAjaxModel(route, id, containerId) {
-    // console.log('abc');
-    alert('fhjkh');
     if (typeof (containerId) == "undefined" || containerId == '') {
         containerId = 'common_popup_modal';
     }
@@ -320,10 +318,6 @@ function ajaxCallOnclick(route, extraData) {
                 const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
                 if (jQuery('body').hasClass('modal-open') && containerId) {
                     closeModalById(containerId);
-                    jQuery(this).closest('tr').css('background','tomato');
-                    jQuery(this).closest('tr').fadeOut(800,function(){
-                       jQuery(this).remove();
-                       });
                 }
             }, error: function (data) {
                 console.log('error');
@@ -428,4 +422,11 @@ var startCheckinTimer = function (startTime) {
         }
     }, 1000);
 }
+
+
+
+jQuery(function() {
+    One.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'rangeslider']);
+});
+jQuery(".js-datepicker").datepicker();
 

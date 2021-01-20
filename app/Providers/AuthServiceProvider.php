@@ -15,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-       //  CheckinHistory::class => CheckinHistoryPolicy::class,
+         CheckinHistory::class => CheckinHistoryPolicy::class,
         //CheckinHistory::class => CheckinHistoryPolicy::class,
 
 

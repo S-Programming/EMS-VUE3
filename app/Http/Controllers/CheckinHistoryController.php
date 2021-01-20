@@ -10,6 +10,7 @@ use App\Models\CheckinHistory;
 use App\Models\User;
 use http\Message\Body;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 use Session;
 
 class CheckinHistoryController extends Controller
@@ -87,7 +88,22 @@ class CheckinHistoryController extends Controller
     {
         return $this->sendJsonResponse($this->checkinHistoryService->getUserCheckinRecord($request));
     }
-
+    // Checkin History Between Two Dates
+    public function checkinHistoryBtDates(Request $request)
+    {
+        // $validator = Validator::make($request->all(), [
+        //     'start_date' => 'after:yesterday|before:end_date',
+        //     'end_date'  => 'date_format:Y-m-d|after:yesterday',
+        // ]);
+        // if ($validator->fails()) {
+        //     //dd("sada");
+        //     return redirect('/pages.user.dashboard')
+        //         ->withInput()
+        //         ->withErrors($validator);
+        //     // return view('/pages.user.dashboard', ['validator' => $validator]);
+        // }
+        return $this->sendJsonResponse($this->checkinHistoryService->checkinHistoryBtDates($request));
+    }
 
     public function deleteCheckinUserModal(Request $request)
     {
@@ -106,30 +122,23 @@ class CheckinHistoryController extends Controller
      */
 
     //user checkin history edit modal by Admin
-    public function editCheckinUserModal(Request $request)
+    public function editCheckinUserModal(Request $request, CheckinHistory $checkinHistory)
     {
-        return $this->sendJsonResponse($this->checkinHistoryService->editCheckinUserModal($request));
-        //dd($user_data);
+       /* $user=$this->getAuthUser();
+       $tt= $user->can('update',$checkinHistory);
+      $authddd= $this->authorize('update', $checkinHistory);
+        dd($authddd,$tt,'Rogani Naan',$user);*/
+      //  dd($checkinHistory);
+        if($this->authorize('update', $checkinHistory))
+        {
+            return $this->sendJsonResponse($this->checkinHistoryService->editCheckinUserModal($request));
+        }
+        
     }
 
     //Update user checkin history by Admin
     public function updateCheckinUser(Request $request)
     {
         return $this->sendJsonResponse($this->checkinHistoryService->updateCheckinUser($request));
-    }
-    public function show()
-    {
-        $checkinHistory = new CheckinHistory;
-        $user = Auth::user();
-
-        if ($user->can('view',$checkinHistory)) {
-            //user is authorized now
-            dd("Chal Gea");
-        }
-        else
-        {
-            dd("nai chala");
-        }
-        
     }
 }

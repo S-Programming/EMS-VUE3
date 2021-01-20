@@ -19,13 +19,15 @@
     <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/filepond.css') }}">
-@yield('css_after')
-<!-- Scripts -->
+    @yield('css_after')
+
+    <!-- Scripts -->
     <script>var baseURL = <?php echo json_encode(url('/')); ?>  </script>
     <script>var isUserCheckin = '{{$is_user_checkin??0}}'  </script>
     <script>var userLastCheckinTime = '{{$user_last_checkin??''}}'  </script>
     <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
     <script src="{{ mix('js/oneui.app.js') }}"></script>
+
     <script src="{{ asset('assets/js/tinymce/tinymce.min.js') }}"></script>
     <script type="text/javascript">
         jQuery.ajaxSetup({
@@ -34,6 +36,7 @@
             }
         });
     </script>
+
 </head>
 <body>
 <!-- Page Container -->
@@ -634,10 +637,14 @@ MAIN CONTENT LAYOUT
 
 <!-- OneUI Core JS -->
 <!-- Laravel Scaffolding JS -->
+
+@yield("js_before")
+
 <!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->
 <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 
 @yield('js_after')
+
 </body>
 </html>
