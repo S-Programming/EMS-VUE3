@@ -10,6 +10,7 @@ use App\Models\CheckinHistory;
 use App\Models\User;
 use http\Message\Body;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 use Session;
 
 class CheckinHistoryController extends Controller
@@ -87,7 +88,22 @@ class CheckinHistoryController extends Controller
     {
         return $this->sendJsonResponse($this->checkinHistoryService->getUserCheckinRecord($request));
     }
-
+    // Checkin History Between Two Dates
+    public function checkinHistoryBtDates(Request $request)
+    {
+        // $validator = Validator::make($request->all(), [
+        //     'start_date' => 'after:yesterday|before:end_date',
+        //     'end_date'  => 'date_format:Y-m-d|after:yesterday',
+        // ]);
+        // if ($validator->fails()) {
+        //     //dd("sada");
+        //     return redirect('/pages.user.dashboard')
+        //         ->withInput()
+        //         ->withErrors($validator);
+        //     // return view('/pages.user.dashboard', ['validator' => $validator]);
+        // }
+        return $this->sendJsonResponse($this->checkinHistoryService->checkinHistoryBtDates($request));
+    }
 
     public function deleteCheckinUserModal(Request $request)
     {

@@ -289,7 +289,7 @@ function closeModalById(id) {
 }
 
 function ajaxCallOnclick(route, extraData) {
-    console.log(extraData);
+    //console.log(extraData);
     if (route != '') {
         const url = baseURL + '/' + route;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
@@ -300,7 +300,7 @@ function ajaxCallOnclick(route, extraData) {
             data: dataToPost,
             dataType: "json",
             success: function (data) {
-                console.log('RN',data)
+                // console.log('RN',data)
                    if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
                         jQuery('#' + data.html_section_id).html(data.html);
                     }
@@ -426,4 +426,14 @@ var startCheckinTimer = function (startTime) {
         }
     }, 1000);
 }
+
+
+
+jQuery(function() {
+    One.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'rangeslider']);
+});
+jQuery(".js-datepicker").datepicker({
+    todayHighlight: true,
+    autoclose: true
+});
 

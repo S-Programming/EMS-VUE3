@@ -10,6 +10,9 @@ class CheckInHistory
     static function register()
     {
         Route::group(['middleware' => ['auth:sanctum']], function () {
+            //my route
+            Route::post('/checkin_history_bt_dates', [CheckinHistoryController::class, 'checkinHistoryBtDates'])->name('checkin.checkin.history.bt.dates');
+
             Route::post('/checkin_modal', [CheckinHistoryController::class, 'checkinModal'])->name('checkin.modal');
             Route::post('/confirm_checkin', [CheckinHistoryController::class, 'confirmCheckin'])->name('confirm.checkin');
             Route::post('/checkout_modal', [CheckinHistoryController::class, 'checkoutModal'])->name('checkout.modal');
