@@ -114,7 +114,7 @@ class UserService extends BaseService
                         $roleuser->save();*/
             $users = User::all();
         }
-        $html = view('pages.user._partial._users_datatable_html', compact('users', $users))->render();
+        $html = view('pages.user._partial._users_list_table_html', compact('users', $users))->render();
         return $this->successResponse('User has Successfully Added', ['html' => $html, 'html_section_id' => 'userlist-section']);
     }
 
@@ -162,7 +162,7 @@ class UserService extends BaseService
         $user_data = User::find($user_id);
         $user_data->delete();
         $users = User::all();
-        $html = view('pages.user._partial._users_datatable_html', compact('users', $users))->render();
+        $html = view('pages.user._partial._users_list_table_html', compact('users', $users))->render();
         return $this->successResponse('User is Successfully Deleted', ['html' => $html]);
     }
 

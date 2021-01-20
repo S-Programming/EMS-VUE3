@@ -60,7 +60,8 @@ function validateFieldsByFormId(e) {
                         closeModalById(modalId);
                     }
 
-                } else {
+                }  
+                else {
                     var errors = data.errors;
                     jQuery.each(errors, function (i, val) {
                         if (errors[i] != 'undefined' && errors[i] != null) {
@@ -331,6 +332,10 @@ function ajaxCallOnclick(route, extraData) {
                     // jQuery(this).closest('tr').fadeOut(800,function(){
                     //    jQuery(this).remove();
                     //    });
+                }
+                if (data.status == 'error') {
+
+                    notificationAlert('error', data.message, 'Inconceivable!');
                 }
             }, error: function (data) {
                 console.log('error');

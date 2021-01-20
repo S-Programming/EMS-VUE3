@@ -105,9 +105,12 @@ class CheckinHistoryController extends Controller
         return $this->sendJsonResponse($this->checkinHistoryService->checkinHistoryBtDates($request));
     }
 
-    public function deleteCheckinUserModal(Request $request)
+    public function deleteCheckinUserModal(Request $request, CheckinHistory $checkinHistory)
     {
-        return $this->sendJsonResponse($this->checkinHistoryService->deleteCheckinUserModal($request));
+        if($this->authorize('delete', $checkinHistory))
+        {
+            return $this->sendJsonResponse($this->checkinHistoryService->deleteCheckinUserModal($request));
+        }
     }
 
     public function deleteConfirmCheckinUser(Request $request)

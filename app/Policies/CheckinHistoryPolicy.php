@@ -89,6 +89,16 @@ class CheckinHistoryPolicy
     public function delete(User $user, CheckinHistory $checkinHistory)
     {
         //
+        $user = $this->getAuthUser();
+         if ($user) {
+            $userRoles = $this->userRoles();
+            if (!in_array(RoleUser::SuperAdmin, $userRoles) && !in_array(RoleUser::Admin, $userRoles)) {
+                return false;
+
+
+            }
+            return true;
+        }
     }
 
     /**
