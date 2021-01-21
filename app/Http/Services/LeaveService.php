@@ -18,18 +18,18 @@ class LeaveService extends BaseService
     /* All Leave Methods */
     public function confirmAddLeave(Request $request)
     {
+
         if (!isset($request) && empty($request)) { // what will be condition
             return $this->errorResponse('Leave Submittion Failed');
         }
         if (isset($request) && !empty($request)) {
             $user_id = $this->getAuthUserId();
-            $leave = LeaveHistory::Create([
-                'user_id' => $user_id,
-                'leave_type_id' => $request->leave_types,
-                'date' => $request->date,
-                'description' => $request->description,
-
-            ]);
+            $leave = new LeaveHistory;
+            $leave->user_id = $user_id;
+            $leave->leave_type_id =$request->leave_types;
+            $leave->date = $request->date;
+            $leave->description = $request->description;
+            $leave->leave_status_id = 1;
             $leave->save();
             $leaves = LeaveHistory::with('type')->where('user_id', $user_id)->get();
             // $leaves = LeaveType::with('history')->get();

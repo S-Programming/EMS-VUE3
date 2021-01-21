@@ -108,10 +108,7 @@ class UserService extends BaseService
             //$user_id = $user->id; // last insert id of user
             $user->roles()->sync($request->roles); // for pivot data
             $user->save();
-            /*            $roleuser = new RoleUser;
-                        $roleuser->user_id = $user_id;
-                        $roleuser->role_id = $request->roles;
-                        $roleuser->save();*/
+           
             $users = User::all();
         }
         $html = view('pages.user._partial._users_list_table_html', compact('users', $users))->render();
@@ -154,7 +151,7 @@ class UserService extends BaseService
     public function confirmDeleteUser(Request $request)
     {
         $login_id = $this->getAuthUserId();
-        $user_id = $request->id;
+        $user_id = $request->user_id;
         if ($user_id == $login_id) {
             return $this->errorResponse('Authorization Required', ['errors' => ['You dont have Authorization to Delete this Account']]);
         }
@@ -163,7 +160,7 @@ class UserService extends BaseService
         $user_data->delete();
         $users = User::all();
         $html = view('pages.user._partial._users_list_table_html', compact('users', $users))->render();
-        return $this->successResponse('User is Successfully Deleted', ['html' => $html]);
+        return $this->successResponse('User is Successfully Deleted', ['html' => $html,'html_section_id' => 'userlist-section']);
     }
 
     public function userUpdateProfile(Request $request)

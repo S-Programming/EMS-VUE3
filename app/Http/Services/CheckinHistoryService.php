@@ -160,21 +160,9 @@ class CheckinHistoryService extends BaseService
      */
     public function checkinHistoryBtDates(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'start_date' => 'after:yesterday|before:end_date',
-        //     // 'end_date'  => 'date_format:Y-m-d|after:yesterday',
-        // ]);
-        // if ($validator->fails()) {
-        //     $redirect_to = redirect('/pages.user.dashboard')
-        //         ->withInput()
-        //         ->withErrors($validator);
-        //     return $this->errorResponse('Checkin_History Not Found', ['errors' => ['Enter Correct Date'], 'validator' => $redirect_to]);
-        // }
         $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
         $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
-        // End date User Record not included
-        // $result = CheckinHistory::whereBetween('checkin', [$startDate, $endDate])->get();
-
+       
         ## End Date User Record Included
         $result = CheckinHistory::whereDate('checkin', '>=', $startDate)->whereDate('checkin', '<=', $endDate)->get();
 
@@ -210,11 +198,6 @@ class CheckinHistoryService extends BaseService
     {
         //$login_id = $this->getAuthUserId();
         $checkin_id = $request->checkin_id;
-        /*if ($user_id == $login_id) {
-            return $this->errorResponse('Authorization Required', ['errors' => ['You dont have Authorization to Delete this Account']]);
-        }
-*/
-        // dd($checkin_id);
         $user_data = CheckinHistory::find($checkin_id);
         $user_data->delete();
         $users = User::all();

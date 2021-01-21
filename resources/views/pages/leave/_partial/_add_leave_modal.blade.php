@@ -17,9 +17,9 @@
                         <div class="card-body">
                             <div class="py-2">
                                 <div class="form-group">
-                                    {{-- <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden" name="id" value="{{$user_data->id??0}}" /> --}}
+                                    <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden" name="id" value="{{$user_data->id??0}}" />
                                     <label for="date">&nbsp Date</label>
-                                    <x-input id="date" class="form-control form-control-alt form-control-lg" type="date" name="date"  required autofocus />
+                                    <x-input id="date" class="form-control form-control-alt form-control-lg" type="date" name="date" value="{{$user_data->first_name??''}}" required autofocus />
                                 </div>
                             </div>
                             <div class="py-3">

@@ -37,7 +37,7 @@ class RoleService extends BaseService
             $roles = Role::all();
         }
         $html = view('pages.role._partial._roles_list_table_html', compact('roles', $roles))->render();
-        return $this->successResponse('Role has Successfully Added', ['html' => $html, 'html_section_id' => 'userlist-section']);
+        return $this->successResponse('Role has Successfully Added', ['html' => $html, 'html_section_id' => 'rolelist-section']);
     }
 
     public function roleModal(Request $request)
@@ -46,16 +46,7 @@ class RoleService extends BaseService
         $role_data = Role::find($role_id);
         //        dd(CommonUtilsFacade::isCheckIn());
         $containerId = $request->input('containerId', 'common_popup_modal');
-        // $roles = Role::all();
-        // $userRoles = [];
-        // if (isset($role_data->roles) && !empty($role_data->roles)) {
-        //     foreach ($role_data->roles as $role) {
-        //         if ($role->id > 0) {
-        //             $userRoles[$role->id] = $role->id;
-        //         }
-        //     }
-        // }
-        // $rolesDropDown = view('utils.roles', ['roles' => ($roles ?? null), 'user_roles' => $userRoles])->render();
+        
         $html = view('pages.role._partial._add_role_modal', ['id' => $containerId, 'data' => null, 'role_data' => $role_data])->render();
 
         return $this->successResponse('success', ['html' => $html]);
@@ -74,16 +65,16 @@ class RoleService extends BaseService
 
     public function confirmDeleteRole(Request $request)
     {
-        $login_id = $this->getAuthUserId();
-        $role_id = $request->id;
-        if ($role_id == $login_id) {
+        //$login_id = $this->getAuthUserId();
+        $role_id = $request->role_id;
+        /*if ($role_id == $login_id) {
             return $this->errorResponse('You dont have Authorization to Delete this Role');
         }
-
+*/
         $role_data = Role::find($role_id);
         $role_data->delete();
         $roles = Role::all();
         $html = view('pages.role._partial._roles_list_table_html', compact('roles', $roles))->render();
-        return $this->successResponse('Role is Successfully Deleted', ['html' => $html]);
+        return $this->successResponse('Role is Successfully Deleted', ['html' => $html,'html_section_id' => 'rolelist-section']);
     }
 }

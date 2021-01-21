@@ -151,7 +151,7 @@ class CheckinHistoryController extends Controller
         $validator = Validator::make($request->all(), [
             'checkin-time' => 'required',
             'checkout-time' => 'required',
-            'description' => 'required|min:3|max:50',
+            'description' => 'required|min:3|max:100',
         ]);
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
