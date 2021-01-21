@@ -336,12 +336,12 @@
             <div class="block-content block-content-full">
                 <div class="row items-push">
                     <div class="col-lg-8">
-                        <form action="{{ route('checkin.checkin.history.bt.dates') }}" method="POST" id="filter-form-id-bt-dates">
+                        <form action="{{ route('checkin.history.bt.dates') }}" method="POST" id="filter-form-id-bt-dates">
                             @csrf
                             <div class="form-group row">
                                 <div class="col-5">
                                     <label for="">Start Date: </label>
-                                    <input type="text" id="start_date" name="start_date" class="js-datepicker form-control js-datepicker-enabled" data-autoclose="true" data-today-highlight="true" data-date-format="yyyy-mm-dd" readonly />
+                                    <x-input id="date" class="form-control form-control-alt form-control-lg" type="date" name="start_date" max="9999-12-31"  required autofocus />
                                     @if($errors->has('start_date'))
                                         <div class="error">{{ $errors->first('start_date') }}</div>
                                     @endif
@@ -351,8 +351,13 @@
                                 </div>
                                 <div class="col-5">
                                     <label for="d2">End Date: </label>
-                                    <input type="text" name="end_date" id="end_date" class="js-datepicker form-control js-datepicker-enabled" data-autoclose="true" data-today-highlight="true" data-date-format="yyyy-mm-dd" readonly />
+
+                                    {{-- <input type="text" name="end_date" id="end_date" class="js-datepicker form-control js-datepicker-enabled" data-autoclose="true" data-today-highlight="true" data-date-format="yyyy-mm-dd" readonly /> --}}
+
                                     {{-- <input type="date" name="end_date" id="end_date" class="datepicker"data-date-format="yyyy-mm-dd" readonly /> --}}
+
+                                    <x-input id="date" class="form-control form-control-alt form-control-lg" type="date" name="end_date" max="9999-12-31" required />
+                                    {{-- <input type="date" name="end_date" id="end_date" class="datepicker" data-autoclose="true" data-today-highlight="true" data-date-format="yyyy-mm-dd" readonly /> --}}
                                     {{-- @if($errors->has('end_date'))
                                         <div class="error">{{ $errors->first('end_date') }}</div>
                                     @endif --}}
