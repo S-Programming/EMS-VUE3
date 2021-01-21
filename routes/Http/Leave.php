@@ -39,6 +39,8 @@ class Leave
 
             /*All Route For Approve Leave*/
             Route::get('/approve_leave_list', [LeaveController::class, 'approveLeave'])->name('leave.approve.list');
+            Route::post('/approve_leave_modal', [LeaveController::class, 'approveLeaveModal'])->name('leave.approve.leave.modal');
+            Route::post('/confirm_approve_leave', [LeaveController::class, 'confirmApproveLeaveModal'])->name('leave.confirm.approve.leave');
         });
     }
 }

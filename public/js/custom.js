@@ -34,6 +34,7 @@ function validateFieldsByFormId(e) {
             data: jQuery('#' + formId).serialize(),
             dataType: "json",
             success: function (data) {
+               // console.log("asdfgh");
                 e.disabled = false;
                 // console.log(data.redirect_to);
                  if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
@@ -62,6 +63,7 @@ function validateFieldsByFormId(e) {
 
                 }
                 else {
+                    console.log("dat.ERROR");
                     var errors = data.errors;
                     jQuery.each(errors, function (i, val) {
                         if (errors[i] != 'undefined' && errors[i] != null) {
@@ -83,6 +85,7 @@ function validateFieldsByFormId(e) {
             error: function (data) {
                 e.disabled = false;
                 // Error...
+                console.log("erorrr");
                 var errors = jQuery.parseJSON(data.responseText);
                 jQuery.each(errors, function (i, val) {
                     if (errors[i] != 'undefined' && errors[i] != null) {

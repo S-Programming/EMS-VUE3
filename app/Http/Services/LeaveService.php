@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
 use Illuminate\Http\Request;
+use Route\Http\Leave;
 
 class LeaveService extends BaseService
 {
@@ -26,7 +27,7 @@ class LeaveService extends BaseService
             $user_id = $this->getAuthUserId();
             $leave = new LeaveHistory;
             $leave->user_id = $user_id;
-            $leave->leave_type_id =$request->leave_types;
+            $leave->leave_type_id = $request->leave_types;
             $leave->date = $request->date;
             $leave->description = $request->description;
             $leave->leave_status_id = 1;
@@ -186,5 +187,36 @@ class LeaveService extends BaseService
         $leaves_status = LeaveStatus::all();
         $html = view('pages.leaveStatus._partial._leave_status_list_table_html', compact('leaves_status', $leaves_status))->render();
         return $this->successResponse('Leave Status has Successfully Deleted', ['html' => $html, 'html_section_id' => 'leave-status-section']);
+    }
+    public function approveLeaveModal(Request $request)
+    {
+        $requestedLeaveId = $request->id;
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $leaveStatus = LeaveStatus::all();
+        $status_dropdown = view('utils.status', ['leaveStatus' => $leaveStatus])->render();
+        $html = view('pages.approveLeave._partial._approve_leave_modal', ['id' => $containerId, 'requestedLeaveId' => $requestedLeaveId, 'data' => null, 'status_dropdown' => $status_dropdown])->render();
+        return $this->successResponse('Leave Status has Successfully Deleted', ['html' => $html]);
+    }
+    public function confirmApproveLeaveModal(Request $request)
+    {
+        if (isset($request) && !empty($request)) {
+            $leave_id = $request->id;
+            $leave_data = LeaveHistory::where('id', $leave_id)->first();
+            $leave_data->comments = $request->comments;
+            $leave_data->leave_status_id = $request->status;
+            $leave_data->save();
+
+            $approve_leaves = LeaveHistory::with('type')->with('user')->where('leave_status_id', '!=', '2')->get();
+
+            $html = view('pages.approveLeave._partial._approve_leave_list_table_html')->with('approve_leaves', $approve_leaves)->render();
+            if ($leave_data->leave_status_id == 1)
+                return $this->successResponse('Still Pending', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
+            if ($leave_data->leave_status_id == 2)
+                return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
+            if ($leave_data->leave_status_id == 3)
+                return $this->successResponse('Rejected', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
+        } else {
+            return $this->errorResponse('Error');
+        }
     }
 }
