@@ -29,7 +29,7 @@ class LeaveController extends Controller
         $user_id = $this->getAuthUserId();
         //$leaves = LeaveType::with('history')->get();
         $leaves = LeaveHistory::with('type')->with('status')->where('user_id', $user_id)->get();
-        // dd($leaves);
+        //dd($leaves);
         return view('pages.leave.leaves_list')->with('leaves', $leaves);
     }
     /**
@@ -205,7 +205,7 @@ class LeaveController extends Controller
      */
     public function approveLeave()
     {
-        $approve_leaves = LeaveHistory::with('type')->with('user')->get();
+        $approve_leaves = LeaveHistory::with('type')->with('user')->where('leave_status_id', '!=', '2')->get();
         return view('pages.approveLeave.approve_leave_list')->with('approve_leaves', $approve_leaves);
     }
 
@@ -219,6 +219,15 @@ class LeaveController extends Controller
         return $this->sendJsonResponse($this->leaveService->approveLeaveModal($request));
     }
 
+    /**
+     * It will return a HTML for the Confirm Approve Leave of user
+     *
+     * @return Body
+     */
+    public function confirmApproveLeaveModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->leaveService->confirmApproveLeaveModal($request));
+    }
     /**
      * Show the form for editing the specified resource.
      *

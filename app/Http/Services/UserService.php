@@ -108,7 +108,7 @@ class UserService extends BaseService
             //$user_id = $user->id; // last insert id of user
             $user->roles()->sync($request->roles); // for pivot data
             $user->save();
-           
+
             $users = User::all();
         }
         $html = view('pages.user._partial._users_list_table_html', compact('users', $users))->render();
@@ -160,7 +160,7 @@ class UserService extends BaseService
         $user_data->delete();
         $users = User::all();
         $html = view('pages.user._partial._users_list_table_html', compact('users', $users))->render();
-        return $this->successResponse('User is Successfully Deleted', ['html' => $html,'html_section_id' => 'userlist-section']);
+        return $this->successResponse('User is Successfully Deleted', ['html' => $html, 'html_section_id' => 'userlist-section']);
     }
 
     public function userUpdateProfile(Request $request)
