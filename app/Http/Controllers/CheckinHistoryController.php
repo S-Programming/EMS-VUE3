@@ -102,8 +102,8 @@ class CheckinHistoryController extends Controller
     public function checkinHistoryBtDates(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'start_date' => 'required|date_format:Y-m-d|before:today|before:end_date',
-            'end_date'  => 'required|date_format:Y-m-d|before_or_equal:tomorrow'
+            'start_date' => 'required|date_format:m/d/Y|before:today|before:end_date',
+            'end_date'  => 'required|date_format:m/d/Y|before_or_equal:tomorrow'
         ]);
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);

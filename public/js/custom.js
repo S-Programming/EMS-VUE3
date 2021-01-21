@@ -299,6 +299,9 @@ function closeModalById(id) {
 
 function ajaxCallOnclick(route, extraData) {
     //console.log(extraData);
+    /*var today = new Date();
+    if(today.getDay() == 6 || today.getDay() == 0) alert('Weekend!');*/
+
     if (route != '') {
         const url = baseURL + '/' + route;
         var el = this;
@@ -380,3 +383,8 @@ var startCheckinTimer = function (startTime) {
     }, 1000);
 }
 
+//jQuery(document).off('.datepicker.data-api');
+/*jQuery('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+});*/

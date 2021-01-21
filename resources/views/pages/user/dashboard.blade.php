@@ -341,7 +341,13 @@
                             <div class="form-group row">
                                 <div class="col-5">
                                     <label for="">Start Date: </label>
-                                    <x-input id="date" class="form-control form-control-alt form-control-lg" type="date" name="start_date" max="9999-12-31"  required autofocus />
+                                    <div class="input-group date" data-provide="datepicker">
+                                        <input type="text" class="form-control" name="start_date" data-date-format="mm-dd-yyyy" data-autoclose="true" readonly>
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+                                   
                                     @if($errors->has('start_date'))
                                         <div class="error">{{ $errors->first('start_date') }}</div>
                                     @endif
@@ -351,7 +357,13 @@
                                 </div>
                                 <div class="col-5">
                                     <label for="d2">End Date: </label>
-                                    <x-input id="date" class="form-control form-control-alt form-control-lg" type="date" name="end_date" max="9999-12-31" required />
+                                    
+                                    <div class="input-group date" data-provide="datepicker">
+                                        <input type="text" class="form-control" name="end_date" data-date-format="mm-dd-yyyy" data-autoclose="true" readonly>
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
                                     {{-- <input type="date" name="end_date" id="end_date" class="datepicker" data-autoclose="true" data-today-highlight="true" data-date-format="yyyy-mm-dd" readonly /> --}}
                                     {{-- @if($errors->has('end_date'))
                                         <div class="error">{{ $errors->first('end_date') }}</div>
