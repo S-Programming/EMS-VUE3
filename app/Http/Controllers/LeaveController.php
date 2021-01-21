@@ -95,7 +95,7 @@ class LeaveController extends Controller
         return $this->sendJsonResponse($this->leaveService->editLeaveType($request));
     }
     /**
-     * Method for Update Leave Type 
+     * Method for Update Leave Type
      *
      * @return Body
      */
@@ -169,7 +169,7 @@ class LeaveController extends Controller
     }
 
     /**
-     * Method for Update Leave Status 
+     * Method for Update Leave Status
      *
      * @return Body
      */

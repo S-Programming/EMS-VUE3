@@ -22,7 +22,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (!$this->isAdmin()) {
+        if (!$this->isAdminRole()) {
             return $request->wantsJson()
                 ? response()->json("You are not Authorized to access, please contact support team, Thanks")
                 : redirect(RouteServiceProvider::HOME);
