@@ -113,8 +113,7 @@ class CheckinHistoryController extends Controller
 
     public function deleteCheckinUserModal(Request $request, CheckinHistory $checkinHistory)
     {
-        if($this->authorize('delete', $checkinHistory))
-        {
+        if ($this->authorize('delete', $checkinHistory)) {
             return $this->sendJsonResponse($this->checkinHistoryService->deleteCheckinUserModal($request));
         }
     }
@@ -133,16 +132,16 @@ class CheckinHistoryController extends Controller
     //user checkin history edit modal by Admin
     public function editCheckinUserModal(Request $request, CheckinHistory $checkinHistory)
     {
-       /* $user=$this->getAuthUser();
+        /* $user=$this->getAuthUser();
        $tt= $user->can('update',$checkinHistory);
       $authddd= $this->authorize('update', $checkinHistory);
         dd($authddd,$tt,'Rogani Naan',$user);*/
-      //  dd($checkinHistory);
-        if($this->authorize('update', $checkinHistory))
+        //  dd($checkinHistory);
+        //condition true when user is admin or super admin
+        if ($this->authorize('update', $checkinHistory)) //condition false when user is simple user
         {
             return $this->sendJsonResponse($this->checkinHistoryService->editCheckinUserModal($request));
         }
-        
     }
 
     //Update user checkin history by Admin
@@ -152,7 +151,7 @@ class CheckinHistoryController extends Controller
         $validator = Validator::make($request->all(), [
             'checkin-time' => 'required',
             'checkout-time' => 'required',
-            'description' => 'required|min:3|max:50',
+            'description' => 'required|min:3|max:100',
         ]);
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);

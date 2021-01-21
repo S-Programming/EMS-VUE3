@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateMenusTable extends Migration
 {
@@ -24,7 +25,6 @@ class CreateMenusTable extends Migration
             $table->tinyInteger('is_count')->default('0');
             $table->tinyInteger('is_active')->default('0');
             $table->timestamps();
-
         });
     }
 
@@ -35,7 +35,8 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('menus');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
-

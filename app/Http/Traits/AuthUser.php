@@ -3,6 +3,7 @@
 namespace App\Http\Traits;
 
 use Illuminate\Support\Facades\Auth;
+use App\Http\Enums\RoleUser;
 
 trait AuthUser
 {
@@ -17,10 +18,13 @@ trait AuthUser
     {
         return "aloexpo-token";
     }
-
+    public function setAuthUserId($user = null)
+    {
+        $this->authUserData['auth_user'] = $user;
+    }
     public function getAuthUser()
     {
-        return $this->authUserData['auth_user'] = isset($this->authUserData['auth_user']) ? $this->authUserData['auth_user'] : (Auth::check() ? Auth::user() : null);
+        return $this->authUserData['auth_user'] = (isset($this->authUserData['auth_user']) && $this->authUserData['auth_user'] != null) ? $this->authUserData['auth_user'] : (Auth::check() ? Auth::user() : null);
     }
 
     public function getAuthUserId()
@@ -48,5 +52,30 @@ trait AuthUser
         $user = $this->getAuthUser();
         $userRoles = $user ? $user->roles : null;
         return $userRoles ? (array_column($userRoles->toArray(), 'id')) : [];
+    }
+    public function hasRoleAccess($role = '')
+    {
+
+        $hasAccess = false;
+        if ($role != '') {
+            $user = $this->getAuthUser();
+            if ($user) {
+                $userRoles = $this->userRoles();
+                $hasAccess = (in_array($role, $userRoles)) ? true : false;
+            }
+            return $hasAccess;
+        }
+    }
+    public function isSuperAdminRole()
+    {
+        return $this->hasRoleAccess(RoleUser::SuperAdmin);
+    }
+    public function isAdminRole()
+    {
+        return $this->hasRoleAccess(RoleUser::Admin);
+    }
+    public function isDeveloperRole()
+    {
+        return $this->hasRoleAccess(RoleUser::Developer);
     }
 }

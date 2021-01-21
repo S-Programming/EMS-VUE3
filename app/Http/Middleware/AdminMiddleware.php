@@ -22,15 +22,11 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $user = $this->getAuthUser();
-        if ($user) {
-            $userRoles = $this->userRoles();
-            if (!in_array(RoleUser::SuperAdmin, $userRoles) && !in_array(RoleUser::Admin, $userRoles)) {
-                return $request->wantsJson()
-                    ? response()->json("You are not Authorized to access, please contact support team, Thanks")
-                    : redirect(RouteServiceProvider::HOME);
-            }
-            return $next($request);
+        if (!$this->isAdminRole()) {
+            return $request->wantsJson()
+                ? response()->json("You are not Authorized to access, please contact support team, Thanks")
+                : redirect(RouteServiceProvider::HOME);
         }
+        return $next($request);
     }
 }

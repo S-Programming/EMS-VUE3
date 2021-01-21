@@ -23,7 +23,7 @@
 	<!-- Page Content -->
 	<div class="content">
 	    <!-- Dynamic Table Full Pagination -->
-	    <div id="userlist-section" class="block block-rounded">
+	    <div id="rolelist-section" class="block block-rounded">
 
 	    @include('pages.role._partial._roles_list_table_html',['roles' => $roles])
 		</div>

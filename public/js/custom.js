@@ -60,7 +60,7 @@ function validateFieldsByFormId(e) {
                         closeModalById(modalId);
                     }
 
-                }  
+                }
                 else {
                     var errors = data.errors;
                     jQuery.each(errors, function (i, val) {
@@ -272,7 +272,7 @@ function commonAjaxModel(route, id, containerId) {
 
         notificationAlert('error', data.message, 'Inconceivable!');
              }
-          
+
             }, error: function (data) {
                 console.log('error',data);
         notificationAlert('error', data.responseJSON.message, 'Inconceivable!');

@@ -57,25 +57,23 @@ class CheckinHistoryPolicy
      */
     public function update(User $user, CheckinHistory $checkinHistory)
     {
-        
+
         $user = $this->getAuthUser();
-         if ($user) {
+        if ($user) {
             $userRoles = $this->userRoles();
-            if (!in_array(RoleUser::SuperAdmin, $userRoles) && !in_array(RoleUser::Admin, $userRoles)) {
-                return false;
-
-
+            if (in_array(RoleUser::SuperAdmin, $userRoles) && in_array(RoleUser::Admin, $userRoles)) {
+                return true;
             }
-            return true;
+            return false;
         }
 
-        //$admin=$user->roles()->where('role_id','2')->get()->isEmpty(); 
+        //$admin=$user->roles()->where('role_id','2')->get()->isEmpty();
 
         /*if(!$user->roles()->where('role_id','2')->get()->isEmpty())
         {
             return true ;
         }
-     
+
             return false;*/
     }
 
@@ -90,12 +88,10 @@ class CheckinHistoryPolicy
     {
         //
         $user = $this->getAuthUser();
-         if ($user) {
+        if ($user) {
             $userRoles = $this->userRoles();
             if (!in_array(RoleUser::SuperAdmin, $userRoles) && !in_array(RoleUser::Admin, $userRoles)) {
                 return false;
-
-
             }
             return true;
         }
