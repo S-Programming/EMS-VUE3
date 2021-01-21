@@ -5,17 +5,21 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\CheckinHistory;
+use App\Models\User;
+use App\Http\Enums\RoleUser;
 use App\Policies\CheckinHistoryPolicy;
+use App\Http\Traits\AuthUser;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    use AuthUser;
     /**
      * The policy mappings for the application.
      *
      * @var array
      */
     protected $policies = [
-         CheckinHistory::class => CheckinHistoryPolicy::class,
+        CheckinHistory::class => CheckinHistoryPolicy::class,
         //CheckinHistory::class => CheckinHistoryPolicy::class,
 
 
@@ -29,16 +33,22 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-       /* Gate::define('isAdmin', function($user) {
-            return $user->roles()->first()->name == 'Admin';
-         });
-        
-         //define a author user role 
-         Gate::define('isDeveloper', function($user) {
-             return $user->roles()->name == 'Developer';
-         });*/
-       
-        
-        //
+        //  Gate::define('isAdmin', function($user) {
+        //     return $user->roles()->first()->name == 'Admin';
+        //  });
+
+        //define a author user role
+        // Gate::define('isDeveloper', function ($user) {
+        //     return $user->roles()->name == 'Developer';
+        // });
+
+
+
+        Gate::define('isAdmin', function ($user) {
+            return $this->isAdminRole();
+        });
+        // Gate::define('isAdmin', function ($user) {
+        //     return $this->isAdminRole();
+        // });
     }
 }
