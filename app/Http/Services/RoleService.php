@@ -66,7 +66,7 @@ class RoleService extends BaseService
     public function confirmDeleteRole(Request $request)
     {
         //$login_id = $this->getAuthUserId();
-        $role_id = $request->id;
+        $role_id = $request->role_id;
         /*if ($role_id == $login_id) {
             return $this->errorResponse('You dont have Authorization to Delete this Role');
         }
@@ -75,6 +75,6 @@ class RoleService extends BaseService
         $role_data->delete();
         $roles = Role::all();
         $html = view('pages.role._partial._roles_list_table_html', compact('roles', $roles))->render();
-        return $this->successResponse('Role is Successfully Deleted', ['html' => $html]);
+        return $this->successResponse('Role is Successfully Deleted', ['html' => $html,'html_section_id' => 'rolelist-section']);
     }
 }
