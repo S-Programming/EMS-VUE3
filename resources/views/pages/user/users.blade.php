@@ -1,5 +1,4 @@
 <x-backend-layout>
-
 	<!-- Hero -->
 	<div class="bg-body-light">
 	    <div class="content content-full">
@@ -28,6 +27,5 @@
 	    @include('pages.user._partial._users_list_table_html',['users' => $users])
 		</div>
 	    <!-- END Dynamic Table Full Pagination -->
-
 	</div>
 </x-backend-layout>
