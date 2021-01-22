@@ -8,6 +8,7 @@ use Route\Http\User;
 use Route\Http\Role;
 use Route\Http\CheckInHistory;
 use Route\Http\Leave;
+use Route\Http\Attendence;
 use Route\Http\Test;
 
 /*
@@ -45,4 +46,5 @@ User::register();
 Role::register();
 CheckInHistory::register();
 Leave::register();
+Attendence::register();
 Test::register();

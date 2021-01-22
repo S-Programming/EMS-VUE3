@@ -385,6 +385,35 @@ var startCheckinTimer = function (startTime) {
         }
     }, 1000);
 }
+jQuery(document).ready(function() {
+    if ("geolocation" in navigator) {
+        console.log("gl available");
+        navigator.geolocation.getCurrentPosition(position => {
+            console.log(position.coords.latitude + "," + position.coords.longitude);
+            
+            jQuery.post("attendance_get_location", 
+            {
+                lat: position.coords.latitude,
+                lon: position.coords.longitude,
+                '_token': jQuery('meta[name=csrf-token]').attr('content'),
+            }
+            , function(data) {
+                console.log(!'{{ $registered_attendance }}')
+                console.log("data is"+ data);
+                    jQuery('#entry_loc').val(data);
+                    jQuery('#entry_location').val(data);
+                    if('{{ $attendance }}') {
+                        jQuery('#exit_loc').val(data);
+                        jQuery('#exit_location').val(data);
+                    }
+            });
+        }, function() {
+            jQuery('#address').val('Denied Permission to retreive location');
+        });
+    } else {
+        jQuery('#address').html("Location not available");
+    }
+});
 
 //jQuery(document).off('.datepicker.data-api');
 /*jQuery('.datepicker').datepicker({
