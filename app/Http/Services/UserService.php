@@ -13,7 +13,7 @@ use App\Models\Role;
 use App\Models\RoleUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 
 class UserService extends BaseService
 {

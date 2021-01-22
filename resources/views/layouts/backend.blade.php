@@ -19,6 +19,8 @@
     <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/filepond.css') }}">
+
+
     @yield('css_after')
 
     <!-- Scripts -->

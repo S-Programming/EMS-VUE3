@@ -383,3 +383,23 @@ var startCheckinTimer = function (startTime) {
     }, 1000);
 }
 
+jQuery(document).ready(function() {
+    jQuery('#date_range').daterangepicker({
+        "locale": {
+            "format": "DD-MM-YYYY",
+        }
+    });
+    jQuery('#date').daterangepicker({
+        "singleDatePicker": true,
+        "locale": {
+            "format": "DD-MM-YYYY",
+        }
+    });
+
+});
+
+function showDate() {
+        jQuery('#range-group').toggleClass('hide-input');
+        jQuery('#date-group').toggleClass('hide-input');
+        jQuery('#half-day').toggleClass('hide-input');
+    }

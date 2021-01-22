@@ -34,6 +34,43 @@
                                     <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg" name="description" required autofocus></textarea>
                                 </div>
                             </div>
+                            <div class="py-3">
+                                <div class="form-group">
+                                    <label>Multiple Days</label>
+                                    <select class="form-control" name="multiple-days" onchange="showDate()">
+                                        <option value="no" selected>No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="py-3">
+                                <style>
+                                    .hide-input {
+                                        display: none;
+                                }
+                                </style>
+                                <div class="form-group hide-input" id="half-day">
+                                    <label>Half Day</label>
+                                    <select class="form-control" name="half_day">
+                                        <option value="no">No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" id="range-group">
+                                <label for="">Date Range: </label>
+                                <input type="text" name="date_range" id="date_range" class="form-control">
+                                @error('date_range')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group hide-input" id="date-group">
+                                <label for="">Select Date </label>
+                                <input type="text" name="date" id="date" class="form-control">
+                                {{-- <input type="text" class="js-flatpickr form-control bg-white js-flatpickr-enabled flatpickr-input" id="example-flatpickr-range" name="example-flatpickr-range" placeholder="Select Date Range" data-mode="range" data-min-date="today" readonly="readonly"> --}}
+                            </div>
                         </div>
                     </div>
                     <div class="block-content block-content-full text-right border-top">
