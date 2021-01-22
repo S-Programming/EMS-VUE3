@@ -302,6 +302,9 @@ function closeModalById(id) {
 
 function ajaxCallOnclick(route, extraData) {
     //console.log(extraData);
+    /*var today = new Date();
+    if(today.getDay() == 6 || today.getDay() == 0) alert('Weekend!');*/
+
     if (route != '') {
         const url = baseURL + '/' + route;
         var el = this;
@@ -403,3 +406,8 @@ function showDate() {
         jQuery('#date-group').toggleClass('hide-input');
         jQuery('#half-day').toggleClass('hide-input');
     }
+//jQuery(document).off('.datepicker.data-api');
+/*jQuery('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+});*/

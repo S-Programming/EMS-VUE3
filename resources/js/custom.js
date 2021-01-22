@@ -34,6 +34,7 @@ function validateFieldsByFormId(e) {
             data: jQuery('#' + formId).serialize(),
             dataType: "json",
             success: function (data) {
+               // console.log("asdfgh");
                 e.disabled = false;
                 // console.log(data.redirect_to);
                  if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
@@ -62,6 +63,7 @@ function validateFieldsByFormId(e) {
 
                 }
                 else {
+                    console.log("dat.ERROR");
                     var errors = data.errors;
                     jQuery.each(errors, function (i, val) {
                         if (errors[i] != 'undefined' && errors[i] != null) {
@@ -83,6 +85,7 @@ function validateFieldsByFormId(e) {
             error: function (data) {
                 e.disabled = false;
                 // Error...
+                console.log("erorrr");
                 var errors = jQuery.parseJSON(data.responseText);
                 jQuery.each(errors, function (i, val) {
                     if (errors[i] != 'undefined' && errors[i] != null) {
@@ -299,6 +302,9 @@ function closeModalById(id) {
 
 function ajaxCallOnclick(route, extraData) {
     //console.log(extraData);
+    /*var today = new Date();
+    if(today.getDay() == 6 || today.getDay() == 0) alert('Weekend!');*/
+
     if (route != '') {
         const url = baseURL + '/' + route;
         var el = this;
@@ -380,3 +386,28 @@ var startCheckinTimer = function (startTime) {
     }, 1000);
 }
 
+jQuery(document).ready(function() {
+    jQuery('#date_range').daterangepicker({
+        "locale": {
+            "format": "DD-MM-YYYY",
+        }
+    });
+    jQuery('#date').daterangepicker({
+        "singleDatePicker": true,
+        "locale": {
+            "format": "DD-MM-YYYY",
+        }
+    });
+
+});
+
+function showDate() {
+        jQuery('#range-group').toggleClass('hide-input');
+        jQuery('#date-group').toggleClass('hide-input');
+        jQuery('#half-day').toggleClass('hide-input');
+    }
+//jQuery(document).off('.datepicker.data-api');
+/*jQuery('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+});*/

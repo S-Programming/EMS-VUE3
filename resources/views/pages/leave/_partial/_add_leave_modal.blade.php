@@ -19,7 +19,12 @@
                                 <div class="form-group">
                                    <!--  <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden" name="id" value="{{$user_data->id??0}}" />
                                     --> <label for="date">&nbsp Date</label>
-                                    <x-input id="date" class="form-control form-control-alt form-control-lg" type="date" max="9999-12-31" name="date"  required autofocus />
+                                     <div class="input-group date" data-provide="datepicker">
+                                        <input type="text" class="form-control" name="date" data-date-format="mm-dd-yyyy" data-autoclose="true" readonly>
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="py-3">
