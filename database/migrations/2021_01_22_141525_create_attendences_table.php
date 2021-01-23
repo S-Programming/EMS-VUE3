@@ -16,13 +16,13 @@ class CreateAttendencesTable extends Migration
         Schema::create('attendences', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('is_present')->default(0);
             $table->string('entry_ip');
             $table->string('entry_location');
             $table->string('exit_ip')->nullable();
             $table->string('exit_location')->nullable();
-            $table->string('registered')->nullable();
             $table->timestamps();
-            
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

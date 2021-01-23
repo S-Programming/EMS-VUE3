@@ -2,7 +2,7 @@
 
 namespace App\Http\Traits;
 
-//use App\Models\FailureLog;
+use App\Models\FailureLog;
 
 trait FailureLogs
 {
@@ -12,6 +12,6 @@ trait FailureLogs
         $record['name'] = $name;
         $record['value'] = json_encode($value);
         $record['json_data'] = isset($jsonData) ? json_encode($jsonData) : '';
-        //FailureLog::create($record);
+        FailureLog::create($record);
     }
 }

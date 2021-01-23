@@ -2,11 +2,14 @@
 
 namespace App\Exceptions;
 
+use App\Http\Traits\FailureLogs;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use FailureLogs;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -33,11 +36,9 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-         // reportable
         $this->renderable(function (Throwable $e) {
-            //
-            $message=$e->getMessage();
-                return response(['status'=>'error','message' => $e->getMessage()], $e->getCode() ?: 200);
+            $this->failureLog('Exception Generated', $e->getMessage(), ['code' => $e->getCode(), 'message' => $e->getMessage()]);
+            return response(['status' => 'error', 'message' => $e->getMessage()], $e->getCode() ?: 200);
         });
     }
 }

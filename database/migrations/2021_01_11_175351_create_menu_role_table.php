@@ -33,7 +33,7 @@ class CreateMenuRoleTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('menu_roles');
+        Schema::dropIfExists('menu_role');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
