@@ -35,16 +35,10 @@
                             </div>
                             <div class="py-3">
                                 <div class="form-group">
-                                    <label for="types">&nbsp Description</label>
-                                    <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg" name="description" required autofocus></textarea>
-                                </div>
-                            </div>
-                            <div class="py-3">
-                                <div class="form-group">
                                     <label>Multiple Days</label>
                                     <select class="form-control" name="multiple-days" onchange="showDate()">
-                                        <option value="no" selected>No</option>
-                                        <option value="yes">Yes</option>
+                                        <option value="yes" selected>Yes</option>
+                                        <option value="no">No</option>
                                     </select>
                                 </div>
                             </div>
@@ -57,19 +51,21 @@
                                 <div class="form-group hide-input" id="half-day">
                                     <label>Half Day</label>
                                     <select class="form-control" name="half_day">
-                                        <option value="no">No</option>
+
                                         <option value="yes">Yes</option>
+                                        <option value="no">No</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group" id="range-group">
                                 <label for="">Date Range: </label>
-                                <input type="text" name="date_range" id="date_range" class="form-control">
-                                @error('date_range')
-                                <div class="text-danger">
-                                    {{ $message }}
+                                {{-- <input type="text" name="date_range" id="date_range" class="form-control"> --}}
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" class="form-control" name="dates" data-date-format="mm-dd-yyyy" data-autoclose="true" readonly>
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
                                 </div>
-                                @enderror
                             </div>
                             <div class="form-group hide-input" id="date-group">
                                 <label for="">Select Date </label>
@@ -78,6 +74,13 @@
                             </div>
                         </div>
                     </div>
+                            <div class="py-3">
+                                <div class="form-group">
+                                    <label for="types">&nbsp Description</label>
+                                    <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg" name="description" required autofocus></textarea>
+                                </div>
+                            </div>
+
                     <div class="block-content block-content-full text-right border-top">
                         <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">Cancel
                         </button>
@@ -90,3 +93,16 @@
         </div>
     </x-slot>
 </x-modal>
+<script>
+    jQuery('input[name="dates"]').daterangepicker({
+    showDropdowns: true,
+    minYear: 1985,
+    autoUpdateInput: false,
+    minDate: new Date,
+    maxYear: parseInt(moment().format('YYYY'),10),
+    locale: {
+                format: 'YYYY-MM-DD'
+            }
+  });
+
+    </script>
