@@ -13,6 +13,7 @@ use App\Models\Role;
 use App\Models\RoleUser;
 use Illuminate\Http\Request;
 use Route\Http\Leave;
+use Carbon\Carbon;
 
 class LeaveService extends BaseService
 {
@@ -27,11 +28,18 @@ class LeaveService extends BaseService
             $user_id = $this->getAuthUserId();
             $leave = new LeaveHistory;
             $leave->user_id = $user_id;
+
             $leave->leave_type_id = $request->leave_types;
-            $leave->date = $request->date;
+            // $leave->date = $request->date;
             $leave->description = $request->description;
+            $leave->half_day = $request->half_day;
+            $leave->start_date = Carbon::parse($request->start_date);
+            // dd($leave->start_date);
+            // $leave->end_date = Carbon::parse($request->end_date) ?? '';
             $leave->leave_status_id = 1;
+            // dd($leave);
             $leave->save();
+
             $leaves = LeaveHistory::with('type')->where('user_id', $user_id)->get();
             // $leaves = LeaveType::with('history')->get();
         }

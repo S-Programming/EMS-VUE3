@@ -19,6 +19,8 @@
     <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/filepond.css') }}">
+
+
     @yield('css_after')
 
     <!-- Scripts -->
@@ -28,6 +30,15 @@
     <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
     <script src="{{ mix('js/oneui.app.js') }}"></script>
 
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
+  
+  <!-- Running This time -->
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
     <script src="{{ asset('assets/js/tinymce/tinymce.min.js') }}"></script>
     <script type="text/javascript">
         jQuery.ajaxSetup({
@@ -36,7 +47,11 @@
             }
         });
     </script>
-
+<style type="text/css">
+    .hide-input{
+        display: none;
+    }
+</style>
 </head>
 <body>
 <!-- Page Container -->
@@ -643,6 +658,7 @@ MAIN CONTENT LAYOUT
 <!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->
 <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+
 
 @yield('js_after')
 

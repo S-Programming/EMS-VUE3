@@ -1,6 +1,5 @@
 <x-backend-layout>
-
-	<!-- Hero -->
+    <!-- Hero -->
 	<div class="bg-body-light">
 	    <div class="content content-full">
 	        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
@@ -16,7 +15,12 @@
 	                </ol>
 	            </nav>
 	        </div>
-	    </div>
+        </div>
+        <!-- -->
+        <div class="jumbotron">
+            <input type="text" id="date" class="form-control daterangepicker" style="z-index: 99999 !important;>
+        </div>
+        <!--  -->
 	</div>
 	<!-- END Hero -->
 
@@ -28,5 +32,6 @@
 		</div>
 	    <!-- END Dynamic Table Full Pagination -->
 
-	</div>
+    </div>
+
 </x-backend-layout>

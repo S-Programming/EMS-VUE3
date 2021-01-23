@@ -84,8 +84,15 @@
                         <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)"
                                   data-validation="validation-span-id"
                                   id="validation-span-id">
-                            <i class="fa fa-fw fa-check mr-1"></i>{{ __('Mark') }}
+                            <i class="fa fa-fw fa-check mr-1"></i>{{ __('Entry Mark') }}
                         </x-button>
+                        @if($attendence_entry_mark)
+                        <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)"
+                                  data-validation="validation-span-id"
+                                  id="validation-span-id">
+                            <i class="fa fa-fw fa-check mr-1"></i>{{ __('Exit Mark') }}
+                        </x-button>
+                        @endif
                     </div>
                 </form>
             </div>
