@@ -385,8 +385,60 @@ var startCheckinTimer = function (startTime) {
         }
     }, 1000);
 }
+jQuery(function() {
+                jQuery('input[name="date_range"]').daterangepicker({
+                    autoApply: true,
+                    timePicker: true,
+                    locale: {
+                        cancelLabel: 'Clear'
+                    }
+                });
+                jQuery('input[name="date_range"]').on('apply.daterangepicker', function(ev, picker) {
+                    jQuery(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+                });
+                jQuery('input[name="date_range"]').on('cancel.daterangepicker', function(ev, picker) {
+                    jQuery(this).val('');
+                });
+                jQuery('input[name="date"]').daterangepicker({
+                    "singleDatePicker": true,
+                    "locale": {
+                        "format": "DD-MM-YYYY",
+                    }
+                });
+            });
 
-jQuery(document).ready(function() {
+/*jQuery(document).ready(function() {
+    if ("geolocation" in navigator) {
+        console.log("gl available");
+        navigator.geolocation.getCurrentPosition(position => {
+            console.log(position.coords.latitude + "," + position.coords.longitude);
+
+            jQuery.post("attendance_get_location",
+            {
+                lat: position.coords.latitude,
+                lon: position.coords.longitude,
+                '_token': jQuery('meta[name=csrf-token]').attr('content'),
+            }
+            , function(data) {
+                console.log(!'{{ $registered_attendance }}')
+                console.log("data is"+ data);
+                    jQuery('#entry_loc').val(data);
+                    jQuery('#entry_location').val(data);
+                    if('{{ $attendance_mark }}') {
+                        jQuery('#exit_loc').val(data);
+                        jQuery('#exit_location').val(data);
+                    }
+            });
+        }, function() {
+            jQuery('#address').val('Denied Permission to retreive location');
+        });
+    } else {
+        jQuery('#address').html("Location not available");
+    }
+});*/
+
+/*jQuery(document).ready(function() {
+    console.log("welcome");
     jQuery('#date_range').daterangepicker({
         "locale": {
             "format": "DD-MM-YYYY",
@@ -399,13 +451,17 @@ jQuery(document).ready(function() {
         }
     });
 
-});
+
+    console.log("Bye");
+});*/
+ //  jQuery('#date_range').daterangepicker();
 
 function showDate() {
         jQuery('#range-group').toggleClass('hide-input');
         jQuery('#date-group').toggleClass('hide-input');
         jQuery('#half-day').toggleClass('hide-input');
     }
+
 //jQuery(document).off('.datepicker.data-api');
 /*jQuery('.datepicker').datepicker({
     format: 'mm/dd/yyyy',

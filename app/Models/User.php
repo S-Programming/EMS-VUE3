@@ -75,4 +75,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class)->with('parentMenus');
     }
 
+    public function attendance() {
+        return $this->hasMany(Attendence::class);
+    }
+
 }
