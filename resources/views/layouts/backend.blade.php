@@ -15,7 +15,14 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
     <!-- Fonts and Styles -->
     @yield('css_before')
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/js/plugins/dropzone/dist/min/dropzone.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.css') }}">
+
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
+
     <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/filepond.css') }}">
@@ -34,11 +41,10 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
   
-  <!-- Running This time -->
-     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+ -->
     <script src="{{ asset('assets/js/tinymce/tinymce.min.js') }}"></script>
     <script type="text/javascript">
         jQuery.ajaxSetup({
@@ -654,11 +660,23 @@ MAIN CONTENT LAYOUT
 <!-- Laravel Scaffolding JS -->
 
 @yield("js_before")
-
+ <script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
+ <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
 <!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->
 <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+ 
+ <script src="{{ asset('assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+        
+<script src="{{ asset('assets/js/plugins/select2/js/select2.full.min.js') }}"></script>
+        
+ <script src="{{ asset('assets/js/plugins/dropzone/dropzone.min.js') }}"></script>
+       
+ <script src="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.js') }}"></script>
 
+<script>jQuery(function () {
+                                            One.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider']);
+                                        });</script>
 
 @yield('js_after')
 

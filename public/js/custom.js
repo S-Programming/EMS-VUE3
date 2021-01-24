@@ -385,7 +385,7 @@ var startCheckinTimer = function (startTime) {
         }
     }, 1000);
 }
-jQuery(function() {
+/*jQuery(function() {
                 jQuery('input[name="date_range"]').daterangepicker({
                     autoApply: true,
                     timePicker: true,
@@ -406,7 +406,7 @@ jQuery(function() {
                     }
                 });
             });
-
+*/
 /*jQuery(document).ready(function() {
     if ("geolocation" in navigator) {
         console.log("gl available");

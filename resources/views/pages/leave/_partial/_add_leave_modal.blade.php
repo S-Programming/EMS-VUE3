@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-group" id="range-group">
                                 <label for="">Date Range: </label>
-                                <input type="text" name="date_range" id="date_range" class="form-control" value="01/01/2018 - 01/15/2018">
+                                <input type="text" class="js-flatpickr form-control bg-white js-flatpickr-enabled flatpickr-input active" id="example-flatpickr-range" name="example-flatpickr-range" placeholder="Select Date Range" data-mode="range" data-min-date="today" readonly="readonly">
                             </div>
                             <div class="form-group hide-input" id="date-group">
                                 <label for="">Select Date </label>
