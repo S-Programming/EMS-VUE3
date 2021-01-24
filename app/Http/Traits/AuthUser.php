@@ -16,12 +16,9 @@ trait AuthUser
 
     public function authTokenKey()
     {
-        return "aloexpo-token";
+        return "kodestudio-token";
     }
-    public function setAuthUserId($user = null)
-    {
-        $this->authUserData['auth_user'] = $user;
-    }
+
     public function getAuthUser()
     {
         return $this->authUserData['auth_user'] = (isset($this->authUserData['auth_user']) && $this->authUserData['auth_user'] != null) ? $this->authUserData['auth_user'] : (Auth::check() ? Auth::user() : null);
@@ -55,7 +52,6 @@ trait AuthUser
     }
     public function hasRoleAccess($role = '')
     {
-
         $hasAccess = false;
         if ($role != '') {
             $user = $this->getAuthUser();
