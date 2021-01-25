@@ -471,9 +471,21 @@ function showDate() {
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
   FilePondPluginImageResize,
-  FilePondPluginImageTransform
-);
+  FilePondPluginImageTransform,
 
+);
+FilePond.setOptions({
+    allowDrop: false,
+    allowReplace: false,
+    instantUpload: false,
+    server: {
+        url: 'http://192.168.33.10',
+        process: './process.php',
+        revert: './revert.php',
+        restore: './restore.php?id=',
+        fetch: './fetch.php?data='
+    }
+});
 const inputElement = document.querySelector('input[type="file"]');
 const pond = FilePond.create(inputElement, {
   
@@ -482,7 +494,7 @@ const pond = FilePond.create(inputElement, {
   // set contain resize mode
   imageResizeMode: 'contain',
 
-  onaddfile: (err, fileItem) => {
+ /* onaddfile: (err, fileItem) => {
     console.log(err, fileItem.getMetadata('resize'));
 
   },
@@ -492,6 +504,7 @@ const pond = FilePond.create(inputElement, {
     console.log(output.name);
      document.body.appendChild(img);
    
-  }
+  }*/
 
 });
+
