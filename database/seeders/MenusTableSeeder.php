@@ -27,6 +27,7 @@ class MenusTableSeeder extends Seeder
             ['id' => 9, 'name' => 'Leave Type', 'parent_id' => 0, 'route' => 'leave.type.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 10, 'name' => 'Leave Status', 'parent_id' => 0, 'route' => 'leave.status.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 11, 'name' => 'Attendence', 'parent_id' => 0, 'route' => 'attendence.mark', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 12, 'name' => 'Holiday', 'parent_id' => 0, 'route' => 'public.holiday.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             
         ];
         DB::table('menus')->insert($menus);

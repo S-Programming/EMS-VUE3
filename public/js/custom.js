@@ -11,6 +11,7 @@ jQuery(function () {
     }
 });
 
+
 function validateFieldsByFormId(e) {
     event.preventDefault();
     const formId = jQuery(e).closest('form').attr('id');
@@ -385,28 +386,6 @@ var startCheckinTimer = function (startTime) {
         }
     }, 1000);
 }
-jQuery(function() {
-                jQuery('input[name="date_range"]').daterangepicker({
-                    autoApply: true,
-                    timePicker: true,
-                    locale: {
-                        cancelLabel: 'Clear'
-                    }
-                });
-                jQuery('input[name="date_range"]').on('apply.daterangepicker', function(ev, picker) {
-                    jQuery(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-                });
-                jQuery('input[name="date_range"]').on('cancel.daterangepicker', function(ev, picker) {
-                    jQuery(this).val('');
-                });
-                jQuery('input[name="date"]').daterangepicker({
-                    "singleDatePicker": true,
-                    "locale": {
-                        "format": "DD-MM-YYYY",
-                    }
-                });
-            });
-
 /*jQuery(document).ready(function() {
     if ("geolocation" in navigator) {
         console.log("gl available");
@@ -436,7 +415,27 @@ jQuery(function() {
         jQuery('#address').html("Location not available");
     }
 });*/
-
+/*jQuery(function() {
+    jQuery('input[name="date_range"]').daterangepicker({
+        autoApply: true,
+        timePicker: true,
+        locale: {
+            cancelLabel: 'Clear'
+        }
+    });
+    jQuery('input[name="date_range"]').on('apply.daterangepicker', function(ev, picker) {
+        jQuery(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+    });
+    jQuery('input[name="date_range"]').on('cancel.daterangepicker', function(ev, picker) {
+        jQuery(this).val('');
+    });
+    jQuery('input[name="date"]').daterangepicker({
+        "singleDatePicker": true,
+        "locale": {
+            "format": "DD-MM-YYYY",
+        }
+    });
+});*/
 /*jQuery(document).ready(function() {
     console.log("welcome");
     jQuery('#date_range').daterangepicker({
