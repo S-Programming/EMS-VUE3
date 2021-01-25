@@ -9,12 +9,6 @@
     <meta name="robots" content="noindex, nofollow">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Custom CSS -->
-    <style type="text/css">
-        .hide-input{
-            display: none;
-        }
-    </style>
     <!-- Icons -->
     <link rel="shortcut icon" href="{{ asset('media/favicons/favicon.png') }}">
     <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
@@ -25,17 +19,23 @@
 
     <!-- Fonts and Styles -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{ mix('/css/oneui.css') }}" id="css-main">
-
     <!-- toastr -->
     <link rel="stylesheet" href="{{ asset('plugins/toastr/css/toastr.min.css') }}">
     <!-- filepond -->
     <link rel="stylesheet" href="{{ asset('plugins/filepond/css/filepond.css') }}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
 
     <!-- CSS After -->
     @yield('css_after')
+
+    <!-- Required JS -->
+    <script>var baseURL = <?php echo json_encode(url('/')); ?>  </script>
+    <script>var isUserCheckin = '{{$is_user_checkin??0}}'  </script>
+    <script>var userLastCheckinTime = '{{$user_last_checkin??''}}'  </script>
+    <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
 
 </head>
 <body>
@@ -548,11 +548,11 @@ MAIN CONTENT LAYOUT
             <div class="row font-size-sm">
                 <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
                     Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600"
-                                                                               href="https://1.envato.market/ydb"
-                                                                               target="_blank">pixelcave</a>
+                                                                               href="https:kodestudio.net"
+                                                                               target="_blank">kodestudio.net</a>
                 </div>
                 <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
-                    <a class="font-w600" href="https://1.envato.market/AVD6j" target="_blank">OneUI</a> &copy; <span
+                    <a class="font-w600" href="https://kodestudio.net" target="_blank">Kodestudio.NET</a> &copy; <span
                         data-toggle="year-copy"></span>
                 </div>
             </div>
@@ -663,19 +663,6 @@ MAIN CONTENT LAYOUT
 
 <!-- JS Before -->
 @yield("js_before")
-
-<!-- Backend JS -->
-<script>var baseURL = <?php echo json_encode(url('/')); ?>  </script>
-<script>var isUserCheckin = '{{$is_user_checkin??0}}'  </script>
-<script>var userLastCheckinTime = '{{$user_last_checkin??''}}'  </script>
-<script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
-<script>
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-</script>
 
 
 <!-- Plugins -->
