@@ -32,6 +32,7 @@ function validateFieldsByFormId(e) {
         jQuery.ajax({
             type: "POST",
             url: formURL,
+            enctype:'multipart/form-data',
             data: jQuery('#' + formId).serialize(),
             dataType: "json",
             success: function (data) {
@@ -130,14 +131,14 @@ function validateFields(formId) {
         }
         if (jQuery.inArray(fname, skipArray) == -1) {
             if (jQuery.trim(field.value) == '') {
-                if (jQuery.inArray(fname, skipforEmpty) == -1) {
+                /*if (jQuery.inArray(fname, skipforEmpty) == -1) {
                     var myregexp = /\[(.*?)\]/;
                     var match = myregexp.exec(fname);
                     if (match != null) {
                         fname = match[1];
                     }
                     error[i] = 'Please enter ' + fname;
-                }
+                }*/
             } else if (jQuery.inArray(fname, emailArray) > -1) {
                 if (!regexy.test(field.value)) {
                     error[i] = 'Please enter correct format of email (example@example.com)';
@@ -466,3 +467,31 @@ function showDate() {
     format: 'mm/dd/yyyy',
     startDate: '-3d'
 });*/
+// register the plugins with FilePond
+FilePond.registerPlugin(
+  FilePondPluginImagePreview,
+  FilePondPluginImageResize,
+  FilePondPluginImageTransform
+);
+
+const inputElement = document.querySelector('input[type="file"]');
+const pond = FilePond.create(inputElement, {
+  
+  imageResizeTargetWidth: 256,
+
+  // set contain resize mode
+  imageResizeMode: 'contain',
+
+  onaddfile: (err, fileItem) => {
+    console.log(err, fileItem.getMetadata('resize'));
+
+  },
+  onpreparefile: (fileItem, output) => {
+    const img = new Image();
+    img.src = URL.createObjectURL(output);
+    console.log(output.name);
+     document.body.appendChild(img);
+   
+  }
+
+});

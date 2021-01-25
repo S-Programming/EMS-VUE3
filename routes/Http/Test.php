@@ -12,6 +12,7 @@ class Test
     {
         Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('/test_open_modal', [TestController::class, 'testModalOpen'])->name('test.modal.open');
+            Route::get('/upload', [TestController::class, 'upload'])->name('test.upload');
         });
     }
 }

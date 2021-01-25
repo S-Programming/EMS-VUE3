@@ -175,6 +175,20 @@ class UserService extends BaseService
             $user_data->email = $request->email;
             $user_data->phone_number = $request->phone_number;
             //$user_data->password = bcrypt($request->password);
+           
+               // $image = new Image;
+            if ($request->hasFile('profile_image')) {
+                $file = $request->file('profile_image');
+                $file_name = $file->getClientOriginalName();
+                $destinationPath = 'uploads';
+                $file_path = $destinationPath . "/" . $file_name;
+                $file->move($destinationPath, $file->getClientOriginalName());
+                dd($file_path);
+                //$image->title = $request->product_image_title;
+                //$image->description = $request->image_description;
+                $user_data->image_path = $file_path;
+               // $image_result = $image->save();
+            }
 
             $user_data->save();
             return $this->successResponse('Profile is Successfully Updated');

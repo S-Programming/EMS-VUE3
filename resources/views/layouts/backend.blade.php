@@ -13,6 +13,11 @@
     <link rel="shortcut icon" href="{{ asset('media/favicons/favicon.png') }}">
     <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
+
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+<!-- Add plugin styles -->
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+
     <!-- Fonts and Styles -->
     @yield('css_before')
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
@@ -34,9 +39,9 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
   <!-- Running This -->
-     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
 
     <script src="{{ asset('assets/js/tinymce/tinymce.min.js') }}"></script>
     <script type="text/javascript">
@@ -655,6 +660,12 @@ MAIN CONTENT LAYOUT
 @yield("js_before")
 
 <!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->
+<!-- Add plugin scripts -->
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
 <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 

@@ -41,6 +41,10 @@ class TestController extends Controller
         }
         exit;
     }
+    public function upload()
+    {
+        return view('test');
+    }
 
     public function testFun()
     {

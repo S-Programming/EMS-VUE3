@@ -50,17 +50,16 @@
                                 <label for="phone_number">Phone Number</label>
                                 <input type="text" oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" id="phone_number" name="phone_number" placeholder="Enter your Contact Number.." value="{{$user_data->phone_number}}">
                             </div>
-                           <!--  <div class="form-group">
-                                <label>Your Avatar</label>
+                            <div class="form-group">
+                                <!-- <label>Your Avatar</label>
                                 <div class="push">
                                     <img class="img-avatar" src="assets/images/avatar13.jpg" alt="">
-                                </div>
-                                <div class="custom-file"> -->
-                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                    <!-- <input type="file" class="custom-file-input" data-toggle="custom-file-input" id="one-profile-edit-avatar" name="one-profile-edit-avatar">
-                                    <label class="custom-file-label" for="one-profile-edit-avatar">Choose a new avatar</label>
-                                </div>
-                            </div> -->
+                                </div> -->
+                                
+                                   <input type="file" name="profile_image" id="profile_image" value="" class="filepond">
+                                   
+                               
+                            </div>
                             <div class="form-group">
                                  <x-button class="btn btn-alt-primary" onclick="validateFieldsByFormId(this)"
                                   data-validation="validation-span-id"

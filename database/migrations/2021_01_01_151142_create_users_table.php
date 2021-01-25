@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->string('phone_number')->nullable();
+            $table->string('image_path')->nullable();
             $table->string('password');
             $table->tinyInteger('is_active')->default('0');
             $table->tinyInteger('is_approved')->default('0');
