@@ -32,25 +32,26 @@
                 <form method="POST" action="{{ route('attendence.add') }}" id="attendence-mark-form-id"
                       data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
+
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
                             	<div class="col-4">
                             		<div class="form-group">
-                            			<label for="entry_time">&nbsp Entry Time</label>
+                            			<label for="entry_time">&nbsp; Entry Time</label>
                                     	<x-input id="entry_time" class="form-control form-control-alt form-control-lg" type="text" name="entry_time" placeholder="--:--:--" disabled/>
 	                                 </div>
                             	</div>
                             	<div class="col-4">
                             		<div class="form-group">
-                            			<label for="entry_location">&nbsp Entry Location</label>
+                            			<label for="entry_location">&nbsp; Entry Location</label>
                                     	<x-input id="entry_location" class="form-control form-control-alt form-control-lg" type="text" name="entry_location" placeholder="Location Loading..." disabled/>
 	                            		<x-input id="entry_loc" class="form-control form-control-alt form-control-lg" type="hidden" name="entry_loc"/>
 	                                 </div>
                             	</div>
                             	<div class="col-4">
                             		<div class="form-group">
-                            			<label for="entry_ip">&nbsp Entry IP</label>
+                            			<label for="entry_ip">&nbsp; Entry IP</label>
                                     	<x-input id="entry_ip" class="form-control form-control-alt form-control-lg" placeholder="X.X.X.X" type="text" name="entry_ip" disabled/>
 	                                 </div>
                             	</div>
@@ -58,20 +59,20 @@
                             <div class="row">
                             	<div class="col-4">
                             		<div class="form-group">
-                            			<label for="exit_time">&nbsp Exit Entry</label>
+                            			<label for="exit_time">&nbsp; Exit Entry</label>
                                     	<x-input id="exit_time" class="form-control form-control-alt form-control-lg" type="text" name="exit_time" placeholder="--:--:--" disabled/>
 	                                 </div>
                             	</div>
                             	<div class="col-4">
                             		<div class="form-group">
-                            			<label for="exit_location">&nbsp Exit Location</label>
+                            			<label for="exit_location">&nbsp; Exit Location</label>
                                     	<x-input id="exit_location" class="form-control form-control-alt form-control-lg" type="text" name="exit_location" placeholder="...." disabled/>
 	                            		<x-input id="exit_loc" class="form-control form-control-alt form-control-lg" type="hidden" name="exit_loc"/>
 	                                 </div>
                             	</div>
                             	<div class="col-4">
                             		<div class="form-group">
-                            			<label for="exit_ip">&nbsp Exit IP</label>
+                            			<label for="exit_ip">&nbsp; Exit IP</label>
                                     	<x-input id="exit_ip" class="form-control form-control-alt form-control-lg" placeholder="X.X.X.X" type="text" name="exit_ip" disabled/>
 	                                 </div>
                             	</div>

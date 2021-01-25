@@ -9,49 +9,34 @@
     <meta name="robots" content="noindex, nofollow">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Custom CSS -->
+    <style type="text/css">
+        .hide-input{
+            display: none;
+        }
+    </style>
     <!-- Icons -->
     <link rel="shortcut icon" href="{{ asset('media/favicons/favicon.png') }}">
     <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
-    <!-- Fonts and Styles -->
+
+    <!-- CSS Before -->
     @yield('css_before')
+
+    <!-- Fonts and Styles -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/filepond.css') }}">
 
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{{ mix('/css/oneui.css') }}" id="css-main">
 
+    <!-- toastr -->
+    <link rel="stylesheet" href="{{ asset('plugins/toastr/css/toastr.min.css') }}">
+    <!-- filepond -->
+    <link rel="stylesheet" href="{{ asset('plugins/filepond/css/filepond.css') }}">
+
+    <!-- CSS After -->
     @yield('css_after')
 
-    <!-- Scripts -->
-    <script>var baseURL = <?php echo json_encode(url('/')); ?>  </script>
-    <script>var isUserCheckin = '{{$is_user_checkin??0}}'  </script>
-    <script>var userLastCheckinTime = '{{$user_last_checkin??''}}'  </script>
-    <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
-    <script src="{{ mix('js/oneui.app.js') }}"></script>
-
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
-  
-  <!-- Running This time -->
-     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-    <script src="{{ asset('assets/js/tinymce/tinymce.min.js') }}"></script>
-    <script type="text/javascript">
-        jQuery.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    </script>
-<style type="text/css">
-    .hide-input{
-        display: none;
-    }
-</style>
 </head>
 <body>
 <!-- Page Container -->
@@ -651,16 +636,64 @@ MAIN CONTENT LAYOUT
 <!-- END Page Container -->
 
 <!-- OneUI Core JS -->
-<!-- Laravel Scaffolding JS -->
+<!--
+    OneUI JS Core
 
+    Vital libraries and plugins used in all pages. You can choose to not include this file if you would like
+    to handle those dependencies through webpack. Please check out assets/_js/main/bootstrap.js for more info.
+
+    If you like, you could also include them separately directly from the assets/js/core folder in the following
+    order. That can come in handy if you would like to include a few of them (eg jQuery) from a CDN.
+
+    assets/js/core/jquery.min.js
+    assets/js/core/bootstrap.bundle.min.js
+    assets/js/core/simplebar.min.js
+    assets/js/core/jquery-scrollLock.min.js
+    assets/js/core/jquery.appear.min.js
+    assets/js/core/js.cookie.min.js
+-->
+<script src="{{ asset('js/oneui.core.min.js') }}"></script>
+<!--
+    OneUI JS
+    Custom functionality including Blocks/Layout API as well as other vital and optional helpers
+    webpack is putting everything together at assets/_js/main/app.js
+-->
+<script src="{{ mix('/js/oneui.app.js') }}"></script>
+
+
+<!-- JS Before -->
 @yield("js_before")
 
-<!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->
-<script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+<!-- Backend JS -->
+<script>var baseURL = <?php echo json_encode(url('/')); ?>  </script>
+<script>var isUserCheckin = '{{$is_user_checkin??0}}'  </script>
+<script>var userLastCheckinTime = '{{$user_last_checkin??''}}'  </script>
+<script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
+<script>
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+</script>
+
+
+<!-- Plugins -->
+<script src="{{ asset('plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+<script src="{{ asset('plugins/chart.js/Chart.bundle.min.js') }}"></script>
+<!-- Page JS Code -->
+<script src="{{ asset('js/pages/be_pages_dashboard.min.js') }}"></script>
+<script src="{{ asset('js/pages/pages_ecom_dashboard.min.js') }}"></script>
+<!-- toastr -->
+<script src="{{ asset('plugins/toastr/js/toastr.min.js') }}"></script>
+<!-- custom js -->
 <script src="{{ asset('js/custom.js') }}"></script>
 
 
 @yield('js_after')
+
+<!-- OneUI Helpers (don't replace its position) -->
+<script src="{{ asset('js/oneui-helpers.js') }}"></script>
 
 </body>
 </html>
