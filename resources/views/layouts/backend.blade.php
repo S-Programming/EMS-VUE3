@@ -549,7 +549,7 @@ MAIN CONTENT LAYOUT
                 <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
                     Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600"
                                                                                href="https:kodestudio.net"
-                                                                               target="_blank">kodestudio.net</a>
+                                                                               target="_blank">kodestudio.NET</a>
                 </div>
                 <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
                     <a class="font-w600" href="https://kodestudio.net" target="_blank">Kodestudio.NET</a> &copy; <span
