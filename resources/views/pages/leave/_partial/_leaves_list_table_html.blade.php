@@ -1,6 +1,6 @@
 <div class="block-header">
     <h3 class="block-title">Dynamic Table <small>Full pagination</small></h3>
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_leave_modal')" data-validation="validation-span-id" id="validation-span-id">Add
+    <x-button class="btn btn-primary" onclick="commonAjaxModel('request_leave_modal')" data-validation="validation-span-id" id="validation-span-id">Request
     </x-button>
 </div>
 <div class="block-content block-content-full">

@@ -11,8 +11,8 @@ class Leave
     {
         Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/leave', [LeaveController::class, 'index'])->name('leave.list');
-            Route::post('/add_leave_modal', [LeaveController::class, 'addLeaveModal'])->name('leave.add.modal');
-            Route::post('/confirm_add_leave', [LeaveController::class, 'confirmAddLeave'])->name('leave.confirm.add');
+            Route::post('/request_leave_modal', [LeaveController::class, 'requestLeaveModal'])->name('leave.request.modal');
+            Route::post('/confirm_request_leave', [LeaveController::class, 'confirmRequestLeave'])->name('leave.confirm.request');
             // Route::post('/deleterole_modal', [RoleController::class, 'roleDeleteModal'])->name('role.delete.modal');
             // Route::post('/confirm_delete_role', [RoleController::class, 'confirmDeleteRole'])->name('role.confirm.delete.role');
             // Route::post('/editrole_modal', [RoleController::class, 'roleModal'])->name('role.edit.modal');

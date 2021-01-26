@@ -736,15 +736,16 @@ MAIN CONTENT LAYOUT
 <script src="{{ asset('js/pages/pages_ecom_dashboard.min.js') }}"></script>
 <!-- toastr -->
 <script src="{{ asset('plugins/toastr/js/toastr.min.js') }}"></script>
+<script src="{{ asset('plugins/filepond/js/filepond.min.js') }}"></script>
 
 
 <!-- Add plugin scripts -->
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+  <!--   <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
-
+ -->
 
 <!-- custom js -->
 <script src="{{ asset('js/custom.js') }}"></script>

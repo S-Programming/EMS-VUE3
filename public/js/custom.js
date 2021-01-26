@@ -117,7 +117,7 @@ function validateFieldsByFormId(e) {
 function validateFields(formId) {
     var fields = $("#" + formId + " :input").serializeArray();
     var error = [];
-    var skipArray = ['action'];
+    var skipArray = ['action','date_range','date'];
     var emailArray = ['email'];
     var phoneNumberArray = ['phone_number'];
     var skipforEmpty = [];
@@ -134,6 +134,7 @@ function validateFields(formId) {
                 elementObj.val(field.value);
             }
         }
+        
         if ($.inArray(fname, skipArray) == -1) {
             if ($.trim(field.value) == '') {
                 if ($.inArray(fname, skipforEmpty) == -1) {

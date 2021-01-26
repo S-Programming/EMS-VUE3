@@ -18,9 +18,10 @@ use Carbon\Carbon;
 class LeaveService extends BaseService
 {
     /* All Leave Methods */
-    public function confirmAddLeave(Request $request)
+    public function confirmRequestLeave(Request $request)
     {
-
+       
+     //  dd($request->all());
         if (!isset($request) && empty($request)) { // what will be condition
             return $this->errorResponse('Leave Submittion Failed');
         }
@@ -28,14 +29,20 @@ class LeaveService extends BaseService
             $user_id = $this->getAuthUserId();
             $leave = new LeaveHistory;
             $leave->user_id = $user_id;
-
             $leave->leave_type_id = $request->leave_types;
-            // $leave->date = $request->date;
             $leave->description = $request->description;
             $leave->half_day = $request->half_day;
-            $leave->start_date = Carbon::parse($request->start_date);
-            // dd($leave->start_date);
-            // $leave->end_date = Carbon::parse($request->end_date) ?? '';
+            if($request->date_range !='')
+            {
+                $date_range = explode('to',$request->date_range);
+            
+                $leave->start_date = Carbon::parse($date_range[0]);
+                $leave->end_date = Carbon::parse($date_range[1]) ?? '';
+            }
+            else
+            {
+                $leave->start_date = Carbon::parse($request->date);
+            }
             $leave->leave_status_id = 1;
             // dd($leave);
             $leave->save();
@@ -44,15 +51,15 @@ class LeaveService extends BaseService
             // $leaves = LeaveType::with('history')->get();
         }
         $html = view('pages.leave._partial._leaves_list_table_html', compact('leaves', $leaves))->render();
-        return $this->successResponse('Leave has Successfully Added', ['html' => $html, 'html_section_id' => 'leavelist-section']);
+        return $this->successResponse('Leave has Successfully Requested', ['html' => $html, 'html_section_id' => 'leavelist-section']);
     }
 
-    public function addLeaveModal(Request $request)
+    public function requestLeaveModal(Request $request)
     {
         $leave_types_data = LeaveType::all();
         $containerId = $request->input('containerId', 'common_popup_modal');
         $leave_types_dropdown = view('utils.leave_types', ['leave_types' => ($roles ?? null), 'leave_types_data' => $leave_types_data])->render();
-        $html = view('pages.leave._partial._add_leave_modal', ['id' => $containerId, 'data' => null, 'leave_types_dropdown' => $leave_types_dropdown])->render();
+        $html = view('pages.leave._partial._request_leave_modal', ['id' => $containerId, 'data' => null, 'leave_types_dropdown' => $leave_types_dropdown])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
 
@@ -203,7 +210,7 @@ class LeaveService extends BaseService
         $leaveStatus = LeaveStatus::all();
         $status_dropdown = view('utils.status', ['leaveStatus' => $leaveStatus])->render();
         $html = view('pages.approveLeave._partial._approve_leave_modal', ['id' => $containerId, 'requestedLeaveId' => $requestedLeaveId, 'data' => null, 'status_dropdown' => $status_dropdown])->render();
-        return $this->successResponse('Leave Status has Successfully Deleted', ['html' => $html]);
+        return $this->successResponse('success', ['html' => $html]);
     }
     public function confirmApproveLeaveModal(Request $request)
     {
@@ -221,7 +228,7 @@ class LeaveService extends BaseService
                 return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
             }
             else{
-                return $this->successResponse('Something Else not Approved', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
+                return $this->successResponse('Not Approved', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
             }
             /*if ($leave_data->leave_status_id == 2)
                 return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approve-leave-section']);

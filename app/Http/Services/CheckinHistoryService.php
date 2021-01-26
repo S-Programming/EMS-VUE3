@@ -6,6 +6,7 @@ namespace App\Http\Services;
 
 use App\Http\Services\BaseService\BaseService;
 use App\Models\CheckinHistory;
+use App\Models\Attendence;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,11 @@ class CheckinHistoryService extends BaseService
                 $cico->checkin = Carbon::now();
                 $cico->user_id = $userid;
                 $cico->save();
+
+                $attendence = new Attendence;
+                $attendence->user_id = $userid;
+                $attendence->is_present = 1;
+                $attendence->save();
             }
             $html = view('pages.user._partial._checkout_html')->render();
             return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section', 'module' => 'checkin']);

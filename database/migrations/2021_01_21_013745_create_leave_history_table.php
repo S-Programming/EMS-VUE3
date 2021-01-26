@@ -22,7 +22,7 @@ class CreateLeaveHistoryTable extends Migration
             // $table->dateTime('date');
             $table->string('description')->nullable();
             $table->string('comments')->nullable();
-            $table->string('half_day');
+            $table->string('half_day')->nullable();
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
             $table->timestamps();

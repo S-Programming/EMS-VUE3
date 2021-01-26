@@ -17,8 +17,8 @@ class CreateAttendencesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('is_present')->default(0);
-            $table->string('entry_ip');
-            $table->string('entry_location');
+            $table->string('entry_ip')->nullable();
+            $table->string('entry_location')->nullable();
             $table->string('exit_ip')->nullable();
             $table->string('exit_location')->nullable();
             $table->timestamps();

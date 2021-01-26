@@ -37,9 +37,9 @@ class LeaveController extends Controller
      *
      * @return Body
      */
-    public function addLeaveModal(Request $request)
+    public function requestLeaveModal(Request $request)
     {
-        return $this->sendJsonResponse($this->leaveService->addLeaveModal($request));
+        return $this->sendJsonResponse($this->leaveService->requestLeaveModal($request));
     }
 
     /**
@@ -47,9 +47,9 @@ class LeaveController extends Controller
      *
      * @return Body
      */
-    public function confirmAddLeave(Request $request)
+    public function confirmRequestLeave(Request $request)
     {
-        return $this->sendJsonResponse($this->leaveService->confirmAddLeave($request));
+        return $this->sendJsonResponse($this->leaveService->confirmRequestLeave($request));
     }
 
     /**

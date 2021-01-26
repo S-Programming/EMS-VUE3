@@ -17,6 +17,7 @@ $(function () {
     }
 });
 
+
 function validateFieldsByFormId(e) {
     event.preventDefault();
     const formId = $(e).closest('form').attr('id');
@@ -116,7 +117,7 @@ function validateFieldsByFormId(e) {
 function validateFields(formId) {
     var fields = $("#" + formId + " :input").serializeArray();
     var error = [];
-    var skipArray = ['action'];
+    var skipArray = ['action','date_range','date'];
     var emailArray = ['email'];
     var phoneNumberArray = ['phone_number'];
     var skipforEmpty = [];
@@ -133,9 +134,11 @@ function validateFields(formId) {
                 elementObj.val(field.value);
             }
         }
+        
         if ($.inArray(fname, skipArray) == -1) {
             if ($.trim(field.value) == '') {
                 if ($.inArray(fname, skipforEmpty) == -1) {
+
                     var myregexp = /\[(.*?)\]/;
                     var match = myregexp.exec(fname);
                     if (match != null) {
@@ -391,6 +394,54 @@ var startCheckinTimer = function (startTime) {
         }
     }, 1000);
 }
+
+
+/*jQuery(function() {
+                jQuery('input[name="date_range"]').daterangepicker({
+                    autoApply: true,
+                    timePicker: true,
+                    locale: {
+                        cancelLabel: 'Clear'
+                    }
+                });
+                jQuery('input[name="date_range"]').on('apply.daterangepicker', function(ev, picker) {
+                    jQuery(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+                });
+                jQuery('input[name="date_range"]').on('cancel.daterangepicker', function(ev, picker) {
+                    jQuery(this).val('');
+                });
+                jQuery('input[name="date"]').daterangepicker({
+                    "singleDatePicker": true,
+                    "locale": {
+                        "format": "DD-MM-YYYY",
+                    }
+                });
+            });
+*/
+
+/*jQuery(document).ready(function() {
+
+$(function() {
+    $('input[name="date_range"]').daterangepicker({
+        autoApply: true,
+        timePicker: true,
+        locale: {
+            cancelLabel: 'Clear'
+        }
+    });
+    $('input[name="date_range"]').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+    });
+    $('input[name="date_range"]').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+    $('input[name="date"]').daterangepicker({
+        "singleDatePicker": true,
+        "locale": {
+            "format": "DD-MM-YYYY",
+        }
+    });
+});
 // $(function() {
 //     $('input[name="date_range"]').daterangepicker({
 //         autoApply: true,
@@ -414,6 +465,7 @@ var startCheckinTimer = function (startTime) {
 // });
 
 /*$(document).ready(function() {
+
     if ("geolocation" in navigator) {
         console.log("gl available");
         navigator.geolocation.getCurrentPosition(position => {
@@ -441,6 +493,28 @@ var startCheckinTimer = function (startTime) {
     } else {
         $('#address').html("Location not available");
     }
+});*/
+
+/*jQuery(function() {
+    jQuery('input[name="date_range"]').daterangepicker({
+        autoApply: true,
+        timePicker: true,
+        locale: {
+            cancelLabel: 'Clear'
+        }
+    });
+    jQuery('input[name="date_range"]').on('apply.daterangepicker', function(ev, picker) {
+        jQuery(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+    });
+    jQuery('input[name="date_range"]').on('cancel.daterangepicker', function(ev, picker) {
+        jQuery(this).val('');
+    });
+    jQuery('input[name="date"]').daterangepicker({
+        "singleDatePicker": true,
+        "locale": {
+            "format": "DD-MM-YYYY",
+        }
+    });
 });*/
 
 /*$(document).ready(function() {
@@ -473,3 +547,44 @@ function showDate() {
     format: 'mm/dd/yyyy',
     startDate: '-3d'
 });*/
+// register the plugins with FilePond
+FilePond.registerPlugin(
+  FilePondPluginImagePreview,
+  FilePondPluginImageResize,
+  FilePondPluginImageTransform,
+
+);
+FilePond.setOptions({
+    allowDrop: false,
+    allowReplace: false,
+    instantUpload: false,
+    server: {
+        url: 'http://192.168.33.10',
+        process: './process.php',
+        revert: './revert.php',
+        restore: './restore.php?id=',
+        fetch: './fetch.php?data='
+    }
+});
+const inputElement = document.querySelector('input[type="file"]');
+const pond = FilePond.create(inputElement, {
+  
+  imageResizeTargetWidth: 256,
+
+  // set contain resize mode
+  imageResizeMode: 'contain',
+
+ /* onaddfile: (err, fileItem) => {
+    console.log(err, fileItem.getMetadata('resize'));
+
+  },
+  onpreparefile: (fileItem, output) => {
+    const img = new Image();
+    img.src = URL.createObjectURL(output);
+    console.log(output.name);
+     document.body.appendChild(img);
+   
+  }*/
+
+});
+
