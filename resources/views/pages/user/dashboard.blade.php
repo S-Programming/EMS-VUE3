@@ -1,27 +1,4 @@
 <x-backend-layout>
-    @section('css_after')
-        <!-- Page JS Plugins CSS -->
-        <link rel="stylesheet" href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/ion-rangeslider/css/ion.rangeSlider.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/dropzone/dist/min/dropzone.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/flatpickr/flatpickr.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
-    @endsection
-    @section('js_after')
-        <!-- Page JS Plugins -->
-        <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-        <script src="{{ asset('plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
-        <script src="{{ asset('plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
-        <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
-        <script src="{{ asset('plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
-        <script src="{{ asset('plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
-        <script src="{{ asset('plugins/dropzone/dropzone.min.js') }}"></script>
-        <script src="{{ asset('plugins/flatpickr/flatpickr.min.js') }}"></script>
-        <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-        <script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
-    @endsection
     <!-- Hero -->
     
 

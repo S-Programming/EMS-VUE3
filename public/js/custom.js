@@ -437,6 +437,27 @@ $(function() {
         }
     });
 });
+// $(function() {
+//     $('input[name="date_range"]').daterangepicker({
+//         autoApply: true,
+//         timePicker: true,
+//         locale: {
+//             cancelLabel: 'Clear'
+//         }
+//     });
+//     $('input[name="date_range"]').on('apply.daterangepicker', function(ev, picker) {
+//         $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+//     });
+//     $('input[name="date_range"]').on('cancel.daterangepicker', function(ev, picker) {
+//         $(this).val('');
+//     });
+//     $('input[name="date"]').daterangepicker({
+//         "singleDatePicker": true,
+//         "locale": {
+//             "format": "DD-MM-YYYY",
+//         }
+//     });
+// });
 
 /*$(document).ready(function() {
 
@@ -489,10 +510,10 @@ $(function() {
  //  $('#date_range').daterangepicker();
 
 function showDate() {
-        $('#range-group').toggleClass('hide-input');
-        $('#date-group').toggleClass('hide-input');
-        $('#half-day').toggleClass('hide-input');
-    }
+    $('#range-group').toggleClass('hide-input');
+    $('#date-group').toggleClass('hide-input');
+    $('#half-day').toggleClass('hide-input');
+}
 
 //$(document).off('.datepicker.data-api');
 /*$('.datepicker').datepicker({

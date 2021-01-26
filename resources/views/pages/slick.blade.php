@@ -1,16 +1,13 @@
 @extends('layouts.backend')
 
 @section('css_before')
-    <link rel="stylesheet" href="{{ asset('js/plugins/slick-carousel/slick.css') }}">
-    <link rel="stylesheet" href="{{ asset('js/plugins/slick-carousel/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/slick-carousel/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/slick-carousel/slick-theme.css') }}">
 @endsection
 
 @section('js_after')
     <!-- Page JS Plugins -->
-    <script src="{{ asset('js/plugins/slick-carousel/slick.min.js') }}"></script>
-
-    <!-- Page JS Helpers (Slick Slider Plugin) -->
-    <script>jQuery(function(){ One.helpers('slick'); });</script>
+    <script src="{{ asset('plugins/slick-carousel/slick.min.js') }}"></script>
 @endsection
 
 @section('content')

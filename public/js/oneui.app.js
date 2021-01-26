@@ -28190,7 +28190,7 @@ var Tools = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/KodeStudio-Login Sytem/resources/js/oneui/app.js */"./resources/js/oneui/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\KodeStudio-Login\resources\js\oneui\app.js */"./resources/js/oneui/app.js");
 
 
 /***/ })
