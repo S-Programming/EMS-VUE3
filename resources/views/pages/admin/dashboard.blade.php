@@ -1,5 +1,5 @@
 <x-backend-layout>
-    
+
     <!-- Hero -->
     <div class="bg-body-light">
         <div class="content content-full">

@@ -15,29 +15,31 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
 
     <!-- CSS Before -->
-    @yield('css_before')
+@yield('css_before')
 
-    <!-- Fonts and Styles -->
+<!-- Fonts and Styles -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="{{ mix('/css/oneui.css') }}" id="css-main">
+    <link rel="stylesheet" href="{{ asset('assets/css/oneui.css') }}" id="css-main">
     <!-- toastr -->
-    <link rel="stylesheet" href="{{ asset('plugins/toastr/css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/css/toastr.min.css') }}">
+    <!-- filepond -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/filepond/css/filepond.css') }}">
     <!-- Page JS Plugins CSS -->
-    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/ion-rangeslider/css/ion.rangeSlider.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/dropzone/dist/min/dropzone.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/flatpickr/flatpickr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/ion-rangeslider/css/ion.rangeSlider.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/dropzone/dist/min/dropzone.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
     <!-- CSS After -->
-    @yield('css_after')
+@yield('css_after')
 
-    <!-- Required JS -->
+<!-- Required JS -->
     <script>var baseURL = <?php echo json_encode(url('/')); ?>  </script>
     <script>var isUserCheckin = '{{$is_user_checkin??0}}'  </script>
     <script>var userLastCheckinTime = '{{$user_last_checkin??''}}'  </script>
@@ -92,60 +94,65 @@
             <!-- END Main Container -->
         </div>
         <!-- END Page Container -->
+
         <!-- OneUI Core JS -->
-<!--
-    OneUI JS Core
+        <!--
+            OneUI JS Core
 
-    Vital libraries and plugins used in all pages. You can choose to not include this file if you would like
-    to handle those dependencies through webpack. Please check out assets/_js/main/bootstrap.js for more info.
+            Vital libraries and plugins used in all pages. You can choose to not include this file if you would like
+            to handle those dependencies through webpack. Please check out assets/_js/main/bootstrap.js for more info.
 
-    If you like, you could also include them separately directly from the assets/js/core folder in the following
-    order. That can come in handy if you would like to include a few of them (eg jQuery) from a CDN.
+            If you like, you could also include them separately directly from the assets/js/core folder in the following
+            order. That can come in handy if you would like to include a few of them (eg jQuery) from a CDN.
 
-    assets/js/core/jquery.min.js
-    assets/js/core/bootstrap.bundle.min.js
-    assets/js/core/simplebar.min.js
-    assets/js/core/jquery-scrollLock.min.js
-    assets/js/core/jquery.appear.min.js
-    assets/js/core/js.cookie.min.js
--->
-<script src="{{ asset('js/oneui.core.min.js') }}"></script>
-<!--
-    OneUI JS
-    Custom functionality including Blocks/Layout API as well as other vital and optional helpers
-    webpack is putting everything together at assets/_js/main/app.js
--->
-<script src="{{ mix('/js/oneui.app.js') }}"></script>
-
-
-<!-- JS Before -->
-@yield("js_before")
-
-<!-- Plugins -->
-<script src="{{ asset('plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
-<script src="{{ asset('plugins/chart.js/Chart.bundle.min.js') }}"></script>
-<script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-<script src="{{ asset('plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
-<script src="{{ asset('plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
-<script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
-<script src="{{ asset('plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
-<script src="{{ asset('plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
-<script src="{{ asset('plugins/dropzone/dropzone.min.js') }}"></script>
-<script src="{{ asset('plugins/flatpickr/flatpickr.min.js') }}"></script>
-<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-<script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
-<script src="{{ asset('plugins/jquery-validation/jquery.validate.min.js') }}"></script>
-
-<!-- toastr -->
-<script src="{{ asset('plugins/toastr/js/toastr.min.js') }}"></script>
-<!-- custom js -->
-<script src="{{ asset('js/custom.js') }}"></script>
+            assets/js/core/jquery.min.js
+            assets/js/core/bootstrap.bundle.min.js
+            assets/js/core/simplebar.min.js
+            assets/js/core/jquery-scrollLock.min.js
+            assets/js/core/jquery.appear.min.js
+            assets/js/core/js.cookie.min.js
+        -->
+        <script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
+        <!--
+            OneUI JS
+            Custom functionality including Blocks/Layout API as well as other vital and optional helpers
+            webpack is putting everything together at assets/_js/main/app.js
+        -->
+        <script src="{{ asset('assets/js/oneui.app.js') }}"></script>
 
 
-@yield('js_after')
+        <!-- JS Before -->
+        @yield("js_before")
 
-<!-- OneUI Helpers (don't replace its position) -->
-<script src="{{ asset('js/oneui-helpers.js') }}"></script>
+
+        <!-- Plugins -->
+        <script src="{{ asset('assets/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/chart.js/Chart.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/dropzone/dropzone.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/daterangepicker/daterangepicker.js') }}"></script>
+        <script src="{{ asset('assets/plugins/tinymce/tinymce.min.js') }}"></script>
+        <!-- Page JS Code -->
+        <script src="{{ asset('assets/js/pages/be_pages_dashboard.min.js') }}"></script>
+        <script src="{{ asset('assets/js/pages/pages_ecom_dashboard.min.js') }}"></script>
+        <!-- toastr -->
+        <script src="{{ asset('assets/plugins/toastr/js/toastr.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/filepond/js/filepond.min.js') }}"></script>
+        <!-- custom js -->
+        <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+
+        @yield('js_after')
+
+        <!-- OneUI Helpers (don't replace its position) -->
+        <script src="{{ asset('assets/js/oneui-helpers.js') }}"></script>
 
 </body>
 </html>

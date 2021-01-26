@@ -3,12 +3,12 @@
     <div class="content-header bg-white-5">
         <!-- Logo -->
         <a class="font-w600 text-dual" href="/">
-                        <span class="smini-visible">
-                            <i class="fa fa-circle-notch text-primary"></i>
-                        </span>
+            <span class="smini-visible">
+                <i class="fa fa-circle-notch text-primary"></i>
+            </span>
             <span class="smini-hide font-size-h5 tracking-wider">
-                            One<span class="font-w400">UI</span>
-                        </span>
+                One<span class="font-w400">UI</span>
+            </span>
         </a>
         <!-- END Logo -->
 
@@ -30,27 +30,27 @@
                         <i class="fa fa-circle text-default"></i>
                     </a>
                     <a class="dropdown-item d-flex align-items-center justify-content-between font-w500"
-                       data-toggle="theme" data-theme="{{ mix('css/themes/amethyst.css') }}" href="#">
+                       data-toggle="theme" data-theme="{{ asset('assets/css/themes/amethyst.css') }}" href="#">
                         <span>Amethyst</span>
                         <i class="fa fa-circle text-amethyst"></i>
                     </a>
                     <a class="dropdown-item d-flex align-items-center justify-content-between font-w500"
-                       data-toggle="theme" data-theme="{{ mix('css/themes/city.css') }}" href="#">
+                       data-toggle="theme" data-theme="{{ asset('assets/css/themes/city.css') }}" href="#">
                         <span>City</span>
                         <i class="fa fa-circle text-city"></i>
                     </a>
                     <a class="dropdown-item d-flex align-items-center justify-content-between font-w500"
-                       data-toggle="theme" data-theme="{{ mix('css/themes/flat.css') }}" href="#">
+                       data-toggle="theme" data-theme="{{ asset('assets/css/themes/flat.css') }}" href="#">
                         <span>Flat</span>
                         <i class="fa fa-circle text-flat"></i>
                     </a>
                     <a class="dropdown-item d-flex align-items-center justify-content-between font-w500"
-                       data-toggle="theme" data-theme="{{ mix('css/themes/modern.css') }}" href="#">
+                       data-toggle="theme" data-theme="{{ asset('assets/css/themes/modern.css') }}" href="#">
                         <span>Modern</span>
                         <i class="fa fa-circle text-modern"></i>
                     </a>
                     <a class="dropdown-item d-flex align-items-center justify-content-between font-w500"
-                       data-toggle="theme" data-theme="{{ mix('css/themes/smooth.css') }}" href="#">
+                       data-toggle="theme" data-theme="{{ asset('assets/css/themes/smooth.css') }}" href="#">
                         <span>Smooth</span>
                         <i class="fa fa-circle text-smooth"></i>
                     </a>
