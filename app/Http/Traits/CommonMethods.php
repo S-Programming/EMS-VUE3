@@ -8,7 +8,7 @@ trait CommonMethods
     {
         $message = "Please double check as $name is not a defined method";
         /*## Need to verify if it will work or not ##*/
-        $this->failureLog("ERROR createCharge", $message, $arguments);
+        $this->failureLog("ERROR", $message, $arguments);
         return array('status' => 'error', 'message' => $message);
     }
 }
