@@ -25,6 +25,14 @@
     <link rel="stylesheet" href="{{ asset('plugins/toastr/css/toastr.min.css') }}">
     <!-- filepond -->
     <link rel="stylesheet" href="{{ asset('plugins/filepond/css/filepond.css') }}">
+    <!-- Page JS Plugins CSS -->
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/ion-rangeslider/css/ion.rangeSlider.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/dropzone/dist/min/dropzone.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
 
@@ -668,6 +676,17 @@ MAIN CONTENT LAYOUT
 <!-- Plugins -->
 <script src="{{ asset('plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
 <script src="{{ asset('plugins/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+<script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
+<script src="{{ asset('plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
+<script src="{{ asset('plugins/dropzone/dropzone.min.js') }}"></script>
+<script src="{{ asset('plugins/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+<script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('plugins/jquery-validation/jquery.validate.min.js') }}"></script>
 <!-- Page JS Code -->
 <script src="{{ asset('js/pages/be_pages_dashboard.min.js') }}"></script>
 <script src="{{ asset('js/pages/pages_ecom_dashboard.min.js') }}"></script>
@@ -683,4 +702,4 @@ MAIN CONTENT LAYOUT
 <script src="{{ asset('js/oneui-helpers.js') }}"></script>
 
 </body>
-</html>
+</html>tables_datatables
