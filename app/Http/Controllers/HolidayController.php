@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\PublicHolidayService;
-use App\Models\PublicHoliday;
+use App\Http\Services\HolidayService;
+use App\Models\Holiday;
 use Illuminate\Support\Facades\Validator;
 
 
-class PublicHolidayController extends Controller
+class HolidayController extends Controller
 {
     //
     protected $publicHolidayService;
 
-    public function __construct(PublicHolidayService $publicHolidayService)
+    public function __construct(HolidayService $holidayService)
     {
         $this->middleware('auth');
-        $this->publicHolidayService = $publicHolidayService;
+        $this->holidayService = $holidayService;
     }
     /**
      * Display a listing of the resource.
@@ -25,15 +25,15 @@ class PublicHolidayController extends Controller
      */
     public function index()
     {
-        $holidays = PublicHoliday::all();
-        return view('pages.publicHolidays.public_holidays')->with('holidays', $holidays);
+        $holidays = Holiday::all();
+        return view('pages.holidays.holidays')->with('holidays', $holidays);
     }
     /**
      * It will return a HTML for the Modal container
      *
      * @return Body
      */
-    public function publicHolidayModal(Request $request)
+    public function holidayModal(Request $request)
     {
         $containerId = $request->input('containerId', 'common_popup_modal');
          $html = view('pages.admin._partial._add_holiday_modal', ['id' => $containerId, 'data' => null])->render();
@@ -41,20 +41,20 @@ class PublicHolidayController extends Controller
     }
 
     /**
-     * Method for the Adding Users
+     * Method for the Adding holidays
      *
      * @return Body
      */
-    public function confirmAddPublicHoliday(Request $request)
+    public function confirmAddHoliday(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:3|max:50',
-            'date' => 'required',   
+            'date_range' => 'required',   
         ]);
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
-        return $this->sendJsonResponse($this->publicHolidayService->confirmAddPublicHoliday($request));
+        return $this->sendJsonResponse($this->holidayService->confirmAddHoliday($request));
     }
 
     /**
@@ -62,35 +62,35 @@ class PublicHolidayController extends Controller
      *
      * @return Body
      */
-    public function publicHolidayDeleteModal(Request $request)
+    public function holidayDeleteModal(Request $request)
     {
-        return $this->sendJsonResponse($this->publicHolidayService->publicHolidayDeleteModal($request));
+        return $this->sendJsonResponse($this->holidayService->holidayDeleteModal($request));
     }
     /**
-     * Method for the Deleting Users
+     * Method for the Deleting holidays
      *
      * @return Body
      */
-    public function confirmDeletePublicHoliday(Request $request)
+    public function confirmDeleteHoliday(Request $request)
     {
         //dd($request);
-        return $this->sendJsonResponse($this->publicHolidayService->confirmDeletePublicHoliday($request));
+        return $this->sendJsonResponse($this->holidayService->confirmDeleteHoliday($request));
     }
      /**
-     * Method for Editing Public Holiday on Modal PoPUP
+     * Method for Editing  Holiday on Modal PoPUP
      *
      * @return Body
      */
-    public function publicHolidayEditModal(Request $request)
+    public function holidayEditModal(Request $request)
     {
-        return $this->sendJsonResponse($this->publicHolidayService->publicHolidayEditModal($request));
+        return $this->sendJsonResponse($this->holidayService->holidayEditModal($request));
     }
     /**
-     * Method for Update Public Holiday
+     * Method for Update  Holiday
      *
      * @return Body
      */
-    public function publicHolidayUpdate(Request $request)
+    public function holidayUpdate(Request $request)
     {
     	$validator = Validator::make($request->all(), [
             'name' => 'required|string|min:3|max:50',
@@ -99,7 +99,7 @@ class PublicHolidayController extends Controller
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
-        return $this->sendJsonResponse($this->publicHolidayService->publicHolidayUpdate($request));
+        return $this->sendJsonResponse($this->holidayService->holidayUpdate($request));
     }
 
 }

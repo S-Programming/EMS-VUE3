@@ -24,7 +24,7 @@
 	    <!-- Dynamic Table Full Pagination -->
 	    <div id="holidaylist-section" class="block block-rounded">
 
-	    @include('pages.admin._partial._public_holidays_list_html',['holidays' => $holidays])
+	    @include('pages.admin._partial._holidays_list_html',['holidays' => $holidays])
 		</div>
 	    <!-- END Dynamic Table Full Pagination -->
 	</div>

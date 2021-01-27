@@ -25,7 +25,8 @@
             @foreach($holidays as $data)
                 <tr>
                     <td class="text-center font-size-sm">{{$data->id}}</td>
-                    <td class="font-w600 font-size-sm">{{$data->date}}</td>
+                    <td class="font-w600 font-size-sm">{{$data->start_date}}</td>
+                    <td class="font-w600 font-size-sm">{{$data->end_date}}</td>
                     <td class="font-w600 font-size-sm">{{$data->name}}</td>
                     <td>
                         <em class="text-muted font-size-sm">{{(isset($data->created_at)?$data->created_at->format('d M'):'')}}</em>

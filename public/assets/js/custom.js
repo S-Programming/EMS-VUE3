@@ -542,10 +542,6 @@ function showDate() {
     $('#half-day').toggleClass('hide-input');
 }
 
-function lalala()
-{
-    console.log("galagasg");
-}
 //$(document).off('.datepicker.data-api');
 /*$('.datepicker').datepicker({
     format: 'mm/dd/yyyy',

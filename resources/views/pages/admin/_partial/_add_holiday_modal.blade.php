@@ -12,13 +12,19 @@
                         <div class="card-body">
                             <div class="py-2">
                                 <div class="form-group">
-                                    <label for="date">&nbsp Date</label>
-                                    <div class="input-group date" data-provide="datepicker">
-                                        <input type="text" class="form-control" name="date" data-date-format="mm-dd-yyyy" data-autoclose="true" readonly>
-                                        <div class="input-group-addon">
-                                            <span class="glyphicon glyphicon-th"></span>
-                                        </div>
-                                    </div>
+                                    <label>Multiple Days</label>
+                                    <select class="form-control" name="multiple-days" onchange="showDate()">
+                                        <option value="yes" selected>Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="range-group">
+                                    <label for="">Date Range: </label>
+                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="" name="date_range" placeholder="Select Holidays" data-mode="range" data-min-date="today">
+                                </div>
+                                <div class="form-group hide-input" id="date-group">
+                                    <label for="">Select Date </label>
+                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" readonly="readonly">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">&nbsp Name</label>
@@ -43,3 +49,8 @@
         </div>
     </x-slot>
 </x-modal>
+<script type="text/javascript">
+    flatpickr(".js-flatpickr", {
+        dateFormat:"d-m-Y"
+    });
+</script>
