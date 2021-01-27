@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MenuRoleTableSeeder::class);
         $this->call(LeaveTypeSeeder::class);
         $this->call(LeaveStatusSeeder::class);
-        $this->call(PublicHolidaySeeder::class);
+        $this->call(HolidaySeeder::class);
     }
 }
