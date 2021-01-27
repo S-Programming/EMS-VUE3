@@ -14,6 +14,7 @@
     <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
 
+
 <!--     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
  -->
@@ -37,21 +38,21 @@
     <!-- Fonts and Styles -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="{{ mix('/css/oneui.css') }}" id="css-main">
+    <link rel="stylesheet" href="{{ asset('assets/css/oneui.css') }}" id="css-main">
     <!-- toastr -->
-    <link rel="stylesheet" href="{{ asset('plugins/toastr/css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/css/toastr.min.css') }}">
     <!-- filepond -->
-    <link rel="stylesheet" href="{{ asset('plugins/filepond/css/filepond.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/filepond/css/filepond.css') }}">
     <!-- Page JS Plugins CSS -->
-    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/ion-rangeslider/css/ion.rangeSlider.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/dropzone/dist/min/dropzone.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/flatpickr/flatpickr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/ion-rangeslider/css/ion.rangeSlider.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/dropzone/dist/min/dropzone.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
     <!-- CSS After -->
     @yield('css_after')
@@ -73,8 +74,7 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
 
-    <script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
-
+  
   
      <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
@@ -704,13 +704,13 @@ MAIN CONTENT LAYOUT
     assets/js/core/jquery.appear.min.js
     assets/js/core/js.cookie.min.js
 -->
-<script src="{{ asset('js/oneui.core.min.js') }}"></script>
+<script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
 <!--
     OneUI JS
     Custom functionality including Blocks/Layout API as well as other vital and optional helpers
     webpack is putting everything together at assets/_js/main/app.js
 -->
-<script src="{{ mix('/js/oneui.app.js') }}"></script>
+<script src="{{ asset('assets/js/oneui.app.js') }}"></script>
 
 
 <!-- JS Before -->
@@ -718,26 +718,28 @@ MAIN CONTENT LAYOUT
 
 
 <!-- Plugins -->
-<script src="{{ asset('plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
-<script src="{{ asset('plugins/chart.js/Chart.bundle.min.js') }}"></script>
-<script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-<script src="{{ asset('plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
-<script src="{{ asset('plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
-<script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
-<script src="{{ asset('plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
-<script src="{{ asset('plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
-<script src="{{ asset('plugins/dropzone/dropzone.min.js') }}"></script>
-<script src="{{ asset('plugins/flatpickr/flatpickr.min.js') }}"></script>
-<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-<script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
-<script src="{{ asset('plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/dropzone/dropzone.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/daterangepicker/daterangepicker.js') }}"></script>
+<script src="{{ asset('assets/plugins/tinymce/tinymce.min.js') }}"></script>
 <!-- Page JS Code -->
-<script src="{{ asset('js/pages/be_pages_dashboard.min.js') }}"></script>
-<script src="{{ asset('js/pages/pages_ecom_dashboard.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/be_pages_dashboard.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/pages_ecom_dashboard.min.js') }}"></script>
 <!-- toastr -->
-<script src="{{ asset('plugins/toastr/js/toastr.min.js') }}"></script>
-<script src="{{ asset('plugins/filepond/js/filepond.min.js') }}"></script>
 
+<script src="{{ asset('assets/plugins/toastr/js/toastr.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/filepond/js/filepond.min.js') }}"></script>
+<!-- custom js -->
+<script src="{{ asset('assets/js/custom.js') }}"></script>
 
 <!-- Add plugin scripts -->
   <!--   <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
@@ -747,14 +749,11 @@ MAIN CONTENT LAYOUT
 
  -->
 
-<!-- custom js -->
-<script src="{{ asset('js/custom.js') }}"></script>
-
 
 @yield('js_after')
 
 <!-- OneUI Helpers (don't replace its position) -->
-<script src="{{ asset('js/oneui-helpers.js') }}"></script>
+<script src="{{ asset('assets/js/oneui-helpers.js') }}"></script>
 
 </body>
 </html>

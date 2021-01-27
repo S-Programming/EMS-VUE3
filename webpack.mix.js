@@ -23,7 +23,7 @@ mix
     /* JS */
     .js('resources/js/app.js', 'public/js/laravel.app.js')
     .js('resources/js/oneui/app.js', 'public/js/oneui.app.js')
-    .scripts('resources/js/custom.js', 'public/js/custom.js')
+
     /* Page JS */
     .js('resources/js/pages/tables_datatables.js', 'public/js/pages/tables_datatables.js')
 

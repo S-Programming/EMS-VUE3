@@ -1,0 +1,3 @@
+This folder and files inside this folder aren't use to the whole project.
+
+This folder is auto created by using command "npm run watch".
