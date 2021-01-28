@@ -31,6 +31,10 @@ class User
             Route::get('/self_edit_profile', [UserController::class, 'selfEditProfile'])->name('user.self.edit');
             Route::post('/update_self_profile', [UserController::class, 'selfUpdateProfile'])->name('user.self.update');
             Route::post('/update_self_password', [UserController::class, 'selfUpdatePassword'])->name('update.self.password');*/
+
+            // Today attendance
+            Route::get('today_attendence_list', [UserController::class, 'verifyAttendance'])->name('today.attendence.list');
+            Route::post('get_user_attendance', [UserController::class, 'getUserAttendanceMonthly'])->name('get.user.attendance');
         });
     }
 }

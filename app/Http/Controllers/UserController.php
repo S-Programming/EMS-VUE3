@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\CheckinHistory;
 use Illuminate\Http\Request;
 use App\Http\Services\UserService;
+use App\Models\Attendence;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
@@ -141,5 +142,39 @@ class UserController extends Controller
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
         return $this->sendJsonResponse($this->userService->userUpdatePassword($request));
+    }
+
+    // Today Attendance Show at _user_attendance_html partial view
+    public function verifyAttendance(Request $request)
+    {
+        // return $this->sendJsonResponse($this->userService->verifyAttendance($request));
+        // $allUsers = User::all();
+        // dd($this->getAllUsers());
+        //$user_attendance = Attendence::whereDate('created_at', Carbon::today())->get();
+        foreach ($this->getAllUsers() as $User) {
+            $check = Attendence::where('user_id', $User->id)
+                ->whereDate('created_at', Carbon::today())->first();
+            if (!$check) {
+                $addEntry = new Attendence;
+                $addEntry->user_id = $User->id;
+                $addEntry->is_present = '0';
+                $addEntry->entry_ip = '';
+                $addEntry->entry_location = '';
+                $addEntry->exit_ip = '';
+                $addEntry->exit_location = '';
+                $addEntry->created_at = Carbon::now();
+                $addEntry->save();
+            }
+        }
+        $todayAttendance = Attendence::whereDate('created_at', Carbon::today())->orderBy("user_id", "asc")->get();
+        // dd($todayAttendance);
+        // $user_attendance_html = view('pages.user._partial._user_attendance_html', compact('todayAttendance', $todayAttendance))->render();
+        return view('pages.user.today_attendence_list')->with(['users' => $this->getAllUsers(), 'todayAttendance' => $todayAttendance]);
+        // return view('pages.user.today_attendence_list');
+    }
+    //Get User Attendance Monthly Wise
+    public function getUserAttendanceMonthly(Request $request)
+    {
+        return $this->sendJsonResponse($this->userService->getUserAttendanceMonthly($request));
     }
 }

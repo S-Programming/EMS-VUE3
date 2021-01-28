@@ -11,9 +11,15 @@ use App\Models\LeaveType;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
+// use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Route\Http\Leave;
 use Carbon\Carbon;
+use App\Mail\TestEmail;
+use Notification;
+use App\Notifications\apllyLeaveNotification;
+use Illuminate\Notifications\Notifiable;
 
 class LeaveService extends BaseService
 {
@@ -138,6 +144,19 @@ class LeaveService extends BaseService
 
     public function leaveStatusConfirmAdd(Request $request)
     {
+        // Using Sendgrid
+        // $data = ['message' => 'This is a test!'];
+        // $email = Mail::to('saadkamboh2841@gmail.com')->send(new TestEmail($data));
+        // $email = Mail::to('developer.hassam@gmail.com')->send(new TestEmail($data));
+
+        // Using Mailtrap
+        // $user = User::first();
+        // dd($user->email);
+        // $data = [
+        //     'name' => "Asad",
+        //     'class' => "8th"
+        // ];
+        // $user->notify(new apllyLeaveNotification($user));
         if (!isset($request) && empty($request)) { // what will be condition
             return $this->errorResponse('Leave Status Submittion Failed');
         }
@@ -217,19 +236,16 @@ class LeaveService extends BaseService
             $approve_leaves = LeaveHistory::with('type')->with('user')->where('leave_status_id', '!=', '2')->get();
 
             $html = view('pages.approveLeave._partial._approve_leave_list_table_html')->with('approve_leaves', $approve_leaves)->render();
-            if ($leave_data->leave_status_id == 2){
+            if ($leave_data->leave_status_id == 2) {
                 return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
-            }
-            else{
+            } else {
                 return $this->successResponse('Something Else not Approved', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
             }
             /*if ($leave_data->leave_status_id == 2)
                 return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
             if ($leave_data->leave_status_id == 3)
                 return $this->successResponse('Rejected', ['html' => $html, 'html_section_id' => 'approve-leave-section']);*/
-        } 
-        else 
-        {
+        } else {
             return $this->errorResponse('Error');
         }
     }

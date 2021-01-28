@@ -11,6 +11,7 @@ use App\Models\CheckinHistory;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
+use App\Models\Attendence;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -210,5 +211,121 @@ class UserService extends BaseService
                 return $this->errorResponse('Current Password is not correct', ['errors' => ['Current Password is not correct']]);
             }
         }
+    }
+    // Today Attendance Show at _user_attendance_html partial view
+    // public function verifyAttendance(Request $request)
+    // {
+    //     $allUsers = User::all();
+    //     //$user_attendance = Attendence::whereDate('created_at', Carbon::today())->get();
+    //     foreach ($allUsers as $User) {
+    //         $check = Attendence::where('user_id', $User->id)
+    //             ->whereDate('created_at', Carbon::today())->first();
+    //         if (!$check) {
+    //             $addEntry = new Attendence;
+    //             $addEntry->user_id = $User->id;
+    //             $addEntry->is_present = '0';
+    //             $addEntry->entry_ip = '';
+    //             $addEntry->entry_location = '';
+    //             $addEntry->exit_ip = '';
+    //             $addEntry->exit_location = '';
+    //             $addEntry->created_at = Carbon::now();
+    //             $addEntry->save();
+    //         }
+    //     }
+    //     $todayAttendance = Attendence::whereDate('created_at', Carbon::today())->get();
+    //     $user_attendance_html = view('pages.user._partial._users_attendance_html', compact('todayAttendance', $todayAttendance))->render();
+
+    //     //return view('pages.user.today_attendence_list');
+    // }
+    //Get User Attendance Monthly Wise
+    public function getUserAttendanceMonthly(Request $request)
+    {
+        $user_id = $request->user_id;
+        // $userData = User::where('id', $user_id)->first();
+        //  dd(Attendence::find($user_id)->user()->first()->first_name);
+        // $name = $userData->first_name;
+        // dd($name);
+        // if ($request->user_days == 'Current Month' && $request->user_id == 'All') {
+        //     // All Attendance Data of All users
+        //     $allAttendance = Attendence::orderBy('user_id', 'asc')->get();
+
+        //     $count = $allAttendance->count();
+        //     $attendance_html = view('pages.user._partial._user_attendance_html', ['todayAttendance' => $allAttendance])->render();
+        //     if ($count > 0) {
+        //         return $this->successResponse('Current Month All Users Attendance Received successfully', ['html' => $attendance_html, 'html_section_id' => 'monthly-attendance-section']);
+        //     } else {
+        //         return $this->errorResponse('Current Month All Users Attendance Not Exists', ['errors' => ['Attendance Not Exists'], 'html' => $attendance_html, 'monthly-attendance-section' => 'self-checkin-history']);
+        //     }
+        // }
+        if ($request->user_days == 'Current Month') {
+            // Current Month data with Specific User
+            if ($user_id != 'All') {
+                //$currentmonthlAttendance = Attendence::where('created_at', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
+                //->where('user_id', $user_id)->get();
+                $currentmonthlAttendance = Attendence::orderBy('user_id', 'asc')->where('created_at', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
+                    ->where('user_id', $user_id)->get();
+
+                // dd($currentmonthlAttendance[0]->user->first_name);
+                // dd($currentmonthlAttendance[0]->is_present);
+                // dd($currentmonthlAttendance[0]->user->last_name);
+                // foreach ($currentmonthlAttendance as $job) {
+                //     var_dump($job->toArray());
+                // }
+                // dd($currentmonthlAttendance->user['first_name']);
+                // 'name' => $name,
+            } else {
+                // dd('all with current month');
+                $currentmonthlAttendance = Attendence::orderBy('user_id', 'asc')->where('created_at', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
+                    ->get();
+                // with('user')->
+            }
+            $count = $currentmonthlAttendance->count();
+            $html = view('pages.user._partial._user_attendance_html', ['todayAttendance' => $currentmonthlAttendance])->render();
+            if ($count > 0) {
+                return $this->successResponse('Current Month Attendance Received successfully', ['html' => $html, 'html_section_id' => 'monthly-attendance-section']);
+            } else {
+                return $this->errorResponse('Current Month Attendance Not Exists', ['errors' => ['Current Month Checkin_History Not Exists'], 'html' => $html, 'html_section_id' => 'monthly-attendance-section']);
+            }
+        } elseif ($request->user_days == 'Previous Month') {
+            //Previous Month data with Specific User
+            if ($user_id != 'All') {
+                // dd('P Not All');
+                $previousMonthAttendance = Attendence::orderBy('user_id', 'asc')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)
+                    ->where('user_id', $user_id)
+                    ->get();
+            } else {
+                // dd('P All');
+                $previousMonthAttendance = Attendence::orderBy('user_id', 'asc')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)
+                    ->get();
+            }
+            $count = $previousMonthAttendance->count();
+            $html = view('pages.user._partial._user_attendance_html', ['todayAttendance' => $previousMonthAttendance])->render();
+            if ($count > 0) {
+                return $this->successResponse('Previous Month Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'monthly-attendance-section']);
+            } else {
+                return $this->errorResponse('Previous Month Checkin_History Not Exists', ['errors' => ['History Not Exists'], 'html' => $html, 'html_section_id' => 'monthly-attendance-section']);
+            }
+        }
+        // oper tak
+
+        //     if ($request->attendance_month == 'Current Month') {
+        //         $currentmonthlAttendance = Attendence::where('created_at', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
+        //             ->get();
+        //         $count = $currentmonthlAttendance->count();
+        //         // return $currentmonthlAttendance;
+        //         $attendance_html = view('pages.user._partial._user_attendance_html', ['todayAttendance' => $currentmonthlAttendance])->render();
+        //         if ($count > 0) {
+        //             return $this->successResponse('Current Month Attendance Received successfully', ['html' => $attendance_html, 'html_section_id' => 'monthly-attendance-section']);
+        //         } else {
+        //             return $this->errorResponse('Current Month Attendance Not Exists', ['errors' => ['Attendance Not Exists'], 'html' => $attendance_html, 'monthly-attendance-section' => 'self-checkin-history']);
+        //         }
+        //     } elseif ($request->attendance_month == 'Previous Month') {
+        //         $previousMonthAttendance = Attendence::whereMonth('created_at', '=', Carbon::now()->subMonth()->month)
+        //             ->where('user_id', 1)
+        //             ->get();
+        //         $count = $previousMonthAttendance->count();
+        //         dd($count);
+        //     }
+
     }
 }

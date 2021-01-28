@@ -50,7 +50,8 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function checkinHistory() {
+    public function checkinHistory()
+    {
 
         return $this->hasMany(CheckinHistory::class);
     }
@@ -60,7 +61,8 @@ class User extends Authenticatable
      *
      * @return bool
      */
-    public function lastCheckin() {
+    public function lastCheckin()
+    {
 
         return $this->checkinHistory()->latest()->first();
     }
@@ -75,8 +77,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class)->with('parentMenus');
     }
 
-    public function attendance() {
+    public function attendance()
+    {
         return $this->hasMany(Attendence::class);
     }
-
 }
