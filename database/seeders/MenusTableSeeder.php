@@ -25,7 +25,7 @@ class MenusTableSeeder extends Seeder
             ['id' => 7, 'name' => 'Leave Approval', 'parent_id' => 0, 'route' => 'leave.approve.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 8, 'name' => 'Apply Leave', 'parent_id' => 0, 'route' => 'leave.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 9, 'name' => 'Leave Type', 'parent_id' => 0, 'route' => 'leave.type.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
-            ['id' => 10, 'name' => 'Leave Status', 'parent_id' => 0, 'route' => 'leave.status.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 10, 'name' => 'Request Status', 'parent_id' => 0, 'route' => 'request.status.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 11, 'name' => 'Attendence', 'parent_id' => 0, 'route' => 'attendence.mark', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 12, 'name' => 'Holiday', 'parent_id' => 0, 'route' => 'holiday.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             

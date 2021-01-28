@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\UserVerify;
 use Illuminate\Support\Facades\Password;
+use Validator;
+use App\Notifications\UserPasswordReset;
 
 class PasswordResetLinkController extends Controller
 {
@@ -28,7 +32,7 @@ class PasswordResetLinkController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+
         $request->validate([
             'email' => 'required|email',
         ]);
@@ -39,10 +43,50 @@ class PasswordResetLinkController extends Controller
         $status = Password::sendResetLink(
             $request->only('email')
         );
-        // dd($status);
+
         return $status == Password::RESET_LINK_SENT
                     ? back()->with('status', __($status))
                     : back()->withInput($request->only('email'))
                             ->withErrors(['email' => __($status)]);
     }
+
+    public function resetPasswordEmail(Request $request)
+    {
+        $request_data = $request->toArray();
+        $validator = Validator::make($request_data, [
+            "email" => 'required', 'email',
+        ]);
+        if ($validator->fails()) {
+            return $this->error($validator->errors()->first());
+        } else {
+            $email = $request['email'] ?? '';
+            $user = User::where('email', '=', $email)->first();
+            if ($user) {
+                $userId = !is_null($user->id) ? $user->id : '';
+                if ($userId != '') {
+                    $verification = $this->updateOrCreateVerificationToken(['user_id' => $userId, 'type' => 'reset_password', 'type_value' => $email]);
+                    $verificationCode = $verification->code ?? null;
+                    if ($verificationCode) {
+                        $mainAppUrl = config('app.url', null);
+                        $verificationCode = $verification->code . '|' . $user->email;
+                        $token = $this->customEncode($verificationCode);
+                        $mainAppUrl = $mainAppUrl.'/' . 'reset-password/' . $verificationCode;
+                        dd($mainAppUrl);
+                        $user->notify(new UserPasswordReset(['url' => $mainAppUrl]));
+                        $response = $this->successResponse('Password Reset Email Sent');
+                    } else {
+                        $response = $this->errorResponse('Password Reset Email Could Not Be Sent');
+                    }
+                } else {
+                    $response = $this->errorResponse('Password Reset Email Could Not Be Sent');
+                }
+            } else {
+                $response = $this->errorResponse('Email Not Found');
+            }
+        }
+        return $response;
+    }
+
+    
+
 }

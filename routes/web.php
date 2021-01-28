@@ -10,6 +10,7 @@ use Route\Http\CheckInHistory;
 use Route\Http\Holiday;
 use Route\Http\Leave;
 use Route\Http\Attendence;
+use Route\Http\RequestStatus;
 use Route\Http\Test;
 
 /*
@@ -40,6 +41,7 @@ Route::view('/pages/slick', 'pages.slick');
 Route::view('/pages/datatables', 'pages.datatables');
 Route::view('/pages/blank', 'pages.blank');
 
+Route::post('reset-passowrd', [NewPasswordController::class, 'resetPassword'])->name('pass.update');
 
 
 Dashboard::register();
@@ -48,5 +50,6 @@ Role::register();
 CheckInHistory::register();
 Leave::register();
 Attendence::register();
+RequestStatus::register();
 Holiday::register();
 Test::register();

@@ -51,6 +51,10 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/dropzone/dist/min/dropzone.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/daterangepicker/daterangepicker.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.css')}}">
+    <link rel="stylesheet" href="{{ asset(' assets/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css')}}">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
@@ -731,9 +735,22 @@ MAIN CONTENT LAYOUT
 <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('assets/plugins/tinymce/tinymce.min.js') }}"></script>
+
+ <!-- Page JS Plugins -->
+<script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/buttons/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/buttons/buttons.print.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/buttons/buttons.html5.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/buttons/buttons.flash.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/buttons/buttons.colVis.min.js')}}"></script>
+
 <!-- Page JS Code -->
+<script src="{{asset('assets/js/pages/be_tables_datatables.min.js')}}"></script>
 <script src="{{ asset('assets/js/pages/be_pages_dashboard.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/pages_ecom_dashboard.min.js') }}"></script>
+
+
 <!-- toastr -->
 
 <script src="{{ asset('assets/plugins/toastr/js/toastr.min.js') }}"></script>

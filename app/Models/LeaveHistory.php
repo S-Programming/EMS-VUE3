@@ -52,7 +52,7 @@ class LeaveHistory extends Model
      *
      * @return bool
      */
-    public function status(){
-        return $this->belongsTo(LeaveStatus::class,'leave_status_id','id');
+    public function requestStatus(){
+        return $this->belongsTo(RequestStatus::class,'request_status_id','id');
     }
 }

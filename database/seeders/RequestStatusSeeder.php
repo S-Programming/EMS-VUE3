@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class LeaveStatusSeeder extends Seeder
+class RequestStatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,13 +15,13 @@ class LeaveStatusSeeder extends Seeder
     public function run()
     {
         //
-         $LeaveStatus = [
+        $requestStatus = [
             ['status' => 'Pending'], 
             ['status' => 'Approve'], 
             ['status' => 'Reject'], 
             
             
         ];
-        DB::table('leave_status')->insert($LeaveStatus);
+        DB::table('request_statuses')->insert($requestStatus);
     }
 }

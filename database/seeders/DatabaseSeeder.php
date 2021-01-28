@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MenusTableSeeder::class);
         $this->call(MenuRoleTableSeeder::class);
         $this->call(LeaveTypeSeeder::class);
-        $this->call(LeaveStatusSeeder::class);
+        $this->call(RequestStatusSeeder::class);
         $this->call(HolidaySeeder::class);
     }
 }

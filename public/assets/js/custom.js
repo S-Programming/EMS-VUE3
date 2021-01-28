@@ -41,7 +41,6 @@ function validateFieldsByFormId(e) {
             data: $('#' + formId).serialize(),
             dataType: "json",
             success: function (data) {
-               // console.log("asdfgh");
                 e.disabled = false;
                 // console.log(data.redirect_to);
                  if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {

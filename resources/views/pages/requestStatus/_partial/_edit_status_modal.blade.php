@@ -1,19 +1,19 @@
 <x-modal :id="$id??'common_popup_modal'" :class="$class??'modal-sm'" :extra="['cls'=>'bg-primary-dark']">
     <x-slot name="modal_header_content">
-        <h3 class="block-title">Add Leave Status</h3>
+        <h3 class="block-title">Edit Request Status</h3>
     </x-slot>
     <x-slot name="modal_content">
         <div class="row">
             <div class="col-sm-10 offset-1">
-                <form method="POST" action="{{ route('leave.status.confirm.add') }}" id="leave-status-add-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
+                <form method="POST" action="{{ route('request.status.update') }}" id="request-status-edit-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
                     <div class="card">
                         <div class="card-body">
                             <div class="py-2">
                                 <div class="form-group">
-                                    <!-- <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden" name="id"/> -->
+                                   <x-input id="id" class="form-control form-control-alt form-control-lg" value="{{$request_status->id??''}}" type="hidden" name="id"/> 
                                     <label for="status">&nbsp Status</label>
-                                    <x-input id="status" class="form-control form-control-alt form-control-lg" type="text" name="status" required autofocus />
+                                    <x-input id="status" class="form-control form-control-alt form-control-lg" type="text" name="status" value="{{$request_status->status??''}}" required autofocus />
                                 </div>
                             </div>
                         </div>

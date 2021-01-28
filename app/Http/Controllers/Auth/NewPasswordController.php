@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use App\Models\User;
+use Validator;
 
 class NewPasswordController extends Controller
 {
@@ -59,5 +61,40 @@ class NewPasswordController extends Controller
                     ? redirect()->route('login')->with('status', __($status))
                     : back()->withInput($request->only('email'))
                             ->withErrors(['email' => __($status)]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request_data = $request->toArray();
+        $validator = Validator::make($request_data, [
+            "token" => 'required',
+            'password' => 'required|confirmed|min:8',
+        ]);
+        if (!$validator->fails()) {
+            //$codeData = $this->customDecode($request['_token']);
+            $codeDataArray = explode('|', $request['token']);
+            $userCode = $codeDataArray[0] ?? null;
+            $userEmail = $codeDataArray[1] ?? null;
+            dd($codeDataArray);
+            $user = User::where('email', $userEmail)->first();
+            if ($user != null) {
+                $userId = $user->id ?? '';
+                $response = $this->verifyVerificationToken(['user_id' => $userId, 'type' => 'reset_password', 'code' => $userCode]);
+                if (isset($response['status']) && trim($response['status']) == 'success') {
+                    $user->password = Hash::make($request_data['password']);
+                    $user->save();
+                    //$this->activityLog("51da6125-6178-48e5-9d8f-87c9febba841", $user->id, $user->id);
+                    $this->guard()->login($user);
+                    $responseData = ['redirect_to' => '/'];
+                    return $this->success('Password Updated Successfully!', $responseData);
+                } else {
+                    return $this->error($response['message'] ?? 'error');
+                }
+            } else {
+                return $this->error('User Not Found');
+            }
+        } else {
+            return $this->error($validator->errors()->first());
+        }
     }
 }

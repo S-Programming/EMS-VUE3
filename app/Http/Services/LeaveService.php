@@ -6,7 +6,7 @@ namespace App\Http\Services;
 
 use App\Http\Services\BaseService\BaseService;
 use App\Models\LeaveHistory;
-use App\Models\LeaveStatus;
+use App\Models\RequestStatus;
 use App\Models\LeaveType;
 use App\Models\User;
 use App\Models\Role;
@@ -43,7 +43,7 @@ class LeaveService extends BaseService
             {
                 $leave->start_date = Carbon::parse($request->date);
             }
-            $leave->leave_status_id = 1;
+            $leave->request_status_id = 1;
             // dd($leave);
             $leave->save();
 
@@ -135,81 +135,13 @@ class LeaveService extends BaseService
     }
 
 
-    /* All Leave Status Methods */
-    public function addLeaveStatusModal(Request $request)
-    {
-        $containerId = $request->input('containerId', 'common_popup_modal');
-        $html = view('pages.leaveStatus._partial._add_leave_status_modal', ['id' => $containerId, 'data' => null])->render();
-        return $this->successResponse('success', ['html' => $html]);
-    }
-
-    public function leaveStatusConfirmAdd(Request $request)
-    {
-        if (!isset($request) && empty($request)) { // what will be condition
-            return $this->errorResponse('Leave Status Submittion Failed');
-        }
-        if (isset($request) && !empty($request)) {
-            $leave_status = new LeaveStatus();
-            $leave_status->status = $request->status;
-            $leave_status->save();
-
-            $leaves_status = LeaveStatus::all();
-        }
-        $html = view('pages.leaveStatus._partial._leave_status_list_table_html', compact('leaves_status', $leaves_status))->render();
-        return $this->successResponse('Leave Status has Successfully Added', ['html' => $html, 'html_section_id' => 'leave-status-section']);
-    }
-
-    public function editLeaveStatusModal(Request $request)
-    {
-
-        $containerId = $request->input('containerId', 'common_popup_modal');
-        $leave_status_id = $request->id;
-        $leave_status_data = LeaveStatus::find($leave_status_id);
-        $html = view('pages.leaveStatus._partial._edit_leave_status_modal', ['id' => $containerId, 'data' => null, 'leave_status_data' => $leave_status_data])->render();
-        return $this->successResponse('success', ['html' => $html]);
-    }
-
-    public function leaveStatusUpdate(Request $request)
-    {
-        if (!isset($request) && empty($request)) { // what will be condition
-            return $this->errorResponse('Leave Status Submittion Failed');
-        }
-        if (isset($request) && !empty($request)) {
-            $leave_status_id = $request->id;
-            $leave_status = LeaveStatus::find($leave_status_id);
-            $leave_status->status = $request->status;
-            $leave_status->save();
-
-            $leaves_status = LeaveStatus::all();
-        }
-        $html = view('pages.leaveStatus._partial._leave_status_list_table_html', compact('leaves_status', $leaves_status))->render();
-        return $this->successResponse('Leave Status has Successfully Updated', ['html' => $html, 'html_section_id' => 'leave-status-section']);
-    }
-
-    public function leaveStatusDeleteModal(Request $request)
-    {
-        $leave_status_id = $request->id;
-        $containerId = $request->input('containerId', 'common_popup_modal');
-        $html = view('pages.leaveStatus._partial._delete_leave_status_modal', ['id' => $containerId, 'leave_status_id' => $leave_status_id])->render();
-        return $this->successResponse('success', ['html' => $html]);
-    }
-
-    public function leaveStatusDeleteConfirm(Request $request)
-    {
-        $leave_status_id = $request->leave_status_id;
-        $leave_status = LeaveStatus::find($leave_status_id);
-        $leave_status->delete();
-        $leaves_status = LeaveStatus::all();
-        $html = view('pages.leaveStatus._partial._leave_status_list_table_html', compact('leaves_status', $leaves_status))->render();
-        return $this->successResponse('Leave Status has Successfully Deleted', ['html' => $html, 'html_section_id' => 'leave-status-section']);
-    }
     public function approveLeaveModal(Request $request)
     {
         $requestedLeaveId = $request->id;
         $containerId = $request->input('containerId', 'common_popup_modal');
-        $leaveStatus = LeaveStatus::all();
-        $status_dropdown = view('utils.status', ['leaveStatus' => $leaveStatus])->render();
-        $html = view('pages.approveLeave._partial._approve_leave_modal', ['id' => $containerId, 'requestedLeaveId' => $requestedLeaveId, 'data' => null, 'status_dropdown' => $status_dropdown])->render();
+        $request_status = RequestStatus::all();
+        $status_dropdown = view('utils.status', ['request_status' => $request_status])->render();
+        $html = view('pages.approve._partial._approve_leave_modal', ['id' => $containerId, 'requestedLeaveId' => $requestedLeaveId, 'data' => null, 'status_dropdown' => $status_dropdown])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
     public function confirmApproveLeaveModal(Request $request)
@@ -218,22 +150,22 @@ class LeaveService extends BaseService
             $leave_id = $request->id;
             $leave_data = LeaveHistory::where('id', $leave_id)->first();
             $leave_data->comments = $request->comments;
-            $leave_data->leave_status_id = $request->status;
+            $leave_data->request_status_id = $request->status;
             $leave_data->save();
 
-            $approve_leaves = LeaveHistory::with('type')->with('user')->where('leave_status_id', '!=', '2')->get();
+            $approve_leaves = LeaveHistory::with('type')->with('user')->where('request_status_id', '!=', '2')->get();
 
-            $html = view('pages.approveLeave._partial._approve_leave_list_table_html')->with('approve_leaves', $approve_leaves)->render();
+            $html = view('pages.approve._partial._approve_leave_list_table_html')->with('approve_leaves', $approve_leaves)->render();
             if ($leave_data->leave_status_id == 2){
-                return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
+                return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approval-section']);
             }
             else{
-                return $this->successResponse('Not Approved', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
+                return $this->successResponse('Not Approved',['info' => ['Not Approved'], 'html' => $html, 'html_section_id' => 'approval-section']);
             }
             /*if ($leave_data->leave_status_id == 2)
-                return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approve-leave-section']);
+                return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approval-section']);
             if ($leave_data->leave_status_id == 3)
-                return $this->successResponse('Rejected', ['html' => $html, 'html_section_id' => 'approve-leave-section']);*/
+                return $this->successResponse('Rejected', ['html' => $html, 'html_section_id' => 'approval-section']);*/
         } 
         else 
         {

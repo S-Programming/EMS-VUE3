@@ -23,9 +23,9 @@
 	<!-- Page Content -->
 	<div class="content">
 	    <!-- Dynamic Table Full Pagination -->
-	    <div id="leave-status-section" class="block block-rounded">
+	    <div id="request-status-section" class="block block-rounded">
 
-	    @include('pages.leaveStatus._partial._leave_status_list_table_html',['leaves_status' => $leaves_status])
+	    @include('pages.requestStatus._partial._request_status_list_table_html',['request_status' => $request_status])
 		</div>
 	    <!-- END Dynamic Table Full Pagination -->
 

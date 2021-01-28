@@ -8,7 +8,7 @@ use App\Models\HistoryLeave;
 use App\Models\LeaveHistory;
 use App\Models\LeaveType;
 use App\Models\HistoryLeaveType;
-use App\Models\LeaveStatus;
+use App\Models\RequestStatus;
 
 class LeaveController extends Controller
 {
@@ -49,6 +49,7 @@ class LeaveController extends Controller
      */
     public function confirmRequestLeave(Request $request)
     {
+
         return $this->sendJsonResponse($this->leaveService->confirmRequestLeave($request));
     }
 
@@ -125,88 +126,14 @@ class LeaveController extends Controller
 
 
     /**
-     * It will return a Leave Status List
-     *
-     * @return Body
-     */
-    public function leaveStatus()
-    {
-
-        //$leaves = LeaveType::with('history')->get();
-        $leaves_status = LeaveStatus::all();
-        // dd($leave_type);
-        return view('pages.leaveStatus.leave_status_list')->with('leaves_status', $leaves_status);
-    }
-
-    /**
-     * It will return a HTML for the Leave Status Modal container
-     *
-     * @return Body
-     */
-    public function addLeaveStatusModal(Request $request)
-    {
-        return $this->sendJsonResponse($this->leaveService->addLeaveStatusModal($request));
-    }
-
-    /**
-     * Method for the Adding Leave Status
-     *
-     * @return Body
-     */
-    public function leaveStatusConfirmAdd(Request $request)
-    {
-        return $this->sendJsonResponse($this->leaveService->leaveStatusConfirmAdd($request));
-    }
-
-    /**
-     * Method for Editing Leave Status on Modal PoPUP
-     *
-     * @return Body
-     */
-    public function editLeaveStatusModal(Request $request)
-    {
-        return $this->sendJsonResponse($this->leaveService->editLeaveStatusModal($request));
-    }
-
-    /**
-     * Method for Update Leave Status
-     *
-     * @return Body
-     */
-    public function leaveStatusUpdate(Request $request)
-    {
-        return $this->sendJsonResponse($this->leaveService->leaveStatusUpdate($request));
-    }
-
-    /**
-     * It will return a HTML for the Modal container for confirmation of deletion
-     *
-     * @return Body
-     */
-    public function leaveStatusDeleteModal(Request $request)
-    {
-        return $this->sendJsonResponse($this->leaveService->leaveStatusDeleteModal($request));
-    }
-
-    /**
-     * Method for the Deleting Leave Status
-     *
-     * @return Body
-     */
-    public function leaveStatusDeleteConfirm(Request $request)
-    {
-        return $this->sendJsonResponse($this->leaveService->leaveStatusDeleteConfirm($request));
-    }
-
-    /**
      * It will return a Approve Leave List
      *
      * @return Body
      */
     public function approveLeave()
     {
-        $approve_leaves = LeaveHistory::with('type')->with('user')->where('leave_status_id', '!=', '2')->get();
-        return view('pages.approveLeave.approve_leave_list')->with('approve_leaves', $approve_leaves);
+        $approve_leaves = LeaveHistory::with('type')->with('user')->where('request_status_id', '!=', '2')->get();
+        return view('pages.approve.approval_list')->with('approve_leaves', $approve_leaves);
     }
 
     /**

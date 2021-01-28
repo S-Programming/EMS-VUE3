@@ -23,9 +23,9 @@
 	<!-- Page Content -->
 	<div class="content">
 	    <!-- Dynamic Table Full Pagination -->
-	    <div id="approve-leave-section" class="block block-rounded">
+	    <div id="expense-section" class="block block-rounded">
 
-	    @include('pages.approveLeave._partial._approve_leave_list_table_html',['approve_leaves' => $approve_leaves])
+	    @include('pages.expense._partial._approve_leave_list_table_html',['approve_leaves' => $approve_leaves])
 		</div>
 	    <!-- END Dynamic Table Full Pagination -->
 
