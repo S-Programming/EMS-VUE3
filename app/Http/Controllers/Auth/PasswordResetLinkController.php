@@ -69,9 +69,7 @@ class PasswordResetLinkController extends Controller
                     if ($verificationCode) {
                         $mainAppUrl = config('app.url', null);
                         $verificationCode = $verification->code . '|' . $user->email;
-                        $token = $this->customEncode($verificationCode);
-                        $mainAppUrl = $mainAppUrl.'/' . 'reset-password/' . $verificationCode;
-                        dd($mainAppUrl);
+                        $mainAppUrl = $mainAppUrl.'/' . 'reset-password/' . $this->customEncode($verificationCode);
                         $user->notify(new UserPasswordReset(['url' => $mainAppUrl]));
                         $response = $this->successResponse('Password Reset Email Sent');
                     } else {

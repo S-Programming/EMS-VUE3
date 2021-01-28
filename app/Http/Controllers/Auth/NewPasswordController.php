@@ -71,11 +71,10 @@ class NewPasswordController extends Controller
             'password' => 'required|confirmed|min:8',
         ]);
         if (!$validator->fails()) {
-            //$codeData = $this->customDecode($request['_token']);
-            $codeDataArray = explode('|', $request['token']);
+            $codeData = $this->customDecode($request['token']);
+            $codeDataArray = explode('|', $codeData);
             $userCode = $codeDataArray[0] ?? null;
             $userEmail = $codeDataArray[1] ?? null;
-            dd($codeDataArray);
             $user = User::where('email', $userEmail)->first();
             if ($user != null) {
                 $userId = $user->id ?? '';
@@ -84,17 +83,17 @@ class NewPasswordController extends Controller
                     $user->password = Hash::make($request_data['password']);
                     $user->save();
                     //$this->activityLog("51da6125-6178-48e5-9d8f-87c9febba841", $user->id, $user->id);
-                    $this->guard()->login($user);
-                    $responseData = ['redirect_to' => '/'];
-                    return $this->success('Password Updated Successfully!', $responseData);
+                   // $this->guard()->login($user);
+                    $responseData = ['redirect_to' => '/login'];
+                    return $this->successResponse('Password Updated Successfully!', $responseData);
                 } else {
-                    return $this->error($response['message'] ?? 'error');
+                    return $this->errorResponse($response['message'] ?? 'error');
                 }
             } else {
-                return $this->error('User Not Found');
+                return $this->errorResponse('User Not Found');
             }
         } else {
-            return $this->error($validator->errors()->first());
+            return $this->errorResponse($validator->errors()->first());
         }
     }
 }

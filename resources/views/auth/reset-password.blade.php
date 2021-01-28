@@ -25,10 +25,11 @@
                                     <!-- Reminder Form -->
                                     <!-- jQuery Validation (.js-validation-reminder class is initialized in js/pages/op_auth_reminder.min.js which was auto compiled from _js/pages/op_auth_reminder.js) -->
                                     <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                                    <form class="js-validation-reminder" action="{{ route('pass.update') }}" 
+                                    <form class="js-validation-reminder" action="{{ route('password.update') }}" 
                                     id="new-password-form-id" method="POST">
                                     @csrf
                                         <div class="form-group">
+                                            <x-input type="hidden" class="form-control form-control-lg form-control-alt" id="password" name="token" value="{{$request->token}}" placeholder="Password"/>
                                             <x-input type="password" class="form-control form-control-lg form-control-alt" id="password" name="password" placeholder="Password"/>
                                         </div>
                                         <div class="form-group">

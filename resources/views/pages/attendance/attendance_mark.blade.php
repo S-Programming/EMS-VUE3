@@ -29,7 +29,7 @@
                 </h3>
             </div>
             <div class="block-content">
-                <form method="POST" action="{{ route('attendence.add') }}" id="attendence-mark-form-id"
+                <form method="POST" action="{{ route('attendance.add') }}" id="attendence-mark-form-id"
                       data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
 
@@ -87,7 +87,7 @@
                                   id="validation-span-id">
                             <i class="fa fa-fw fa-check mr-1"></i>{{ __('Entry Mark') }}
                         </x-button>
-                        @if($attendence_entry_mark)
+                        @if($attendance_entry_mark)
                         <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)"
                                   data-validation="validation-span-id"
                                   id="validation-span-id">
