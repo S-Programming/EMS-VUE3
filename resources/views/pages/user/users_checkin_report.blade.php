@@ -1,21 +1,18 @@
 <x-backend-layout>
     <div class="block block-rounded">
-        <div class="block-header block-header-default">
-            <h3 class="block-title bold">Checkin History</h3>
-            <div class="block-options">
-                <form method="POST" action="{{ route('checkin.history.user') }}" id="filter-form-id">
+        <div class="block-header block-header-default row">
+            <div class="col-md-6">
+                <h3 class="block-title bold">Checkin History</h3>
+            </div>
+            <div class="block-options col-md-6">
+                <form method="POST" action="{{ route('checkin.history.user') }}" id="checkin-filter-form-id">
                             @csrf
                 <div class="row">
 
                     <div class="col-sm-4">
 
-                        <select class="dropdown form-control "  name="user_days">
-                            <option>All</option>
-                            <option>Previous Week</option>
-                            <option>Current Week</option>
-                            <option>Previous Month</option>
-                            <option>Current Month</option>
-                        </select>
+                       {!!$user_days!!}
+                   
                     </div>
                     <div class="col-sm-4">
                         <select class="form-control" name="user_id">
@@ -31,7 +28,7 @@
                     <div class="col-sm-4">
                         <x-button class="checkout-btn btn btn-primary" onclick="validateFieldsByFormId(this)" data-validation=" validation-span-id"
                               id="validation-span-id" >
-                        <i class="fa fa-fw fa-search-in-alt mr-1"></i>{{ __('Search') }}
+                        <i class="fa fa-fw fa-search mr-1"></i>{{ __('Search') }}
                         </x-button>
                     </div>
                 

@@ -1,5 +1,5 @@
 <div class="block-header">
-    <h3 class="block-title">Dynamic Table <small>Full pagination</small></h3>
+    <h3 class="block-title">Status List<!--  <small>Full pagination</small> --></h3>
     <x-button class="btn btn-primary" onclick="commonAjaxModel('add_status_modal')" data-validation="validation-span-id" id="validation-span-id">Add
     </x-button>
 </div>

@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\CheckinHistory;
 use Illuminate\Http\Request;
 use App\Http\Services\UserService;
+use App\Models\Attendence;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
@@ -28,8 +29,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('pages.user.users')->with('users', $users);
+        return view('pages.user.users')->with(['users' => $this->getAllUsers()]);
     }
     /**
      * Display a Report of the User-Self Checkin History.
@@ -143,4 +143,6 @@ class UserController extends Controller
         }
         return $this->sendJsonResponse($this->userService->userUpdatePassword($request));
     }
+
+    
 }

@@ -206,9 +206,9 @@ class CheckinHistoryService extends BaseService
         $checkin_id = $request->checkin_id;
         $user_data = CheckinHistory::find($checkin_id);
         $user_data->delete();
-        $users = User::all();
+        
         $user_history = CheckinHistory::all();
-        $html = view('pages.user._partial._checkin_history_html', ['users' => $users, 'user_history' => $user_history])->render();
+        $html = view('pages.user._partial._checkin_history_html', ['users' => $this->getAllUsers(), 'user_history' => $user_history])->render();
         // dd($html);
         return $this->successResponse('User is Successfully Deleted', ['html' => $html, 'html_section_id' => 'checkin-history']);
     }

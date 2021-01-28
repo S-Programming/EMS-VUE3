@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
-class CreateAttendencesTable extends Migration
+class CreateAttendancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +14,7 @@ class CreateAttendencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attendences', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('is_present')->default(0);
@@ -34,6 +35,8 @@ class CreateAttendencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendences');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists('attendances');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

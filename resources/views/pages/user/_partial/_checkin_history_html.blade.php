@@ -1,5 +1,5 @@
-<div class="table-responsive">
-    <table class="table table-borderless table-striped table-vcenter">
+<div class="block-content block-content-full">
+    <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
         <thead>
         <tr>
             <th>User ID</th>

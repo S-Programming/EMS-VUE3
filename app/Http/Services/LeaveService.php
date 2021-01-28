@@ -11,9 +11,14 @@ use App\Models\LeaveType;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Route\Http\Leave;
 use Carbon\Carbon;
+use App\Mail\TestEmail;
+use Notification;
+use App\Notifications\apllyLeaveNotification;
+use Illuminate\Notifications\Notifiable;
 
 class LeaveService extends BaseService
 {
@@ -135,6 +140,8 @@ class LeaveService extends BaseService
     }
 
 
+   
+    
     public function approveLeaveModal(Request $request)
     {
         $requestedLeaveId = $request->id;
@@ -160,16 +167,13 @@ class LeaveService extends BaseService
                 return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approval-section']);
             }
             else{
-                return $this->successResponse('Not Approved',['info' => ['Not Approved'], 'html' => $html, 'html_section_id' => 'approval-section']);
+                return $this->successResponse('Not Approved',['success' => ['Not Approved'], 'html' => $html, 'html_section_id' => 'approval-section']);
             }
-            /*if ($leave_data->leave_status_id == 2)
-                return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approval-section']);
-            if ($leave_data->leave_status_id == 3)
-                return $this->successResponse('Rejected', ['html' => $html, 'html_section_id' => 'approval-section']);*/
+ 
         } 
         else 
         {
-            return $this->errorResponse('Error');
-        }
+            return $this->errorResponse('Error in Approval',['error'=>['Error in Approval'], 'html' => $html, 'html_section_id' => 'approval-section']);
+        } 
     }
 }

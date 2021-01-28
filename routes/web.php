@@ -9,7 +9,7 @@ use Route\Http\Role;
 use Route\Http\CheckInHistory;
 use Route\Http\Holiday;
 use Route\Http\Leave;
-use Route\Http\Attendence;
+use Route\Http\Attendance;
 use Route\Http\RequestStatus;
 use Route\Http\Test;
 
@@ -49,7 +49,7 @@ User::register();
 Role::register();
 CheckInHistory::register();
 Leave::register();
-Attendence::register();
+Attendance::register();
 RequestStatus::register();
 Holiday::register();
 Test::register();
