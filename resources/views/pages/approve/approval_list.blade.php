@@ -24,10 +24,14 @@
 	<div class="content">
 	    <!-- Dynamic Table Full Pagination -->
 	    <div id="approval-section" class="block block-rounded">
-
-	    @include('pages.approve._partial._approve_leave_list_table_html',['approve_leaves' => $approve_leaves])
+	    	@if(isset($approve_leaves) && !empty($approve_leaves)) 
+	    		@include('pages.approve._partial._approve_leave_list_table_html',['approve_leaves' => $approve_leaves]);
+	    	@endif
+	    	@if(isset($approve_expense) && !empty($approve_expense))
+	    		@include('pages.approve._partial._approve_expense_list_table_html',['approve_expense' => $approve_expense]);
+	    	@endif
 		</div>
 	    <!-- END Dynamic Table Full Pagination -->
-
+	   
 	</div>
 </x-backend-layout>

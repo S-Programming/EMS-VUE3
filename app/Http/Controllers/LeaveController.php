@@ -28,7 +28,7 @@ class LeaveController extends Controller
     {
         $user_id = $this->getAuthUserId();
         //$leaves = LeaveType::with('history')->get();
-        $leaves = LeaveHistory::with('type')->with('status')->where('user_id', $user_id)->get();
+        $leaves = LeaveHistory::with('type')->with('requestStatus')->where('user_id', $user_id)->get();
         //dd($leaves);
         return view('pages.leave.leaves_list')->with('leaves', $leaves);
     }
@@ -49,7 +49,6 @@ class LeaveController extends Controller
      */
     public function confirmRequestLeave(Request $request)
     {
-
         return $this->sendJsonResponse($this->leaveService->confirmRequestLeave($request));
     }
 

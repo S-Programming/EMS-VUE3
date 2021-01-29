@@ -15,30 +15,15 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
 
 
-<!--     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
- -->
-    <!-- Fonts and Styles -->
-  <!--   @yield('css_before')
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/css/select2.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/js/plugins/dropzone/dist/min/dropzone.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.css') }}">
-
-    <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
-
-    <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/filepond.css') }}"> -->
-
     <!-- CSS Before -->
     @yield('css_before')
 
     <!-- Fonts and Styles -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/oneui.css') }}" id="css-main">
+    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/oneui.css') }}" >
+    
     <!-- toastr -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/css/toastr.min.css') }}">
     <!-- filepond -->
@@ -69,15 +54,8 @@
 
 <!--     <script src="{{ mix('js/oneui.app.js') }}"></script>
  -->
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
-
-  <!-- Running This -->
-     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
-
+    
+ 
   
   
 
@@ -710,7 +688,8 @@ MAIN CONTENT LAYOUT
     Custom functionality including Blocks/Layout API as well as other vital and optional helpers
     webpack is putting everything together at assets/_js/main/app.js
 -->
-<script src="{{ asset('assets/js/oneui.app.js') }}"></script>
+<!-- <script src="{{ asset('assets/js/oneui.app.js') }}"></script> -->
+<script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
 
 
 <!-- JS Before -->

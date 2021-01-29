@@ -8,22 +8,26 @@
     <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
         <thead>
             <tr>
-                <th style="width: 15%;">Date</th>
+                <th style="width: 15%;">Start Date</th>
+                <th style="width: 15%;">End Date</th>
                 <th style="width: 15%;">Type</th>
-                <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
                 <th class="d-none d-sm-table-cell" style="width: 30%;">Description</th>
                 <th class="d-none d-sm-table-cell" style="width: 30%;">Comments</th>
+                <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
+                
             </tr>
         </thead>
         <tbody>
             @if(isset($leaves) && !empty($leaves))
             @foreach($leaves as $leave)
             <tr>
-                <td class="font-w600 font-size-sm">{{$leave->date}}</td>
+                <td class="font-w600 font-size-sm">{{$leave->start_date}}</td>
+                <td class="font-w600 font-size-sm">{{$leave->end_date}}</td>
                 <td class="font-w600 font-size-sm">{{$leave->type->type}}</td>
-                <td class="font-w600 font-size-sm">{{$leave->requestStatus->status}}</td>
                 <td class="font-w600 font-size-sm">{{$leave->description}}</td>
                 <td class="font-w600 font-size-sm">{{$leave->comments}}</td>
+                <td class="font-w600 font-size-sm">{{$leave->requestStatus->status}}</td>
+                
                 <!-- <td>
                     <button class="btn btn-info" onclick="commonAjaxModel('edit_role_modal',{{$leave->id}})"><i class="fa fa-edit"></i></button>
                     <button class="btn btn-danger" onclick="commonAjaxModel('delete_role_modal',{{$leave->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>

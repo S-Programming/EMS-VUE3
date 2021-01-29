@@ -27,6 +27,8 @@ class MenuRoleTableSeeder extends Seeder
             ['is_allow' => 1, 'role_id' => 1, 'menu_id' => 10],
             ['is_allow' => 1, 'role_id' => 1, 'menu_id' => 12],
             ['is_allow' => 1, 'role_id' => 1, 'menu_id' => 13],
+            ['is_allow' => 1, 'role_id' => 1, 'menu_id' => 14],
+            ['is_allow' => 1, 'role_id' => 1, 'menu_id' => 15],
             ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 1], // Admin
             ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 2],
             ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 3],
@@ -38,11 +40,15 @@ class MenuRoleTableSeeder extends Seeder
             ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 10],
             ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 12],
             ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 13],
+            ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 14],
+            ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 15],
             ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 1], // Developer
             ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 3],
             ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 5],
             ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 8],
             ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 11],
+            ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 16],
+           
            
             
         ];

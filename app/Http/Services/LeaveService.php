@@ -163,7 +163,7 @@ class LeaveService extends BaseService
             $approve_leaves = LeaveHistory::with('type')->with('user')->where('request_status_id', '!=', '2')->get();
 
             $html = view('pages.approve._partial._approve_leave_list_table_html')->with('approve_leaves', $approve_leaves)->render();
-            if ($leave_data->leave_status_id == 2){
+            if ($leave_data->request_status_id == 2){
                 return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approval-section']);
             }
             else{

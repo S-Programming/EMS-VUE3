@@ -62,13 +62,6 @@
                             </div>
                         </div>
                     </div>
-                            <div class="py-3">
-                                <div class="form-group">
-                                    <label for="types">&nbsp Description</label>
-                                    <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg" name="description" required autofocus></textarea>
-                                </div>
-                            </div>
-
                     <div class="block-content block-content-full text-right border-top">
                         <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">Cancel
                         </button>

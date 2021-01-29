@@ -13,6 +13,7 @@
                 <th style="width: 20%;">User Name</th>
                 <th style="width: 15%;">Leave Type</th>
                 <th class="d-none d-sm-table-cell" style="width: 40%;">Description</th>
+                <th style="width: 15%;">Status</th>
                 <th style="width: 10%;">opertaion</th>
             </tr>
         </thead>
@@ -25,6 +26,7 @@
                 <td class="font-w600 font-size-sm">{{$approve_leave->user->first_name}} {{$approve_leave->user->last_name}}</td>
                 <td class="font-w600 font-size-sm">{{$approve_leave->type->type}}</td>
                 <td class="font-w600 font-size-sm">{{$approve_leave->description}}</td>
+                <td class="font-w600 font-size-sm">{{$approve_leave->requestStatus->status}}</td>
                 <td>
                     <button class="btn btn-success" onclick="commonAjaxModel('approve_leave_modal',{{$approve_leave->id}})">Approve</button>
                     <!-- <button class="btn btn-danger" onclick="commonAjaxModel('delete_role_modal',{{$approve_leave->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
