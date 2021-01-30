@@ -5,7 +5,7 @@
     <x-slot name="modal_content">
         <div class="row">
             <div class="col-sm-10 offset-1">
-                <form method="POST" action="{{ route('public.holiday.update') }}" id="edit-public-holiday-form-id"
+                <form method="POST" action="{{ route('holiday.update') }}" id="edit-public-holiday-form-id"
                       data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
                     <div class="card">

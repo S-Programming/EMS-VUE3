@@ -47,7 +47,7 @@ class HolidayService extends BaseService
         //        dd(CommonUtilsFacade::isCheckIn());
         $containerId = $request->input('containerId', 'common_popup_modal');
         // $role_data=Role::find($user_id);
-        $html = view('pages.user._partial._delete_holiday_modal', ['id' => $containerId, 'holiday_id' => $holiday_id])->render();
+        $html = view('pages.admin._partial._delete_holiday_modal', ['id' => $containerId, 'holiday_id' => $holiday_id])->render();
 
         return $this->successResponse('success', ['html' => $html]);
     }
@@ -68,7 +68,7 @@ class HolidayService extends BaseService
     {
         $containerId = $request->input('containerId', 'common_popup_modal');
         $holiday_id = $request->id;
-        $holiday_data = PublicHoliday::find($holiday_id);
+        $holiday_data = Holiday::find($holiday_id);
         $html = view('pages.admin._partial._edit_holiday_modal', ['id' => $containerId, 'data' => null, 'holiday_data' => $holiday_data])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
