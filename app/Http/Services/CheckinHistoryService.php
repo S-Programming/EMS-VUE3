@@ -6,7 +6,7 @@ namespace App\Http\Services;
 
 use App\Http\Services\BaseService\BaseService;
 use App\Models\CheckinHistory;
-use App\Models\Attendence;
+use App\Models\Attendance;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +40,7 @@ class CheckinHistoryService extends BaseService
                 $cico->user_id = $userid;
                 $cico->save();
 
-                $attendence = new Attendence;
+                $attendence = new Attendance;
                 $attendence->user_id = $userid;
                 $attendence->is_present = 1;
                 $attendence->save();
