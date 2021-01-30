@@ -23,11 +23,9 @@
     <!-- Theme CSS -->
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/oneui.css') }}" >
-    
+
     <!-- toastr -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/css/toastr.min.css') }}">
-    <!-- filepond -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/filepond/css/filepond.css') }}">
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
@@ -38,7 +36,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/daterangepicker/daterangepicker.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.css')}}">
-    <link rel="stylesheet" href="{{ asset(' assets/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css')}}">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
@@ -54,10 +52,10 @@
 
 <!--     <script src="{{ mix('js/oneui.app.js') }}"></script>
  -->
-    
- 
-  
-  
+
+
+
+
 
 <!--     <script src="{{ asset('assets/js/tinymce/tinymce.min.js') }}"></script>
     <script type="text/javascript">
@@ -729,20 +727,12 @@ MAIN CONTENT LAYOUT
 <!-- toastr -->
 
 <script src="{{ asset('assets/plugins/toastr/js/toastr.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/filepond/js/filepond.min.js') }}"></script>
 <!-- custom js -->
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 
-<!-- Add plugin scripts -->
-  <!--   <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-
- -->
-
 
 @yield('js_after')
+@stack('js_after_stack')
 
 <!-- OneUI Helpers (don't replace its position) -->
 <script src="{{ asset('assets/js/oneui-helpers.js') }}"></script>

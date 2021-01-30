@@ -168,7 +168,7 @@ class CheckinHistoryService extends BaseService
     {
         $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
         $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
-       
+
         ## End Date User Record Included
         $result = CheckinHistory::whereDate('checkin', '>=', $startDate)->whereDate('checkin', '<=', $endDate)->get();
 
@@ -206,7 +206,7 @@ class CheckinHistoryService extends BaseService
         $checkin_id = $request->checkin_id;
         $user_data = CheckinHistory::find($checkin_id);
         $user_data->delete();
-        
+
         $user_history = CheckinHistory::all();
         $html = view('pages.user._partial._checkin_history_html', ['users' => $this->getAllUsers(), 'user_history' => $user_history])->render();
         // dd($html);

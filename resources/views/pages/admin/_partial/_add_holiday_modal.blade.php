@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="form-group hide-input" id="date-group">
                                     <label for="">Select Date </label>
-                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" readonly="readonly">
+                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date"  data-min-date="today" placeholder="Select Date" readonly="readonly">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">&nbsp Name</label>

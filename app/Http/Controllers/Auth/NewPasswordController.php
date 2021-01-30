@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
 
@@ -83,7 +84,7 @@ class NewPasswordController extends Controller
                     $user->password = Hash::make($request_data['password']);
                     $user->save();
                     //$this->activityLog("51da6125-6178-48e5-9d8f-87c9febba841", $user->id, $user->id);
-                   // $this->guard()->login($user);
+                    $this->guard()->login($user);
                     $responseData = ['redirect_to' => '/login'];
                     return $this->successResponse('Password Updated Successfully!', $responseData);
                 } else {
@@ -95,5 +96,14 @@ class NewPasswordController extends Controller
         } else {
             return $this->errorResponse($validator->errors()->first());
         }
+    }
+    /**
+     * Get the guard to be used during password reset.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard();
     }
 }

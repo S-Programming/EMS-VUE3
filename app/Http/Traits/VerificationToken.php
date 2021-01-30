@@ -45,10 +45,11 @@ trait VerificationToken
         $type = $paramsData['type'] ?? '';
         $code = $paramsData['code'] ?? '';
         $response = $this->response();
-        if ($code == "4321") {
+        $testing = false;
+        if ($testing && $code == "4321") {
             $verify = UserVerify::where(['user_id' => $userId, 'type' => $type])->first();
             if ($verify == NULL) {
-                $response['message'] = 'Code Not Found';
+                $response['message'] = 'Link is expired, please request again.';
             } else {
                 $verify->delete();
                 $response['status'] = 'success';
@@ -56,7 +57,7 @@ trait VerificationToken
         } else {
             $verify = UserVerify::where(['user_id' => $userId, 'type' => $type, 'code' => $code])->first();
             if ($verify == NULL) {
-                $response['message'] = 'Code Not Found';
+                $response['message'] = 'Link is expired, please request again.';
             } else {
                 $verify->delete();
                 $response['status'] = 'success';

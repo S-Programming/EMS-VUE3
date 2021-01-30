@@ -43,18 +43,11 @@ function validateFieldsByFormId(e) {
             success: function (data) {
                 e.disabled = false;
                 // console.log(data.redirect_to);
-                 if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
-                        $('#' + data.html_section_id).html(data.html);
-                    }
+                if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
+                    $('#' + data.html_section_id).html(data.html);
+                }
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
-                    //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
-                    if(formId=="profile-form-id" || formId=="attendence-filter-form-id" || 'checkin-filter-form-id')
-                    {
-                        $(`#` + validationSpanId).html(buttonHtml);
-                    }
-
-
                     if (data.redirect_to != '' && typeof (data.redirect_to) != "undefined") {
                         setTimeout(function () {
                             reload_page(data.redirect_to)
@@ -66,27 +59,26 @@ function validateFieldsByFormId(e) {
                     if ($('body').hasClass('modal-open') && typeof modalId != 'undefined' && modalId != '') {
                         closeModalById(modalId);
                     }
-
-                }
-                else {
-                    console.log("dat.ERROR");
-                    var errors = data.errors;
-                    $.each(errors, function (i, val) {
-                        if (errors[i] != 'undefined' && errors[i] != null) {
-                            let nowErrorMessage = errors[i];
-                            if (i == 'errors') {
-                                let newErrors = errors[i];
-                                $.each(newErrors, function (index, value) {
-                                    nowErrorMessage = newErrors[index][0] ? newErrors[index][0] : '';
-                                });
+                } else {
+                    errorMsg = typeof data.message != "undefined" ? data.message : '';
+                    if (typeof data.errors != 'undefined') {
+                        var errors = data.errors;
+                        $.each(errors, function (i, val) {
+                            if (errors[i] != 'undefined' && errors[i] != null) {
+                                let nowErrorMessage = errors[i];
+                                if (i == 'errors') {
+                                    let newErrors = errors[i];
+                                    $.each(newErrors, function (index, value) {
+                                        nowErrorMessage = newErrors[index][0] ? newErrors[index][0] : '';
+                                    });
+                                }
+                                errorMsg += nowErrorMessage + '<br>';
                             }
-                            errorMsg += nowErrorMessage + '<br>';
-                        }
-                    });
+                        });
+                    }
                     notificationAlert('error', errorMsg, 'Inconceivable!');
-                    //  bsAlert(data.message, 'alert-danger', 'alert_placeholder');
-                    $(`#` + validationSpanId).html(buttonHtml);
                 }
+                $(`#` + validationSpanId).html(buttonHtml);
             },
             error: function (data) {
                 e.disabled = false;
@@ -116,7 +108,7 @@ function validateFieldsByFormId(e) {
 function validateFields(formId) {
     var fields = $("#" + formId + " :input").serializeArray();
     var error = [];
-    var skipArray = ['action','date_range','date'];
+    var skipArray = ['action', 'date_range', 'date'];
     var emailArray = ['email'];
     var phoneNumberArray = ['phone_number'];
     var skipforEmpty = [];
@@ -133,7 +125,7 @@ function validateFields(formId) {
                 elementObj.val(field.value);
             }
         }
-        
+
         if ($.inArray(fname, skipArray) == -1) {
             if ($.trim(field.value) == '') {
                 if ($.inArray(fname, skipforEmpty) == -1) {
@@ -269,24 +261,24 @@ function commonAjaxModel(route, id, containerId) {
             data: dataToPost,
             dataType: "json",
             success: function (data) {
-                 if (data.status == 'success') {
-                /*If Modal Div not defined*/
-                if ($('#' + containerId + '_mp').length == 0) {
-                    $("body").append('<div id="' + containerId + '_mp"></div>');
+                if (data.status == 'success') {
+                    /*If Modal Div not defined*/
+                    if ($('#' + containerId + '_mp').length == 0) {
+                        $("body").append('<div id="' + containerId + '_mp"></div>');
+                    }
+                    /*Put Modal HTML in Modal Placeholder*/
+                    $('#' + containerId + '_mp').html(data.html);
+                    /*Show Modal*/
+                    $('#' + containerId).modal('show');
                 }
-                /*Put Modal HTML in Modal Placeholder*/
-                $('#' + containerId + '_mp').html(data.html);
-                /*Show Modal*/
-                $('#' + containerId).modal('show');
-            }
-             if (data.status == 'error') {
+                if (data.status == 'error') {
 
-        notificationAlert('error', data.message, 'Inconceivable!');
-             }
+                    notificationAlert('error', data.message, 'Inconceivable!');
+                }
 
             }, error: function (data) {
-                console.log('error',data);
-        notificationAlert('error', data.responseJSON.message, 'Inconceivable!');
+                console.log('error', data);
+                notificationAlert('error', data.responseJSON.message, 'Inconceivable!');
             }
         });
     } else {
@@ -325,13 +317,10 @@ function ajaxCallOnclick(route, extraData) {
             dataType: "json",
             success: function (data) {
                 // console.log('RN',data)
-                   if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
-                        $('#' + data.html_section_id).html(data.html);
-                    }
+                if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
+                    $('#' + data.html_section_id).html(data.html);
+                }
                 if (data.status == 'success') {
-                    if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
-                        $('#' + data.html_section_id).html(data.html);
-                    }
                     notificationAlert('success', data.message, 'Success!');
                     if (typeof dataToPost.method_to_execute != 'undefined' && dataToPost.method_to_execute != '') {
                         window[extraData.method_to_execute]();
@@ -342,7 +331,7 @@ function ajaxCallOnclick(route, extraData) {
                 const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
                 if ($('body').hasClass('modal-open') && containerId) {
                     closeModalById(containerId);
-                     //$(this).closest('tr').css('background','tomato');
+                    //$(this).closest('tr').css('background','tomato');
                     // $(this).closest('tr').fadeOut(800,function(){
                     //    $(this).remove();
                     //    });
@@ -469,8 +458,8 @@ $(function() {
         console.log("gl available");
         navigator.geolocation.getCurrentPosition(position => {
             console.log(position.coords.latitude + "," + position.coords.longitude);
-            
-            $.post("attendance_get_location", 
+
+            $.post("attendance_get_location",
             {
                 lat: position.coords.latitude,
                 lon: position.coords.longitude,
@@ -529,11 +518,12 @@ $(function() {
             "format": "DD-MM-YYYY",
         }
     });
-    
-   
+
+
     console.log("Bye");
 });*/
- //  $('#date_range').daterangepicker();
+
+//  $('#date_range').daterangepicker();
 
 function showDate() {
     $('#range-group').toggleClass('hide-input');
@@ -546,44 +536,3 @@ function showDate() {
     format: 'mm/dd/yyyy',
     startDate: '-3d'
 });*/
-// register the plugins with FilePond
-FilePond.registerPlugin(
-  FilePondPluginImagePreview,
-  FilePondPluginImageResize,
-  FilePondPluginImageTransform,
-
-);
-FilePond.setOptions({
-    allowDrop: false,
-    allowReplace: false,
-    instantUpload: false,
-    server: {
-        url: 'http://192.168.33.10',
-        process: './process.php',
-        revert: './revert.php',
-        restore: './restore.php?id=',
-        fetch: './fetch.php?data='
-    }
-});
-const inputElement = document.querySelector('input[type="file"]');
-const pond = FilePond.create(inputElement, {
-  
-  imageResizeTargetWidth: 256,
-
-  // set contain resize mode
-  imageResizeMode: 'contain',
-
- /* onaddfile: (err, fileItem) => {
-    console.log(err, fileItem.getMetadata('resize'));
-
-  },
-  onpreparefile: (fileItem, output) => {
-    const img = new Image();
-    img.src = URL.createObjectURL(output);
-    console.log(output.name);
-     document.body.appendChild(img);
-   
-  }*/
-
-});
-
