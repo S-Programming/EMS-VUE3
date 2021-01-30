@@ -20,7 +20,7 @@ class CreateExpensesTable extends Migration
             $table->string('reason');
             $table->string('description');
             $table->string('comments')->nullable();
-            $table->float('amount');
+            $table->double('amount');
             $table->string('receipt_path')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
