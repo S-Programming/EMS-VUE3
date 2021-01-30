@@ -49,7 +49,7 @@ function validateFieldsByFormId(e) {
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     //  bsAlert(data.message, 'alert-success', 'alert_placeholder');
-                    if(formId=="profile-form-id" || formId=="filter-form-id")
+                    if(formId=="profile-form-id" || formId=="attendence-filter-form-id" || 'checkin-filter-form-id')
                     {
                         $(`#` + validationSpanId).html(buttonHtml);
                     }

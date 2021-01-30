@@ -1,43 +1,42 @@
 <x-backend-layout>
     <div class="block block-rounded">
-        <div class="block-header block-header-default row">
+        <div class="block-header block-header-default">
             <div class="col-md-6">
                 <h3 class="block-title bold">User Attendance</h3>
             </div>
             <div class="block-options col-md-6" style="float: right;">
-                
                 <form method="POST" action="{{ route('attendance.history.user') }}" id="attendence-filter-form-id">
                             @csrf
-                <div class="row">
-                    <div class="col-4">
-                        <select class="dropdown form-control " name="user_days">
-                            <option value="Current Month">Current Month</option>
-                            <option value="Previous Month">Previous Month</option>
-                        </select>
-                    </div>
-                    <div class="col-4">
-                        <select class="form-control" name="user_id">
-                            @if(isset($users) && !empty($users))
-                                <option value="All">All</option>
-                                @foreach($users as $user)
-                                    <option
-                                        value="{{$user->id}}">{{$user->first_name}}{{" "}}{{$user->last_name}}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                    </div>
-                  <div class="col-4">
-                        <x-button class="checkout-btn btn btn-primary" onclick="validateFieldsByFormId(this)" data-validation=" validation-span-id"
-                              id="validation-span-id" >
-                        <i class="fa fa-fw fa-search mr-1"></i>{{ __('Search') }}
-                        </x-button>
-                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <select class="dropdown form-control " name="user_days">
+                                <option value="Current Month">Current Month</option>
+                                <option value="Previous Month">Previous Month</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <select class="form-control" name="user_id">
+                                @if(isset($users) && !empty($users))
+                                    <option value="All">All</option>
+                                    @foreach($users as $user)
+                                        <option
+                                            value="{{$user->id}}">{{$user->first_name}}{{" "}}{{$user->last_name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                      <div class="col-4">
+                            <x-button class="checkout-btn btn btn-primary" onclick="validateFieldsByFormId(this)" data-validation=" validation-span-id"
+                                  id="validation-span-id" >
+                            <i class="fa fa-fw fa-search mr-1"></i>{{ __('Search') }}
+                            </x-button>
+                        </div>
 
-                </div>
+                    </div>
                 </form>
-                </div>
             </div>
         </div>
+    </div>
 	<!-- Hero -->
 	{{-- <div class="bg-body-light">
 	    <div class="content content-full">
