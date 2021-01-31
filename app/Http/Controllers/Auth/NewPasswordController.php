@@ -83,7 +83,7 @@ class NewPasswordController extends Controller
                     $user->password = Hash::make($request_data['password']);
                     $user->save();
                     //$this->activityLog("51da6125-6178-48e5-9d8f-87c9febba841", $user->id, $user->id);
-                   // $this->guard()->login($user);
+                    $this->guard()->login($user);
                     $responseData = ['redirect_to' => '/login'];
                     return $this->successResponse('Password Updated Successfully!', $responseData);
                 } else {
