@@ -9,14 +9,14 @@
                             <h3 class="block-title">Create Account</h3>
                             <div class="block-options">
                                 <a class="btn-block-option font-size-sm" href="javascript:void(0)" data-toggle="modal" data-target="#one-signup-terms">View Terms</a>
-                                <a class="btn-block-option" href="op_auth_signin.html" data-toggle="tooltip" data-placement="left" title="Sign In">
+                                <a class="btn-block-option" href="{{route('login')}}" data-toggle="tooltip" data-placement="left" title="Sign In">
                                     <i class="fa fa-sign-in-alt"></i>
                                 </a>
                             </div>
                         </div>
                         <div class="block-content">
                             <div class="p-sm-3 px-lg-4 py-lg-5">
-                                <h1 class="h2 mb-1">OneUI</h1>
+                                <h1 class="h2 mb-1">KodeStudio</h1>
                                 <p class="text-muted">
                                     Please fill the following details to create a new account.
                                 </p>
@@ -69,9 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="content content-full font-size-sm text-muted text-center">
-            <strong>OneUI 4.8</strong> &copy; <span data-toggle="year-copy"></span>
-        </div>
+        <x-footer-signature></x-footer-signature>
     </div>
     <!-- END Page Content -->
     {{-- <x-auth-card>

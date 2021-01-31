@@ -7,7 +7,7 @@
             <div class="col-sm-10 offset-1">
                 <form method="POST" action="{{ route('leave.confirm.request') }}" id="leave-request-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
-                
+
                     @php
                         $inyMceConfig = theme_tinyMCE_default_config();
                         $inyMceConfig['is_tiny_mce_modal'] = $id??'common_popup_modal';
@@ -19,7 +19,7 @@
                             <div class="py-2">
                                 <div class="form-group">
                                    <!--  <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden" name="id" value="{{$user_data->id??0}}" />
-                                    --> 
+                                    -->
                                 </div>
                             </div>
                            <div class="py-3">
@@ -33,7 +33,7 @@
                                     <label for="types">&nbsp Description</label>
                                     <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="description"  required autofocus ></textarea>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="form-group">
                                 <label>Multiple Days</label>
                                 <select class="form-control" name="multiple-days" onchange="showDate()">
@@ -51,14 +51,14 @@
 
                             <div class="form-group" id="range-group">
                                 <label for="">Date Range: </label>
-                                <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id=""
+                                <input type="text" class="js-flatpickr form-control bg-white flatpickr-input date-range-cls" id="date-range-id"
                                            name="date_range" placeholder="Select Holidays"
-                                           data-mode="range"
+{{--                                           data-mode="range"--}}
                                            data-min-date="today">
                             </div>
                             <div class="form-group hide-input" id="date-group">
                                 <label for="">Select Date </label>
-                                <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" readonly="readonly">
+                                <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" data-min-date="today" readonly="readonly">
                             </div>
                         </div>
                     </div>

@@ -25,8 +25,8 @@ class LeaveService extends BaseService
     /* All Leave Methods */
     public function confirmRequestLeave(Request $request)
     {
-       
-     //  dd($request->all());
+
+        //  dd($request->all());
         if (!isset($request) && empty($request)) { // what will be condition
             return $this->errorResponse('Leave Submittion Failed');
         }
@@ -37,15 +37,15 @@ class LeaveService extends BaseService
             $leave->leave_type_id = $request->leave_types;
             $leave->description = $request->description;
             $leave->half_day = $request->half_day;
-            if($request->date_range !='')
-            {
-                $date_range = explode('to',$request->date_range);
-            
-                $leave->start_date = Carbon::parse($date_range[0]);
-                $leave->end_date = Carbon::parse($date_range[1]) ?? '';
-            }
-            else
-            {
+            if ($request->date_range != '') {
+                $date_range = explode('to', $request->date_range);
+                if(!isset($date_range[1]) && !empty($date_range[1])) {
+                    $leave->start_date = isset($date_range[0]) ? Carbon::parse($date_range[0]) : '';
+                    $leave->end_date = isset($date_range[1]) ? Carbon::parse($date_range[1]) : '';
+                }else{
+                    $leave->start_date = Carbon::parse($request->date_range);
+                }
+            } else {
                 $leave->start_date = Carbon::parse($request->date);
             }
             $leave->request_status_id = 1;
@@ -140,8 +140,6 @@ class LeaveService extends BaseService
     }
 
 
-   
-    
     public function approveLeaveModal(Request $request)
     {
         $requestedLeaveId = $request->id;
@@ -151,6 +149,7 @@ class LeaveService extends BaseService
         $html = view('pages.approve._partial._approve_leave_modal', ['id' => $containerId, 'requestedLeaveId' => $requestedLeaveId, 'data' => null, 'status_dropdown' => $status_dropdown])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
+
     public function confirmApproveLeaveModal(Request $request)
     {
         if (isset($request) && !empty($request)) {
@@ -163,17 +162,14 @@ class LeaveService extends BaseService
             $approve_leaves = LeaveHistory::with('type')->with('user')->where('request_status_id', '!=', '2')->get();
 
             $html = view('pages.approve._partial._approve_leave_list_table_html')->with('approve_leaves', $approve_leaves)->render();
-            if ($leave_data->request_status_id == 2){
+            if ($leave_data->request_status_id == 2) {
                 return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approval-section']);
+            } else {
+                return $this->successResponse('Not Approved', ['success' => ['Not Approved'], 'html' => $html, 'html_section_id' => 'approval-section']);
             }
-            else{
-                return $this->successResponse('Not Approved',['success' => ['Not Approved'], 'html' => $html, 'html_section_id' => 'approval-section']);
-            }
- 
-        } 
-        else 
-        {
-            return $this->errorResponse('Error in Approval',['error'=>['Error in Approval'], 'html' => $html, 'html_section_id' => 'approval-section']);
-        } 
+
+        } else {
+            return $this->errorResponse('Error in Approval', ['error' => ['Error in Approval'], 'html' => $html, 'html_section_id' => 'approval-section']);
+        }
     }
 }

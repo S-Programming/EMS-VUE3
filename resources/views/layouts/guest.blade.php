@@ -23,8 +23,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/oneui.css') }}" id="css-main">
     <!-- toastr -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/css/toastr.min.css') }}">
-    <!-- filepond -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/filepond/css/filepond.css') }}">
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
@@ -144,7 +142,6 @@ MAIN CONTENT LAYOUT
 <script src="{{ asset('assets/js/pages/pages_ecom_dashboard.min.js') }}"></script>
 <!-- toastr -->
 <script src="{{ asset('assets/plugins/toastr/js/toastr.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/filepond/js/filepond.min.js') }}"></script>
 <!-- custom js -->
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 

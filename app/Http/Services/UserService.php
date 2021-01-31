@@ -21,69 +21,16 @@ class UserService extends BaseService
     public function userReportHistory(Request $request)
     {
         $userId = $this->getAuthUserId();
-        if ($request->history_report == 'Current Month') {
-            $currentmonthlyCheckins = CheckinHistory::where('checkin', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
-                // ->where('user_id', $userId)
-                ->get();
-            $count = $currentmonthlyCheckins->count();
-            $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $currentmonthlyCheckins, 'totalCheckins' => $count])->render();
-            if ($count > 0) {
-                return $this->successResponse('Current Month Checkin_History Received successfully', ['html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
-            } else {
-                return $this->errorResponse('Current Month Checkin_History Not Exists', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
-            }
-        } elseif ($request->history_report == 'Previous Month') {
-            //Previous Month Checkins
-            $previousMonthCheckins = CheckinHistory::whereMonth(
-                'checkin',
-                '=',
-                Carbon::now()->subMonth()->month
-            )->get();
-            $count = $previousMonthCheckins->count();
-            $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $previousMonthCheckins, 'totalCheckins' => $count])->render();
-            if ($count > 0) {
-                return $this->successResponse('Previous Month Checkin_History Received successfully', ['html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
-            } else {
-                return $this->errorResponse('Previous Month Checkin_History Not Exists', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
-            }
-        } elseif ($request->history_report == 'Current Week') {
-            // current week
-            $NowDate = Carbon::now()->format('Y-m-d');
-            $currentStartWeekDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1); // gives 2016-01-3
-            $currentWeekCheckins = CheckinHistory::whereBetween('checkin', array($currentStartWeekDate, $NowDate))
-                // ->where('user_id', $userId)
-                ->get();
-            $count = $currentWeekCheckins->count();
-            $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $currentWeekCheckins, 'totalCheckins' => $count])->render();
-            if ($count > 0) {
-                return $this->successResponse('Current Week Checkin_History Received successfully', ['html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
-            } else {
-                return $this->errorResponse('Current Week Checkin_History Not Exists', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
-            }
-        } elseif ($request->history_report == 'Previous Week') {
-            // Past Week Checkins (Today is not included)
-            $previousWeekStartDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->subWeek()->format('Y-m-d'); // gives 2016-01-31
-            $previousWeekEndDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek)->format('Y-m-d');
-            $pastWeekCheckins = CheckinHistory::whereBetween('checkin', array($previousWeekStartDate, $previousWeekEndDate))
-                // ->where('user_id', $userId)
-                ->get();
-            $count = $pastWeekCheckins->count();
-            $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $pastWeekCheckins, 'totalCheckins' => $count])->render();
-            if ($count > 0) {
-                return $this->successResponse('Previous Week Checkin_History Received successfully', ['html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
-            } else {
-                return $this->errorResponse('Previous Week Checkin_History Not Exists', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
-            }
+        $filters = ($userId > 0) ? [['user_id', '=', $userId]] : [];
+        $date_filters = historyDateFilter($request->history_report);
+        $filters = array_merge($date_filters, $filters);
+        $checkinHistoryData = CheckinHistory::where($filters)->get();
+        $count = $checkinHistoryData->count();
+        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkinHistoryData, 'totalCheckins' => $count])->render();
+        if ($count > 0) {
+            return $this->successResponse('Record Found successfully', ['html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
         } else {
-            $all_checkin_history = CheckinHistory::all();
-            // where('user_id', $userId)->get()
-            $count = $all_checkin_history->count();
-            $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $all_checkin_history, 'totalCheckins' => $count])->render();
-            if ($count > 0) {
-                return $this->successResponse('All Checkin_History Received successfully', ['html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
-            } else {
-                return $this->errorResponse('Checkin_History Not Exists', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
-            }
+            return $this->errorResponse('Record Not Found', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
         }
     }
 
@@ -158,7 +105,7 @@ class UserService extends BaseService
 
         $user_data = User::find($user_id);
         $user_data->delete();
-       
+
         $html = view('pages.user._partial._users_list_table_html', ['users' => $this->getAllUsers()])->render();
         return $this->successResponse('User is Successfully Deleted', ['html' => $html, 'html_section_id' => 'userlist-section']);
     }
@@ -175,8 +122,8 @@ class UserService extends BaseService
             $user_data->email = $request->email;
             $user_data->phone_number = $request->phone_number;
             //$user_data->password = bcrypt($request->password);
-           
-               // $image = new Image;
+
+            // $image = new Image;
             if ($request->hasFile('profile_image')) {
                 $file = $request->file('profile_image');
                 $file_name = $file->getClientOriginalName();
@@ -187,7 +134,7 @@ class UserService extends BaseService
                 //$image->title = $request->product_image_title;
                 //$image->description = $request->image_description;
                 $user_data->image_path = $file_path;
-               // $image_result = $image->save();
+                // $image_result = $image->save();
             }
 
             $user_data->save();
@@ -225,5 +172,5 @@ class UserService extends BaseService
             }
         }
     }
-   
+
 }

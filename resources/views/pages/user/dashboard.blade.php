@@ -1,6 +1,6 @@
 <x-backend-layout>
     <!-- Hero -->
-    
+
 
 <!-- New Dashboard huh -->
     <!-- Page Content -->
@@ -191,7 +191,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div id="one-dashboard-search-orders" class="block-content border-bottom d-none">
                         <!-- Search Form -->
                         <form action="#" method="POST" onsubmit="">
@@ -238,7 +238,7 @@
                                             <span class="glyphicon glyphicon-th"></span>
                                         </div>
                                     </div>
-                                   
+
                                     @if($errors->has('start_date'))
                                         <div class="error">{{ $errors->first('start_date') }}</div>
                                     @endif
@@ -247,7 +247,7 @@
                                     @enderror --}}
                                 </div>
                                 <div class="col-5">
-                                    <label for="d2">End Date: </label>                
+                                    <label for="d2">End Date: </label>
                                     <div class="input-group date" data-provide="datepicker">
                                         <input type="text" class="form-control form-control-alt form-control-lg" name="end_date" data-date-format="mm-dd-yyyy" data-autoclose="true" readonly>
                                         <div class="input-group-addon">
@@ -317,7 +317,7 @@
                     </form>
                     <!-- END Search Form -->
                 </div>
-                <div class="block-content" id="self-checkin-history">
+                <div class="block-content">
                     {!!$checkin_history_html ??''!!}
                 </div>
             </div>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
 
@@ -95,5 +96,14 @@ class NewPasswordController extends Controller
         } else {
             return $this->errorResponse($validator->errors()->first());
         }
+    }
+    /**
+     * Get the guard to be used during password reset.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard();
     }
 }
