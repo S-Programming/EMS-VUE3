@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CicoController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Route\Http\Dashboard;
@@ -11,6 +12,7 @@ use Route\Http\Expense;
 use Route\Http\Holiday;
 use Route\Http\Leave;
 use Route\Http\Attendance;
+use Route\Http\Pdf;
 use Route\Http\RequestStatus;
 use Route\Http\Test;
 
@@ -28,8 +30,6 @@ use Route\Http\Test;
 Route::get('/', function () {
     return view('welcome');
 });
-
-
 
 require __DIR__ . '/auth.php';
 
@@ -53,4 +53,5 @@ Attendance::register();
 RequestStatus::register();
 Expense::register();
 Holiday::register();
+Pdf::register();
 Test::register();

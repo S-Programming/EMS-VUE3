@@ -21,7 +21,6 @@ class Holiday
             Route::post('/delete_holiday_modal', [HolidayController::class, 'holidayDeleteModal'])->name('holiday.delete.modal');
 
             Route::post('/confirm_delete_holiday', [HolidayController::class, 'confirmDeleteHoliday'])->name('holiday.confirm.delete');
-          
            
         });
     }
