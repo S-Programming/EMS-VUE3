@@ -9,6 +9,7 @@ use App\Models\LeaveHistory;
 use App\Models\LeaveType;
 use App\Models\HistoryLeaveType;
 use App\Models\RequestStatus;
+use Illuminate\Support\Facades\Validator;
 
 class LeaveController extends Controller
 {
@@ -49,6 +50,12 @@ class LeaveController extends Controller
      */
     public function confirmRequestLeave(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'type' => 'required|unique:leave_type|string|min:3|max:50',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->leaveService->confirmRequestLeave($request));
     }
 
@@ -83,6 +90,12 @@ class LeaveController extends Controller
      */
     public function leaveTypeConfirmAdd(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'type' => 'required|unique:leave_type|string|min:3|max:50',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->leaveService->leaveTypeConfirmAdd($request));
     }
     /**
@@ -101,6 +114,12 @@ class LeaveController extends Controller
      */
     public function leaveTypeUpdate(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'type' => 'required|unique:leave_type|string|min:3|max:50',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->leaveService->leaveTypeUpdate($request));
     }
 
