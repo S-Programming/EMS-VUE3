@@ -47,6 +47,7 @@
     <!-- Required JS -->
     <script>var baseURL = <?php echo json_encode(url('/')); ?>  </script>
     <script>var isUserCheckin = '{{$is_user_checkin??0}}'  </script>
+    <script>var authUserId = '{{$user->id??0}}'  </script>
     <script>var userLastCheckinTime = '{{$user_last_checkin??''}}'  </script>
     <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
 

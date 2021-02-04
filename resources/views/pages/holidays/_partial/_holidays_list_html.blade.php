@@ -1,9 +1,14 @@
 <div class="block-header">
     <h3 class="block-title">Holiday List </h3>
     @can('isAdmin')
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_holiday_modal')" data-validation="validation-span-id"
+     <x-button class="btn btn-success" onclick="commonAjaxModel('add_holiday_modal')" data-validation="validation-span-id"
+              id="validation-span-id">Import CSV 
+    </x-button>
+    &nbsp;
+    <x-button class="btn btn-primary filepond" onclick="commonAjaxModel('add_holiday_modal')" data-validation="validation-span-id"
               id="validation-span-id">Add
     </x-button>
+   
     @endcan
 </div>
 <div class="block-content block-content-full">

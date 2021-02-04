@@ -56,7 +56,7 @@ class ExpenseController extends Controller
     public function approveExpense(Request $request)
     {
     	$approve_expense = Expense::with('user')->where('request_status_id', '!=', '2')->get();
-        return view('pages.approve.approval_list')->with('approve_expense', $approve_expense);
+        return view('pages.admin.approvals.approval_list')->with('approve_expense', $approve_expense);
     }
     /**
      * It will return a HTML for the Modal container for expense approval

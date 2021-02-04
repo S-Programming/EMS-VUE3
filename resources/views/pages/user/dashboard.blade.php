@@ -142,22 +142,25 @@
             </div>
             <div class="col-6 col-sm-4 col-md-3 col-xl-3">
                 <div class="block block-rounded d-flex flex-column">
+                    <center><dt class="font-size-h2 font-w600">Current Time</dt></center> 
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                        <dl class="mb-0">
+
+                        <p id="current-timer"></p>
+                        <!-- <dl class="mb-0">
                             <dt class="font-size-h2 font-w700">32</dt>
                             <dd class="text-muted mb-0">Pending Orders</dd>
                         </dl>
                         <div class="item item-rounded bg-body">
                             <i class="fa fa-shopping-cart font-size-h3 text-primary"></i>
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <!-- <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
                         <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
                             View all orders
                             <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

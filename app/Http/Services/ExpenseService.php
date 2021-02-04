@@ -43,7 +43,7 @@ class ExpenseService extends BaseService
         $containerId = $request->input('containerId', 'common_popup_modal');
         $request_status = RequestStatus::all();
         $status_dropdown = view('utils.status', ['request_status' => $request_status])->render();
-        $html = view('pages.approve._partial._approve_expense_modal', ['id' => $containerId, 'requestedExpenseId' => $requestedExpenseId, 'data' => null, 'status_dropdown' => $status_dropdown])->render();
+        $html = view('pages.admin.approvals._partial._approve_expense_modal', ['id' => $containerId, 'requestedExpenseId' => $requestedExpenseId, 'data' => null, 'status_dropdown' => $status_dropdown])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
 
@@ -58,7 +58,7 @@ class ExpenseService extends BaseService
 
             $approve_expense = Expense::with('user')->where('request_status_id', '!=', '2')->get();
 
-            $html = view('pages.approve._partial._approve_expense_list_table_html')->with('approve_expense', $approve_expense)->render();
+            $html = view('pages.admin.approvals._partial._approve_expense_list_table_html')->with('approve_expense', $approve_expense)->render();
             if ($expense_data->request_status_id == 2){
                 return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approval-section']);
             }

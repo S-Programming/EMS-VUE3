@@ -36,26 +36,28 @@
                         </div>
                         <div class="col-lg-8 col-xl-5">
                             <div class="form-group">
+                                 <!-- <input type="text" class="form-control" id="id" name="id" 
+                                       placeholder="Enter your username.." value="{{$user_data->id??''}}"> -->
                                 <label for="first_name">First Name</label>
                                 <input type="text" class="form-control" id="first_name" name="first_name"
-                                       placeholder="Enter your username.." value="{{$user_data->first_name}}">
+                                       placeholder="Enter your username.." value="{{$user_data->first_name??''}}">
                             </div>
                             <div class="form-group">
                                 <label for="last_name">Last Name</label>
                                 <input type="text" class="form-control" id="last_name" name="last_name"
-                                       placeholder="Enter your name.." value="{{$user_data->last_name}}">
+                                       placeholder="Enter your name.." value="{{$user_data->last_name??''}}">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email Address</label>
                                 <input type="email" class="form-control" id="email" name="email"
-                                       placeholder="Enter your email.." value="{{$user_data->email}}">
+                                       placeholder="Enter your email.." value="{{$user_data->email??''}}">
                             </div>
                             <div class="form-group">
                                 <label for="phone_number">Phone Number</label>
                                 <input type="text"
                                        oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                                        class="form-control" id="phone_number" name="phone_number"
-                                       placeholder="Enter your Contact Number.." value="{{$user_data->phone_number}}">
+                                       placeholder="Enter your Contact Number.." value="{{$user_data->phone_number??''}}">
                             </div>
                             <div class="form-group">
                                 <!-- <label>Your Avatar</label>
@@ -64,9 +66,11 @@
                                 </div> -->
 
                                 <input type="file" name="image_file" id="image-file" value="" class="filepond">
-{{--                                <input type="hidden" name="current_profile_image"--}}
-{{--                                       value="{{basename('s8d0ZQzRNFO3itjj3v90RSIkKhl1P0n6INXbffax.jpg')}}">--}}
-{{--                                <input type="hidden" name="temp_value[]" value="">--}}
+
+                                <input type="hidden" name="current_profile_image"
+                                       value="{{basename($user_data->image_path??'')}}">
+                                <!-- <input type="text" name="temp_value[]" value="" id="temp_value">
+ -->
 
                             </div>
                             <div class="form-group">
@@ -166,22 +170,26 @@
                         'image/png': null,
                         'image/gif': null
                     },
+                     
                     maxFileSize: "8MB",
                     server: {
                         process: function (fieldName, file, metadata, load, error, progress, abort) {
 
                             // fieldName is the name of the input field
                             // file is the actual file object to send
+                            
                             const formData = new FormData();
                             formData.append('image_file', file, file.name);
 
                             const request = new XMLHttpRequest();
-                            request.open('POST', '/api/image/process');
+                            request.open('POST', '/api/image/process/'+authUserId);
+                           
 
                             // Should call the progress method to update the progress to 100% before calling load
                             // Setting computable to false switches the loading indicator to infinite mode
                             request.upload.onprogress = function (e) {
                                 progress(e.lengthComputable, e.loaded, e.total);
+                                
                             };
 
                             // Should call the load method when done and pass the returned server file id
@@ -191,6 +199,7 @@
                                 if (request.status >= 200 && request.status < 300) {
                                     // the load method accepts either a string (id) or an object
                                     load(JSON.parse(request.responseText));
+                                    console.log("ok");
                                 } else {
                                     // Can call the error method if something is wrong, should exit after
                                     error('Failed to upload image.');
@@ -209,6 +218,7 @@
                                     abort();
                                 }
                             };
+                        
                         },
                         load: '/api/profile/images/',
                         revert: '/api/profile/images/',
@@ -247,8 +257,11 @@
 
                     filePond.onprocessfile = function (error, file) {
                         if (!error) {
+                            
                             $(parent.element).nextAll("input[name='temp_value[]']:first").val(file.serverId);
                         }
+                        console.log("double ok");
+                           // document.getElementById("temp_value").value = file.serverId;
                     };
 
                     filePond.onprocessfilerevert = function (file) {

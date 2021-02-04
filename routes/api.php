@@ -21,4 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/{category}/images/{imageId}', [UploadController::class, 'loadImage']);
 //Route::get('/event-floor-layouts/pdf/{id}', [UploadController::class, 'verifyAttendance']);
 Route::delete('/image', [UploadController::class, 'loadImage']);
-Route::post('/image/process', [UploadController::class, 'uploadImage']);
+Route::post('/image/process/{user_id}', [UploadController::class, 'uploadImage']);

@@ -38,7 +38,7 @@ class HolidayService extends BaseService
 
             $holidays = Holiday::all();
         }
-        $html = view('pages.admin._partial._holidays_list_html', compact('holidays', $holidays))->render();
+        $html = view('pages.holidays._partial._holidays_list_html', compact('holidays', $holidays))->render();
         return $this->successResponse('Holiday has Successfully Added', ['html' => $html, 'html_section_id' => 'holidaylist-section']);
     }
     public function holidayDeleteModal(Request $request)
@@ -60,7 +60,7 @@ class HolidayService extends BaseService
         $holiday_data = Holiday::find($holiday_id);
         $holiday_data->delete();
         $holidays = Holiday::all();
-        $html = view('pages.admin._partial._holidays_list_html', compact('holidays', $holidays))->render();
+        $html = view('pages.holidays._partial._holidays_list_html', compact('holidays', $holidays))->render();
         return $this->successResponse('Holiday is Successfully Deleted', ['html' => $html, 'html_section_id' => 'holidaylist-section']);
     }
 
@@ -87,7 +87,7 @@ class HolidayService extends BaseService
 
              $holidays = Holiday::all();
         }
-        $html = view('pages.admin._partial._holidays_list_html', compact('holidays', $holidays))->render();
+        $html = view('pages.holidays._partial._holidays_list_html', compact('holidays', $holidays))->render();
         return $this->successResponse('Holiday has Successfully Updated', ['html' => $html, 'html_section_id' => 'holidaylist-section']);   
     }
 

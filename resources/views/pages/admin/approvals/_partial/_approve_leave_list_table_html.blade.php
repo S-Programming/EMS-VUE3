@@ -25,7 +25,7 @@
                 <td class="font-w600 font-size-sm">{{$approve_leave->end_date}}</td>
                 <td class="font-w600 font-size-sm">{{$approve_leave->user->first_name}} {{$approve_leave->user->last_name}}</td>
                 <td class="font-w600 font-size-sm">{{$approve_leave->type->type}}</td>
-                <td class="font-w600 font-size-sm">{{$approve_leave->description}}</td>
+                <td class="font-w600 font-size-sm">{!! $approve_leave->description !!}</td>
                 <td class="font-w600 font-size-sm">{{$approve_leave->requestStatus->status}}</td>
                 <td>
                     <button class="btn btn-success" onclick="commonAjaxModel('approve_leave_modal',{{$approve_leave->id}})">Approve</button>

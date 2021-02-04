@@ -116,8 +116,9 @@ MAIN CONTENT LAYOUT
     Custom functionality including Blocks/Layout API as well as other vital and optional helpers
     webpack is putting everything together at assets/_js/main/app.js
 -->
-<script src="{{ asset('assets/js/oneui.app.js') }}"></script>
-
+<!-- <script src="{{ asset('assets/js/oneui.app.js') }}"></script>
+ -->
+ <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
 
 <!-- JS Before -->
 @yield("js_before")

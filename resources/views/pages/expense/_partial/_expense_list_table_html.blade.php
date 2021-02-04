@@ -23,8 +23,8 @@
             <tr>
                 <td class="font-w600 font-size-sm">{{$data->id}}</td>
                 <td class="font-w600 font-size-sm">{{$data->reason}}</td>
-                <td class="font-w600 font-size-sm">{{$data->description}}</td>
-                <td class="font-w600 font-size-sm">{{$data->comments}}</td>
+                <td class="font-w600 font-size-sm">{!! $data->description !!}</td>
+                <td class="font-w600 font-size-sm">{!! $data->comments !!}</td>
                 <td class="font-w600 font-size-sm">{{$data->amount}}</td>
                 <td class="font-w600 font-size-sm">{{$data->requestStatus->status}}</td>
                 

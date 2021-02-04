@@ -132,7 +132,7 @@ class LeaveController extends Controller
     public function approveLeave()
     {
         $approve_leaves = LeaveHistory::with('type')->with('user')->where('request_status_id', '!=', '2')->get();
-        return view('pages.approve.approval_list')->with('approve_leaves', $approve_leaves);
+        return view('pages.admin.approvals.approval_list')->with('approve_leaves', $approve_leaves);
     }
 
     /**

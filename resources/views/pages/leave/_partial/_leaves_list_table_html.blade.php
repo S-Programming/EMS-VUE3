@@ -25,7 +25,7 @@
                 <td class="font-w600 font-size-sm">{{$leave->end_date}}</td>
                 <td class="font-w600 font-size-sm">{{$leave->type->type}}</td>
                 <td class="font-w600 font-size-sm">{!! $leave->description !!}</td>
-                <td class="font-w600 font-size-sm">{{$leave->comments}}</td>
+                <td class="font-w600 font-size-sm">{!! $leave->comments !!}</td>
                 <td class="font-w600 font-size-sm">{{$leave->requestStatus->status}}</td>
 
                 <!-- <td>

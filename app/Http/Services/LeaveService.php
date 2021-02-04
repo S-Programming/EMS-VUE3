@@ -146,7 +146,7 @@ class LeaveService extends BaseService
         $containerId = $request->input('containerId', 'common_popup_modal');
         $request_status = RequestStatus::all();
         $status_dropdown = view('utils.status', ['request_status' => $request_status])->render();
-        $html = view('pages.approve._partial._approve_leave_modal', ['id' => $containerId, 'requestedLeaveId' => $requestedLeaveId, 'data' => null, 'status_dropdown' => $status_dropdown])->render();
+        $html = view('pages.admin.approvals._partial._approve_leave_modal', ['id' => $containerId, 'requestedLeaveId' => $requestedLeaveId, 'data' => null, 'status_dropdown' => $status_dropdown])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
 
@@ -161,7 +161,7 @@ class LeaveService extends BaseService
 
             $approve_leaves = LeaveHistory::with('type')->with('user')->where('request_status_id', '!=', '2')->get();
 
-            $html = view('pages.approve._partial._approve_leave_list_table_html')->with('approve_leaves', $approve_leaves)->render();
+            $html = view('pages.admin.approvals._partial._approve_leave_list_table_html')->with('approve_leaves', $approve_leaves)->render();
             if ($leave_data->request_status_id == 2) {
                 return $this->successResponse('Approve Successfully', ['html' => $html, 'html_section_id' => 'approval-section']);
             } else {
