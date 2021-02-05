@@ -38,7 +38,7 @@ class PdfController extends Controller
         if ($request->has('download')) {
             $holidays = Holiday::all();
             // dd($holidays);
-            $pdf = PDF::loadView('pages.admin._partial._holidays_list_html', ['holidays' => $holidays]);
+            $pdf = PDF::loadView('pages.holidays._partial._holidays_list_html', ['holidays' => $holidays]);
             // $pdf = PDF::loadView('pages.holidays.holidays',['holidays' => $holidays]);
             return $pdf->download('history.pdf');
         }

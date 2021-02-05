@@ -10,6 +10,7 @@ use Image;
 use Storage;
 use Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Input;
 
 class UploadController extends Controller
 {
@@ -95,6 +96,7 @@ class UploadController extends Controller
                     $user->image_path = basename($fileToStore);
                     $user->save();
                 }
+
                 
                 return response()->json(basename($fileToStore));
             }
@@ -108,4 +110,28 @@ class UploadController extends Controller
 
         return Response::make('The uploaded image is missing.', 400);
     }
+
+    public function revertImage(Request $request)
+    {
+        $imageId = $request->getContent();
+        $fileToDelete = Config::get('constants.images.profile').DIRECTORY_SEPARATOR.$imageId;
+        // dd($fileToDelete);
+        Storage::disk('local')->delete($fileToDelete);
+        //Storage::cloud()->delete($fileToDelete);
+        return response()->json($fileToDelete);
+    }
+
+    // public function load($id)
+    // {
+    //     dd($id);
+    //     $headers = [
+    //         'HTTP/1.1 200 OK',
+    //         'Accept-Ranges' => 'bytes',
+    //         'Content-Type' => 'application/pdf',
+    //         'Content-Disposition' => 'inline;'
+
+    //     ];
+    //     $filePath = storage_path('app' . DIRECTORY_SEPARATOR . Config::get('constants.pdfs.event.floor_layout') . DIRECTORY_SEPARATOR . $id);
+    //     return response()->file($filePath, $headers);
+    // }
 }
