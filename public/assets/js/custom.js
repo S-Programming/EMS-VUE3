@@ -536,3 +536,37 @@ function showDate() {
     format: 'mm/dd/yyyy',
     startDate: '-3d'
 });*/
+
+
+$(function () {
+    $('#email').blur(function () {
+        // $('#result').text('test');
+        var email = $("#email").val();
+        $("#result").val('');
+        if (!EmailMask($("#email").val())) {
+            $('#result').text('Please enter valid email');
+        }
+        else {
+            $.ajax({
+                url: "check_email",
+                type: "POST",
+                data: { email: email },
+                success: function (data) {
+                    console.log(data);
+                    if (data.status == 'success') {
+                        $('#result').text('Email Already Exist');
+                    }
+                    else if (data.status == 'error') {
+                        $('#result').text('');
+                    }
+                }
+            });
+        }
+    });
+});
+
+function EmailMask(email) {
+    var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    return expr.test(email);
+}
+

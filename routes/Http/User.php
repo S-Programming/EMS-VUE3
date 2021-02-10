@@ -9,6 +9,7 @@ class User
 {
     static function register()
     {
+        
         Route::group(['middleware' => ['auth:sanctum', 'isAdmin']], function () {
             Route::get('/user', [UserController::class, 'index'])->name('user.list');
         });
@@ -31,6 +32,8 @@ class User
             Route::get('/self_edit_profile', [UserController::class, 'selfEditProfile'])->name('user.self.edit');
             Route::post('/update_self_profile', [UserController::class, 'selfUpdateProfile'])->name('user.self.update');
             Route::post('/update_self_password', [UserController::class, 'selfUpdatePassword'])->name('update.self.password');*/
+
+        
 
             
             

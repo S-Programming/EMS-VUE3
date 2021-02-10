@@ -143,6 +143,4 @@ class UserController extends Controller
         }
         return $this->sendJsonResponse($this->userService->userUpdatePassword($request));
     }
-
-    
 }
