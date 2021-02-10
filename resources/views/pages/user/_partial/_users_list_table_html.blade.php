@@ -3,8 +3,21 @@
     <x-button class="btn btn-primary" onclick="commonAjaxModel('add_user_modal')" data-validation="validation-span-id"
               id="validation-span-id">Add
     </x-button>
+    {{-- <x-button class="btn btn-primary">Upload CSV</x-button> --}}
+    <form id="upload_csv" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="custom-file">
+            <div class="col-12 mt-5">
+                <input type="file" name="csv_file" accept=".csv" class="form-control rounded-0" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" >
+            </div>
+        </div>
+        <input class="mt-3 btn btn-primary mb-4 mt-5 float-right rounded-0 px-4 btn-save" type="submit" onclick="usersCsvUploadByAdmin()" name="upload" id="upload" value="Upload">
+    </form>
+    {{-- onclick="usersCsvUploadByAdmin()" --}}
+
 </div>
 <div class="block-content block-content-full">
+    {{-- ajaxCallOnclick('import_users_by_csv')  visitorCsvUploadByOrganizer() --}}
     <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
     <table class="table table-bordered table-striped table-vcenter  js-dataTable-buttons">
         <thead>

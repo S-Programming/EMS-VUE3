@@ -18,12 +18,56 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService extends BaseService
 {
+    public function storeCSV($request = null)
+    {
+        if (isset($_FILES['csv_file']['name']) && !empty($_FILES['csv_file']['name'])) {
+            $date = date('d-m-Y');
+            $csv = $date . "_" . $_FILES['csv_file']['name'];
+            // $csv = mt_rand(100000, 999999) . $_FILES['csv_file']['name'];
+            $file = $request->file('csv_file');
+            $destinationPath = 'uploads';
+            $file->move($destinationPath, $csv);
+            $file_data = fopen(public_path('uploads/' . $csv), 'r');
+            $no_of_rows = 0;
+            if (($fp = fopen(public_path('uploads/' . $csv), 'r')) !== FALSE) {
+                while (($record = fgetcsv($fp)) !== FALSE) {
+                    $no_of_rows++;
+                }
+            }
+            while ($row = fgetcsv($file_data)) {
+                if ($row[0] != 'first_name') {
+                    $user_count = User::where('email', $row[2])->count();
+                    if ($user_count == 0) {
+                        //$user_uuid = uniqid('csv', true);
+                        //$user_id_array[]['user_id'] = $user_uuid;
+                        $user[] = array(
+                            // 'id' => $user_uuid,
+                            'first_name' => $row[0],
+                            'last_name' => $row[1],
+                            'email' => $row[2],
+                            'phone_number' => $row[3],
+                            'password' => bcrypt(generate_random_string(16))
+                        );
+                    } else {
+                        $no_of_rows--;
+                    }
+                }
+            }
+            if (!isset($user)) return false;
+            User::insert($user);
+            return $this->success('CSV file save successfully', ['data' => $user]);
+        }
+    }
     public function userReportHistory(Request $request)
     {
         $userId = $this->getAuthUserId();
+
         $filters = ($userId > 0) ? [['user_id', '=', $userId]] : [];
+        // dd($filters);
         $date_filters = historyDateFilter($request->history_report);
+        // dd($date_filters);
         $filters = array_merge($date_filters, $filters);
+        //dd($filters);
         $checkinHistoryData = CheckinHistory::where($filters)->get();
         $count = $checkinHistoryData->count();
         $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkinHistoryData, 'totalCheckins' => $count])->render();
@@ -56,7 +100,6 @@ class UserService extends BaseService
             //$user_id = $user->id; // last insert id of user
             $user->roles()->sync($request->roles); // for pivot data
             $user->save();
-
         }
         $html = view('pages.user._partial._users_list_table_html', ['users' => $this->getAllUsers()])->render();
         return $this->successResponse('User has Successfully Added', ['html' => $html, 'html_section_id' => 'userlist-section']);
@@ -172,5 +215,4 @@ class UserService extends BaseService
             }
         }
     }
-
 }

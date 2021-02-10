@@ -32,6 +32,38 @@ class UserController extends Controller
         return view('pages.user.users')->with(['users' => $this->getAllUsers()]);
     }
     /**
+     * Import Csv of users
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function importUsersCsv(Request $request)
+    {
+        // $file =
+        //dd($request->all());
+        // $file = $request->file('csv_file');
+        // $file->getClientOriginalName());
+        // return 1;
+        // dd(1);
+        $validator = Validator::make($request->all(), [
+            'csv_file' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
+        $response = $this->userService->storeCSV($request);
+        //        if (!$response) return $this->error('Following emails already exists in the system');
+        //        $redirectionRoute = '/exhibition_visitor';
+        //
+        //        return $this->success('Success', ['data' => $response, 'redirect_to' => $redirectionRoute]);
+        if (!$response) {
+            $redirectionRoute = '/user';
+            return $this->error('Following emails already exists in the system', ['errors' => ['Duplicate Emails'], 'redirect_to' => $redirectionRoute]);
+        }
+        $redirectionRoute = '/user';
+        return $this->success('Success', ['data' => $response, 'redirect_to' => $redirectionRoute]);
+        //dd($request->all(), 'saaddd');
+    }
+    /**
      * Display a Report of the User-Self Checkin History.
      *
      * @return body
@@ -143,6 +175,4 @@ class UserController extends Controller
         }
         return $this->sendJsonResponse($this->userService->userUpdatePassword($request));
     }
-
-    
 }

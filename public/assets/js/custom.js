@@ -300,6 +300,48 @@ function closeModalById(id) {
 
 }
 
+function usersCsvUploadByAdmin() {
+    jQuery('#upload_csv').on('submit', function(e) {
+        e.preventDefault();
+        //var $file = document.getElementById('csv_file');
+        console.log(new FormData(this));
+        jQuery.ajax({
+            url: "import_users_by_csv",
+            method: "POST",
+            data: new FormData(this), //$file
+            dataType: 'json',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                if (data.status == 'success') {
+                    notificationAlert('success', data.message, 'Success!');
+                } else if (data.status == 'error') {
+                    var errorMsg = '';
+                    var errors = data.errors;
+                    // console.log(data.errors)
+                    $.each(errors, function(i, val) {
+                        console.log(i, "iiii")
+                        if (errors != 'undefined' && errors[i] != null) {
+                            let nowErrorMessage = errors[i];
+                            if (i == 'errors') {
+                                console.log(errors[i], 'kaya hai');
+                                let newErrors = errors[i];
+                                $.each(newErrors, function(index, value) {
+                                    nowErrorMessage = newErrors[index][0] ? newErrors[index][0] : '';
+                                });
+                            }
+                            errorMsg += nowErrorMessage + '<br>';
+                        }
+                    });
+                    notificationAlert('error', errorMsg, 'Error!');
+                }
+            }
+        });
+    });
+}
+
+
 function ajaxCallOnclick(route, extraData) {
     //console.log(extraData);
     /*var today = new Date();
@@ -307,6 +349,7 @@ function ajaxCallOnclick(route, extraData) {
 
     if (route != '') {
         const url = baseURL + '/' + route;
+        console.log(url);
         var el = this;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
         console.log(dataToPost);
@@ -316,7 +359,7 @@ function ajaxCallOnclick(route, extraData) {
             data: dataToPost,
             dataType: "json",
             success: function (data) {
-                // console.log('RN',data)
+                //console.log('RN',data)
                 if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
                     $('#' + data.html_section_id).html(data.html);
                 }
@@ -328,14 +371,14 @@ function ajaxCallOnclick(route, extraData) {
                 } else {
                     notificationAlert('error', data.message, 'Inconceivable!');
                 }
-                const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
-                if ($('body').hasClass('modal-open') && containerId) {
-                    closeModalById(containerId);
-                    //$(this).closest('tr').css('background','tomato');
-                    // $(this).closest('tr').fadeOut(800,function(){
-                    //    $(this).remove();
-                    //    });
-                }
+                // const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
+                // if ($('body').hasClass('modal-open') && containerId) {
+                //     closeModalById(containerId);
+                //     //$(this).closest('tr').css('background','tomato');
+                //     // $(this).closest('tr').fadeOut(800,function(){
+                //     //    $(this).remove();
+                //     //    });
+                // }
                 if (data.status == 'error') {
 
                     notificationAlert('error', data.message, 'Inconceivable!');
