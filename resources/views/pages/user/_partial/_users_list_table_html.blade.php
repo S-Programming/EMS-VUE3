@@ -4,15 +4,21 @@
               id="validation-span-id">Add
     </x-button>
     {{-- <x-button class="btn btn-primary">Upload CSV</x-button> --}}
-    <form id="upload_csv" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('user.import.by.csv') }}"id="user-form-id"
+    data-modal-id="{{$id??'common_popup_modal'}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="custom-file">
             <div class="col-12 mt-5">
                 <input type="file" name="csv_file" accept=".csv" class="form-control rounded-0" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" >
             </div>
         </div>
-        <input class="mt-3 btn btn-primary mb-4 mt-5 float-right rounded-0 px-4 btn-save" type="submit" onclick="usersCsvUploadByAdmin()" name="upload" id="upload" value="Upload">
-    </form>
+        <input name="test" type="text" >
+        <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)"
+        data-validation="validation-span-id"
+        id="validation-span-id">
+  <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Submit') }}
+</x-button>
+        </form>
     {{-- onclick="usersCsvUploadByAdmin()" --}}
 
 </div>

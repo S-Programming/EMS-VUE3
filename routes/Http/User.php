@@ -31,8 +31,8 @@ class User
             Route::get('/self_edit_profile', [UserController::class, 'selfEditProfile'])->name('user.self.edit');
             Route::post('/update_self_profile', [UserController::class, 'selfUpdateProfile'])->name('user.self.update');
             Route::post('/update_self_password', [UserController::class, 'selfUpdatePassword'])->name('update.self.password');*/
+            Route::post('/import_users_by_csv', [UserController::class, 'importUsersCsv'])->name('user.import.by.csv');
         });
-        Route::post('/import_users_by_csv', [UserController::class, 'importUsersCsv'])->name('import.users.by.csv');
 
         // only admin can upload csv
     }

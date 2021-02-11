@@ -38,12 +38,13 @@ class UserController extends Controller
      */
     public function importUsersCsv(Request $request)
     {
+        dd($request->all());
         // $file =
         //dd($request->all());
         // $file = $request->file('csv_file');
         // $file->getClientOriginalName());
         // return 1;
-        // dd(1);
+        //   dd("lkjhrewertyuli");
         $validator = Validator::make($request->all(), [
             'csv_file' => 'required'
         ]);
@@ -119,7 +120,7 @@ class UserController extends Controller
      */
     public function confirmDeleteUser(Request $request)
     {
-        //dd($request);
+        //dd($request->all());
         return $this->sendJsonResponse($this->userService->confirmDeleteUser($request));
     }
     /**

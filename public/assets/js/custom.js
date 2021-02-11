@@ -31,15 +31,20 @@ function validateFieldsByFormId(e) {
         showErrors(error);
         flag = false;
     }
+    console.log($('#' + formId)[0],'RN',$('#' + formId));
     if (flag) {
         e.disabled = true;
         const buttonHtml = $(`#` + validationSpanId).html();
         $(`#` + validationSpanId).html(loadingImage());
+        var formData = new FormData($('#' + formId)[0])
+        console.log(formData);
         $.ajax({
             type: "POST",
             url: formURL,
-            data: $('#' + formId).serialize(),
+            data: formData,
             dataType: "json",
+            processData: false,
+            contentType: false,
             success: function (data) {
                 e.disabled = false;
                 // console.log(data.redirect_to);
@@ -300,53 +305,13 @@ function closeModalById(id) {
 
 }
 
-function usersCsvUploadByAdmin() {
-    jQuery('#upload_csv').on('submit', function(e) {
-        e.preventDefault();
-        //var $file = document.getElementById('csv_file');
-        console.log(new FormData(this));
-        jQuery.ajax({
-            url: "import_users_by_csv",
-            method: "POST",
-            data: new FormData(this), //$file
-            dataType: 'json',
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                if (data.status == 'success') {
-                    notificationAlert('success', data.message, 'Success!');
-                } else if (data.status == 'error') {
-                    var errorMsg = '';
-                    var errors = data.errors;
-                    // console.log(data.errors)
-                    $.each(errors, function(i, val) {
-                        console.log(i, "iiii")
-                        if (errors != 'undefined' && errors[i] != null) {
-                            let nowErrorMessage = errors[i];
-                            if (i == 'errors') {
-                                console.log(errors[i], 'kaya hai');
-                                let newErrors = errors[i];
-                                $.each(newErrors, function(index, value) {
-                                    nowErrorMessage = newErrors[index][0] ? newErrors[index][0] : '';
-                                });
-                            }
-                            errorMsg += nowErrorMessage + '<br>';
-                        }
-                    });
-                    notificationAlert('error', errorMsg, 'Error!');
-                }
-            }
-        });
-    });
-}
+
 
 
 function ajaxCallOnclick(route, extraData) {
-    //console.log(extraData);
+    //console.log(extraData+"asadasd");
     /*var today = new Date();
     if(today.getDay() == 6 || today.getDay() == 0) alert('Weekend!');*/
-
     if (route != '') {
         const url = baseURL + '/' + route;
         console.log(url);
@@ -356,7 +321,7 @@ function ajaxCallOnclick(route, extraData) {
         $.ajax({
             type: "POST",
             url: url,
-            data: dataToPost,
+            data: dataToPost,//dataToPost,
             dataType: "json",
             success: function (data) {
                 //console.log('RN',data)
@@ -371,14 +336,14 @@ function ajaxCallOnclick(route, extraData) {
                 } else {
                     notificationAlert('error', data.message, 'Inconceivable!');
                 }
-                // const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
-                // if ($('body').hasClass('modal-open') && containerId) {
-                //     closeModalById(containerId);
-                //     //$(this).closest('tr').css('background','tomato');
-                //     // $(this).closest('tr').fadeOut(800,function(){
-                //     //    $(this).remove();
-                //     //    });
-                // }
+                const containerId = typeof extraData.containerId != "undefined" ? extraData.containerId : false;
+                if ($('body').hasClass('modal-open') && containerId) {
+                    closeModalById(containerId);
+                    //$(this).closest('tr').css('background','tomato');
+                    // $(this).closest('tr').fadeOut(800,function(){
+                    //    $(this).remove();
+                    //    });
+                }
                 if (data.status == 'error') {
 
                     notificationAlert('error', data.message, 'Inconceivable!');
