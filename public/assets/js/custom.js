@@ -31,15 +31,20 @@ function validateFieldsByFormId(e) {
         showErrors(error);
         flag = false;
     }
+    console.log($('#' + formId)[0],'RN',$('#' + formId));
     if (flag) {
         e.disabled = true;
         const buttonHtml = $(`#` + validationSpanId).html();
         $(`#` + validationSpanId).html(loadingImage());
+        var formData = new FormData($('#' + formId)[0])
+        console.log(formData);
         $.ajax({
             type: "POST",
             url: formURL,
-            data: $('#' + formId).serialize(),
+            data: formData,
             dataType: "json",
+            processData: false,
+            contentType: false,
             success: function (data) {
                 e.disabled = false;
                 // console.log(data.redirect_to);
@@ -300,23 +305,26 @@ function closeModalById(id) {
 
 }
 
+
+
+
 function ajaxCallOnclick(route, extraData) {
-    //console.log(extraData);
+    //console.log(extraData+"asadasd");
     /*var today = new Date();
     if(today.getDay() == 6 || today.getDay() == 0) alert('Weekend!');*/
-
     if (route != '') {
         const url = baseURL + '/' + route;
+        console.log(url);
         var el = this;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
         console.log(dataToPost);
         $.ajax({
             type: "POST",
             url: url,
-            data: dataToPost,
+            data: dataToPost,//dataToPost,
             dataType: "json",
             success: function (data) {
-                // console.log('RN',data)
+                //console.log('RN',data)
                 if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
                     $('#' + data.html_section_id).html(data.html);
                 }
