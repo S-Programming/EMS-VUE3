@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\CheckinHistory;
+use App\Models\UserInteraction;
 use Illuminate\Http\Request;
 use App\Http\Services\UserService;
 use App\Models\Attendence;
@@ -144,5 +145,39 @@ class UserController extends Controller
         return $this->sendJsonResponse($this->userService->userUpdatePassword($request));
     }
 
-    
+    public function viewUserProfilePlusInteractions(Request $request,$user_id)
+    {
+        //dd($user_id);
+        $user_data = User::find($user_id);
+        $user_id = $user_data->id;
+        $userInteractions = UserInteraction::where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
+        $html = view('pages.admin._partial._users_interactions_list_table_html',['html_section_id' => 'userlist-section'])->render();
+        return view('pages.admin.user_profile', ['html' => $html, 'user_data' => $user_data,'userInteractions' => $userInteractions,'user_id'=>$user_id]);
+    }
+    public function addUserInteractionModal(Request $request)
+    {
+        //dd($request->id);
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $html = view('pages.admin._partial._add_userInteraction_point_modal',['user_id'=>$request->id])->render();
+//        ,['user_email'=>$user_email]
+        return $this->successResponse('success', ['html' => $html]);
+//        dd($request->all());
+    }
+    public function confirmAddUserInteractionModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->userService->confirmAddUserInteractionModal($request));
+    }
+    public function discussionsView(Request $request)
+    {
+
+        $current_user = $this->getAuthUserId();
+//        $userInteractions $userInteractions= UserInteraction::where('staff_id',$current_user)->orderBy('created_at', 'DESC')->get();
+        $userInteractions = UserInteraction::with('users')->where('staff_id',$current_user)->orderBy('created_at', 'DESC')->get();
+        //$abc = $userInteractions->toArray();
+        //dd($abc['users']);
+//        dd($userInteractions[0]);
+//        dd($userInteractions[2]->users->first_name);
+        $html = view('pages.admin.discussions._partial._discussions_list',['html_section_id' => 'userlist-section'])->render();
+        return view('pages.admin.discussions.discussion', ['html' => $html, 'userInteractions' => $userInteractions]);
+    }
 }

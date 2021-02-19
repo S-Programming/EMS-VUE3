@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\Attendence;
+use App\Models\UserInteraction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -174,6 +175,21 @@ class UserService extends BaseService
                 return $this->errorResponse('Current Password is not correct', ['errors' => ['Current Password is not correct']]);
             }
         }
+    }
+
+    public function confirmAddUserInteractionModal(Request $request)
+    {
+        $user_data = User::find($request->user_id);
+        $userInteraction = new UserInteraction;
+        $userInteraction->staff_id = $this->getAuthUserId();
+        $userInteraction->user_id = $request->user_id;
+        $userInteraction->description = $request->discussion_point;
+        $userInteraction->save();
+        $userInteractions = UserInteraction::where('user_id',$request->user_id)->orderBy('created_at', 'DESC')->get();
+        //dd($userInteractions);
+        $html = view('pages.admin._partial._users_interactions_list_table_html',['userInteractions' => $userInteractions])->render();
+//        return $this->successResponse('success',['html' => $html,'user_data' => $user_data,'userInteractions' => $userInteractions,'user_id'=>$userInteraction->user_id]);
+        return $this->successResponse('success',['html' => $html,'html_section_id' => 'userlist-section' ]);
     }
 
 }

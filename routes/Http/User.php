@@ -32,8 +32,13 @@ class User
             Route::post('/update_self_profile', [UserController::class, 'selfUpdateProfile'])->name('user.self.update');
             Route::post('/update_self_password', [UserController::class, 'selfUpdatePassword'])->name('update.self.password');*/
 
-            
-            
+//            Admin Route Admin Route
+            Route::get('specific_user_profile/{user_id}', [UserController::class, 'viewUserProfilePlusInteractions'])->name('user.specific.profile');
+            Route::post('add_userInteraction_point_modal', [UserController::class, 'addUserInteractionModal'])->name('user.add.userInteraction.point.modal');
+            Route::post('users_confirm_add_discussionPoint', [UserController::class, 'confirmAddUserInteractionModal'])->name('user.confirm.add.discussionPoint');
+            Route::get('discussions', [UserController::class, 'discussionsView'])->name('user.discussions');
+
+
         });
     }
 }

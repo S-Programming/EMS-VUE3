@@ -301,7 +301,7 @@ function closeModalById(id) {
 }
 
 function ajaxCallOnclick(route, extraData) {
-    //console.log(extraData);
+    console.log(extraData);
     /*var today = new Date();
     if(today.getDay() == 6 || today.getDay() == 0) alert('Weekend!');*/
 
@@ -309,7 +309,7 @@ function ajaxCallOnclick(route, extraData) {
         const url = baseURL + '/' + route;
         var el = this;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
-        console.log(dataToPost);
+        console.log(url);
         $.ajax({
             type: "POST",
             url: url,

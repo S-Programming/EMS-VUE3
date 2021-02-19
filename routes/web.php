@@ -5,6 +5,7 @@ use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Route\Http\Dashboard;
+use Route\Http\Feedback;
 use Route\Http\User;
 use Route\Http\Role;
 use Route\Http\CheckInHistory;
@@ -55,3 +56,5 @@ Expense::register();
 Holiday::register();
 Pdf::register();
 Test::register();
+Feedback::register();
+
