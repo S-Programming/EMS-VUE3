@@ -60,20 +60,20 @@
                                        class="form-control" id="phone_number" name="phone_number"
                                        placeholder="Enter your Contact Number.." value="{{$user_data->phone_number??''}}" readonly>
                             </div>
-                            <div class="form-group">
+{{--                            <div class="form-group">--}}
                                 <!-- <label>Your Avatar</label>
                                 <div class="push">
                                     <img class="img-avatar" src="assets/images/avatar13.jpg" alt="">
                                 </div> -->
 
-                                <input type="file" name="image_file" id="image-file" value="" class="filepond">
+{{--                                <input type="file" name="image_file" id="image-file" value="" class="filepond">--}}
 
-                                <input type="hidden" name="current_profile_image"
-                                       value="{{basename($user_data->image_path??'')}}">
+{{--                                <input type="hidden" name="current_profile_image"--}}
+{{--                                       value="{{basename($user_data->image_path??'')}}">--}}
                                 <!-- <input type="text" name="temp_value[]" value="" id="temp_value">
  -->
 
-                            </div>
+{{--                            </div>--}}
                             <div class="form-group">
 {{--                                <x-button class="btn btn-alt-primary" onclick="validateFieldsByFormId(this)"--}}
 {{--                                          data-validation="validation-span-id"--}}
@@ -93,7 +93,7 @@
         <div class="content">
             <!-- Dynamic Table Full Pagination -->
             <div id="userlist-section" class="block block-rounded">
-                @include('pages.admin._partial._users_interactions_list_table_html',['userInteractions'=>$userInteractions,'user_id'=>$user_id])
+                @include('pages.admin._partial._users_interactions_list_table_html',['userInteractions'=>$userInteractions,'query_statuses'=>$query_statuses,'user_id'=>$user_id,'user_name'=>$user_name])
 {{--                ,['users' => $users] ,['userInteractions'=>$userInteractions]--}}
             </div>
             <!-- END Dynamic Table Full Pagination -->

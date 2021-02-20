@@ -36,6 +36,8 @@ class User
             Route::get('specific_user_profile/{user_id}', [UserController::class, 'viewUserProfilePlusInteractions'])->name('user.specific.profile');
             Route::post('add_userInteraction_point_modal', [UserController::class, 'addUserInteractionModal'])->name('user.add.userInteraction.point.modal');
             Route::post('users_confirm_add_discussionPoint', [UserController::class, 'confirmAddUserInteractionModal'])->name('user.confirm.add.discussionPoint');
+            Route::post('delete_user_interaction_modal', [UserController::class, 'deleteUserInteraction'])->name('user.delete.user.interaction.modal');
+            Route::post('confirm_delete_user_interaction', [UserController::class, 'deleteConfirmUserInteraction'])->name('user.confirm.delete.user_interaction');
             Route::get('discussions', [UserController::class, 'discussionsView'])->name('user.discussions');
 
 

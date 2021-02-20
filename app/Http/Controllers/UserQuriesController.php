@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\FeedbackService;
+use App\Http\Services\UserQueryService;
 use App\Http\Traits\AuthUser;
-use App\Models\Feedback;
+use App\Models\QueryStatus;
 use App\Models\UserQuries;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class FeedbackController extends Controller
+class UserQuriesController extends Controller
 {
     use AuthUser;
-    protected $feedbackService;
+    protected $userQueryService;
 
-    public function __construct(FeedbackService $feedbackService)
+    public function __construct(UserQueryService $userQueryService)
     {
 //        $this->middleware('auth');
-        $this->feedbackService = $feedbackService;
+        $this->userQueryService = $userQueryService;
     }
     /**
      * Display a listing of the resource.
@@ -46,7 +46,7 @@ class FeedbackController extends Controller
      */
     public function addUserQueryModal(Request $request)
     {
-        return $this->sendJsonResponse($this->feedbackService->addUserQueryModal($request));
+        return $this->sendJsonResponse($this->userQueryService->addUserQueryModal($request));
     }
     /**
      * Click yes button to add feedback confirmly.
@@ -62,7 +62,7 @@ class FeedbackController extends Controller
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
-        return $this->sendJsonResponse($this->feedbackService->confirmAddUserQuery($request));
+        return $this->sendJsonResponse($this->userQueryService->confirmAddUserQuery($request));
     }
     //For All users
     /**
@@ -89,7 +89,6 @@ class FeedbackController extends Controller
     public function viewAdminUserQuery(Request $request)
     {
         $user_quries = UserQuries::with('users')->get();
-//        $html = view('pages.feedback._partial._admin_feedback_list_table_html',['html_section_id' => 'allfeedbacklist-section'])->render();
         $html = view('pages.feedback._partial._admin_feedback_list_table_html', ['html_section_id' => 'allfeedbacklist-section'])->render();
         return view('pages.feedback.admin_feedback', ['html' => $html, 'user_quries' => $user_quries]);
     }
@@ -100,7 +99,7 @@ class FeedbackController extends Controller
      */
     public function addCommentModal(Request $request)
     {
-        return $this->sendJsonResponse($this->feedbackService->addCommentModal($request));
+        return $this->sendJsonResponse($this->userQueryService->addCommentModal($request));
     }
     /**
      * Click yes button to add comment confirmly.
@@ -110,12 +109,12 @@ class FeedbackController extends Controller
     public function confirmAddComment(Request $request)
     {
         $validator = Validator::make($request->all(), [
-        'admin_comment' => 'required|string',
-    ]);
+            'admin_comment' => 'required|string',
+        ]);
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
-        return $this->sendJsonResponse($this->feedbackService->confirmAddComment($request));
+        return $this->sendJsonResponse($this->userQueryService->confirmAddComment($request));
     }
     /**
      * Display a Modal to delete Feedback.
@@ -124,7 +123,7 @@ class FeedbackController extends Controller
      */
     public function deleteUserQueryModal(Request $request)
     {
-        return $this->sendJsonResponse($this->feedbackService->deleteUserQueryModal($request));
+        return $this->sendJsonResponse($this->userQueryService->deleteUserQueryModal($request));
     }
     /**
      * Click yes Button to delete feedback confirmly.
@@ -133,7 +132,6 @@ class FeedbackController extends Controller
      */
     public function confirmDeleteUserQuery(Request $request)
     {
-        return $this->sendJsonResponse($this->feedbackService->confirmDeleteUserQuery($request));
+        return $this->sendJsonResponse($this->userQueryService->confirmDeleteUserQuery($request));
     }
-
 }

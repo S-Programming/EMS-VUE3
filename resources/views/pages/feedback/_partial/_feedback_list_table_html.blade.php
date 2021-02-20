@@ -1,7 +1,7 @@
 <div class="block-header">
-    <h3 class="block-title">Product Record </h3>
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_feedback_modal')" data-validation="validation-span-id"
-              id="validation-span-id">Add Feedback
+    <h3 class="block-title">Quries </h3>
+    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_userquery_modal')" data-validation="validation-span-id"
+              id="validation-span-id">Add Quries
     </x-button>
 </div>
 <div class="block-content block-content-full">
@@ -10,25 +10,25 @@
         <thead>
         <tr>
 {{--            <th class="text-center">Name</th>--}}
-            <th class="text-center">Email</th>
+            <th class="text-center">Email</th>  {{-- yaha guard lgna h --}}
             <th class="text-center">Topic</th>
             <th class="text-center">Description</th>
-            <th class="text-center">Status</th>
             <th class="text-center">Admin Comment</th>
+            <th class="text-center">Status</th>
             <th class="text-center">viewed</th>
         </tr>
         </thead>
         <tbody>
-        @if(isset($feedbacks))
-        @foreach($feedbacks as $feedback)
+        @if(isset($user_quries))
+        @foreach($user_quries as $user_qurie)
         <tr>
 {{--            <td class="font-size-sm">{{$feedback->first_name??''}}  {{$feedback->last_name??''}}</td>--}}
-            <td class="font-w600 font-size-sm">{{$feedback->email??''}}</td>
-            <td class="font-w600 font-size-sm">{{$feedback->topic??''}}</td>
-            <td class="font-w600 font-size-sm">{!!$feedback->description??''!!}</td>
-            <td class="font-w600 font-size-sm">{{$feedback->rate_status??''??''}}</td>
-            <td class="font-w600 font-size-sm">{!!$feedback->admin_comment??''!!}</td>
-            <td class="text-center text-info font-w600 font-size-sm">{{$feedback->is_view??''}}</td>
+            <td class="font-w600 font-size-sm">{{$user_qurie->email??''}}</td> {{-- yaha guard lgna h --}}
+            <td class="font-w600 font-size-sm">{{$user_qurie->topic??''}}</td>
+            <td class="font-w600 font-size-sm">{!!$user_qurie->description??''!!}</td>
+            <td class="font-w600 font-size-sm">{!!$user_qurie->admin_comment??''!!}</td>
+            <td class="font-w600 font-size-sm">{{$user_qurie->rate_status??''??''}}</td>
+            <td class="text-center text-info font-w600 font-size-sm">{{$user_qurie->is_view??''}}</td>
 
 {{--            <td>--}}
 {{--                <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('edit_product_modal',{{$stock->product->id??''}})"><i class="fa fa-edit"></i></button>--}}

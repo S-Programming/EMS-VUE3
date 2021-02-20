@@ -2,8 +2,7 @@
 
 
 namespace App\Http\Services;
-
-use App\Models\Feedback;
+use App\Models\QueryStatus;
 use App\Models\UserQuries;
 use App\Http\Traits\AuthUser;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\BaseService\BaseService;
 use Illuminate\Support\Facades\Hash;
 
-class FeedbackService extends BaseService
+class UserQueryService extends BaseService
 {
     use AuthUser;
     /**
@@ -54,9 +53,10 @@ class FeedbackService extends BaseService
      */
     public function addCommentModal(Request $request)
     {
+        $query_statuses = QueryStatus::all();
         $user_qurie_id = $request->id;
         $containerId = $request->input('containerId', 'common_popup_modal');
-        $html = view('pages.feedback._partial._add_comment_modal',['user_qurie_id'=>$user_qurie_id])->render();
+        $html = view('pages.feedback._partial._add_comment_modal',['user_qurie_id'=>$user_qurie_id,'query_statuses'=>$query_statuses])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
     /**
@@ -66,14 +66,18 @@ class FeedbackService extends BaseService
      */
     public function confirmAddComment(Request $request)
     {
+        $status_id = $request->status;
+        $query_status = QueryStatus::where('id',$status_id)->first()->query_status;
         $user_qurie = UserQuries::find($request->feedback_id);
         $user_qurie->admin_comment = $request->admin_comment;
+        $user_qurie->status = $query_status;
         $user_qurie->is_view = "viewed";
         $user_qurie->save();
         $user_quries = UserQuries::all();
+        $query_statuses = QueryStatus::all();
 //        //$html = view('pages.feedback._partial._feedback_list_table_html',['feedbacks' => $feedbacks])->render();
 //        return $this->successResponse('success', ['html' => $html, 'html_section_id' => 'feedbacklist-section']);
-        $html = view('pages.feedback._partial._admin_feedback_list_table_html', ['user_quries' => $user_quries])->render();
+        $html = view('pages.feedback._partial._admin_feedback_list_table_html', ['user_quries' => $user_quries,'query_statuses'=>$query_statuses])->render();
         return $this->successResponse('success',['html' => $html, 'html_section_id' => 'feedbacklist-section']);
     }
     /**

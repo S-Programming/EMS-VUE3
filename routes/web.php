@@ -16,6 +16,7 @@ use Route\Http\Attendance;
 use Route\Http\Pdf;
 use Route\Http\RequestStatus;
 use Route\Http\Test;
+use Route\Http\UserQuries;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,5 +57,6 @@ Expense::register();
 Holiday::register();
 Pdf::register();
 Test::register();
-Feedback::register();
+//Feedback::register();
+UserQuries::register();
 

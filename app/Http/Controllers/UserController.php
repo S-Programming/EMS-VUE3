@@ -150,33 +150,57 @@ class UserController extends Controller
         //dd($user_id);
         $user_data = User::find($user_id);
         $user_id = $user_data->id;
-        $userInteractions = UserInteraction::where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
+        $user = User::find($this->getAuthUserId());
+        $user_name = $user->first_name;
+        //dd($user_name->first_name);
+        //dd($user_name);
+        $userInteractions = UserInteraction::with('users')->where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
+        //dd($userInteractions->users->first_name);
         $html = view('pages.admin._partial._users_interactions_list_table_html',['html_section_id' => 'userlist-section'])->render();
-        return view('pages.admin.user_profile', ['html' => $html, 'user_data' => $user_data,'userInteractions' => $userInteractions,'user_id'=>$user_id]);
+        return view('pages.admin.user_profile', ['html' => $html, 'user_data' => $user_data,'userInteractions' => $userInteractions,'user_id'=>$user_id,'user_name'=>$user_name]);
     }
     public function addUserInteractionModal(Request $request)
     {
-        //dd($request->id);
         $containerId = $request->input('containerId', 'common_popup_modal');
         $html = view('pages.admin._partial._add_userInteraction_point_modal',['user_id'=>$request->id])->render();
-//        ,['user_email'=>$user_email]
         return $this->successResponse('success', ['html' => $html]);
-//        dd($request->all());
     }
     public function confirmAddUserInteractionModal(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'discussion_point' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->userService->confirmAddUserInteractionModal($request));
+    }
+    public function deleteUserInteraction(Request $request)
+    {
+        $ui = UserInteraction::where('id',$request->id)->first();
+        //dd($ui->id);
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $html = view('pages.admin.discussions._partial._delete_user_interaction_modal',['id' => $containerId, 'user_interaction_id'=>$ui->id])->render();
+//        ,['user_interaction_id'=>$ui->id]
+        return $this->successResponse('success', ['html' => $html]);
+    }
+    public function deleteConfirmUserInteraction(Request $request)
+    {
+        $userInteractions = UserInteraction::find($request->user_interaction_id);
+        $userInteractions->delete();
+        $user_id = $userInteractions->user_id;
+        $userInteractions = UserInteraction::with('users')->where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
+        $user = User::find($this->getAuthUserId());
+        $user_name = $user->first_name;
+        $html = view('pages.admin._partial._users_interactions_list_table_html',['userInteractions' => $userInteractions,'user_id'=>$user_id,'user_name'=>$user_name])->render();
+        return $this->successResponse('success', ['html' => $html,'html_section_id' => 'userlist-section']);
+
     }
     public function discussionsView(Request $request)
     {
-
         $current_user = $this->getAuthUserId();
-//        $userInteractions $userInteractions= UserInteraction::where('staff_id',$current_user)->orderBy('created_at', 'DESC')->get();
         $userInteractions = UserInteraction::with('users')->where('staff_id',$current_user)->orderBy('created_at', 'DESC')->get();
-        //$abc = $userInteractions->toArray();
-        //dd($abc['users']);
-//        dd($userInteractions[0]);
-//        dd($userInteractions[2]->users->first_name);
         $html = view('pages.admin.discussions._partial._discussions_list',['html_section_id' => 'userlist-section'])->render();
         return view('pages.admin.discussions.discussion', ['html' => $html, 'userInteractions' => $userInteractions]);
     }

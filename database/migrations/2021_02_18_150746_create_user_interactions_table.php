@@ -19,6 +19,7 @@ class CreateUserInteractionsTable extends Migration
             $table->integer("staff_id");
             $table->unsignedBigInteger('user_id');
             $table->string('description')->nullable();
+            $table->dateTime('date');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

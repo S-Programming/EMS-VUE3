@@ -8,6 +8,7 @@ use App\Http\Services\BaseService\BaseService;
 use App\Models\Menu;
 use App\Models\MenuRole;
 use App\Models\CheckinHistory;
+use App\Models\QueryStatus;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
@@ -179,17 +180,19 @@ class UserService extends BaseService
 
     public function confirmAddUserInteractionModal(Request $request)
     {
+        $user = User::find($this->getAuthUserId());
+        $user_name = $user->first_name;
         $user_data = User::find($request->user_id);
         $userInteraction = new UserInteraction;
         $userInteraction->staff_id = $this->getAuthUserId();
         $userInteraction->user_id = $request->user_id;
         $userInteraction->description = $request->discussion_point;
+        $userInteraction->date = Carbon::parse($request->date)??'';
+        //dd($userInteraction->date);
         $userInteraction->save();
         $userInteractions = UserInteraction::where('user_id',$request->user_id)->orderBy('created_at', 'DESC')->get();
-        //dd($userInteractions);
-        $html = view('pages.admin._partial._users_interactions_list_table_html',['userInteractions' => $userInteractions])->render();
+        $html = view('pages.admin._partial._users_interactions_list_table_html',['userInteractions' => $userInteractions,'user_name'=>$user_name,'user_id'=>$userInteraction->user_id])->render();
 //        return $this->successResponse('success',['html' => $html,'user_data' => $user_data,'userInteractions' => $userInteractions,'user_id'=>$userInteraction->user_id]);
         return $this->successResponse('success',['html' => $html,'html_section_id' => 'userlist-section' ]);
     }
-
 }
