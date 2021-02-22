@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Route\Http\Dashboard;
+use Route\Http\Feedback;
 use Route\Http\User;
 use Route\Http\Role;
 use Route\Http\CheckInHistory;
@@ -16,6 +17,7 @@ use Route\Http\Attendance;
 use Route\Http\Pdf;
 use Route\Http\RequestStatus;
 use Route\Http\Test;
+use Route\Http\UserQuries;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +59,6 @@ Expense::register();
 Holiday::register();
 Pdf::register();
 Test::register();
+//Feedback::register();
+UserQuries::register();
+

@@ -32,6 +32,11 @@ class MenusTableSeeder extends Seeder
             ['id' => 14, 'name' => 'Leave', 'parent_id' => 7, 'route' => 'approve.leave.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 15, 'name' => 'Expense', 'parent_id' => 7, 'route' => 'approve.expense.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 16, 'name' => 'Claim Expense', 'parent_id' => 0, 'route' => 'expense.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 17, 'name' => 'Add Query', 'parent_id' => 0, 'route' => 'userquery.add', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 18, 'name' => 'User Quries', 'parent_id' => 0, 'route' => 'userquery.admin.view.userqueries', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 19, 'name' => 'Comments', 'parent_id' => 0, 'route' => 'userquery.comments', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 20, 'name' => 'Discussions', 'parent_id' => 0, 'route' => 'user.discussions', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+
 
 
         ];

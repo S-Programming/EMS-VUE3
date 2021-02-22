@@ -310,6 +310,7 @@ function closeModalById(id) {
 
 function ajaxCallOnclick(route, extraData) {
     //console.log(extraData+"asadasd");
+    console.log(extraData);
     /*var today = new Date();
     if(today.getDay() == 6 || today.getDay() == 0) alert('Weekend!');*/
     if (route != '') {
@@ -317,7 +318,7 @@ function ajaxCallOnclick(route, extraData) {
         console.log(url);
         var el = this;
         let dataToPost = typeof extraData != 'undefined' ? extraData : {};
-        console.log(dataToPost);
+        console.log(url);
         $.ajax({
             type: "POST",
             url: url,
