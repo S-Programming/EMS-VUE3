@@ -33,9 +33,9 @@
 {{--                                <input type="email" class="form-control" id="email" name="email" value="{{$user_email??''}}" readonly/>--}}
 {{--                            </div>--}}
                             <div class="form-group">
-                                <label>Description</label>
+                                <label>User Query Description</label>
                                 {{--<textarea id="js-ckeditor" class="textarea_value" name="product_description"></textarea>--}}
-                                <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="feedback_description"></textarea>
+                                <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="user_query_description"></textarea>
                             </div>
                         </div>
                     </div>
@@ -68,9 +68,7 @@
                         <div class="block-content block-content-full text-right border-top">
                                 <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">No</button>
                                 <button type="button" class="checkin-btn btn btn-primary" onclick="validateFieldsByFormId(this)"
-                                >Yes,
-                                    Confirm
-                                </button>
+                                >Send</button>
                         </div>
         </form>
     </x-slot>

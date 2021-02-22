@@ -14,7 +14,7 @@ class User
         });
         Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('/add_user_modal', [UserController::class, 'userModal'])->name('user.modal');
-            Route::post('/edit_user_modal', [UserController::class, 'userModal'])->name('user.edit.modal');
+            Route::post('/edspecific_user_profileit_user_modal', [UserController::class, 'userModal'])->name('user.edit.modal');
             Route::post('/delete_user_modal', [UserController::class, 'userDeleteModal'])->name('user.delete.modal');
 
             Route::post('/confirm_delete', [UserController::class, 'confirmDeleteUser'])->name('user.confirm.delete.user');
@@ -36,6 +36,7 @@ class User
             Route::get('specific_user_profile/{user_id}', [UserController::class, 'viewUserProfilePlusInteractions'])->name('user.specific.profile');
             Route::post('add_userInteraction_point_modal', [UserController::class, 'addUserInteractionModal'])->name('user.add.userInteraction.point.modal');
             Route::post('users_confirm_add_discussionPoint', [UserController::class, 'confirmAddUserInteractionModal'])->name('user.confirm.add.discussionPoint');
+            Route::post('users_edit_discussionPoint', [UserController::class, 'editUserInteractionModal'])->name('user.edit.discussionPoint');
             Route::post('delete_user_interaction_modal', [UserController::class, 'deleteUserInteraction'])->name('user.delete.user.interaction.modal');
             Route::post('confirm_delete_user_interaction', [UserController::class, 'deleteConfirmUserInteraction'])->name('user.confirm.delete.user_interaction');
             Route::get('discussions', [UserController::class, 'discussionsView'])->name('user.discussions');

@@ -23,7 +23,7 @@
         <!-- Dynamic Table Full Pagination -->
 {{--        @dd($query_statuses)--}}
         <div id="feedbacklist-section" class="block block-rounded">
-            @include('pages.feedback._partial._admin_feedback_list_table_html',['user_quries' => $user_quries])
+            @include('pages.user_query._partial._admin_user_query_list_table_html',['user_quries' => $user_quries])
         </div>
         <!-- END Dynamic Table Full Pagination -->
     </div>

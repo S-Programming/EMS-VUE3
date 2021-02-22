@@ -25,7 +25,7 @@ class UserQuries
             //Admin Feedback Routes
             //Admin Feedback Routes
 
-            Route::get('/userqueries', [UserQuriesController::class,'viewAdminUserQuery'])->name('userquery.admin.view.userqueries');
+            Route::get('/user/queries', [UserQuriesController::class,'viewAdminUserQuery'])->name('userquery.admin.view.userqueries');
 //            Route::get('/feedbacks', [FeedbackController::class,'viewAdminFeedback'])->name('feedback.view');
 
             Route::post('/comment_on_userquery_modal', [UserQuriesController::class,'addCommentModal'])->name('comment.modal');

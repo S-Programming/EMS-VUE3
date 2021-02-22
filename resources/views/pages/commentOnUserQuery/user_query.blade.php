@@ -4,7 +4,7 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    User Quries <!-- <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">Tables transformed with dynamic features.</small> -->
+                    Feedback <!-- <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">Tables transformed with dynamic features.</small> -->
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
@@ -24,7 +24,7 @@
         <!-- Dynamic Table Full Pagination -->
         <div id="feedbacklist-section" class="block block-rounded">
 
-            @include('pages.feedback._partial._feedback_list_table_html',['user_quries' => $user_quries])
+            @include('pages.user_query._partial._comment_user_query_overview',['user_quries' => $user_quries])
         </div>
         <!-- END Dynamic Table Full Pagination -->
     </div>

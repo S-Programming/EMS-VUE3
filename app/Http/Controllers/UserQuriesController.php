@@ -29,18 +29,18 @@ class UserQuriesController extends Controller
         //
     }
     /**
-     * Display list of Feedback To User.
+     * Display list of user_query To User.
      *
      * @return \Illuminate\Http\Response
      */
     public function addUserQuery(Request $request)
     {
         $user_quries = UserQuries::where('user_id',$this->getAuthUserId())->get();
-        $html = view('pages.feedback._partial._feedback_list_table_html',['html_section_id' => 'feedbacklist-section'])->render();
-        return view('pages.feedback.feedback',['html'=>$html,'user_quries' => $user_quries]);
+        $html = view('pages.user_query._partial._user_query_list_table_html',['html_section_id' => 'feedbacklist-section'])->render();
+        return view('pages.user_query.user_query',['html'=>$html,'user_quries' => $user_quries]);
     }
     /**
-     * Display a Modal to add feedback by User.
+     * Display a Modal to add user_query by User.
      *
      * @return \Illuminate\Http\Response
      */
@@ -49,48 +49,50 @@ class UserQuriesController extends Controller
         return $this->sendJsonResponse($this->userQueryService->addUserQueryModal($request));
     }
     /**
-     * Click yes button to add feedback confirmly.
+     * Click yes button to add user_query confirmly.
      *
      * @return \Illuminate\Http\Response
      */
     public function confirmAddUserQuery(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'topic' => 'required',
-            'feedback_description' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
-        }
+//        $validator = Validator::make($request->all(), [
+//            'topic' => 'required',
+//            'description' => 'required',
+//        ]);
+//        if ($validator->fails()) {
+//            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+//        }
         return $this->sendJsonResponse($this->userQueryService->confirmAddUserQuery($request));
     }
     //For All users
     /**
-     * View Feedbacks And Comments on Feedbacks.
+     * View user_queries And Comments on user_query.
      *
      * @return \Illuminate\Http\Response
      */
     public  function viewCommentsUserQuery(Request $request)
     {
+
         $user_quries = UserQuries::all();
-        $html = view('pages.feedback.commentFeedback._partial._comment_feedback_overview',['html_section_id' => 'feedbacklist-section'])->render();
-        return view('pages.feedback.commentFeedback.feedback',['html'=>$html,'user_quries' => $user_quries]);
+        $html = view('pages.user_query._partial._comment_user_query_overview',['html_section_id' => 'feedbacklist-section'])->render();
+        return view('pages.user_query.user_query',['html'=>$html,'user_quries' => $user_quries]);
+//        return view('pages.user_query.commentFeedback.user_query',['html'=>$html,'user_quries' => $user_quries]);
     }
-    //  Admin Admin Admin Admin Admin Admin
 
-    //  Admin Admin Admin Admin Admin Admin
 
-    //  Admin Admin Admin Admin Admin Admin
     /**
-     * Show admin Feedback list View.
+     *
+     * Admin Admin Admin Admin Admin Admin
+     *
+     * Show admin user_query list View.
      *
      * @return \Illuminate\Http\Response
      */
     public function viewAdminUserQuery(Request $request)
     {
         $user_quries = UserQuries::with('users')->get();
-        $html = view('pages.feedback._partial._admin_feedback_list_table_html', ['html_section_id' => 'allfeedbacklist-section'])->render();
-        return view('pages.feedback.admin_feedback', ['html' => $html, 'user_quries' => $user_quries]);
+        $html = view('pages.user_query._partial._admin_user_query_list_table_html', ['html_section_id' => 'allfeedbacklist-section'])->render();
+        return view('pages.user_query.admin_user_query', ['html' => $html, 'user_quries' => $user_quries]);
     }
     /**
      * Display Comment Modal for Admin.
@@ -117,7 +119,7 @@ class UserQuriesController extends Controller
         return $this->sendJsonResponse($this->userQueryService->confirmAddComment($request));
     }
     /**
-     * Display a Modal to delete Feedback.
+     * Display a Modal to delete user_query.
      *
      * @return \Illuminate\Http\Response
      */
@@ -126,7 +128,7 @@ class UserQuriesController extends Controller
         return $this->sendJsonResponse($this->userQueryService->deleteUserQueryModal($request));
     }
     /**
-     * Click yes Button to delete feedback confirmly.
+     * Click yes Button to delete user_query confirmly.
      *
      * @return \Illuminate\Http\Response
      */

@@ -7,7 +7,7 @@
         <thead>
         <tr>
             {{--            <th class="text-center">Name</th>--}}
-            {{--            <th class="text-center">Email</th>--}}
+{{--            <th class="text-center">Email</th>--}}
             <th class="text-center">Topic</th>
             <th class="text-center">Description</th>
             <th class="text-center">Status</th>
@@ -20,11 +20,11 @@
             @foreach($user_quries as $user_qurie)
                 <tr>
                     {{--            <td class="font-size-sm">{{$feedback->first_name??''}}  {{$feedback->last_name??''}}</td>--}}
-                    {{--                    <td class="font-w600 font-size-sm">{{$feedback->email??''}}</td>--}}
+{{--                    <td class="font-w600 font-size-sm">{{$feedback->email??''}}</td>--}}
                     <td class="font-w600 font-size-sm">{{$user_qurie->topic??''}}</td>
                     <td class="font-w600 font-size-sm">{!!$user_qurie->description??''!!}</td>
-                    <td class="font-w600 font-size-sm">{{$user_qurie->rate_status??''??''}}</td>
-                    <td class="font-w600 font-size-sm">{!!$user_qurie->admin_comment??''!!}</td>
+                    <td class="font-w600 font-size-sm">{{$user_qurie->query_statuses->query_status??''??''}}</td>
+                    <td class="font-w600 font-size-sm">{!!$user_qurie->comment??''!!}</td>
                     <td class="text-center text-info font-w600 font-size-sm">{{$user_qurie->is_view??''}}</td>
 
                     {{--            <td>--}}

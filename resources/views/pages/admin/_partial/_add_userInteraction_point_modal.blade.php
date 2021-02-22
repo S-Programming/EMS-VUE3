@@ -21,8 +21,9 @@
                                 {{--<textarea id="js-ckeditor" class="textarea_value" name="product_description"></textarea>--}}
                                 <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="discussion_point"></textarea>
                             </div>
-                            <input type="date" id="date" name="date">
-{{--                            <div class="form-group hide-input" id="date-group">--}}
+                            <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" data-min-date="today" readonly="readonly">
+
+                            {{--                            <div class="form-group hide-input" id="date-group">--}}
 {{--                                <label for="">Select Date </label>--}}
 {{--                                <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" data-min-date="today" readonly="readonly">--}}
 {{--                            </div>--}}
@@ -40,9 +41,7 @@
                 <div class="block-content block-content-full text-right border-top">
                     <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">No</button>
                     <button type="button" class="checkin-btn btn btn-primary" onclick="validateFieldsByFormId(this)"
-                    >Yes,
-                        Confirm
-                    </button>
+                    >Add</button>
                 </div>
         </form>
     </x-slot>

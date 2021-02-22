@@ -16,15 +16,11 @@ class CreateUserQuriesTable extends Migration
     {
         Schema::create('user_quries', function (Blueprint $table) {
             $table->id();
-//            $table->string('first_name')->nullable();
-//            $table->string('last_name')->nullable();
-//            $table->string('email');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('query_status_id');
+            $table->unsignedBigInteger('query_status_id')->nullable();
             $table->string('topic')->nullable();
             $table->string('description')->nullable();
-            $table->string('admin_comment')->nullable();
-            $table->string('status')->default("Good");
+            $table->string('comment')->nullable();
             $table->string('is_view')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

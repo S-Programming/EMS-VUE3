@@ -13,8 +13,8 @@
             <th class="text-center">Staff Name</th>
             <th class="text-center">User Name</th>
             <th class="text-center">Description</th>
-            <th class="text-center">Meeting Date</th>
             <th class="text-center">Date</th>
+{{--            <th class="text-center">Date</th>--}}
             <th class="text-center">Actions</th>
         </tr>
         </thead>
@@ -29,9 +29,10 @@
                     <td class="font-w600 font-size-sm">{!!$userInteraction->description??''!!}</td>
                     <td class="font-w600 font-size-sm">{!!$userInteraction->date??''!!}</td>
 {{--                    <td class="font-w600 font-size-sm">{{$userInteraction->created_at->format('Y-m-d')??''}}</td>--}}
-                    <td class="font-w600 font-size-sm">{{$userInteraction->created_at->format('M d Y')??''}}</td>
+{{--                    <td class="font-w600 font-size-sm">{{$userInteraction->created_at->format('M d Y')??''}}</td>--}}
                                 <td>
                                     <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('delete_user_interaction_modal',{{$userInteraction->id??''}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+{{--                                    <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('users_edit_discussionPoint',{{$userInteraction->id??''}})"><i class="fa fa-edit" aria-hidden="true"></i></button>--}}
                     {{--                <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('view_product_modal',{{$stock->product->id??''}})"><i class="fa fa-eye" aria-hidden="true"></i></button>--}}
                                 </td>
                 </tr>

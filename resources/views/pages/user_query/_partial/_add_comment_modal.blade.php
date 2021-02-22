@@ -11,7 +11,7 @@
                 $inyMceConfig['selector'] = '.tinymce-editor-cls';
             echo theme_tinyMCE_script($inyMceConfig);
             @endphp
-            <input type="hidden" name="feedback_id" value="{{$user_qurie_id}}">
+            <input type="hidden" name="user_query_id" value="{{$user_qurie_id}}">
             <div class="block block-rounded">
                 <div class="block-content">
                     <div class="row justify-content-center">
@@ -19,10 +19,10 @@
                             <div class="form-group">
                                 <label>Type Your Comment</label>
                                 {{--<textarea id="js-ckeditor" class="textarea_value" name="product_description"></textarea>--}}
-                                <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="admin_comment"></textarea>
+                                <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="admin_comment">{{$user_quries->comment??''}}</textarea>
                             </div>
                             <div class="form-group">
-                                <select id="" name="status">
+                                <select class="browser-default custom-select" id="" name="status">
                                     @if(isset($query_statuses))
                                         @foreach($query_statuses as $query_status)
                                             <option value="{{$query_status->id??''}}">{{$query_status->query_status??''}}</option>
@@ -44,9 +44,7 @@
                         <div class="block-content block-content-full text-right border-top">
                             <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">No</button>
                             <button type="button" class="checkin-btn btn btn-primary" onclick="validateFieldsByFormId(this)"
-                            >Yes,
-                                Confirm
-                            </button>
+                            >Update</button>
                         </div>
         </form>
     </x-slot>
