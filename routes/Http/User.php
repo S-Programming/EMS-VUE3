@@ -43,6 +43,9 @@ class User
             Route::post('confirm_delete_user_interaction', [UserController::class, 'deleteConfirmUserInteraction'])->name('user.confirm.delete.user_interaction');
             Route::get('discussions', [UserController::class, 'discussionsView'])->name('user.discussions');
 
+//            Project Manager
+            Route::get('add_project_manager', [UserController::class, 'addProjectManager'])->name('user.add.project.manager');
+
 
         });
 

@@ -26,7 +26,7 @@
                     <td class="font-w600 font-size-sm">{{$user_qurie->users->email??''}}</td>
                     <td class="font-w600 font-size-sm">{{$user_qurie->topic??''}}</td>
                     <td class="font-w600 font-size-sm">{!!$user_qurie->description??''!!}</td>
-                    <td class="font-w600 font-size-sm">{{$user_qurie->query_statuses->query_status??''}}</td>
+                    <td class="font-w600 font-size-sm text-center">{{$user_qurie->query_statuses->query_status??''}}</td>
                     <td class="font-w600 font-size-sm">{!!$user_qurie->comment??''!!}</td>
 
                     <td>

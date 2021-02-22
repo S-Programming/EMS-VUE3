@@ -237,4 +237,16 @@ class UserController extends Controller
         $html = view('pages.admin.discussions._partial._discussions_list',['html_section_id' => 'userlist-section'])->render();
         return view('pages.admin.discussions.discussion', ['html' => $html, 'userInteractions' => $userInteractions]);
     }
+    /**
+     * Display Project Manager List.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addProjectManager(Request $request)
+    {
+        $project_anagers = User::where('id',3)->get();
+        dd($project_anagers);
+    }
 }
