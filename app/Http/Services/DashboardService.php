@@ -28,7 +28,12 @@ class DashboardService extends BaseService
             $userRoles = $this->userRoles();
             if (in_array(RoleUser::SuperAdmin, $userRoles) || in_array(RoleUser::Admin, $userRoles)) {
                 return $this->adminDashboard($request);
-            } else {
+            }
+            elseif(in_array(RoleUser::EngagementManager, $userRoles))
+            {
+                return $this->engagementManagerDashboard($request);
+            }
+            else {
                 return $this->userDashboard($request);
             }
         }
@@ -81,6 +86,14 @@ class DashboardService extends BaseService
     }
 
     public function adminDashboard(Request $request)
+    {
+        $totalUsers = User::all()->count();
+        $user = $this->getAuthUser();
+        $responseData = ['user' => $user, 'total_user_count' => $totalUsers];
+        $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
+        return view('pages.admin.dashboard', $responseData);
+    }
+    public function engagementManagerDashboard(Request $request)
     {
         $totalUsers = User::all()->count();
         $user = $this->getAuthUser();
