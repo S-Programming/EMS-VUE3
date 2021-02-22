@@ -22,8 +22,7 @@
     <!-- Page Content -->
     <div class="content">
         <!-- Dynamic Table Full Pagination -->
-        <div id="feedbacklist-section" class="block block-rounded">
-
+        <div id="user-query-list-section" class="block block-rounded">
             @include('pages.user_query._partial._user_query_list_table_html',['user_quries' => $user_quries])
         </div>
         <!-- END Dynamic Table Full Pagination -->

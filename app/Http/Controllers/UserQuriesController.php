@@ -36,7 +36,7 @@ class UserQuriesController extends Controller
     public function addUserQuery(Request $request)
     {
         $user_quries = UserQuries::where('user_id',$this->getAuthUserId())->get();
-        $html = view('pages.user_query._partial._user_query_list_table_html',['html_section_id' => 'feedbacklist-section'])->render();
+        $html = view('pages.user_query._partial._user_query_list_table_html',['html_section_id' => 'user-query-list-section'])->render();
         return view('pages.user_query.user_query',['html'=>$html,'user_quries' => $user_quries]);
     }
     /**
@@ -74,7 +74,7 @@ class UserQuriesController extends Controller
     {
 
         $user_quries = UserQuries::all();
-        $html = view('pages.user_query._partial._comment_user_query_overview',['html_section_id' => 'feedbacklist-section'])->render();
+        $html = view('pages.user_query._partial._comment_user_query_overview',['html_section_id' => 'user-query-list-section'])->render();
         return view('pages.user_query.user_query',['html'=>$html,'user_quries' => $user_quries]);
     }
 
@@ -90,7 +90,7 @@ class UserQuriesController extends Controller
     public function viewAdminUserQuery(Request $request)
     {
         $user_quries = UserQuries::with('users')->get();
-        $html = view('pages.user_query._partial._admin_user_query_list_table_html', ['html_section_id' => 'allfeedbacklist-section'])->render();
+        $html = view('pages.user_query._partial._admin_user_query_list_table_html', ['html_section_id' => 'user-query-list-section'])->render();
         return view('pages.user_query.admin_user_query', ['html' => $html, 'user_quries' => $user_quries]);
     }
     /**

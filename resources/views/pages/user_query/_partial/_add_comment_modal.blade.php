@@ -21,15 +21,21 @@
                                 {{--<textarea id="js-ckeditor" class="textarea_value" name="product_description"></textarea>--}}
                                 <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="admin_comment">{{$user_quries->comment??''}}</textarea>
                             </div>
-                            <div class="form-group">
-                                <select class="browser-default custom-select" id="" name="status">
-                                    @if(isset($query_statuses))
-                                        @foreach($query_statuses as $query_status)
-                                            <option value="{{$query_status->id??''}}">{{$query_status->query_status??''}}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
+
+                            <div id="query_menus-section" class="block block-rounded">
+                                {!!$query_status_menu_html??''!!}
+{{--                                @include('utils._partial._query_status_menu',['query_statuses'=>$query_statuses])--}}
+{{--                                ,['query_statuses'=>$query_statuses]--}}
                             </div>
+{{--                            <div class="form-group">--}}
+{{--                                <select class="browser-default custom-select" id="" name="status">--}}
+{{--                                    @if(isset($query_statuses))--}}
+{{--                                        @foreach($query_statuses as $query_status)--}}
+{{--                                            <option value="{{$query_status->id??''}}">{{$query_status->query_status??''}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    @endif--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>
