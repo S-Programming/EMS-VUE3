@@ -55,13 +55,13 @@ class UserQuriesController extends Controller
      */
     public function confirmAddUserQuery(Request $request)
     {
-//        $validator = Validator::make($request->all(), [
-//            'topic' => 'required',
-//            'description' => 'required',
-//        ]);
-//        if ($validator->fails()) {
-//            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
-//        }
+        $validator = Validator::make($request->all(), [
+            'topic' => 'required',
+            'user_query_description' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->userQueryService->confirmAddUserQuery($request));
     }
     //For All users
@@ -76,7 +76,6 @@ class UserQuriesController extends Controller
         $user_quries = UserQuries::all();
         $html = view('pages.user_query._partial._comment_user_query_overview',['html_section_id' => 'feedbacklist-section'])->render();
         return view('pages.user_query.user_query',['html'=>$html,'user_quries' => $user_quries]);
-//        return view('pages.user_query.commentFeedback.user_query',['html'=>$html,'user_quries' => $user_quries]);
     }
 
 
