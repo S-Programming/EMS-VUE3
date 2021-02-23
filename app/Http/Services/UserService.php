@@ -8,6 +8,7 @@ use App\Http\Services\BaseService\BaseService;
 use App\Models\Menu;
 use App\Models\MenuRole;
 use App\Models\CheckinHistory;
+use App\Models\Project;
 use App\Models\QueryStatus;
 use App\Models\User;
 use App\Models\Role;
@@ -367,5 +368,110 @@ class UserService extends BaseService
         $project_managers = RoleUser::with('user')->where('role_id',4)->get();
         $html = view('pages.engagementManager._partial._project_manager_list_table_html', ['project_managers'=>$project_managers])->render();
         return $this->successResponse('Project Manager Deleted Successfully', ['html'=>$html,'html_section_id'=> 'project-manager-list-section']);
+    }
+    /**
+     * Display popup to add project By Admin.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addProjectModal(Request $request)
+    {
+        $project_managers = RoleUser::with('user')->where('role_id',4)->get();
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $projectManagersDropDown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers])->render();
+        $html = view('pages.admin.projects._partial._add_project_modal', ['id' => $containerId, 'data' => null, 'project_managers_dropdown' => $projectManagersDropDown])->render();
+        return $this->successResponse('success', ['html' => $html]);
+    }
+    /**
+     * Click Add to add project in the project list.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmAddProjectModal(Request $request)
+    {
+        $project = new Project;
+        $project->name = $request->project_name;
+        $project->description =$request->project_description;
+        $project->user_id =$request->project_manager_id;
+        $project->start_date =Carbon::parse($request->date);
+        $project->save();
+        $projects = Project::with('users')->get();
+        $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
+        return $this->successResponse('Project Added Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
+    }
+    /**
+     * Display popup to edit Project Attributes.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editProjectModal(Request $request)
+    {
+        $project_id = $request->id;
+        $project = Project::find($project_id);
+        $project_managers = RoleUser::with('user')->where('role_id',4)->get();
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $projectManagersDropDown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers])->render();
+        $html = view('pages.admin.projects._partial._edit_project_modal', ['id' => $containerId, 'data' => null, 'project_managers_dropdown' => $projectManagersDropDown,'project'=>$project])->render();
+        return $this->successResponse('success', ['html' => $html]);
+//        $project_id = $request->id;
+//        $project = Project::find($project_id);
+//        $containerId = $request->input('containerId', 'common_popup_modal');
+//        $html = view('pages.admin.projects._partial._edit_project_modal', ['id' => $containerId, 'project' => $project])->render();
+//        return $this->successResponse('success', ['html' => $html]);
+    }
+    /**
+     * Click Update Button to edit Project Attributes.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmEditProjectModal(Request $request)
+    {
+        $project_id = $request->id;
+        $project = Project::find($project_id);
+        $project->name = $request->project_name;
+        $project->description =$request->project_description;
+        $project->user_id =$request->project_manager_id;
+        $project->start_date =Carbon::parse($request->date);
+        $project->save();
+        $projects = Project::with('users')->get();
+        $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
+        return $this->successResponse('Project Updated Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
+    }
+    /**
+     * Display Popup to delete Project form DB.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteProjectModal(Request $request)
+    {
+        $project_id = $request->id;
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $html = view('pages.admin.projects._partial._delete_project_modal', ['id' => $containerId, 'project_id' => $project_id])->render();
+        return $this->successResponse('success', ['html' => $html]);
+    }
+    /**
+     * Click Delete button to delete project from DB.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmDeleteProjectModal(Request $request)
+    {
+        $project = Project::find($request->project_id);
+        $project->delete();
+        $projects = Project::with('users')->get();
+        $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
+        return $this->successResponse('Project Added Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
     }
 }
