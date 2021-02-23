@@ -18,6 +18,7 @@ use Route\Http\Pdf;
 use Route\Http\RequestStatus;
 use Route\Http\Test;
 use Route\Http\UserQuries;
+use Route\Http\TechnologyStack;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,4 +62,5 @@ Pdf::register();
 Test::register();
 //Feedback::register();
 UserQuries::register();
+TechnologyStack::register();
 
