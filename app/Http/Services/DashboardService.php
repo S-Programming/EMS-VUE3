@@ -33,6 +33,10 @@ class DashboardService extends BaseService
             {
                 return $this->engagementManagerDashboard($request);
             }
+            elseif(in_array(RoleUser::ProjectManager, $userRoles))
+            {
+                return $this->projectManagerDashboard($request);
+            }
             else {
                 return $this->userDashboard($request);
             }
@@ -94,6 +98,14 @@ class DashboardService extends BaseService
         return view('pages.admin.dashboard', $responseData);
     }
     public function engagementManagerDashboard(Request $request)
+    {
+        $totalUsers = User::all()->count();
+        $user = $this->getAuthUser();
+        $responseData = ['user' => $user, 'total_user_count' => $totalUsers];
+        $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
+        return view('pages.admin.dashboard', $responseData);
+    }
+    public function projectManagerDashboard(Request $request)
     {
         $totalUsers = User::all()->count();
         $user = $this->getAuthUser();

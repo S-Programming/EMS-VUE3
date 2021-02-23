@@ -10,6 +10,11 @@ class TechnologyStack extends Model
     protected $table = 'technology_stacks';
     public $fillable = ['name'];
 
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class);

@@ -9,7 +9,7 @@ class User
 {
     static function register()
     {
-        
+
         Route::group(['middleware' => ['auth:sanctum', 'isAdmin']], function () {
             Route::get('/user', [UserController::class, 'index'])->name('user.list');
         });
@@ -54,7 +54,13 @@ class User
 
 
             // Projects
-            Route::post('projects_list', [UserController::class, 'projectList'])->name('user.projects.list');
+            Route::get('projects_list', [UserController::class, 'projectList'])->name('user.projects.list');
+            Route::post('add_project_modal', [UserController::class, 'addProjectModal'])->name('user.add.project.modal');
+            Route::post('confirm_add_project_modal', [UserController::class, 'confirmAddProjectModal'])->name('user.confirm.add.project');
+            Route::post('edit_project_modal', [UserController::class, 'editProjectModal'])->name('user.edit.project');
+            Route::post('confirm_edit_project_modal', [UserController::class, 'confirmEditProjectModal'])->name('user.confirm.edit.project');
+            Route::post('delete_project_modal', [UserController::class, 'deleteProjectModal'])->name('user.delete.project');
+            Route::post('confirm_delete_project', [UserController::class, 'confirmDeleteProjectModal'])->name('user.confirm.delete.project');
 
 
         });

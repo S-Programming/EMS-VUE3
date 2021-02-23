@@ -50,9 +50,7 @@
                     <div class="block-content block-content-full text-right border-top">
                         <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">Cancel
                         </button>
-                        <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)"
-                                  data-validation="validation-span-id"
-                                  id="validation-span-id">
+                        <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)">
                             {{ __('Add') }}
                         </x-button>
                     </div>
