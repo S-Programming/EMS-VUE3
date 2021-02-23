@@ -9,6 +9,7 @@ class User
 {
     static function register()
     {
+
         Route::group(['middleware' => ['auth:sanctum', 'isAdmin']], function () {
             Route::get('/user', [UserController::class, 'index'])->name('user.list');
         });
@@ -31,6 +32,7 @@ class User
             Route::get('/self_edit_profile', [UserController::class, 'selfEditProfile'])->name('user.self.edit');
             Route::post('/update_self_profile', [UserController::class, 'selfUpdateProfile'])->name('user.self.update');
             Route::post('/update_self_password', [UserController::class, 'selfUpdatePassword'])->name('update.self.password');*/
+            Route::post('/import_users_by_csv', [UserController::class, 'importUsersCsv'])->name('user.import.by.csv');
 
 //            Admin Route Admin Route
             Route::get('specific_user_profile/{user_id}', [UserController::class, 'viewUserProfilePlusInteractions'])->name('user.specific.profile');
@@ -52,9 +54,17 @@ class User
 
 
             // Projects
-            Route::post('projects_list', [UserController::class, 'projectList'])->name('user.projects.list');
+            Route::get('projects_list', [UserController::class, 'projectList'])->name('user.projects.list');
+            Route::post('add_project_modal', [UserController::class, 'addProjectModal'])->name('user.add.project.modal');
+            Route::post('confirm_add_project_modal', [UserController::class, 'confirmAddProjectModal'])->name('user.confirm.add.project');
+            Route::post('edit_project_modal', [UserController::class, 'editProjectModal'])->name('user.edit.project');
+            Route::post('confirm_edit_project_modal', [UserController::class, 'confirmEditProjectModal'])->name('user.confirm.edit.project');
+            Route::post('delete_project_modal', [UserController::class, 'deleteProjectModal'])->name('user.delete.project');
+            Route::post('confirm_delete_project', [UserController::class, 'confirmDeleteProjectModal'])->name('user.confirm.delete.project');
 
 
         });
+
+        // only admin can upload csv
     }
 }

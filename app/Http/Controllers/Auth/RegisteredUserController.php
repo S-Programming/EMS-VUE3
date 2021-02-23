@@ -55,4 +55,17 @@ class RegisteredUserController extends Controller
 
         //return redirect(RouteServiceProvider::HOME);
     }
+
+    public function checkEmail(Request $request)
+    {
+        $email = $request->get('email');
+        if (isset($email) && !empty($email)) {
+            $userData = User::where('email', $email)->get()->count();
+            if ($userData > 0) {
+                return $this->success('Email Already Exists', ['data' => 'Email Exist']);
+            } else {
+                return $this->error('Email Available', ['data' => 'Email Available']);
+            }
+        }
+    }
 }

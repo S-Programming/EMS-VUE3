@@ -64,6 +64,7 @@ class LeaveService extends BaseService
         $leave_types_data = LeaveType::all();
         $containerId = $request->input('containerId', 'common_popup_modal');
         $leave_types_dropdown = view('utils.leave_types', ['leave_types' => ($roles ?? null), 'leave_types_data' => $leave_types_data])->render();
+        // dd($leave_types_dropdown);
         $html = view('pages.leave._partial._request_leave_modal', ['id' => $containerId, 'data' => null, 'leave_types_dropdown' => $leave_types_dropdown])->render();
         return $this->successResponse('success', ['html' => $html]);
     }

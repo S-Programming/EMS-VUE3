@@ -17,6 +17,11 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest');
 
+
+//Check Email 
+Route::post('/check_email', [RegisteredUserController::class, 'checkEmail'])->name('check.email');
+
+
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
     ->name('login');

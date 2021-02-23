@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CicoController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Route\Http\Dashboard;
@@ -17,6 +18,7 @@ use Route\Http\Pdf;
 use Route\Http\RequestStatus;
 use Route\Http\Test;
 use Route\Http\UserQuries;
+use Route\Http\TechnologyStack;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,7 @@ Route::view('/pages/blank', 'pages.blank');
 
 
 
+
 Dashboard::register();
 User::register();
 Role::register();
@@ -59,4 +62,5 @@ Pdf::register();
 Test::register();
 //Feedback::register();
 UserQuries::register();
+TechnologyStack::register();
 

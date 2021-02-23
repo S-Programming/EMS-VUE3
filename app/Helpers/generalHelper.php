@@ -15,7 +15,6 @@ if (!function_exists('debug')) {
         if ($is_exit)
             exit();
     }
-
 }
 if (!function_exists('encode')) {
     function encode($param)
@@ -60,7 +59,6 @@ if (!function_exists('formatPhone')) {
             $str = str_replace(array('-', ' ', '(', ')'), '', $str);
             $str = substr($str, -10);
             $str = '(' . substr($str, 0, 3) . ') ' . substr($str, 3, 3) . '-' . substr($str, 6, 5);
-
         }
         return $str;
     }
@@ -76,11 +74,13 @@ if (!function_exists('numericPhone')) {
 if (!function_exists('date_filter')) {
     function date_filter($date_from = '', $date_to = '', $compare_date = 'created_at', $dataFormat = 'Y-m-d')
     {
+        //dd($date_from);
         if ($date_from == '')
             $date_from = date($dataFormat);
         if ($date_to == '' || $date_to == '0000-00-00')
             $date_to = date($dataFormat);
         $date = date_create_from_format($dataFormat, $date_from);
+        //dd($date);
         $date_from = $date->format($dataFormat);
         $date = date_create_from_format($dataFormat, $date_to);
         $date_to = $date->modify('+1 day')->format($dataFormat);
@@ -137,4 +137,3 @@ if (!function_exists('historyDateFilter')) {
         return $filters;
     }
 }
-

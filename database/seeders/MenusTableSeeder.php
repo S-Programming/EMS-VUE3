@@ -38,6 +38,8 @@ class MenusTableSeeder extends Seeder
             ['id' => 20, 'name' => 'Discussions', 'parent_id' => 0, 'route' => 'user.discussions', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 21, 'name' => 'Project Manager', 'parent_id' => 0, 'route' => 'user.project.managers', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 22, 'name' => 'Projects', 'parent_id' => 0, 'route' => 'user.projects.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 23, 'name' => 'Technology Stack', 'parent_id' => 0, 'route' => 'technology.stack.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+
 
 
 

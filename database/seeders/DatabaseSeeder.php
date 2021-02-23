@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
 //        $this->call(FeedbackTableSeeder::class);
         $this->call(QueryStatusSeeder::class);
         $this->call(UserQuriesSeeder::class);
+        $this->call(ProjectSeeder::class);
         $this->call(UserInteractionSeeder::class);
 
     }

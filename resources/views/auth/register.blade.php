@@ -35,6 +35,7 @@
                                         </div>
                                         <div class="form-group">
                                             <x-input type="email" class="form-control form-control-lg form-control-alt" id="email" name="email" placeholder="Email"/>
+                                            <small> <span class="text-danger" id="result"> </span></small>
                                         </div>
                                         <div class="form-group">
                                             <x-input type="tel" class="form-control form-control-lg form-control-alt" id="phone" name="phone" placeholder="Phone Number"/>

@@ -3,8 +3,27 @@
     <x-button class="btn btn-primary" onclick="commonAjaxModel('add_user_modal')" data-validation="validation-span-id"
               id="validation-span-id">Add
     </x-button>
+    {{-- <x-button class="btn btn-primary">Upload CSV</x-button> --}}
+    <form action="{{ route('user.import.by.csv') }}"id="user-form-id"
+    data-modal-id="{{$id??'common_popup_modal'}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="custom-file">
+            <div class="col-12 mt-5">
+                <input type="file" name="csv_file" accept=".csv" class="form-control rounded-0" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" >
+            </div>
+        </div>
+        <input name="test" type="text" >
+        <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)"
+        data-validation="validation-span-id"
+        id="validation-span-id">
+  <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Submit') }}
+</x-button>
+        </form>
+    {{-- onclick="usersCsvUploadByAdmin()" --}}
+
 </div>
 <div class="block-content block-content-full">
+    {{-- ajaxCallOnclick('import_users_by_csv')  visitorCsvUploadByOrganizer() --}}
     <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
     <table class="table table-bordered table-striped table-vcenter  js-dataTable-buttons">
         <thead>
