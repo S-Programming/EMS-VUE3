@@ -42,7 +42,17 @@ class User
             Route::get('discussions', [UserController::class, 'discussionsView'])->name('user.discussions');
 
 //            Project Manager
-            Route::get('add_project_manager', [UserController::class, 'addProjectManager'])->name('user.add.project.manager');
+            Route::get('project_managers_list', [UserController::class, 'projectManagersList'])->name('user.project.managers');
+            Route::post('add_project_manager', [UserController::class, 'addProjectManagerModal'])->name('user.add.project.manager');
+            Route::post('confirm_add_project_manager', [UserController::class, 'confirmAddProjectManager'])->name('user.confirm.add.project.manager');
+            Route::post('edit_project_manager_modal', [UserController::class, 'editProjectManagerModal'])->name('user.edit.project.manager.modal');
+            Route::post('confirm_edit_project_manager', [UserController::class, 'confirmEditProjectManager'])->name('user.confirm.edit.project.manager');
+            Route::post('delete_project_manager_modal', [UserController::class, 'deleteProjectManagerModal'])->name('user.delete.project.manager.modal');
+            Route::post('confirm_delete_project_manager', [UserController::class, 'confirmDeleteProjectManager'])->name('user.confirm.delete.project.manager');
+
+
+            // Projects
+            Route::post('projects_list', [UserController::class, 'projectList'])->name('user.projects.list');
 
 
         });

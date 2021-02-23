@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\CheckinHistory;
+use App\Models\RoleUser;
 use App\Models\UserInteraction;
 use Illuminate\Http\Request;
 use App\Http\Services\UserService;
@@ -28,6 +29,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         return view('pages.user.users')->with(['users' => $this->getAllUsers()]);
@@ -211,9 +213,101 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function addProjectManager(Request $request)
+    public function projectManagersList(Request $request)
     {
-        $project_anagers = User::where('id',3)->get();
-        dd($project_anagers);
+        $project_managers = RoleUser::with('user')->where('role_id',4)->get();
+        $html = view('pages.engagementManager._partial._project_manager_list_table_html',['html_section_id'=> 'project-manager-list-section'])->render();
+        return view('pages.engagementManager.project_manager_list',['html'=>$html,'project_managers'=>$project_managers]);
     }
+    /**
+     * Display Project Manager Popup To Add Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addProjectManagerModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->userService->addProjectManagerModal($request));
+    }
+    /**
+     * Click Add button to add Project Manager
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmAddProjectManager(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|min:3|max:30',
+            'last_name' => 'required|min:3|max:30',
+            'email' => 'required|email',   // |unique:users,email
+            'phone_number' => 'required|min:11|numeric',
+            'roles' => 'required|numeric',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
+        return $this->sendJsonResponse($this->userService->confirmAddProjectManager($request));
+    }
+    /**
+     * Display Edit Project Manager Popup To Edit Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editProjectManagerModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->userService->editProjectManagerModal($request));
+    }
+    /**
+     * Click Edit button to Edit Project Manager information.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmEditProjectManager(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|min:3|max:30',
+            'last_name' => 'required|min:3|max:30',
+            'email' => 'required|email',   // |unique:users,email
+            'phone_number' => 'required|min:11|numeric',
+            'roles' => 'required|numeric',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
+        return $this->sendJsonResponse($this->userService->confirmEditProjectManager($request));
+    }
+    /**
+     * Display delete popup modal to delete Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteProjectManagerModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->userService->deleteProjectManagerModal($request));
+    }
+    /**
+     * click delete button to delete Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmDeleteProjectManager(Request $request)
+    {
+        return $this->sendJsonResponse($this->userService->confirmDeleteProjectManager($request));
+    }
+    public function projectList(Request $request)
+    {
+        dd('sss');
+    }
+
 }

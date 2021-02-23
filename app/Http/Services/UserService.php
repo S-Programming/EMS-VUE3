@@ -56,9 +56,9 @@ class UserService extends BaseService
             ]);
 
             //$user_id = $user->id; // last insert id of user
-            $user->roles()->sync($request->roles); // for pivot data
-            $user->save();
 
+            $user->save();
+            $user->roles()->sync($request->roles); // for pivot data
         }
         $html = view('pages.user._partial._users_list_table_html', ['users' => $this->getAllUsers()])->render();
         return $this->successResponse('User has Successfully Added', ['html' => $html, 'html_section_id' => 'userlist-section']);
@@ -194,5 +194,135 @@ class UserService extends BaseService
         $html = view('pages.admin._partial._users_interactions_list_table_html',['userInteractions' => $userInteractions,'user_name'=>$user_name,'user_id'=>$userInteraction->user_id])->render();
 //        return $this->successResponse('success',['html' => $html,'user_data' => $user_data,'userInteractions' => $userInteractions,'user_id'=>$userInteraction->user_id]);
         return $this->successResponse('success',['html' => $html,'html_section_id' => 'userlist-section' ]);
+    }
+    /**
+     * Display Project Manager Popup To Add Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addProjectManagerModal(Request $request)
+    {
+        $user_id = $request->id;
+        $user_data = User::with('roles')->find($user_id);
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $roles = Role::all();
+        $userRoles = [];
+        if (isset($user_data->roles) && !empty($user_data->roles)) {
+            foreach ($user_data->roles as $role) {
+                if ($role->id > 0) {
+                    $userRoles[$role->id] = $role->id;
+                }
+            }
+        }
+        $rolesDropDown = view('utils.roles', ['roles' => ($roles ?? null), 'user_roles' => $userRoles])->render();
+        $html = view('pages.engagementManager._partial._add_project_manager_modal', ['id' => $containerId, 'data' => null, 'roles_dropdown' => $rolesDropDown])->render();
+        return $this->successResponse('success', ['html' => $html]);
+    }
+    /**
+     * Click Add button to add Project Manager
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmAddProjectManager(Request $request)
+    {
+        $user = new User;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->password = bcrypt('12345678');
+
+        $user->save();
+        $user->roles()->attach(['role_id'=>$request->roles]);
+//        $user_id = $user->id;
+//        $user->roles()->attach(['user_id' => $user_id, 'role_id' => $request->roles]);
+//        $role_user = new RoleUser;
+//        $role_user->user_id = $user_id;
+//        $role_user->role_id = $request->roles;
+//        $role_user->save();
+
+        $project_managers = RoleUser::with('user')->where('role_id',4)->get();
+        $html = view('pages.engagementManager._partial._project_manager_list_table_html',['project_managers'=>$project_managers])->render();
+        return $this->successResponse('success', ['html' => $html,'html_section_id'=> 'project-manager-list-section']);
+    }
+    /**
+     * Display Edit Project Manager Popup To Edit Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editProjectManagerModal(Request $request)
+    {
+        $user_id = $request->id;
+        $user_data = User::with('roles')->find($user_id);
+        //        dd(CommonUtilsFacade::isCheckIn());
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $roles = Role::all();
+        $userRoles = [];
+        if (isset($user_data->roles) && !empty($user_data->roles)) {
+            foreach ($user_data->roles as $role) {
+                if ($role->id > 0) {
+                    $userRoles[$role->id] = $role->id;
+                }
+            }
+        }
+        $rolesDropDown = view('utils.roles', ['roles' => ($roles ?? null), 'user_roles' => $userRoles])->render();
+        $html = view('pages.engagementManager._partial._edit_project_manager_modal', ['id' => $containerId, 'data' => null, 'roles_dropdown' => $rolesDropDown, 'user_data' => $user_data])->render();
+
+        return $this->successResponse('success', ['html' => $html]);
+    }
+    /**
+     * Click Edit button to Edit Project Manager information.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmEditProjectManager(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->first_name =$request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->save();
+        $project_managers = RoleUser::with('user')->where('role_id',4)->get();
+        $html = view('pages.engagementManager._partial._project_manager_list_table_html',['project_managers'=>$project_managers])->render();
+        return $this->successResponse('success', ['html' => $html,'html_section_id'=> 'project-manager-list-section']);
+    }
+    /**
+     * Display delete popup modal to delete Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteProjectManagerModal(Request $request)
+    {
+        $project_manager_id = $request->id;
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $html = view('pages.engagementManager._partial._delete_project_manager_modal', ['id' => $containerId, 'project_manager_id' => $project_manager_id])->render();
+        return $this->successResponse('success', ['html' => $html]);
+    }
+    /**
+     * click delete button to delete Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmDeleteProjectManager(Request $request)
+    {
+        $user_id = $request->project_manager_id;
+        $user = User::find($user_id);
+        $user->delete();
+        $project_managers = RoleUser::with('user')->where('role_id',4)->get();
+        $html = view('pages.engagementManager._partial._project_manager_list_table_html', ['project_managers'=>$project_managers])->render();
+        return $this->successResponse('Project Manager Deleted Successfully', ['html'=>$html,'html_section_id'=> 'project-manager-list-section']);
     }
 }
