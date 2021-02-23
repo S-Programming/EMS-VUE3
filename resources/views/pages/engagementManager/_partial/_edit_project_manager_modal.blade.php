@@ -30,7 +30,7 @@
                             <div class="py-3">
                                 <div class="form-group">
                                     <label for="roles">&nbsp Role</label>
-                                    {!!$project_managers_dropdown??''!!}
+                                    {!!$roles_dropdown??''!!}
                                 </div>
                                 <div class="form-group">
                                     <label for="email">&nbsp Email</label>

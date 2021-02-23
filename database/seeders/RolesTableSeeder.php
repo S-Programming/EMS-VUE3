@@ -22,6 +22,13 @@ class RolesTableSeeder extends Seeder
             ['id' => 6, 'name' => 'UIDeveloper', 'route' => '/dashboard'],
             ['id' => 7, 'name' => 'UIDesigner', 'route' => '/dashboard'],
             ['id' => 8, 'name' => 'QualityAssurance', 'route' => '/dashboard'],
+
+            ['id' => 10, 'name' => 'ProjectManager', 'route' => '/dashboard'],
+            ['id' => 11, 'name' => 'ProjectManager', 'route' => '/dashboard'],
+            ['id' => 12, 'name' => 'ProjectManager', 'route' => '/dashboard'],
+            ['id' => 13, 'name' => 'ProjectManager', 'route' => '/dashboard'],
+
+
         ];
         DB::table('roles')->insert($roles);
     }

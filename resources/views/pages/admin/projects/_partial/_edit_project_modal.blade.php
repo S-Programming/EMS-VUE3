@@ -31,8 +31,9 @@
                                     <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="project_description">{!!$project->description??''!!}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="roles">&nbsp Role</label>
-                                    {!!$roles_dropdown??''!!}
+                                    <label for="roles">&nbsp Project Managers</label>
+{{--                                    @dd($project_managers)--}}
+                                    {!!$project_managers_dropdown??''!!}
                                 </div>
                                 <div class="form-group">
                                     <label>Date</label>
