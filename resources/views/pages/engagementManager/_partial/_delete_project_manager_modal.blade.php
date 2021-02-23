@@ -8,11 +8,9 @@
         </div>
         <div class="block-content block-content-full text-right border-top">
             <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">No</button>
-            <button type="button" class="checkin-btn btn btn-primary"  onclick="ajaxCallOnclick('confirm_delete_role',{role_id:{{$role_id}},containerId:'{{"$id"??'common_popup_modal'}}'})" 
-                    >Yes,
-                    Confirm
-            </button>
-           
+            <button type="button" class="checkin-btn btn btn-primary"  onclick="ajaxCallOnclick('confirm_delete_project_manager',{project_manager_id:{{$project_manager_id??''}},containerId:'{{"$id"??'common_popup_modal'}}'})"
+            >Delete</button>
+
         </div>
     </x-slot>
 

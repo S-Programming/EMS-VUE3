@@ -12,69 +12,107 @@ use Illuminate\Http\Request;
 
 class TechnologyStackService extends BaseService
 {
-    public function confirmAddRole(Request $request)
+    /**
+     * Display Technology Stack Popup To Add Technology Stack.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function technologyStackModal(Request $request)
     {
+        $containerId = $request->input('containerId', 'common_popup_modal');
 
-        ## DB operations
+        $html = view('pages.technologyStack._partial._add_technology_stack_modal', ['id' => $containerId, 'data' => null])->render();
+
+        return $this->successResponse('success', ['html' => $html]);
+    }
+
+    /**
+     * Click Add button to add Technology Stack
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmAddTechnologyStack(Request $request)
+    {
         if (!isset($request) && empty($request)) { // what will be condition
-            return $this->errorResponse('Role Submittion Failed');
+            return $this->errorResponse('Technology Stack Submittion Failed');
         }
         if (isset($request) && !empty($request)) {
 
-            $role = Role::updateOrCreate([
-                'id' => $request->id,
-            ], [
-                'name' => $request->role
-            ]);
-            $role->route = '/dashboard';
-            // $role_id = $role->id;
-            // $role->$request->roles;
-            $role->save();
-            /*            $roleuser = new RoleUser;
-                        $roleuser->user_id = $user_id;
-                        $roleuser->role_id = $request->roles;
-                        $roleuser->save();*/
-            $roles = Role::all();
+            $technology_stack = new TechnologyStack;
+            $technology_stack->name = $request->technology_stack;
+            $technology_stack->save();
+            $technology_stacks = TechnologyStack::all();
         }
-        $html = view('pages.role._partial._roles_list_table_html', compact('roles', $roles))->render();
-        return $this->successResponse('Role has Successfully Added', ['html' => $html, 'html_section_id' => 'rolelist-section']);
+        $html = view('pages.technologyStack._partial._technology_stacks_list_table_html', compact('technology_stacks', $technology_stacks))->render();
+        return $this->successResponse('Technology Stack has Successfully Added', ['html' => $html, 'html_section_id' => 'technology-stack-list-section']);
     }
 
-    public function technologyStackModal(Request $request)
+    /**
+     * Display Edit Technology Stack Popup To Edit Technology Stack.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editTechnologyStackModal(Request $request)
     {
         $technology_stack_id = $request->id;
         $technology_stack_data = TechnologyStack::find($technology_stack_id);
-        //        dd(CommonUtilsFacade::isCheckIn());
         $containerId = $request->input('containerId', 'common_popup_modal');
-        
-        $html = view('pages.technologyStack._partial._add_role_modal', ['id' => $containerId, 'data' => null, 'technology_stack_data' => $technology_stack_data])->render();
+        $html = view('pages.technologyStack._partial._edit_technology_stack_modal', ['id' => $containerId, 'data' => null, 'technology_stack_data' => $technology_stack_data])->render();
 
         return $this->successResponse('success', ['html' => $html]);
     }
 
-    public function roleDeleteModal(Request $request)
+    /**
+     * Click Edit button to Edit Technology Stack information.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmEditTechnologyStack(Request $request)
     {
-        $role_id = $request->id;
-        //        dd(CommonUtilsFacade::isCheckIn());
-        $containerId = $request->input('containerId', 'common_popup_modal');
-        // $role_data=Role::find($user_id);
-        $html = view('pages.role._partial._delete_role_modal', ['id' => $containerId, 'role_id' => $role_id])->render();
-
-        return $this->successResponse('success', ['html' => $html]);
+        $technology_stack = TechnologyStack::find($request->id);
+        $technology_stack->name = $request->technology_stack;
+        $technology_stack->save();
+        $technology_stacks = TechnologyStack::all();
+        $html = view('pages.technologyStack._partial._technology_stacks_list_table_html', compact('technology_stacks', $technology_stacks))->render();
+        return $this->successResponse('Technology Stack has Successfully Updated', ['html' => $html, 'html_section_id' => 'technology-stack-list-section']);
     }
 
-    public function confirmDeleteRole(Request $request)
+    /**
+     * Display delete popup modal to delete Technology Stack.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteTechnologyStackModal(Request $request)
     {
-        //$login_id = $this->getAuthUserId();
-        $role_id = $request->role_id;
-        /*if ($role_id == $login_id) {
-            return $this->errorResponse('You dont have Authorization to Delete this Role');
-        }
-*/
-        $role_data = Role::find($role_id);
-        $role_data->delete();
-        $roles = Role::all();
-        $html = view('pages.role._partial._roles_list_table_html', compact('roles', $roles))->render();
-        return $this->successResponse('Role is Successfully Deleted', ['html' => $html,'html_section_id' => 'rolelist-section']);
+        $technology_stack_id = $request->id;
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $html = view('pages.technologyStack._partial._delete_technology_stack_modal', ['id' => $containerId, 'technology_stack_id' => $technology_stack_id])->render();
+        return $this->successResponse('success', ['html' => $html]);
+    }
+    /**
+     * click delete button to delete Technology Stack.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmDeleteTechnologyStack(Request $request)
+    {
+        $technology_stack_id = $request->technology_stack_id;
+        $technology_stack = TechnologyStack::find($technology_stack_id);
+        $technology_stack->delete();
+        $technology_stacks = TechnologyStack::all();
+        $html = view('pages.technologyStack._partial._technology_stacks_list_table_html', compact('technology_stacks', $technology_stacks))->render();
+        return $this->successResponse('Technology Stack has Successfully Deleted', ['html' => $html, 'html_section_id' => 'technology-stack-list-section']);
     }
 }

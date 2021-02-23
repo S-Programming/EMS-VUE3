@@ -23,9 +23,9 @@
 	<!-- Page Content -->
 	<div class="content">
 	    <!-- Dynamic Table Full Pagination -->
-	    <div id="rolelist-section" class="block block-rounded">
+	    <div id="technology-stack-list-section" class="block block-rounded">
 
-	    @include('pages.technologyStack._partial._technology_stacks_list_table_html',['technologyStacks' => $technologyStacks])
+	    @include('pages.technologyStack._partial._technology_stacks_list_table_html',['technology_stacks' => $technology_stacks])
 		</div>
 	    <!-- END Dynamic Table Full Pagination -->
 
