@@ -16,11 +16,11 @@ class ProjectSeeder extends Seeder
     public function run()
     {
         $projects = [
-            ['name' => 'Login','description'=>'Login Project','start_date' => Carbon::now()->format('Y-m-d H:i:s'), 'user_id'=>10,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
-            ['name' => 'Checkout','description'=>'Checkout Project','start_date' => Carbon::now()->format('Y-m-d H:i:s'), 'user_id'=>11,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
-            ['name' => 'bayan','description'=>'bayan Project','start_date' => Carbon::now()->format('Y-m-d H:i:s'), 'user_id'=>12,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
-            ['name' => 'AloExpo','description'=>'AloExpo Project','start_date' => Carbon::now()->format('Y-m-d H:i:s'), 'user_id'=>4,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
-            ['name' => 'Remit Scanner','description'=>'Remit Scanner Project','start_date' => Carbon::now()->format('Y-m-d H:i:s'), 'user_id'=>13,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['name' => 'Login','description'=>'Login Project','start_date' => Carbon::now()->format('Y-m-d H:i:s'), 'user_id'=>10,'number_of_developers'=>4,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['name' => 'Checkout','description'=>'Checkout Project','start_date' => Carbon::now()->format('Y-m-d H:i:s'), 'user_id'=>11,'number_of_developers'=>5,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['name' => 'bayan','description'=>'bayan Project','start_date' => Carbon::now()->format('Y-m-d H:i:s'), 'user_id'=>12,'number_of_developers'=>9,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['name' => 'AloExpo','description'=>'AloExpo Project','start_date' => Carbon::now()->format('Y-m-d H:i:s'), 'user_id'=>4,'number_of_developers'=>4,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['name' => 'Remit Scanner','description'=>'Remit Scanner Project','start_date' => Carbon::now()->format('Y-m-d H:i:s'), 'user_id'=>13,'number_of_developers'=>6,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
         ];
         DB::table('projects')->insert($projects);
     }

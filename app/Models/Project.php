@@ -13,13 +13,19 @@ class Project extends Model
     public function project(){
         return $this->belongsTo(Project::class,'project_id','id');
     }
-
+    public function users(){
+        return $this->belongsTo(User::class,'user_id','id');
+    }
     // public function technology()
     // {
     //     return $this->belongsToMany(TechnologyStack::class);
     // }
 
     public function technology()
+    {
+        return $this->belongsToMany(TechnologyStack::class);
+    }
+    public function technologystack()
     {
         return $this->belongsToMany(TechnologyStack::class);
     }

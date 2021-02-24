@@ -348,7 +348,7 @@ class UserController extends Controller
      */
     public function projectList(Request $request)
     {
-        $projects = Project::with('users')->get();
+        $projects = Project::with('users')->with('technology')->get();
         return view('pages.admin.projects.projects',['projects'=>$projects]);
     }
     /**

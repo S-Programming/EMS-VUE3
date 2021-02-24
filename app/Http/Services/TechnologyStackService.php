@@ -22,7 +22,6 @@ class TechnologyStackService extends BaseService
     public function technologyStackModal(Request $request)
     {
         $containerId = $request->input('containerId', 'common_popup_modal');
-
         $html = view('pages.technologyStack._partial._add_technology_stack_modal', ['id' => $containerId, 'data' => null])->render();
 
         return $this->successResponse('success', ['html' => $html]);
