@@ -25,7 +25,7 @@
 	    <!-- Dynamic Table Full Pagination -->
 	    <div id="technology-stack-list-section" class="block block-rounded">
 
-	    @include('pages.technologyStack._partial._technology_stacks_list_table_html',['technology_stacks' => $technology_stacks])
+	    @include('pages.projectManager._partial._assign_project_list_table_html',['project_lists' => $project_lists])
 		</div>
 	    <!-- END Dynamic Table Full Pagination -->
 

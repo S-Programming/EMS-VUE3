@@ -18,19 +18,23 @@ class TechnologyStackController extends Controller
         $this->technologyStackService = $technologyStackService;
     }
     /**
-     * Display a listing of Technology Stack.
+     * Display Technology Stack List.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $technologyStacks = TechnologyStack::all();
-        return view('pages.technologyStack.technologyStacks')->with('technologyStacks', $technologyStacks);
+        $technology_stacks = TechnologyStack::all();
+        return view('pages.technologyStack.technologyStacks')->with('technology_stacks', $technology_stacks);
     }
     /**
-     * It will return a HTML for the of Technology Stack Modal container
+     * Display Technology Stack Popup To Add Technology Stack.
      *
-     * @return Body
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function technologyStackModal(Request $request)
     {
@@ -38,72 +42,70 @@ class TechnologyStackController extends Controller
     }
 
     /**
-     * Method for the Adding Users
+     * Click Add button to add Technology Stack
      *
-     * @return Body
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function confirmAddRole(Request $request)
+    public function confirmAddTechnologyStack(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'role' => 'required|min:3|max:30'
+            'technology_stack' => 'required|min:3|max:30'
         ]);
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
-        return $this->sendJsonResponse($this->technologyStackService->confirmAddRole($request));
-    }
-
-
-    /**
-     * It will return a HTML for the Modal container for confirmation of deletion
-     *
-     * @return Body
-     */
-    public function roleDeleteModal(Request $request)
-    {
-        return $this->sendJsonResponse($this->technologyStackService->roleDeleteModal($request));
+        return $this->sendJsonResponse($this->technologyStackService->confirmAddTechnologyStack($request));
     }
     /**
-     * Method for the Deleting Users
-     *
-     * @return Body
-     */
-    public function confirmDeleteRole(Request $request)
-    {
-        return $this->sendJsonResponse($this->technologyStackService->confirmDeleteRole($request));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Display Edit Technology Stack Popup To Edit Technology Stack.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function editTechnologyStackModal(Request $request)
     {
-        //
+        return $this->sendJsonResponse($this->technologyStackService->editTechnologyStackModal($request));
     }
-
     /**
-     * Remove the specified resource from storage.
+     * Click Edit button to Edit Technology stack information.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function confirmEditTechnologyStack(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'technology_stack' => 'required|min:3|max:30',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
+        return $this->sendJsonResponse($this->technologyStackService->confirmEditTechnologyStack($request));
+    }
+    /**
+     * Display delete popup modal to delete Technology Stack.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteTechnologyStackModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->technologyStackService->deleteTechnologyStackModal($request));
+    }
+    /**
+     * click delete button to delete Technology Stack.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmDeleteTechnologyStack(Request $request)
+    {
+        return $this->sendJsonResponse($this->technologyStackService->confirmDeleteTechnologyStack($request));
     }
 }

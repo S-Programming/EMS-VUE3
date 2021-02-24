@@ -15,6 +15,7 @@ use Route\Http\Holiday;
 use Route\Http\Leave;
 use Route\Http\Attendance;
 use Route\Http\Pdf;
+use Route\Http\ProjectManager;
 use Route\Http\RequestStatus;
 use Route\Http\Test;
 use Route\Http\UserQuries;
@@ -63,4 +64,5 @@ Test::register();
 //Feedback::register();
 UserQuries::register();
 TechnologyStack::register();
+ProjectManager::register();
 

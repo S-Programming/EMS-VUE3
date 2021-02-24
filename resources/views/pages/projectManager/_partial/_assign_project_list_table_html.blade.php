@@ -10,7 +10,10 @@
         <thead>
         <tr>
             <th class="text-center" style="width: 80px;">ID</th>
-            <th>Name</th>
+            <th> Name </th>
+            <th> Description </th>
+            <th> Start Date </th>
+            <th> Technology Stack </th>
             <!-- <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
             <th class="d-none d-sm-table-cell" style="width: 15%;">Access</th>
             <th style="width: 15%;">Registered</th> -->
@@ -18,14 +21,16 @@
         </tr>
         </thead>
         <tbody>
-        @if($technology_stacks)
-            @foreach($technology_stacks as $technology_stack)
+        @if($project_lists)
+            @foreach($project_lists as $project_list)
                 <tr>
-                    <td class="text-center font-size-sm">{{$technology_stack->id}}</td>
-                    <td class="font-w600 font-size-sm">{{$technology_stack->name}}</td>
+                    <td class="text-center font-size-sm">{{$project_list->id}}</td>
+                    <td class="font-w600 font-size-sm">{{$project_list->name}}</td>
+                    <td class="font-w600 font-size-sm">{{$project_list->description}}</td>
+                    <td class="font-w600 font-size-sm"></td>
+                    <td class="font-w600 font-size-sm"></td>
                     <td>
-                         <button class="btn btn-info" onclick="commonAjaxModel('edit_technology_stack_modal',{{$technology_stack->id}})"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger" onclick="commonAjaxModel('delete_technology_stack_modal',{{$technology_stack->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                         <button class="btn btn-info" onclick="commonAjaxModel('edit_technology_stack_modal',{{$project_list->id}})">Developer Request</i></button>
 
                     </td>
                 </tr>

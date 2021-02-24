@@ -103,7 +103,6 @@ class UserService extends BaseService
             //$user_id = $user->id; // last insert id of user
             $user->save();
             $user->roles()->sync($request->roles); // for pivot data
-
         }
         $html = view('pages.user._partial._users_list_table_html', ['users' => $this->getAllUsers()])->render();
         return $this->successResponse('User has Successfully Added', ['html' => $html, 'html_section_id' => 'userlist-section']);

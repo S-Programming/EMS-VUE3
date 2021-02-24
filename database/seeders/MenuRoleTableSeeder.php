@@ -47,10 +47,14 @@ class MenuRoleTableSeeder extends Seeder
             ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 18],
             ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 19],
             ['is_allow' => 1, 'role_id' => 2, 'menu_id' => 20],
-            ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 21], // EngagementUser
+            // EngagementUser
+            ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 21], 
             ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 22],
             ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 23],
-            ['is_allow' => 1, 'role_id' => 5, 'menu_id' => 1], // Developer
+            //Project Manager
+            ['is_allow' => 1, 'role_id' => 4, 'menu_id' => 24],
+            // Developer
+            ['is_allow' => 1, 'role_id' => 5, 'menu_id' => 1], 
             ['is_allow' => 1, 'role_id' => 5, 'menu_id' => 3],
             ['is_allow' => 1, 'role_id' => 5, 'menu_id' => 5],
             ['is_allow' => 1, 'role_id' => 5, 'menu_id' => 8],

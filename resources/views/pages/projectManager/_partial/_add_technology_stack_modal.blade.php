@@ -1,23 +1,23 @@
-<x-modal :id="$id??'common_popup_modal'" :class="$class??'modal-sm'" :extra="['cls'=>'bg-primary-dark']">
+<x-modal :id="$id??'common_popup_modal'" :class="$class??'modal-lg'" :extra="['cls'=>'bg-primary-dark']">
     <x-slot name="modal_header_content">
-        <h3 class="block-title">Add Role</h3>
+        <h3 class="block-title">Add Technology Stack</h3>
     </x-slot>
     <x-slot name="modal_content">
         <div class="row">
             <div class="col-sm-10 offset-1">
-                <form method="POST" action="{{ route('role.confirm.addrole') }}" id="role-form-id"
+                <form method="POST" action="{{ route('confirm.add.technology.stack') }}" id="role-form-id"
                       data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
                     <div class="card">
                         <div class="card-body">
                             <div class="py-2">
                                 <div class="form-group">
-                                    <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden"
-                                             name="id" value="{{$role_data->id??0}}"/>
-                                    <label for="role">&nbsp Role</label>
+                                    <!-- <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden"
+                                             name="id"/> -->
+                                    <label for="role">&nbsp Technology Stack</label>
                                     <x-input id="role" class="form-control form-control-alt form-control-lg"
                                              type="text"
-                                             name="role" value="{{$role_data->name??''}}" required
+                                             name="technology_stack" required
                                              autofocus/>
                                 </div>
                                 <!-- <div class="form-group">
