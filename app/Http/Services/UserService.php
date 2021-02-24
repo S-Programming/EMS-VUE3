@@ -414,9 +414,10 @@ class UserService extends BaseService
     {
         $project_id = $request->id;
         $project = Project::find($project_id);
+        $project_manager_id = $project->user_id;
         $project_managers = RoleUser::with('user')->where('role_id',4)->get();
         $containerId = $request->input('containerId', 'common_popup_modal');
-        $projectManagersDropDown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers])->render();
+        $projectManagersDropDown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers,'project_manager_id'=>$project_manager_id])->render();
         $html = view('pages.admin.projects._partial._edit_project_modal', ['id' => $containerId, 'data' => null, 'project_managers_dropdown' => $projectManagersDropDown,'project'=>$project])->render();
         return $this->successResponse('success', ['html' => $html]);
 //        $project_id = $request->id;

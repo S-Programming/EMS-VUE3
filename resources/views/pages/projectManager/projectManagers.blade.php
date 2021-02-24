@@ -23,7 +23,7 @@
 	<!-- Page Content -->
 	<div class="content">
 	    <!-- Dynamic Table Full Pagination -->
-	    <div id="technology-stack-list-section" class="block block-rounded">
+	    <div id="project-technology-stack-section" class="block block-rounded">
 
 	    @include('pages.projectManager._partial._assign_project_list_table_html',['project_lists' => $project_lists])
 		</div>

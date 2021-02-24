@@ -29,7 +29,9 @@ class DatabaseSeeder extends Seeder
         $this->call(QueryStatusSeeder::class);
         $this->call(UserQuriesSeeder::class);
         $this->call(ProjectSeeder::class);
+        $this->call(TechnologyStackSeeder::class);
         $this->call(UserInteractionSeeder::class);
+        $this->call(ProjectTechnologyStackSeeder::class);
 
     }
 }
