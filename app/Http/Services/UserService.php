@@ -413,7 +413,7 @@ class UserService extends BaseService
         $file_path = $destinationPath . "/" . $file_name;
         $file->move($destinationPath, $file->getClientOriginalName());
         $project_document = new ProjectDocument();
-        $project_document->path = $file_path;
+        $project_document->path = $file_name;
         $project_document->project_id = $project_id;
         $project_document->save();
         $projects = Project::with('users')->get();
