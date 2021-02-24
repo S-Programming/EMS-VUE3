@@ -32,7 +32,8 @@
                     <td class="font-w600 font-size-sm">{{$project_list->start_date??''}}</td>
                     <td class="font-w600 font-size-sm">{{$project_list->technologystack[0]->name??''}}</td>
                     <td class="font-w600 font-size-sm">{{$project_list->number_of_developers}}</td>
-                    <td class="font-w600 font-size-sm"><a href="{{ asset('assets/uploads/files/umar.pdf') }}" download="{{$project_list->document[0]->path??''}}">{{$project_list->document[0]->path??''}</a></td>
+                    <td class="font-w600 font-size-sm"></td>
+{{--                    <td class="font-w600 font-size-sm"><a href="{{ asset('assets/uploads/files/umar.pdf') }}" download="{{$project_list->document[0]->path??''}}">{{$project_list->document[0]->path??''}</a></td>--}}
                     <td>
                          <button class="btn btn-info" onclick="commonAjaxModel('developers_request_modal',{{$project_list->id}})">Developer Request</i></button>
 

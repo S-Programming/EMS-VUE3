@@ -33,9 +33,13 @@
                                     {!!$project_managers_dropdown??''!!}
                                 </div>
                                 <div class="form-group">
-                                    <label>Date</label>
-                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" data-min-date="today" readonly="readonly">
+                                    <label for="roles">&nbsp Technology Stack</label>
+                                    {!!$technology_stack_dropdown!!}
                                 </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label>Date</label>--}}
+{{--                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" data-min-date="today" readonly="readonly">--}}
+{{--                                </div>--}}
                             </div>
 
                         </div>

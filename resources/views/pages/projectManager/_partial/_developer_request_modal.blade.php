@@ -13,10 +13,10 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="py-2">
-                                <div class="form-group">
-                                    <label for="role">&nbsp Technology Stack</label>
-                                    {!!$technology_stack_dropdown!!}
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="role">&nbsp Technology Stack</label>--}}
+{{--                                    {!!$technology_stack_dropdown!!}--}}
+{{--                                </div>--}}
                                 <div class="form-group">
                                     <label for="role">&nbsp Number of Developers</label>
                                     <x-input id="role" class="form-control form-control-alt form-control-lg"
@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>End Date</label>
-                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="end_date" name="date" placeholder="Select Date" data-min-date="today" readonly="readonly">
+                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="end_date" name="end_date" placeholder="Select Date" data-min-date="today" readonly="readonly">
                                 </div>
                             </div>
                         </div>

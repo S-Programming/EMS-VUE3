@@ -29,22 +29,9 @@ class ProjectManagerController extends Controller
      */
     public function index()
     {
-        // $user_id = $this->getAuthUserId();
-        // $user_data = User::with('roles')->find($user_id);
-        // dd($user_data);
-        // $shop = Project::with('technology')->get();
-        // dd($shop);
-        // $user_id = $this->getAuthUserId();
-        // $project_lists = Project::with('technology')->get();
-        // dd($project_lists, 'with technology');
-
+        //dd('ss');
         $user_id = $this->getAuthUserId();
-//        $project_lists = Project::where('user_id',$user_id)->get();
-//        $project_lists = TechnologyStack::with('Projects')->get();
-//        $project_lists = Project::with('technology')->get();
-//        $project_lists = ProjectTechnologyStack::with('technologystack')->with('Project')->get();
         $project_lists = Project::with('technologystack')->with('document')->where('user_id',$user_id)->get();
-//        dd($project_lists);
         return view('pages.projectManager.projectManagers')->with('project_lists', $project_lists);
     }
     /**
@@ -74,19 +61,22 @@ class ProjectManagerController extends Controller
      */
     public function confirmDevelopersRequest(Request $request)
     {
-        $project_technology_stack = new ProjectTechnologyStack;
-        $project_technology_stack->project_id = $request->project_id;
-        $project_technology_stack->technology_stack_id = $request->technology_stack_id;
-        $project_technology_stack->save();
+        $validator = Validator::make($request->all(), [
+            'no_of_developers' => 'required|numeric',
+            'start_date' => 'required|date|before:end_date',
+            'end_date' => 'required|date',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         $project = Project::find($request->project_id);
         $project->number_of_developers = $request->no_of_developers;
+        $project->start_date = Carbon::parse($request->start_date);
+        $project->end_date = Carbon::parse($request->end_date);
         $project->save();
         $user_id = $this->getAuthUserId();
         $project_lists = Project::where('user_id',$user_id)->get();
         $html = view('pages.projectManager._partial._assign_project_list_table_html', ['project_lists' => $project_lists])->render();
         return $this->successResponse('success',['html' => $html, 'html_section_id' => 'project-technology-stack-section']);
-
-//        Carbon::parse($request->date)
-
     }
 }

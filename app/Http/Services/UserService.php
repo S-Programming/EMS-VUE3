@@ -9,7 +9,9 @@ use App\Models\Menu;
 use App\Models\MenuRole;
 use App\Models\CheckinHistory;
 use App\Models\Project;
+use App\Models\ProjectTechnologyStack;
 use App\Models\QueryStatus;
+use App\Models\TechnologyStack;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
@@ -379,10 +381,12 @@ class UserService extends BaseService
      */
     public function addProjectModal(Request $request)
     {
+        $technologies = TechnologyStack::all();
         $project_managers = RoleUser::with('user')->where('role_id',4)->get();
         $containerId = $request->input('containerId', 'common_popup_modal');
+        $technology_stack_dropdown = view('utils.technology_stack_dropdown',['technologies'=>$technologies])->render();
         $projectManagersDropDown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers])->render();
-        $html = view('pages.admin.projects._partial._add_project_modal', ['id' => $containerId, 'data' => null, 'project_managers_dropdown' => $projectManagersDropDown])->render();
+        $html = view('pages.admin.projects._partial._add_project_modal', ['id' => $containerId,'technology_stack_dropdown'=>$technology_stack_dropdown, 'data' => null, 'project_managers_dropdown' => $projectManagersDropDown])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
     /**
@@ -398,8 +402,10 @@ class UserService extends BaseService
         $project->name = $request->project_name;
         $project->description =$request->project_description;
         $project->user_id =$request->project_manager_id;
-        $project->start_date =Carbon::parse($request->date);
+//        $project->start_date =Carbon::parse($request->date);
         $project->save();
+//        dd('dd');
+        $project->technologystack()->attach(['technology_stack_id'=>$request->technology_stack_id]);
         $project_id = $project->id;
         $file = $request->file('project_document');
         $file_name = $file->getClientOriginalName();
