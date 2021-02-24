@@ -29,4 +29,8 @@ class Project extends Model
     {
         return $this->belongsToMany(TechnologyStack::class);
     }
+    public function document()
+    {
+        return $this->hasMany(ProjectDocument::class);
+    }
 }

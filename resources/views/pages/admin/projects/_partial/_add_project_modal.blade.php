@@ -5,13 +5,12 @@
     <x-slot name="modal_content">
         <div class="row">
             <div class="col-sm-10 offset-1">
-                <form method="POST" action="{{ route('user.confirm.add.project') }}" id="user-project-manager-id"
-                      data-modal-id="{{$id??'common_popup_modal'}}">
+                <form method="POST" action="{{ route('user.confirm.add.project') }}" id="user-project-manager-id" data-modal-id="{{$id??'common_popup_modal'}}"  enctype="multipart/form-data">
                     @csrf
                     @php
-                        $inyMceConfig = theme_tinyMCE_default_config();
-                        $inyMceConfig['is_tiny_mce_modal'] = $id??'common_popup_modal';
-                        $inyMceConfig['selector'] = '.tinymce-editor-cls';
+                    $inyMceConfig = theme_tinyMCE_default_config();
+                    $inyMceConfig['is_tiny_mce_modal'] = $id??'common_popup_modal';
+                    $inyMceConfig['selector'] = '.tinymce-editor-cls';
                     echo theme_tinyMCE_script($inyMceConfig);
                     @endphp
                     <div class="card">
@@ -19,14 +18,15 @@
                             <div class="py-2">
                                 <div class="form-group">
                                     <label for="project_name">&nbsp Project Name</label>
-                                    <x-input id="project_name" class="form-control form-control-alt form-control-lg"
-                                             type="text"
-                                             name="project_name" required
-                                             autofocus/>
+                                    <x-input id="project_name" class="form-control form-control-alt form-control-lg" type="text" name="project_name" required autofocus />
+                                </div>
+                                <div class="form-group">
+                                    <label class="d-block" for="project_document">Project Document</label>
+                                    <input class="form-control form-control-alt form-control-lg" type="file" id="project_document" name="project_document">
                                 </div>
                                 <div class="form-group">
                                     <label>Project Description</label>
-                                    <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="project_description"></textarea>
+                                    <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg" name="project_description"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="roles">&nbsp Project Manager</label>
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Date</label>
-                                <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" data-min-date="today" readonly="readonly">
+                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" data-min-date="today" readonly="readonly">
                                 </div>
                             </div>
 
@@ -43,9 +43,7 @@
                     <div class="block-content block-content-full text-right border-top">
                         <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">Cancel
                         </button>
-                        <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)"
-                                  data-validation="validation-span-id"
-                                  id="validation-span-id">
+                        <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)" data-validation="validation-span-id" id="validation-span-id">
                             {{ __('Add') }}
                         </x-button>
                     </div>
@@ -56,6 +54,6 @@
 </x-modal>
 <script type="text/javascript">
     flatpickr(".js-flatpickr", {
-        dateFormat:"d-m-Y"
+        dateFormat: "d-m-Y"
     });
 </script>

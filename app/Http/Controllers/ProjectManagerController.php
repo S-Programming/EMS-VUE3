@@ -43,7 +43,7 @@ class ProjectManagerController extends Controller
 //        $project_lists = TechnologyStack::with('Projects')->get();
 //        $project_lists = Project::with('technology')->get();
 //        $project_lists = ProjectTechnologyStack::with('technologystack')->with('Project')->get();
-        $project_lists = Project::with('technologystack')->where('user_id',$user_id)->get();
+        $project_lists = Project::with('technologystack')->with('document')->where('user_id',$user_id)->get();
 //        dd($project_lists);
         return view('pages.projectManager.projectManagers')->with('project_lists', $project_lists);
     }

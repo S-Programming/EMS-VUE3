@@ -15,6 +15,7 @@
             <th> Start Date </th>
             <th> Technology Stack </th>
             <th> Number of Developers </th>
+            <th> Document </th>
             <!-- <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
             <th class="d-none d-sm-table-cell" style="width: 15%;">Access</th>
             <th style="width: 15%;">Registered</th> -->
@@ -31,6 +32,7 @@
                     <td class="font-w600 font-size-sm">{{$project_list->start_date??''}}</td>
                     <td class="font-w600 font-size-sm">{{$project_list->technologystack[0]->name??''}}</td>
                     <td class="font-w600 font-size-sm">{{$project_list->number_of_developers}}</td>
+                    <td class="font-w600 font-size-sm"><a href="{{ asset('assets/uploads/files/umar.pdf') }}" download="{{$project_list->document[0]->path??''}}">{{$project_list->document[0]->path??''}</a></td>
                     <td>
                          <button class="btn btn-info" onclick="commonAjaxModel('developers_request_modal',{{$project_list->id}})">Developer Request</i></button>
 
