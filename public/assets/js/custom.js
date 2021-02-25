@@ -280,6 +280,10 @@ function commonAjaxModel(route, id, containerId) {
 
                     notificationAlert('error', data.message, 'Inconceivable!');
                 }
+                // if(){
+                //     $("#assign-developer-btn").prop("disabled", false);
+                // }
+
 
             }, error: function (data) {
                 console.log('error', data);

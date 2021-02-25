@@ -61,6 +61,7 @@ class ProjectManagerController extends Controller
      */
     public function confirmDevelopersRequest(Request $request)
     {
+//        dd($request->all());
         $validator = Validator::make($request->all(), [
             'no_of_developers' => 'required|numeric',
             'start_date' => 'required|date|before:end_date',
@@ -73,6 +74,7 @@ class ProjectManagerController extends Controller
         $project->number_of_developers = $request->no_of_developers;
         $project->start_date = Carbon::parse($request->start_date);
         $project->end_date = Carbon::parse($request->end_date);
+        $project->working_status = 1;
         $project->save();
         $user_id = $this->getAuthUserId();
         $project_lists = Project::where('user_id',$user_id)->get();

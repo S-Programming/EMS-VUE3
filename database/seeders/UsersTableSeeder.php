@@ -26,6 +26,12 @@ class UsersTableSeeder extends Seeder
             ['id' => 12, 'first_name' => 'imran', 'last_name' => 'Nazim', 'email' => 'imran@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
             ['id' => 13, 'first_name' => 'farhan', 'last_name' => 'Jutt', 'email' => 'farhan@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
 
+            ['id' => 21, 'first_name' => 'Meqdaam', 'last_name' => 'Anwar', 'email' => 'Meqdaam@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['id' => 22, 'first_name' => 'Jamo', 'last_name' => 'Jutt', 'email' => 'Jamo@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['id' => 23, 'first_name' => 'Chano', 'last_name' => 'Cheema', 'email' => 'Chano@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['id' => 24, 'first_name' => 'Ali', 'last_name' => 'Bhatti', 'email' => 'Ali@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['id' => 25, 'first_name' => 'Zafar', 'last_name' => 'Kamboh', 'email' => 'Zafar@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+
         ];
         DB::table('users')->insert($users);
     }
