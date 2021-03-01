@@ -348,7 +348,7 @@ class UserController extends Controller
      */
     public function projectList(Request $request)
     {
-        $projects = Project::with('users')->where('working_status',"!=",2)->with('technology')->get();
+        $projects = Project::with('users')->where('project_status',"!=",2)->with('technology')->get();
         return view('pages.admin.projects.projects',['projects'=>$projects]);
     }
     /**
@@ -369,9 +369,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function confirmAddProjectModal(Request $request)
+    public function confirmAddProject(Request $request)
     {
-        return $this->sendJsonResponse($this->userService->confirmAddProjectModal($request));
+        $validator = Validator::make($request->all(), [
+            'project_name' => 'required|min:3|max:30',
+            'project_description' => 'required|min:3|max:500',
+            'project_manager_id' => 'required|numeric',
+            'technology_stack_id' => 'required|numeric',
+//            'project_document' => 'required|csv,txt,xlx,xls,pdf|max:2048',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
+        return $this->sendJsonResponse($this->userService->confirmAddProject($request));
     }
     /**
      * Display popup to edit Project Attributes.
@@ -393,6 +403,15 @@ class UserController extends Controller
      */
     public function confirmEditProjectModal(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'project_name' => 'required|min:3|max:30',
+            'project_description' => 'required|min:3|max:500',
+            'project_manager_id' => 'required|numeric',
+            'date' => 'required|numeric',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->userService->confirmEditProjectModal($request));
     }
     /**

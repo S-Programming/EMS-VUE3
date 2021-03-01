@@ -18,10 +18,11 @@ class CreateProjectsTable extends Migration
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->dateTime('start_date')->nullable();
-            $table->dateTime('end_date')->nullable();
+            $table->string('estimate_time')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->integer('number_of_developers')->nullable();
-            $table->tinyInteger('working_status')->default('0');
+            $table->string('pm_description')->nullable();
+            $table->tinyInteger('project_status')->default('0');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

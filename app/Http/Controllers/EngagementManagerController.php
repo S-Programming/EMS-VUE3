@@ -3,50 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Models\ProjectDevelopers;
-use App\Models\RoleUser;
-use App\Models\User;
+use App\Http\Services\engagementManagerService;
+
 use Illuminate\Http\Request;
 
 class EngagementManagerController extends Controller
 {
-//    protected $userService;
-//    UserService $userService
-    public function __construct()
+    protected $engagementManagerService;
+//    UserService $engagementManagerService
+    public function __construct(engagementManagerService $engagementManagerService)
     {
         $this->middleware('auth');
-//        $this->userService = $userService;
+        $this->engagementManagerService = $engagementManagerService;
     }
+    /**
+     * Display Popup in which Engagement manager assign Developers to the Project Manager for project.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function assignProjectDevelopersModal(Request $request)
     {
-        $project_id = $request->id;
-        $developers = RoleUser::with('user')->where('role_id',5)->get();
-        $developers_dropdown = view('utils.developers_dropdown', ['developers' => $developers])->render();
-        $containerId = $request->input('containerId', 'common_popup_modal');
-        $html = view('pages.engagementManager._partial._assign_developers_modal', ['id' => $containerId,'project_id' => $project_id,'developers_dropdown'=>$developers_dropdown])->render();
-        return $this->successResponse('success', ['html' => $html]);
+        return $this->sendJsonResponse($this->engagementManagerService->assignProjectDevelopersModal($request));
     }
+    /**
+     * Engagement Manager assign developer to project Manager confirmly.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function confirmAssignProjectDevelopers(Request $request)
     {
-        $project_id = $request->id;
-        for ($i=0; $i<count($request->developers);$i=$i+1) {
-            $project_developers = new ProjectDevelopers;
-            $project_developers->project_id = $project_id;
-            $project_developers->user_id = $request->developers[$i];
-            $project_developers->save();
-        }
-        $project = Project::find($project_id);
-        $project->working_status = 2;
-//        2 when developers assign
-        $project->save();
-        $projects = Project::with('users')->where('working_status',"!=",2)->with('technology')->get();
-        $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
-        return $this->successResponse('Developers Assign Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
-
+        return $this->sendJsonResponse($this->engagementManagerService->confirmAssignProjectDevelopers($request));
     }
+    /**
+     * Display view for working project list.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function workingProjectList(Request $request)
     {
-        $projects = Project::with('users')->where('working_status',2)->with('technology')->get();
+        $projects = Project::with('users')->where('project_status',2)->with('technology')->orderBy('created_at','DESC')->get();
         return view('pages.engagementManager.woking_projects_list',['projects'=>$projects]);
     }
 }

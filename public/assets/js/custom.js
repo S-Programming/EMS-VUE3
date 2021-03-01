@@ -24,20 +24,21 @@ function validateFieldsByFormId(e) {
     const formURL = $(e).closest('form').attr('action');
     const modalId = $(e).closest('form').data('modal-id');
     const validationSpanId = $(e).data('validation');
+    console.log(modalId);
     var error = validateFields(formId);
     var errorMsg = '';
     var flag = true;
     if (error.length > 0) {
         showErrors(error);
         flag = false;
+
     }
-    console.log($('#' + formId)[0],'RN',$('#' + formId));
     if (flag) {
+
         e.disabled = true;
         const buttonHtml = $(`#` + validationSpanId).html();
         $(`#` + validationSpanId).html(loadingImage());
         var formData = new FormData($('#' + formId)[0])
-        console.log(formData);
         $.ajax({
             type: "POST",
             url: formURL,
@@ -112,6 +113,7 @@ function validateFieldsByFormId(e) {
 
 function validateFields(formId) {
     var fields = $("#" + formId + " :input").serializeArray();
+   //console.log(fields);
     var error = [];
     var skipArray = ['action', 'date_range', 'date'];
     var emailArray = ['email'];
@@ -119,6 +121,7 @@ function validateFields(formId) {
     var skipforEmpty = [];
     var fname = 'no_name';
     var passwordArray = ['new_password', 'confirm_password'];
+
     var regexy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var regexp_number = /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/
     $.each(fields, function (i, field) {
@@ -158,6 +161,7 @@ function validateFields(formId) {
         }
 
     });
+
     return error;
 }
 
@@ -280,11 +284,6 @@ function commonAjaxModel(route, id, containerId) {
 
                     notificationAlert('error', data.message, 'Inconceivable!');
                 }
-                // if(){
-                //     $("#assign-developer-btn").prop("disabled", false);
-                // }
-
-
             }, error: function (data) {
                 console.log('error', data);
                 notificationAlert('error', data.responseJSON.message, 'Inconceivable!');

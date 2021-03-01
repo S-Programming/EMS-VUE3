@@ -25,7 +25,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('pages.role.roles')->with('roles', $roles);
+        return view('pages.role.roles')->with(['roles'=> $roles]);
     }
     /**
      * It will return a HTML for the Modal container

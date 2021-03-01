@@ -1,8 +1,8 @@
 <div class="block-header">
     <h3 class="block-title">Dynamic Table <small>Full pagination</small></h3>
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_project_modal')" data-validation="validation-span-id"
-              id="validation-span-id">Projects In Working
-    </x-button>
+{{--    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_project_modal')" data-validation="validation-span-id"--}}
+{{--              id="validation-span-id">Projects In Working--}}
+{{--    </x-button>--}}
 </div>
 <div class="block-content block-content-full">
     <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->

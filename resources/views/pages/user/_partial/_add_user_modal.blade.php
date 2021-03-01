@@ -7,7 +7,7 @@
             <div class="col-sm-10 offset-1">
                 <form method="POST" action="{{ route('user.confirm.adduser') }}" id="user-form-id"
                       data-modal-id="{{$id??'common_popup_modal'}}">
-                    @csrf
+
                     <div class="card">
                         <div class="card-body">
                             <div class="py-2">
@@ -21,7 +21,7 @@
                                              autofocus/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="last_name">&nbsp Last Name</label>
+                                    <label for="last_name">&nbsp Last Name saaad</label>
                                     <x-input id="last_name" class="form-control form-control-alt form-control-lg"
                                              type="text"
                                              name="last_name" value="{{$user_data->last_name??''}}" required/>

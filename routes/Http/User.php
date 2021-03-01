@@ -4,15 +4,23 @@ namespace Route\Http;
 
 use App\Http\Controllers\UserController;
 use \Illuminate\Support\Facades\Route;
+use App\Http\Traits\AuthUser;
 
 class User
 {
+    use AuthUser;
     static function register()
     {
 
-        Route::group(['middleware' => ['auth:sanctum', 'isAdmin']], function () {
+
+        Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
+         //   if($this->getAuthUserId())
             Route::get('/user', [UserController::class, 'index'])->name('user.list');
         });
+
+//        Route::group(['middleware' => ['auth:sanctum','isSuperAdmin']], function () {
+//            Route::get('/user', [UserController::class, 'index'])->name('user.list');
+//        });
         Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('/add_user_modal', [UserController::class, 'userModal'])->name('user.modal');
             Route::post('/edspecific_user_profileit_user_modal', [UserController::class, 'userModal'])->name('user.edit.modal');
@@ -56,7 +64,7 @@ class User
             // Projects
             Route::get('projects_list', [UserController::class, 'projectList'])->name('user.projects.list');
             Route::post('add_project_modal', [UserController::class, 'addProjectModal'])->name('user.add.project.modal');
-            Route::post('confirm_add_project_modal', [UserController::class, 'confirmAddProjectModal'])->name('user.confirm.add.project');
+            Route::post('confirm_add_project', [UserController::class, 'confirmAddProject'])->name('user.confirm.add.project');
             Route::post('edit_project_modal', [UserController::class, 'editProjectModal'])->name('user.edit.project');
             Route::post('confirm_edit_project_modal', [UserController::class, 'confirmEditProjectModal'])->name('user.confirm.edit.project');
             Route::post('delete_project_modal', [UserController::class, 'deleteProjectModal'])->name('user.delete.project');

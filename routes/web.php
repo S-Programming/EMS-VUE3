@@ -5,8 +5,10 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Route\Http\Admin;
 use Route\Http\Dashboard;
 use Route\Http\Feedback;
+use Route\Http\SuperAdmin;
 use Route\Http\User;
 use Route\Http\Role;
 use Route\Http\CheckInHistory;
@@ -67,4 +69,6 @@ UserQuries::register();
 TechnologyStack::register();
 ProjectManager::register();
 EngagementManager::register();
+Admin::register();
+SuperAdmin::register();
 

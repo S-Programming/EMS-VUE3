@@ -5,9 +5,15 @@
     <x-slot name="modal_content">
         <div class="row">
             <div class="col-sm-10 offset-1">
-                <form method="POST" action="{{ route('assign.confirm.developers.request') }}" id="role-form-id"
+                <form action="{{route('assign.confirm.developers.request')}}" method="POST" id="developer-request-form-id"
                       data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
+                    @php
+                        $inyMceConfig = theme_tinyMCE_default_config();
+                        $inyMceConfig['is_tiny_mce_modal'] = $id??'common_popup_modal';
+                        $inyMceConfig['selector'] = '.tinymce-editor-cls';
+                        echo theme_tinyMCE_script($inyMceConfig);
+                    @endphp
                     <input type="hidden" name="project_id" value="{{$project_id??''}}">
 
                     <div class="card">
@@ -24,23 +30,39 @@
                                              name="no_of_developers" required
                                              autofocus/>
                                 </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label>Type Your Comment</label>--}}
+{{--                                    <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="pm_comment"></textarea>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label>Project Description</label>--}}
+{{--                                    <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg" name="pm_description"></textarea>--}}
+{{--                                </div>--}}
+                                <div class="form-group">
+                                    <label>Project Description</label>
+                                    <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg" name="project_manager_description"></textarea>
+                                </div>
                                 <div class="form-group">
                                     <label>Start Date</label>
                                     <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="start_date" placeholder="Select Date" data-min-date="today" readonly="readonly">
                                 </div>
                                 <div class="form-group">
-                                    <label>End Date</label>
-                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="end_date" name="end_date" placeholder="Select Date" data-min-date="today" readonly="readonly">
-                                </div>
+                                    <label>Estimate Time</label>
+                                    <input type="text" name="estimate_time" class="form-control" placeholder="Estimate Time">                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="block-content block-content-full text-right border-top">
                         <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">Cancel
                         </button>
-                        <x-button class="checkout-btn btn btn-primary" onclick="validateFieldsByFormId(this)"
+{{--                        <x-button class="checkout-btn btn btn-primary" onclick="validateFieldsByFormId(this)"--}}
+{{--                                  data-validation="validation-span-id"--}}
+{{--                                  id="validation-span-id">{{ __('Request') }}--}}
+{{--                        </x-button>--}}
+                        <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)"
                                   data-validation="validation-span-id"
-                                  id="validation-span-id">{{ __('Request') }}
+                                  id="validation-span-id">
+                            {{ __('Request') }}
                         </x-button>
                     </div>
                 </form>

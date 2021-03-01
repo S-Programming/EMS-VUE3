@@ -69,11 +69,8 @@ class UserService extends BaseService
         $userId = $this->getAuthUserId();
 
         $filters = ($userId > 0) ? [['user_id', '=', $userId]] : [];
-        // dd($filters);
         $date_filters = historyDateFilter($request->history_report);
-        // dd($date_filters);
         $filters = array_merge($date_filters, $filters);
-        //dd($filters);
         $checkinHistoryData = CheckinHistory::where($filters)->get();
         $count = $checkinHistoryData->count();
         $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkinHistoryData, 'totalCheckins' => $count])->render();
@@ -126,7 +123,8 @@ class UserService extends BaseService
                 }
             }
         }
-        $rolesDropDown = view('utils.roles', ['roles' => ($roles ?? null), 'user_roles' => $userRoles])->render();
+        $user_id = $this->getAuthUserId();
+        $rolesDropDown = view('utils.roles', ['roles' => ($roles ?? null), 'user_roles' => $userRoles,'user_id'=>$user_id])->render();
         $html = view('pages.user._partial._add_user_modal', ['id' => $containerId, 'data' => null, 'roles_dropdown' => $rolesDropDown, 'user_data' => $user_data])->render();
 
         return $this->successResponse('success', ['html' => $html]);
@@ -171,24 +169,7 @@ class UserService extends BaseService
             $user_data->last_name = $request->last_name;
             $user_data->email = $request->email;
             $user_data->phone_number = $request->phone_number;
-
             $user_data->image_path = $request->image_file;
-            //$user_data->password = bcrypt($request->password);
-
-            // $image = new Image;
-            /*if ($request->hasFile('profile_image')) {
-                $file = $request->file('profile_image');
-                $file_name = $file->getClientOriginalName();
-                $destinationPath = 'uploads';
-                $file_path = $destinationPath . "/" . $file_name;
-                $file->move($destinationPath, $file->getClientOriginalName());
-                //dd($file_path);
-                //$image->title = $request->product_image_title;
-                //$image->description = $request->image_description;
-                $user_data->image_path = $file_path;
-                // $image_result = $image->save();
-            }*/
-
             $user_data->save();
             return $this->successResponse('Profile is Successfully Updated');
         } else {
@@ -282,16 +263,8 @@ class UserService extends BaseService
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->password = bcrypt('12345678');
-
         $user->save();
         $user->roles()->attach(['role_id'=>$request->roles]);
-//        $user_id = $user->id;
-//        $user->roles()->attach(['user_id' => $user_id, 'role_id' => $request->roles]);
-//        $role_user = new RoleUser;
-//        $role_user->user_id = $user_id;
-//        $role_user->role_id = $request->roles;
-//        $role_user->save();
-
         $project_managers = RoleUser::with('user')->where('role_id',4)->get();
         $html = view('pages.engagementManager._partial._project_manager_list_table_html',['project_managers'=>$project_managers])->render();
         return $this->successResponse('success', ['html' => $html,'html_section_id'=> 'project-manager-list-section']);
@@ -396,15 +369,15 @@ class UserService extends BaseService
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function confirmAddProjectModal(Request $request)
+    public function confirmAddProject(Request $request)
     {
+//        dd($request->all());
         $project = new Project;
         $project->name = $request->project_name;
         $project->description =$request->project_description;
         $project->user_id =$request->project_manager_id;
 //        $project->start_date =Carbon::parse($request->date);
         $project->save();
-//        dd('dd');
         $project->technologystack()->attach(['technology_stack_id'=>$request->technology_stack_id]);
         $project_id = $project->id;
         $file = $request->file('project_document');
@@ -437,11 +410,6 @@ class UserService extends BaseService
         $projectManagersDropDown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers,'project_manager_id'=>$project_manager_id])->render();
         $html = view('pages.admin.projects._partial._edit_project_modal', ['id' => $containerId, 'data' => null, 'project_managers_dropdown' => $projectManagersDropDown,'project'=>$project])->render();
         return $this->successResponse('success', ['html' => $html]);
-//        $project_id = $request->id;
-//        $project = Project::find($project_id);
-//        $containerId = $request->input('containerId', 'common_popup_modal');
-//        $html = view('pages.admin.projects._partial._edit_project_modal', ['id' => $containerId, 'project' => $project])->render();
-//        return $this->successResponse('success', ['html' => $html]);
     }
     /**
      * Click Update Button to edit Project Attributes.

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-    public $fillable = ['name','description','start_date','user_id','working_status','created_at','updated_at'];
+    public $fillable = ['name','description','start_date','estimate_time','user_id','project_status','pm_description','created_at','updated_at'];
     protected $table = 'projects';
     public function project(){
         return $this->belongsTo(Project::class,'project_id','id');
