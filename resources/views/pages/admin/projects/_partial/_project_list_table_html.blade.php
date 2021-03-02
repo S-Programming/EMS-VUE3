@@ -9,13 +9,16 @@
     <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
         <thead>
         <tr>
-            <th>Project Name</th>
-            <th>Description</th>
-            <th>start_date</th>
-            <th>Project Manager</th>
-            <th>Number of Developers</th>
-            <th>Technology Stack</th>
-            <th>Assign Developers</th>
+            <th class="text-nowrap">Project Name</th>
+            <th class="text-nowrap">Project Manager</th>
+            <th class="text-nowrap">Technology Stack</th>
+            <th class="text-nowrap">Developers</th>
+            <th class="text-nowrap">start_date</th>
+            <th class="text-nowrap">Estimate Time</th>
+
+
+
+            <th class="text-nowrap">Assign Developers</th>
             <th style="width: 15%;">opertaion</th>
         </tr>
         </thead>
@@ -24,17 +27,18 @@
             @foreach($projects as $project)
                 <tr>
                     <td class="font-w600 font-size-sm">{{$project->name??''}}</td>
-                    <td class="font-w600 font-size-sm">{!!$project->description??''!!}</td>
-                    <td class="font-w600 font-size-sm">{{$project->start_date??''}}</td>
                     <td class="font-w600 font-size-sm">{{$project->users->first_name??''}} {{$project->users->last_name??''}}</td>
-                    <td class="text-center font-w600 font-size-sm">{{$project->number_of_developers??''}}</td>
-
-
                     <td class="font-w600 font-size-sm">
                         @foreach($project->technologystack as $data)
                             {{$data->name??''}}
                         @endforeach
                     </td>
+                    <td class="text-center font-w600 font-size-sm">{{$project->number_of_developers??''}}</td>
+
+                    <td class="font-w600 font-size-sm">{{$project->start_date??''}}</td>
+                    <td class="font-w600 font-size-sm">{{$project->estimate_time??''}}</td>
+
+
                     @if(isset($project->project_status) && $project->project_status===0)
                         <td class="font-w600 font-size-sm text-nowrap"><button type="button" class="btn btn-secondary" disabled> Assign Developers </button></td>
                     @elseif($project->project_status===1)
@@ -42,6 +46,7 @@
                     @endif
                     <td>
                         <button class="btn btn-info" onclick="commonAjaxModel('edit/project/modal',{{$project->id}})"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-info" onclick="commonAjaxModel('view/project/modal',{{$project->id}})"><i class="fa fa-eye" aria-hidden="true"></i></button>
                         <button class="btn btn-danger" onclick="commonAjaxModel('delete/project/modal',{{$project->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                     </td>

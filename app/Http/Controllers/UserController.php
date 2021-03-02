@@ -373,8 +373,8 @@ class UserController extends Controller
     {
 //        dd($request->all());
         $validator = Validator::make($request->all(), [
-            'project_name' => 'required|min:3|max:30',
-            'project_description' => 'required|min:3|max:500',
+            'project_name' => 'required|min:3|string',
+            'project_description' => 'required|min:3',
             'project_manager_id' => 'required|numeric',
             'technology_stack_id.*' => 'required|distinct|numeric',
 //            'project_document' => 'required|csv,txt,xlx,xls,pdf|max:2048',
@@ -414,6 +414,17 @@ class UserController extends Controller
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
         return $this->sendJsonResponse($this->userService->confirmEditProjectModal($request));
+    }
+    /**
+     * Display popup to view the Project with detail.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function viewProjectModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->userService->viewProjectModal($request));
     }
     /**
      * Display Popup to delete Project form DB.

@@ -67,6 +67,7 @@ class User
             Route::post('confirm/add/project', [UserController::class, 'confirmAddProject'])->name('user.confirm.add.project');
             Route::post('edit/project/modal', [UserController::class, 'editProjectModal'])->name('user.edit.project');
             Route::post('confirm/edit/project/modal', [UserController::class, 'confirmEditProjectModal'])->name('user.confirm.edit.project');
+            Route::post('view/project/modal', [UserController::class, 'viewProjectModal'])->name('user.view.project');
             Route::post('delete/project/modal', [UserController::class, 'deleteProjectModal'])->name('user.delete.project');
             Route::post('confirm/delete/project', [UserController::class, 'confirmDeleteProjectModal'])->name('user.confirm.delete.project');
 

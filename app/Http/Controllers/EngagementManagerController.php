@@ -47,7 +47,7 @@ class EngagementManagerController extends Controller
      */
     public function workingProjectList(Request $request)
     {
-        $projects = Project::with('users')->where('project_status',2)->with('technology')->orderBy('created_at','DESC')->get();
+        $projects = Project::with('users')->where('project_status',2)->with('technologystack')->orderBy('created_at','DESC')->get();
         return view('pages.engagementManager.woking_projects_list',['projects'=>$projects]);
     }
 }

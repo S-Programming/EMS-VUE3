@@ -9,6 +9,7 @@ use App\Models\Menu;
 use App\Models\MenuRole;
 use App\Models\CheckinHistory;
 use App\Models\Project;
+use App\Models\ProjectDevelopers;
 use App\Models\ProjectTechnologyStack;
 use App\Models\QueryStatus;
 use App\Models\TechnologyStack;
@@ -434,6 +435,26 @@ class UserService extends BaseService
         $projects = Project::with('users')->get();
         $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
         return $this->successResponse('Project Updated Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
+    }
+    /**
+     * Display popup to view the Project with detail.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function viewProjectModal(Request $request)
+    {
+        $project_id = $request->id;
+        $project = Project::with('technologystack')->find($project_id);
+//        dd($project->technologystack);
+//        $project_manager_id = $project->user_id;
+//        $project_managers = RoleUser::with('user')->where('role_id',4)->get();
+        $containerId = $request->input('containerId', 'common_popup_modal');
+//        $projectManagersDropDown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers,'project_manager_id'=>$project_manager_id])->render();
+//        $html = view('pages.admin.projects._partial._view_project_modal', ['id' => $containerId, 'data' => null, 'project_managers_dropdown' => $projectManagersDropDown,'project'=>$project])->render();
+        $html = view('pages.admin.projects._partial._view_project_modal', ['id' => $containerId,'project'=>$project])->render();
+        return $this->successResponse('success', ['html' => $html]);
     }
     /**
      * Display Popup to delete Project form DB.

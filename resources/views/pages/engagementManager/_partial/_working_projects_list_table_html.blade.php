@@ -34,7 +34,12 @@
                     <td class="font-w600 font-size-sm">{{$project->end_date??''}}</td>
                     <td class="font-w600 font-size-sm">{{$project->users->first_name??''}} {{$project->users->last_name??''}}</td>
                     <td class="text-center font-w600 font-size-sm">{{$project->number_of_developers??''}}</td>
-                    <td class="font-w600 font-size-sm">{{$project->technology[0]->name??''}}</td>
+                    <td class="font-w600 font-size-sm">
+                        @foreach($project->technologystack as $data)
+                            {{$data->name??''}}
+                        @endforeach
+                    </td>
+{{--                    <td class="font-w600 font-size-sm">{{$project->technologystack[0]->name??''}}</td>--}}
 {{--                    @if(isset($project->in_working_list) && $project->in_working_list===1)--}}
 {{--                        --}}{{--                        false--}}
 {{--                        <td class="font-w600 font-size-sm"><button type="button" class="btn btn-success" disabled> Submit </button></td>--}}

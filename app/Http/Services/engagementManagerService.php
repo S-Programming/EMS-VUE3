@@ -57,6 +57,7 @@ class engagementManagerService extends BaseService
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
+
         $project_id = $request->id;
         for ($i=0; $i<count($request->developers);$i=$i+1) {
             $project_developers = new ProjectDevelopers;
@@ -64,13 +65,15 @@ class engagementManagerService extends BaseService
             $project_developers->user_id = $request->developers[$i];
             $project_developers->save();
         }
+
         $project = Project::find($project_id);
         $project->project_status = 2;
 //        0 when project create and assign to project manager
 //        1 when project manager requests for developers
 //        2 when developers assign
         $project->save();
-        $projects = Project::with('users')->where('project_status',"!=",2)->with('technology')->get();
+
+        $projects = Project::with('users')->where('project_status',"!=",2)->with('technologystack')->get();
         $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
         return $this->successResponse('Developers Assign Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
 
