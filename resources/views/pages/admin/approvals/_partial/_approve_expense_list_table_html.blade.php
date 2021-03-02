@@ -29,8 +29,8 @@
                 <td class="font-w600 font-size-sm">{{$data->amount}}</td>
                 <td class="font-w600 font-size-sm">{{$data->requestStatus->status}}</td>
                 <td>
-                    <button class="btn btn-success" onclick="commonAjaxModel('approve_expense_modal',{{$data->id}})">Approve</button>
-                    
+                    <button class="btn btn-success" onclick="commonAjaxModel('approve/expense/modal',{{$data->id}})">Approve</button>
+
 
                 </td>
             </tr>

@@ -1,14 +1,14 @@
 <div class="block-header">
     <h3 class="block-title">Holiday List </h3>
     @can('isAdmin')
-     <x-button class="btn btn-success" onclick="commonAjaxModel('add_holiday_modal')" data-validation="validation-span-id"
-              id="validation-span-id">Import CSV 
+     <x-button class="btn btn-success" onclick="commonAjaxModel('add/holiday/modal')" data-validation="validation-span-id"
+              id="validation-span-id">Import CSV
     </x-button>
     &nbsp;
-    <x-button class="btn btn-primary filepond" onclick="commonAjaxModel('add_holiday_modal')" data-validation="validation-span-id"
+    <x-button class="btn btn-primary filepond" onclick="commonAjaxModel('add/holiday/modal')" data-validation="validation-span-id"
               id="validation-span-id">Add
     </x-button>
-   
+
     @endcan
 </div>
 <div class="block-content block-content-full">
@@ -39,8 +39,8 @@
                     </td>
                     @can('isAdmin')
                     <td>
-                         <button class="btn btn-info" onclick="commonAjaxModel('edit_holiday_modal',{{$data->id}})"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger" onclick="commonAjaxModel('delete_holiday_modal',{{$data->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                         <button class="btn btn-info" onclick="commonAjaxModel('edit/holiday/modal',{{$data->id}})"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger" onclick="commonAjaxModel('delete/holiday/modal',{{$data->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                     </td>
                     @endcan

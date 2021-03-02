@@ -32,7 +32,7 @@
     <!-- Hero -->
     <div class="block-header">
         <h3 class="block-title">Project Managers </h3>
-        <x-button class="btn btn-primary" onclick="commonAjaxModel('add_project_manager')" data-validation="validation-span-id"
+        <x-button class="btn btn-primary" onclick="commonAjaxModel('add/project/manager')" data-validation="validation-span-id"
                   id="validation-span-id">Add Project Manager
         </x-button>
     </div>

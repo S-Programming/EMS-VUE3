@@ -8,7 +8,7 @@
         </div>
         <div class="block-content block-content-full text-right border-top">
             <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">No</button>
-            <button type="button" class="checkin-btn btn btn-primary"  onclick="ajaxCallOnclick('confirm_delete_project',{project_id:{{$project_id??''}},containerId:'{{"$id"??'common_popup_modal'}}'})"
+            <button type="button" class="checkin-btn btn btn-primary"  onclick="ajaxCallOnclick('confirm/delete/project',{project_id:{{$project_id??''}},containerId:'{{"$id"??'common_popup_modal'}}'})"
             >Delete</button>
 
         </div>

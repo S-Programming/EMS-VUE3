@@ -10,7 +10,7 @@ class Pdf
     static function register()
     {
         Route::group(['middleware' => ['auth:sanctum']], function () {
-            Route::get('pdf_attendeanc_history', [PdfController::class, 'attendanceHistory'])->name('pdf.attendance.history');
+            Route::get('pdf/attendeanc/history', [PdfController::class, 'attendanceHistory'])->name('pdf.attendance.history');
         });
     }
 }

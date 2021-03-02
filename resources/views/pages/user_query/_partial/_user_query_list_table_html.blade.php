@@ -1,6 +1,6 @@
 <div class="block-header">
     <h3 class="block-title">Quries </h3>
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_userquery_modal')" data-validation="validation-span-id"
+    <x-button class="btn btn-primary" onclick="commonAjaxModel('add/userquery/modal')" data-validation="validation-span-id"
               id="validation-span-id">Add Quries
     </x-button>
 </div>

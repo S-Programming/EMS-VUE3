@@ -1,6 +1,6 @@
 <div class="block-header">
     <h3 class="block-title">Expense </h3>
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('claim_expense_modal')" data-validation="validation-span-id" id="validation-span-id">Claim
+    <x-button class="btn btn-primary" onclick="commonAjaxModel('claim/expense/modal')" data-validation="validation-span-id" id="validation-span-id">Claim
     </x-button>
 </div>
 <div class="block-content block-content-full">
@@ -14,7 +14,7 @@
                 <th class="d-none d-sm-table-cell" style="width: 30%;">Comments</th>
                 <th class="d-none d-sm-table-cell" style="width: 30%;">Amount</th>
                 <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
-                
+
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                 <td class="font-w600 font-size-sm">{!! $data->comments !!}</td>
                 <td class="font-w600 font-size-sm">{{$data->amount}}</td>
                 <td class="font-w600 font-size-sm">{{$data->requestStatus->status}}</td>
-                
+
             </tr>
             @endforeach
 

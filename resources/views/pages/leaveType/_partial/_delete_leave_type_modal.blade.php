@@ -8,11 +8,11 @@
         </div>
         <div class="block-content block-content-full text-right border-top">
             <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">No</button>
-            <button type="button" class="checkin-btn btn btn-primary"  onclick="ajaxCallOnclick('leave_type_confirm_delete',{leave_type_id:{{$leave_type_id}},containerId:'{{"$id"??'common_popup_modal'}}'})" 
+            <button type="button" class="checkin-btn btn btn-primary"  onclick="ajaxCallOnclick('leave/type/confirm/delete',{leave_type_id:{{$leave_type_id}},containerId:'{{"$id"??'common_popup_modal'}}'})"
                     >Yes,
                     Confirm
             </button>
-           
+
         </div>
     </x-slot>
 

@@ -12,8 +12,8 @@ class Expense
     	Route::group(['middleware' => ['auth:sanctum']], function () {
 
     		Route::get('/expense', [ExpenseController::class, 'index'])->name('expense.list');
-            Route::post('/claim_expense_modal', [ExpenseController::class, 'claimExpenseModal'])->name('expense.claim.modal');
-            Route::post('/confirm_claim_expense', [ExpenseController::class, 'confirmClaimExpense'])->name('expense.confirm.claim');		
+            Route::post('/claim/expense/modal', [ExpenseController::class, 'claimExpenseModal'])->name('expense.claim.modal');
+            Route::post('/confirm/claim/expense', [ExpenseController::class, 'confirmClaimExpense'])->name('expense.confirm.claim');
 
 
 
@@ -21,9 +21,9 @@ class Expense
 
 
     		/* Approval Routes */
-    		Route::get('/approve_expense_list', [ExpenseController::class, 'approveExpense'])->name('approve.expense.list');
-            Route::post('/approve_expense_modal', [ExpenseController::class, 'approveExpenseModal'])->name('expense.approve.modal');
-            Route::post('/confirm_approve_expense', [ExpenseController::class, 'confirmApproveExpense'])->name('expense.confirm.approve');
+    		Route::get('/approve/expense/list', [ExpenseController::class, 'approveExpense'])->name('approve.expense.list');
+            Route::post('/approve/expense/modal', [ExpenseController::class, 'approveExpenseModal'])->name('expense.approve.modal');
+            Route::post('/confirm/approve/expense', [ExpenseController::class, 'confirmApproveExpense'])->name('expense.confirm.approve');
     	});
     }
 }

@@ -1,6 +1,6 @@
 <div class="block-header">
     <h3 class="block-title">Leave Type<!--  <small>Full pagination</small> --></h3>
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_leave_type_modal')" data-validation="validation-span-id" id="validation-span-id">Add
+    <x-button class="btn btn-primary" onclick="commonAjaxModel('add/leave/type/modal')" data-validation="validation-span-id" id="validation-span-id">Add
     </x-button>
 </div>
 <div class="block-content block-content-full">
@@ -20,8 +20,8 @@
                 <td class="text-center font-size-sm">{{$leave_type->id}}</td>
                 <td class="font-w600 font-size-sm">{{$leave_type->type}}</td>
                 <td>
-                    <button class="btn btn-info" onclick="commonAjaxModel('edit_leave_type_modal',{{$leave_type->id}})"><i class="fa fa-edit"></i></button>
-                    <button class="btn btn-danger" onclick="commonAjaxModel('delete_leave_type_modal',{{$leave_type->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button class="btn btn-info" onclick="commonAjaxModel('edit/leave/type/modal',{{$leave_type->id}})"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-danger" onclick="commonAjaxModel('delete/leave/type/modal',{{$leave_type->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                 </td>
             </tr>

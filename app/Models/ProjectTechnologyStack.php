@@ -12,13 +12,13 @@ class ProjectTechnologyStack extends Model
     protected $table = 'project_technology_stack';
     public $fillable = ['project_id', 'technology_stack_id', 'created_at', 'updated_at'];
 
-//    public function Project()
-//    {
-//        return $this->belongsTo(Project::class);
-//    }
-//
-//    public function technologystack()
-//    {
-//        return $this->belongsTo(TechnologyStack::class,'technology_stack_id','id');
-//    }
+    public function Project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function technologystack()
+    {
+        return $this->belongsTo(TechnologyStack::class);
+    }
 }

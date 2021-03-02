@@ -11,8 +11,8 @@ class Feedback
         Route::group(['middleware' => ['auth:sanctum']], function () {
 //            Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
             Route::get('feedback', [FeedbackController::class,'addFeedback'])->name('feedback');
-            Route::post('add_feedback_modal', [FeedbackController::class,'addFeedbackModal'])->name('feedback.add.modal');
-            Route::post('confirm_add_feedback', [FeedbackController::class,'confirmAddFeedbackModal'])->name('feedback.add.confirm');
+            Route::post('add/feedback/modal', [FeedbackController::class,'addFeedbackModal'])->name('feedback.add.modal');
+            Route::post('confirm/add/feedback', [FeedbackController::class,'confirmAddFeedbackModal'])->name('feedback.add.confirm');
 
             //For All users
             Route::get('/comments', [FeedbackController::class,'viewCommentsFeedback'])->name('feedback.comments');
@@ -21,15 +21,15 @@ class Feedback
             //Admin Feedback Routes
 
             Route::get('/feedbacks', [FeedbackController::class,'viewAdminFeedback'])->name('feedback.view');
-            Route::post('/comment_on_feedback_modal', [FeedbackController::class,'addCommentModal'])->name('comment.modal');
-            Route::post('/comment_add_confirm', [FeedbackController::class,'confirmAddComment'])->name('comment.add.confirm');
-            Route::post('/delete_feedback_modal', [FeedbackController::class,'deleteFeedbackModal'])->name('feedback.delete.modal');
-            Route::post('/confirm_delete_feedback', [FeedbackController::class,'confirmDeleteFeedback'])->name('feedback.confirm.delete');
+            Route::post('/comment/on/feedback/modal', [FeedbackController::class,'addCommentModal'])->name('comment.modal');
+            Route::post('/comment/add/confirm', [FeedbackController::class,'confirmAddComment'])->name('comment.add.confirm');
+            Route::post('/delete/feedback/modal', [FeedbackController::class,'deleteFeedbackModal'])->name('feedback.delete.modal');
+            Route::post('/confirm/delete/feedback', [FeedbackController::class,'confirmDeleteFeedback'])->name('feedback.confirm.delete');
             /* Route::get('/dashboard1', function(){
                  dd(2);
              })->name('dashboard1');*/
-            /*Route::post('/checkin_modal', [DashboardController::class, 'checkinModal'])->name('checkin.modal');
-            Route::post('/confirm_checkin', [DashboardController::class, 'confirmCheckin'])->name('confirm.checkin');*/
+            /*Route::post('/checkin/modal', [DashboardController::class, 'checkinModal'])->name('checkin.modal');
+            Route::post('/confirm/checkin', [DashboardController::class, 'confirmCheckin'])->name('confirm.checkin');*/
         });
     }
 }

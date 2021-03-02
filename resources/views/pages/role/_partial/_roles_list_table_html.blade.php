@@ -1,6 +1,6 @@
 <div class="block-header">
     <h3 class="block-title">Dynamic Table <small>Full pagination</small></h3>
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_role_modal')" data-validation="validation-span-id"
+    <x-button class="btn btn-primary" onclick="commonAjaxModel('add/role/modal')" data-validation="validation-span-id"
               id="validation-span-id">Add
     </x-button>
 </div>
@@ -24,14 +24,14 @@
                     <td class="text-center font-size-sm">{{$role->id}}</td>
                     <td class="font-w600 font-size-sm">{{$role->name}}</td>
                     <td>
-                         <button class="btn btn-info" onclick="commonAjaxModel('edit_role_modal',{{$role->id}})"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger" onclick="commonAjaxModel('delete_role_modal',{{$role->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                         <button class="btn btn-info" onclick="commonAjaxModel('edit/role/modal',{{$role->id}})"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger" onclick="commonAjaxModel('delete/role/modal',{{$role->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                     </td>
                 </tr>
             @endforeach
         @endif
-        
+
         </tbody>
     </table>
 </div>

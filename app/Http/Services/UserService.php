@@ -371,14 +371,18 @@ class UserService extends BaseService
      */
     public function confirmAddProject(Request $request)
     {
-//        dd($request->all());
+
         $project = new Project;
         $project->name = $request->project_name;
         $project->description =$request->project_description;
         $project->user_id =$request->project_manager_id;
-//        $project->start_date =Carbon::parse($request->date);
         $project->save();
-        $project->technologystack()->attach(['technology_stack_id'=>$request->technology_stack_id]);
+//        $project->technologystack()->attach(['technology_stack_id'=>$request->technology_stack_id]);
+        for($i=0;$i<count($request->technology_stack_id);$i++)
+        {
+            $project->technologystack()->attach(['technology_stack_id'=>$request->technology_stack_id[$i]]);
+        }
+
         $project_id = $project->id;
         $file = $request->file('project_document');
         $file_name = $file->getClientOriginalName();
@@ -425,7 +429,7 @@ class UserService extends BaseService
         $project->name = $request->project_name;
         $project->description =$request->project_description;
         $project->user_id =$request->project_manager_id;
-        $project->start_date =Carbon::parse($request->date);
+//        $project->start_date =Carbon::parse($request->date);
         $project->save();
         $projects = Project::with('users')->get();
         $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();

@@ -36,7 +36,7 @@
                     <td class="font-w600 font-size-sm"><a class="btn btn-success" href="{{ asset('assets/uploads/files/$project_list->document[0]->path')}}" download="{{$project_list->document[0]->path??''}}">{{$project_list->document[0]->path??''}}</a></td>
                     @if($project_list->project_status === 0)
                     <td>
-                         <button class="btn btn-info" onclick="commonAjaxModel('developers_request_modal',{{$project_list->id}})">Developer Request</i></button>
+                         <button class="btn btn-info" onclick="commonAjaxModel('developers/request/modal',{{$project_list->id}})">Developer Request</i></button>
 
                     </td>
                     @endif

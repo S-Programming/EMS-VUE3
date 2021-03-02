@@ -1,6 +1,6 @@
 <div class="block-header">
     <h3 class="block-title">User Interaction Record </h3>
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_userInteraction_point_modal',{{$user_id??''}})" data-validation="validation-span-id"
+    <x-button class="btn btn-primary" onclick="commonAjaxModel('add/user/interaction/point/modal',{{$user_id??''}})" data-validation="validation-span-id"
               id="validation-span-id">Add User Interaction Point
     </x-button>
 </div>
@@ -31,7 +31,7 @@
 {{--                    <td class="font-w600 font-size-sm">{{$userInteraction->created_at->format('Y-m-d')??''}}</td>--}}
 {{--                    <td class="font-w600 font-size-sm">{{$userInteraction->created_at->format('M d Y')??''}}</td>--}}
                                 <td>
-                                    <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('delete_user_interaction_modal',{{$userInteraction->id??''}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('delete/user/interaction/modal',{{$userInteraction->id??''}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 {{--                                    <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('users_edit_discussionPoint',{{$userInteraction->id??''}})"><i class="fa fa-edit" aria-hidden="true"></i></button>--}}
                     {{--                <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('view_product_modal',{{$stock->product->id??''}})"><i class="fa fa-eye" aria-hidden="true"></i></button>--}}
                                 </td>

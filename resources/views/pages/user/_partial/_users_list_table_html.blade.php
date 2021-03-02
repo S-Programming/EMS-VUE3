@@ -1,6 +1,6 @@
 <div class="block-header">
     <h3 class="block-title">User Record </h3>
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_user_modal')" data-validation="validation-span-id"
+    <x-button class="btn btn-primary" onclick="commonAjaxModel('add/user/modal')" data-validation="validation-span-id"
               id="validation-span-id">Add
     </x-button>
     {{-- <x-button class="btn btn-primary">Upload CSV</x-button> --}}
@@ -52,8 +52,8 @@
                         <em class="text-muted font-size-sm">{{(isset($user->created_at)?$user->created_at->format('d M'):'')}}</em>
                     </td>
                     <td>
-                         <button class="btn btn-info" onclick="commonAjaxModel('edit_user_modal',{{$user->id}})"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger" onclick="commonAjaxModel('delete_user_modal',{{$user->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                         <button class="btn btn-info" onclick="commonAjaxModel('edit/user/modal',{{$user->id}})"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger" onclick="commonAjaxModel('delete/user/modal',{{$user->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 {{--                        <a class="btn btn-info"  onclick="ajaxCallOnclick('specific_user_profile',{user_id:{{$user->id}} })"><i class="fas fa-eye"></i></a>--}}
                         <a class="btn btn-info"  href="{{ route('user.specific.profile',$user->id)   }}"><i class="fas fa-user"></i></a>
 

@@ -30,8 +30,8 @@
                     <td class="font-w600 font-size-sm">{!!$user_qurie->comment??''!!}</td>
 
                     <td>
-                        <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('comment_on_userquery_modal',{{$user_qurie->id??''}})"><i class="far fa-edit"></i></button>
-                        <button class="d-inline btn btn-sm btn-alt-danger" onclick="commonAjaxModel('delete_user_query_modal',{{$user_qurie->id??''}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('comment/on/userquery/modal',{{$user_qurie->id??''}})"><i class="far fa-edit"></i></button>
+                        <button class="d-inline btn btn-sm btn-alt-danger" onclick="commonAjaxModel('delete/user/query/modal',{{$user_qurie->id??''}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
                     </td>
                 </tr>
             @endforeach

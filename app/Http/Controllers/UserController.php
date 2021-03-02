@@ -348,7 +348,7 @@ class UserController extends Controller
      */
     public function projectList(Request $request)
     {
-        $projects = Project::with('users')->where('project_status',"!=",2)->with('technology')->get();
+        $projects = Project::with('users')->where('project_status',"!=",2)->with('technologystack')->get();
         return view('pages.admin.projects.projects',['projects'=>$projects]);
     }
     /**
@@ -371,11 +371,12 @@ class UserController extends Controller
      */
     public function confirmAddProject(Request $request)
     {
+//        dd($request->all());
         $validator = Validator::make($request->all(), [
             'project_name' => 'required|min:3|max:30',
             'project_description' => 'required|min:3|max:500',
             'project_manager_id' => 'required|numeric',
-            'technology_stack_id' => 'required|numeric',
+            'technology_stack_id.*' => 'required|distinct|numeric',
 //            'project_document' => 'required|csv,txt,xlx,xls,pdf|max:2048',
         ]);
         if ($validator->fails()) {
@@ -407,7 +408,7 @@ class UserController extends Controller
             'project_name' => 'required|min:3|max:30',
             'project_description' => 'required|min:3|max:500',
             'project_manager_id' => 'required|numeric',
-            'date' => 'required|numeric',
+//            'date' => 'required',
         ]);
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);

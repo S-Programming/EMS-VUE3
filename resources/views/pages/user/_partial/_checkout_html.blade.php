@@ -1,4 +1,4 @@
-<a class="block block-rounded block-link-shadow text-center" href="javascript:void(0)" onclick="commonAjaxModel('checkout_modal')" data-validation="validation-span-id" id="validation-span-id">
+<a class="block block-rounded block-link-shadow text-center" href="javascript:void(0)" onclick="commonAjaxModel('checkout/modal')" data-validation="validation-span-id" id="validation-span-id">
     <div class="block-content block-content-full">
         <div class="font-size-h3 text-danger">Checkout</div>
     </div>

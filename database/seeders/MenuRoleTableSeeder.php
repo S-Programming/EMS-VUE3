@@ -57,7 +57,7 @@ class MenuRoleTableSeeder extends Seeder
             ['is_allow' => 1, 'role_id' => 3, 'menu_id' => 25],
             //Project Manager
             ['is_allow' => 1, 'role_id' => 4, 'menu_id' => 24],
-            ['is_allow' => 1, 'role_id' => 4, 'menu_id' => 25],
+//            ['is_allow' => 1, 'role_id' => 4, 'menu_id' => 25],
             // Developer
             ['is_allow' => 1, 'role_id' => 5, 'menu_id' => 1],
             ['is_allow' => 1, 'role_id' => 5, 'menu_id' => 3],

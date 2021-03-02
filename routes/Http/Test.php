@@ -11,7 +11,7 @@ class Test
     static function register()
     {
         Route::group(['middleware' => ['auth:sanctum']], function () {
-            Route::post('/test_open_modal', [TestController::class, 'testModalOpen'])->name('test.modal.open');
+            Route::post('/test/open/modal', [TestController::class, 'testModalOpen'])->name('test.modal.open');
             Route::get('/upload', [TestController::class, 'upload'])->name('test.upload');
         });
     }

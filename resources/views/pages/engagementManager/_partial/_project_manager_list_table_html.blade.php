@@ -26,8 +26,8 @@
                     <td class="font-w600 font-size-sm">{{$project_manager->user->phone_number??''}}</td>
                     <td class="font-w600 font-size-sm">{{$project_manager->user->image_path??''}}</td>
                     <td>
-                        <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('edit_project_manager_modal',{{$project_manager->user_id??''}})"><i class="far fa-edit"></i></button>
-                        <button class="d-inline btn btn-sm btn-alt-danger" onclick="commonAjaxModel('delete_project_manager_modal',{{$project_manager->user_id??''}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('edit/project/manager/modal',{{$project_manager->user_id??''}})"><i class="far fa-edit"></i></button>
+                        <button class="d-inline btn btn-sm btn-alt-danger" onclick="commonAjaxModel('delete/project/manager/modal',{{$project_manager->user_id??''}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
                     </td>
                 </tr>
             @endforeach

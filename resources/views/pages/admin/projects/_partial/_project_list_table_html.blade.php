@@ -1,6 +1,6 @@
 <div class="block-header">
     <h3 class="block-title">Dynamic Table <small>Full pagination</small></h3>
-    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_project_modal')" data-validation="validation-span-id"
+    <x-button class="btn btn-primary" onclick="commonAjaxModel('add/project/modal')" data-validation="validation-span-id"
               id="validation-span-id">Add Projects
     </x-button>
 </div>
@@ -28,15 +28,21 @@
                     <td class="font-w600 font-size-sm">{{$project->start_date??''}}</td>
                     <td class="font-w600 font-size-sm">{{$project->users->first_name??''}} {{$project->users->last_name??''}}</td>
                     <td class="text-center font-w600 font-size-sm">{{$project->number_of_developers??''}}</td>
-                    <td class="font-w600 font-size-sm">{{$project->technology[0]->name??''}}</td>
+
+
+                    <td class="font-w600 font-size-sm">
+                        @foreach($project->technologystack as $data)
+                            {{$data->name??''}}
+                        @endforeach
+                    </td>
                     @if(isset($project->project_status) && $project->project_status===0)
-                        <td class="font-w600 font-size-sm"><button type="button" class="btn btn-success" disabled> Assign Developers </button></td>
+                        <td class="font-w600 font-size-sm text-nowrap"><button type="button" class="btn btn-secondary" disabled> Assign Developers </button></td>
                     @elseif($project->project_status===1)
-                        <td class="font-w600 font-size-sm"><button type="button" class="btn btn-success" onclick="commonAjaxModel('assign_developers_modal',{{$project->id}})"> Assign Developers </button></td>
+                        <td class="font-w600 font-size-sm"><button type="button" class="btn btn-success" onclick="commonAjaxModel('assign/developers/modal',{{$project->id}})"> Assign Developers </button></td>
                     @endif
                     <td>
-                        <button class="btn btn-info" onclick="commonAjaxModel('edit_project_modal',{{$project->id}})"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger" onclick="commonAjaxModel('delete_project_modal',{{$project->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button class="btn btn-info" onclick="commonAjaxModel('edit/project/modal',{{$project->id}})"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger" onclick="commonAjaxModel('delete/project/modal',{{$project->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                     </td>
                 </tr>
