@@ -65,7 +65,7 @@ class ProjectManagerController extends Controller
     }
 
     /**
-     * Working Projects of Project Manager.
+     * Pending Projects List of Project Manager.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -76,7 +76,7 @@ class ProjectManagerController extends Controller
         dd('kkkk');
     }
     /**
- * Working Projects of Project Manager.
+ * Working Projects List of Project Manager.
  *
  * @param  \Illuminate\Http\Request  $request
  * @param  int  $id
@@ -87,7 +87,7 @@ class ProjectManagerController extends Controller
         dd('kkkk');
     }
     /**
-     * Working Projects of Project Manager.
+     * Completed Projects of Project Manager.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
