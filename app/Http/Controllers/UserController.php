@@ -57,15 +57,15 @@ class UserController extends Controller
         }
         $response = $this->userService->storeCSV($request);
         //        if (!$response) return $this->error('Following emails already exists in the system');
-        //        $redirectionRoute = '/exhibition_visitor';
+        //        $redirection_route = '/exhibition_visitor';
         //
-        //        return $this->success('Success', ['data' => $response, 'redirect_to' => $redirectionRoute]);
+        //        return $this->success('Success', ['data' => $response, 'redirect_to' => $redirection_route]);
         if (!$response) {
-            $redirectionRoute = '/user';
-            return $this->error('Following emails already exists in the system', ['errors' => ['Duplicate Emails'], 'redirect_to' => $redirectionRoute]);
+            $redirection_route = '/user';
+            return $this->error('Following emails already exists in the system', ['errors' => ['Duplicate Emails'], 'redirect_to' => $redirection_route]);
         }
-        $redirectionRoute = '/user';
-        return $this->success('Success', ['data' => $response, 'redirect_to' => $redirectionRoute]);
+        $redirection_route = '/user';
+        return $this->success('Success', ['data' => $response, 'redirect_to' => $redirection_route]);
         //dd($request->all(), 'saaddd');
     }
     /**
@@ -148,7 +148,6 @@ class UserController extends Controller
      */
     public function userUpdateProfile(Request $request)
     {
-       // dd($request->all());
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|min:3|max:50',
             'last_name' => 'required|string|min:3|max:50',
@@ -183,17 +182,14 @@ class UserController extends Controller
 
     public function viewUserProfilePlusInteractions(Request $request,$user_id)
     {
-        //dd($user_id);
         $user_data = User::find($user_id);
         $user_id = $user_data->id;
         $user = User::find($this->getAuthUserId());
         $user_name = $user->first_name;
-        //dd($user_name->first_name);
-        //dd($user_name);
-        $userInteractions = UserInteraction::with('users')->where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
-        //dd($userInteractions->users->first_name);
+        $user_interactions = UserInteraction::with('users')->where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
+        //dd($user_interactions->users->first_name);
         $html = view('pages.admin._partial._users_interactions_list_table_html',['html_section_id' => 'userlist-section'])->render();
-        return view('pages.admin.user_profile', ['html' => $html, 'user_data' => $user_data,'userInteractions' => $userInteractions,'user_id'=>$user_id,'user_name'=>$user_name]);
+        return view('pages.admin.user_profile', ['html' => $html, 'user_data' => $user_data,'user_interactions' => $user_interactions,'user_id'=>$user_id,'user_name'=>$user_name]);
     }
     public function addUserInteractionModal(Request $request)
     {
@@ -215,129 +211,28 @@ class UserController extends Controller
     public function deleteUserInteraction(Request $request)
     {
         $ui = UserInteraction::where('id',$request->id)->first();
-        //dd($ui->id);
         $containerId = $request->input('containerId', 'common_popup_modal');
         $html = view('pages.admin.discussions._partial._delete_user_interaction_modal',['id' => $containerId, 'user_interaction_id'=>$ui->id])->render();
-//        ,['user_interaction_id'=>$ui->id]
         return $this->successResponse('success', ['html' => $html]);
     }
     public function deleteConfirmUserInteraction(Request $request)
     {
-        $userInteractions = UserInteraction::find($request->user_interaction_id);
-        $userInteractions->delete();
-        $user_id = $userInteractions->user_id;
-        $userInteractions = UserInteraction::with('users')->where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
+        $user_interactions = UserInteraction::find($request->user_interaction_id);
+        $user_interactions->delete();
+        $user_id = $user_interactions->user_id;
+        $user_interactions = UserInteraction::with('users')->where('user_id',$user_id)->orderBy('created_at', 'DESC')->get();
         $user = User::find($this->getAuthUserId());
         $user_name = $user->first_name;
-        $html = view('pages.admin._partial._users_interactions_list_table_html',['userInteractions' => $userInteractions,'user_id'=>$user_id,'user_name'=>$user_name])->render();
+        $html = view('pages.admin._partial._users_interactions_list_table_html',['user_interactions' => $user_interactions,'user_id'=>$user_id,'user_name'=>$user_name])->render();
         return $this->successResponse('success', ['html' => $html,'html_section_id' => 'userlist-section']);
 
     }
     public function discussionsView(Request $request)
     {
         $current_user = $this->getAuthUserId();
-        $userInteractions = UserInteraction::with('users')->where('staff_id',$current_user)->orderBy('created_at', 'DESC')->get();
+        $user_interactions = UserInteraction::with('users')->where('staff_id',$current_user)->orderBy('created_at', 'DESC')->get();
         $html = view('pages.admin.discussions._partial._discussions_list',['html_section_id' => 'userlist-section'])->render();
-        return view('pages.admin.discussions.discussion', ['html' => $html, 'userInteractions' => $userInteractions]);
-    }
-    /**
-     * Display Project Manager List.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function projectManagersList(Request $request)
-    {
-        $project_managers = RoleUser::with('user')->where('role_id',4)->get();
-        $html = view('pages.engagementManager._partial._project_manager_list_table_html',['html_section_id'=> 'project-manager-list-section'])->render();
-        return view('pages.engagementManager.project_manager_list',['html'=>$html,'project_managers'=>$project_managers]);
-    }
-    /**
-     * Display Project Manager Popup To Add Project Manager.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function addProjectManagerModal(Request $request)
-    {
-        return $this->sendJsonResponse($this->userService->addProjectManagerModal($request));
-    }
-    /**
-     * Click Add button to add Project Manager
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function confirmAddProjectManager(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|min:3|max:30',
-            'last_name' => 'required|min:3|max:30',
-            'email' => 'required|email',   // |unique:users,email
-            'phone_number' => 'required|min:11|numeric',
-            'roles' => 'required|numeric',
-        ]);
-        if ($validator->fails()) {
-            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
-        }
-        return $this->sendJsonResponse($this->userService->confirmAddProjectManager($request));
-    }
-    /**
-     * Display Edit Project Manager Popup To Edit Project Manager.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function editProjectManagerModal(Request $request)
-    {
-        return $this->sendJsonResponse($this->userService->editProjectManagerModal($request));
-    }
-    /**
-     * Click Edit button to Edit Project Manager information.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function confirmEditProjectManager(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|min:3|max:30',
-            'last_name' => 'required|min:3|max:30',
-            'email' => 'required|email',   // |unique:users,email
-            'phone_number' => 'required|min:11|numeric',
-            'roles' => 'required|numeric',
-        ]);
-        if ($validator->fails()) {
-            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
-        }
-        return $this->sendJsonResponse($this->userService->confirmEditProjectManager($request));
-    }
-    /**
-     * Display delete popup modal to delete Project Manager.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function deleteProjectManagerModal(Request $request)
-    {
-        return $this->sendJsonResponse($this->userService->deleteProjectManagerModal($request));
-    }
-    /**
-     * click delete button to delete Project Manager.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function confirmDeleteProjectManager(Request $request)
-    {
-        return $this->sendJsonResponse($this->userService->confirmDeleteProjectManager($request));
+        return view('pages.admin.discussions.discussion', ['html' => $html, 'user_interactions' => $user_interactions]);
     }
     /**
      * Display all projects list with project Managers.
@@ -376,7 +271,7 @@ class UserController extends Controller
             'project_name' => 'required|min:3|string',
             'project_description' => 'required|min:3',
             'project_manager_id' => 'required|numeric',
-            'technology_stack_id.*' => 'required|distinct|numeric',
+            'technology_stack_id.*' => 'required|distinct|numeric|min:1',
 //            'project_document' => 'required|csv,txt,xlx,xls,pdf|max:2048',
         ]);
         if ($validator->fails()) {
@@ -446,7 +341,7 @@ class UserController extends Controller
      */
     public function confirmDeleteProjectModal(Request $request)
     {
-        return $this->sendJsonResponse($this->userService->deleteProjectModal($request));
+        return $this->sendJsonResponse($this->userService->confirmDeleteProjectModal($request));
     }
 
 }

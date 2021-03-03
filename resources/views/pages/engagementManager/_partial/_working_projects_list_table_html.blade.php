@@ -12,7 +12,7 @@
             {{--            <th class="text-center" style="width: 80px;">ID</th>--}}
             <th>Project Name</th>
             <th>Start Date</th>
-            <th>End Date</th>
+            <th>Estimate Time</th>
             <th>Project Manager</th>
             <th>Number of Developers</th>
             <th>Technology Stack</th>
@@ -31,7 +31,7 @@
                     <td class="font-w600 font-size-sm">{{$project->name??''}}</td>
 {{--                    <td class="font-w600 font-size-sm">{!!$project->description??''!!}</td>--}}
                     <td class="font-w600 font-size-sm">{{$project->start_date??''}}</td>
-                    <td class="font-w600 font-size-sm">{{$project->end_date??''}}</td>
+                    <td class="font-w600 font-size-sm">{{$project->estimate_time??''}}</td>
                     <td class="font-w600 font-size-sm">{{$project->users->first_name??''}} {{$project->users->last_name??''}}</td>
                     <td class="text-center font-w600 font-size-sm">{{$project->number_of_developers??''}}</td>
                     <td class="font-w600 font-size-sm">

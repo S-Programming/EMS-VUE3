@@ -23,6 +23,6 @@ class Project extends Model
     }
     public function document()
     {
-        return $this->hasMany(ProjectDocument::class);
+        return $this->hasMany(DocumentProject::class);
     }
 }

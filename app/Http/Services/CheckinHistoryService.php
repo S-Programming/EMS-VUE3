@@ -21,9 +21,9 @@ class CheckinHistoryService extends BaseService
     {
         $isMarkCheckIn = true;
         ## DB operations
-        $userid = $this->getAuthUserId();
-        if ($userid > 0) {
-            $checkin_history_data = CheckinHistory::where('user_id', $userid)->latest()->first();
+        $user_id = $this->getAuthUserId();
+        if ($user_id > 0) {
+            $checkin_history_data = CheckinHistory::where('user_id', $user_id)->latest()->first();
             if (!is_null($checkin_history_data)) {
                 $today = Carbon::parse($checkin_history_data->checkin);
                 /*## Need to improve logic, If user already checkin then will not be able to checkin again*/
@@ -35,13 +35,13 @@ class CheckinHistoryService extends BaseService
             }
             if ($isMarkCheckIn) {
 
-                $cico = new CheckinHistory;
-                $cico->checkin = Carbon::now();
-                $cico->user_id = $userid;
-                $cico->save();
+                $add_user_checkin = new CheckinHistory;
+                $add_user_checkin->checkin = Carbon::now();
+                $add_user_checkin->user_id = $user_id;
+                $add_user_checkin->save();
 
                 $attendence = new Attendance;
-                $attendence->user_id = $userid;
+                $attendence->user_id = $user_id;
                 $attendence->is_present = 1;
                 $attendence->save();
             }
@@ -52,10 +52,10 @@ class CheckinHistoryService extends BaseService
 
     public function confirmCheckout(Request $request)
     {
-        $userid = $this->getAuthUserId();
-        if ($userid > 0) {
+        $user_id = $this->getAuthUserId();
+        if ($user_id > 0) {
             $html = view('pages.user._partial._checkin_html')->render();
-            $checkin_history_data = CheckinHistory::where('user_id', $userid)->latest()->first();
+            $checkin_history_data = CheckinHistory::where('user_id', $user_id)->latest()->first();
             if ($checkin_history_data != null) {
                 if (!$checkin_history_data->checkout) {
                     $checkin_history_data->checkout = Carbon::now();
@@ -72,21 +72,17 @@ class CheckinHistoryService extends BaseService
     {
         $user_id = $request->user_id;
         $filters = ($user_id > 0) ? [['user_id', '=', $user_id]] : [];
-        //dd($filters,$user_id);
-        
         $date_filters = historyDateFilter($request->user_days);
-      //  dd($date_filters,$user_id,$filters);
-
         $filters = array_merge($date_filters, $filters);
        // dd($filters);
-        $checkinHistoryData = CheckinHistory::where($filters)->get();
-        $count = $checkinHistoryData->count();
-        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkinHistoryData, 'totalCheckins' => $count])->render();
-        if ($count > 0) 
+        $checkin_history_data = CheckinHistory::where($filters)->get();
+        $count = $checkin_history_data->count();
+        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkin_history_data, 'totalCheckins' => $count])->render();
+        if ($count > 0)
         {
             return $this->successResponse('Record Found successfully', ['html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
-        } 
-        else 
+        }
+        else
         {
             return $this->errorResponse('Record Not Found', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
         }
@@ -95,7 +91,7 @@ class CheckinHistoryService extends BaseService
             $user_history = CheckinHistory::all();
             $count = $user_history->count();
             $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history, 'totalCheckins' => $count])->render();
-           
+
         }
 
         if ($request->user_days == 'Current Month') {
@@ -109,7 +105,7 @@ class CheckinHistoryService extends BaseService
             $count = $currentmonthlyCheckins->count();
             $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $currentmonthlyCheckins, 'totalCheckins' => $count])->render();
             // dd($currentmonthlyCheckins);
-            
+
         } elseif ($request->user_days == 'Previous Month') {
             //Previous Month Checkins
             if ($user_id != 'All') {
@@ -119,7 +115,7 @@ class CheckinHistoryService extends BaseService
             }
             $count = $previousMonthCheckins->count();
             $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $previousMonthCheckins, 'totalCheckins' => $count])->render();
-            
+
         } elseif ($request->user_days == 'Current Week') {
             // current week
             $NowDate = Carbon::now()->format('Y-m-d');
@@ -131,7 +127,7 @@ class CheckinHistoryService extends BaseService
             }
             $count = $currentWeekCheckins->count();
             $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $currentWeekCheckins, 'totalCheckins' => $count])->render();
-            
+
         } elseif ($request->user_days == 'Previous Week') {
             // Past Week Checkins (Today is not included)
             $previousWeekStartDate = Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->subWeek()->format('Y-m-d'); // gives 2016-01-31
@@ -144,7 +140,7 @@ class CheckinHistoryService extends BaseService
 
             $count = $pastWeekCheckins->count();
             $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $pastWeekCheckins, 'totalCheckins' => $count])->render();
-            
+
         } else {
             $all_checkin_history = CheckinHistory::where('user_id', $user_id)->get();
             $count = $all_checkin_history->count();
@@ -157,7 +153,7 @@ class CheckinHistoryService extends BaseService
             }
         }*/
 
-        
+
     }
     /**
      * Method used for showing users checkins between two dates
@@ -166,11 +162,11 @@ class CheckinHistoryService extends BaseService
      */
     public function checkinHistoryBtDates(Request $request)
     {
-        $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
-        $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
+        $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
+        $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
 
         ## End Date User Record Included
-        $result = CheckinHistory::whereDate('checkin', '>=', $startDate)->whereDate('checkin', '<=', $endDate)->get();
+        $result = CheckinHistory::whereDate('checkin', '>=', $start_date)->whereDate('checkin', '<=', $end_date)->get();
 
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $result])->render();
         if ($result->count() > 0) {
@@ -187,9 +183,7 @@ class CheckinHistoryService extends BaseService
     public function deleteCheckinUserModal(Request $request)
     {
         $checkin_id = $request->id;
-        //        dd(CommonUtilsFacade::isCheckIn());
         $containerId = $request->input('containerId', 'common_popup_modal');
-        // $role_data=Role::find($user_id);
         $html = view('pages.admin._partial._delete_user_checkin_modal', ['id' => $containerId, 'checkin_id' => $checkin_id])->render();
 
         return $this->successResponse('success', ['html' => $html]);
@@ -202,7 +196,6 @@ class CheckinHistoryService extends BaseService
 
     public function deleteConfirmCheckinUser(Request $request)
     {
-        //$login_id = $this->getAuthUserId();
         $checkin_id = $request->checkin_id;
         $user_data = CheckinHistory::find($checkin_id);
         $user_data->delete();

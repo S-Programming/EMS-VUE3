@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TechnologyStackSeeder::class);
         $this->call(UserInteractionSeeder::class);
         $this->call(ProjectTechnologyStackSeeder::class);
-//        $this->call(ProjectDevelopersSeeder::class);
+        $this->call(DevelopersProjectSeeder::class);
 
     }
 }

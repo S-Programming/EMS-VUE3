@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectDevelopersTable extends Migration
+class CreateDevelopersProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateProjectDevelopersTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_developers', function (Blueprint $table) {
+        Schema::create('developers_projects', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('user_id');
@@ -22,7 +22,6 @@ class CreateProjectDevelopersTable extends Migration
 
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
         });
     }
 
@@ -34,7 +33,7 @@ class CreateProjectDevelopersTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('project_developers');
+        Schema::dropIfExists('developers_projects');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

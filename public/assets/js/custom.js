@@ -312,7 +312,7 @@ function closeModalById(id) {
 
 
 function ajaxCallOnclick(route, extraData) {
-    //console.log(extraData+"asadasd");
+    // console.log(extraData+"asadasd");
     console.log(extraData);
     /*var today = new Date();
     if(today.getDay() == 6 || today.getDay() == 0) alert('Weekend!');*/

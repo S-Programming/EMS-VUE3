@@ -14,54 +14,49 @@ class AttendanceService extends BaseService
 {
 	public function verifyAttendance(Request $request)
 	{
-		if (!isset($request) && empty($request)) { // what will be condition
+		if (!isset($request) && empty($request)) {
             return $this->errorResponse('Attendance Request Failed');
         }
         if (isset($request) && !empty($request)) {
 			foreach ($this->getAllUsers() as $User) {
-	            $verifyUserPresence = Attendance::where('user_id', $User->id)
+	            $verify_user_presence = Attendance::where('user_id', $User->id)
 	                ->whereDate('created_at', Carbon::today())->first();
-	            if (!$verifyUserPresence) {
-	                $addEntry = new Attendance;
-	                $addEntry->user_id = $User->id;
-	                $addEntry->is_present = '0';
-	                $addEntry->entry_ip = '';
-	                $addEntry->entry_location = '';
-	                $addEntry->exit_ip = '';
-	                $addEntry->exit_location = '';
-	                $addEntry->created_at = Carbon::now();
-	                $addEntry->save();
+	            if (!$verify_user_presence) {
+	                $add_entry = new Attendance;
+	                $add_entry->user_id = $User->id;
+	                $add_entry->is_present = '0';
+	                $add_entry->entry_ip = '';
+	                $add_entry->entry_location = '';
+	                $add_entry->exit_ip = '';
+	                $add_entry->exit_location = '';
+	                $add_entry->created_at = Carbon::now();
+	                $add_entry->save();
 	            }
 	        }
-	        $todayAttendance  = Attendance::whereDate('created_at', Carbon::today())->orderBy("user_id", "asc")->get();
-	        $html = view('pages.attendance._partial._user_attendance_html', ['todayAttendance' => $todayAttendance ])->render();
+	        $today_attendance  = Attendance::whereDate('created_at', Carbon::today())->orderBy("user_id", "asc")->get();
+	        $html = view('pages.attendance._partial._user_attendance_html', ['attendance' => $today_attendance ])->render();
 	         return  $html;
-        } 
-
-        //return view('pages.attendance.today_attendance_list')->with(['users' => $this->getAllUsers(), 'todayAttendance' => $todayAttendance]);
-        
+        }
 	}
 
 	 public function getUserAttendanceHistory(Request $request)
     {
         $user_id = $request->user_id;
-       
+
         if ($request->user_days == 'Current Month') {
             // Current Month data with Specific User
             if ($user_id != 'All') {
-               
-                $currentmonthlAttendance = Attendance::orderBy('user_id', 'asc')->where('created_at', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
+
+                $current_monthl_attendance = Attendance::orderBy('user_id', 'asc')->where('created_at', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
                     ->where('user_id', $user_id)->get();
 
-                
+
             } else {
-                // dd('all with current month');
-                $currentmonthlAttendance = Attendance::orderBy('user_id', 'asc')->where('created_at', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
+                $current_monthl_attendance = Attendance::orderBy('user_id', 'asc')->where('created_at', '>=', Carbon::now()->startOfMonth()->toDateTimeString())
                     ->get();
-                // with('user')->
             }
-            $count = $currentmonthlAttendance->count();
-            $html = view('pages.attendance._partial._user_attendance_html', ['todayAttendance' => $currentmonthlAttendance])->render();
+            $count = $current_monthl_attendance->count();
+            $html = view('pages.attendance._partial._user_attendance_html', ['attendance' => $current_monthl_attendance])->render();
             if ($count > 0) {
                 return $this->successResponse('Current Month Attendance Received successfully', ['html' => $html, 'html_section_id' => 'attendance-section']);
             } else {
@@ -71,16 +66,15 @@ class AttendanceService extends BaseService
             //Previous Month data with Specific User
             if ($user_id != 'All') {
                 // dd('P Not All');
-                $previousMonthAttendance = Attendance::orderBy('user_id', 'asc')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)
+                $previous_month_attendance = Attendance::orderBy('user_id', 'asc')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)
                     ->where('user_id', $user_id)
                     ->get();
             } else {
-                // dd('P All');
-                $previousMonthAttendance = Attendance::orderBy('user_id', 'asc')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)
+                $previous_month_attendance = Attendance::orderBy('user_id', 'asc')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)
                     ->get();
             }
-            $count = $previousMonthAttendance->count();
-            $html = view('pages.attendance._partial._user_attendance_html', ['todayAttendance' => $previousMonthAttendance])->render();
+            $count = $previous_month_attendance->count();
+            $html = view('pages.attendance._partial._user_attendance_html', ['attendance' => $previous_month_attendance])->render();
             if ($count > 0) {
                 return $this->successResponse('Previous Month Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'attendance-section']);
             } else {

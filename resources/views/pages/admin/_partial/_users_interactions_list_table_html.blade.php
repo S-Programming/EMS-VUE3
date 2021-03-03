@@ -19,19 +19,19 @@
         </tr>
         </thead>
         <tbody>
-        @if(isset($userInteractions))
-            @foreach($userInteractions as $userInteraction)
+        @if(isset($user_interactions))
+            @foreach($user_interactions as $user_interaction)
                 <tr>
 {{--                    <td class="font-w600 font-size-sm">{{$userInteraction->staff_id??''}}</td>--}}
                     <td class="font-w600 font-size-sm">{{$user_name??''}}</td>
-                    <td class="font-w600 font-size-sm">{{$userInteraction->users->first_name??''}} {{$userInteraction->users->last_name??''}}</td>
+                    <td class="font-w600 font-size-sm">{{$user_interaction->users->first_name??''}} {{$user_interaction->users->last_name??''}}</td>
 {{--                    <td class="font-w600 font-size-sm">{{$userInteraction->user_id??''}}</td>--}}
-                    <td class="font-w600 font-size-sm">{!!$userInteraction->description??''!!}</td>
-                    <td class="font-w600 font-size-sm">{!!$userInteraction->date??''!!}</td>
+                    <td class="font-w600 font-size-sm">{!!$user_interaction->description??''!!}</td>
+                    <td class="font-w600 font-size-sm">{!!$user_interaction->date??''!!}</td>
 {{--                    <td class="font-w600 font-size-sm">{{$userInteraction->created_at->format('Y-m-d')??''}}</td>--}}
 {{--                    <td class="font-w600 font-size-sm">{{$userInteraction->created_at->format('M d Y')??''}}</td>--}}
                                 <td>
-                                    <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('delete/user/interaction/modal',{{$userInteraction->id??''}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('delete/user/interaction/modal',{{$user_interaction->id??''}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 {{--                                    <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('users_edit_discussionPoint',{{$userInteraction->id??''}})"><i class="fa fa-edit" aria-hidden="true"></i></button>--}}
                     {{--                <button class="d-inline btn btn-sm btn-alt-info" onclick="commonAjaxModel('view_product_modal',{{$stock->product->id??''}})"><i class="fa fa-eye" aria-hidden="true"></i></button>--}}
                                 </td>

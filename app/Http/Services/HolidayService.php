@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class HolidayService extends BaseService
 {
-    
+
     public function confirmAddHoliday(Request $request)
     {
         ## DB operations
@@ -25,7 +25,7 @@ class HolidayService extends BaseService
             if($request->date_range !='')
             {
                 $date_range = explode('to',$request->date_range);
-            
+
                 $holiday->start_date = Carbon::parse($date_range[0]);
                 $holiday->end_date = Carbon::parse($date_range[1]) ?? '';
             }
@@ -44,9 +44,7 @@ class HolidayService extends BaseService
     public function holidayDeleteModal(Request $request)
     {
         $holiday_id = $request->id;
-        //        dd(CommonUtilsFacade::isCheckIn());
         $containerId = $request->input('containerId', 'common_popup_modal');
-        // $role_data=Role::find($user_id);
         $html = view('pages.admin._partial._delete_holiday_modal', ['id' => $containerId, 'holiday_id' => $holiday_id])->render();
 
         return $this->successResponse('success', ['html' => $html]);
@@ -56,7 +54,6 @@ class HolidayService extends BaseService
     public function confirmDeleteHoliday(Request $request)
     {
         $holiday_id = $request->holiday_id;
-     
         $holiday_data = Holiday::find($holiday_id);
         $holiday_data->delete();
         $holidays = Holiday::all();
@@ -88,8 +85,8 @@ class HolidayService extends BaseService
              $holidays = Holiday::all();
         }
         $html = view('pages.holidays._partial._holidays_list_html', compact('holidays', $holidays))->render();
-        return $this->successResponse('Holiday has Successfully Updated', ['html' => $html, 'html_section_id' => 'holidaylist-section']);   
+        return $this->successResponse('Holiday has Successfully Updated', ['html' => $html, 'html_section_id' => 'holidaylist-section']);
     }
 
-    
+
 }

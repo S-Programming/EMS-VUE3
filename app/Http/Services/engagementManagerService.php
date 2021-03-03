@@ -9,7 +9,7 @@ use App\Models\Menu;
 use App\Models\MenuRole;
 use App\Models\CheckinHistory;
 use App\Models\Project;
-use App\Models\ProjectDevelopers;
+use App\Models\DevelopersProject;
 use App\Models\ProjectTechnologyStack;
 use App\Models\QueryStatus;
 use App\Models\TechnologyStack;
@@ -17,7 +17,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\Attendence;
-use App\Models\ProjectDocument;
+use App\Models\DocumentProject;
 use App\Models\UserInteraction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -60,7 +60,7 @@ class engagementManagerService extends BaseService
 
         $project_id = $request->id;
         for ($i=0; $i<count($request->developers);$i=$i+1) {
-            $project_developers = new ProjectDevelopers;
+            $project_developers = new DevelopersProject;
             $project_developers->project_id = $project_id;
             $project_developers->user_id = $request->developers[$i];
             $project_developers->save();

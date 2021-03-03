@@ -15,7 +15,7 @@ class ExpenseService extends BaseService
 {
     public function confirmClaimExpense(Request $request)
     {
-       
+
      //  dd($request->all());
         if (!isset($request) && empty($request)) { // what will be condition
             return $this->errorResponse('Claim Submittion Failed');
@@ -28,15 +28,13 @@ class ExpenseService extends BaseService
             $expense->description = $request->description;
             $expense->amount = $request->amount;
             $expense->request_status_id = 1; // for pending by default
-           //  dd($expense);
             $expense->save();
-
             $expense = Expense::where('user_id', $user_id)->get();
         }
         $html = view('pages.expense._partial._expense_list_table_html', compact('expense', $expense))->render();
         return $this->successResponse('Leave has Successfully Requested', ['html' => $html, 'html_section_id' => 'expense-section']);
     }
-    
+
     public function approveExpenseModal(Request $request)
     {
         $requestedExpenseId = $request->id;
@@ -65,11 +63,11 @@ class ExpenseService extends BaseService
             else{
                 return $this->successResponse('Not Approved',['success' => ['Not Approved'], 'html' => $html, 'html_section_id' => 'approval-section']);
             }
- 
-        } 
-        else 
+
+        }
+        else
         {
             return $this->errorResponse('Error in Approval',['error'=>['Error in Approval'], 'html' => $html, 'html_section_id' => 'approval-section']);
-        } 
+        }
     }
 }

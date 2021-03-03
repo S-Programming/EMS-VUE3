@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectDocumentsTable extends Migration
+class CreateDocumentProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProjectDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_documents', function (Blueprint $table) {
+        Schema::create('document_projects', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('project_id');
             $table->string('path')->nullable();
@@ -30,7 +30,7 @@ class CreateProjectDocumentsTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('project_documents');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::dropIfExists('document_projects');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
     }
 }

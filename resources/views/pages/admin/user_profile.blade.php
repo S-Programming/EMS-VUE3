@@ -94,7 +94,7 @@
             <!-- Dynamic Table Full Pagination -->
             <div id="userlist-section" class="block block-rounded">
 {{--                ,'query_statuses'=>$query_statuses--}}
-                @include('pages.admin._partial._users_interactions_list_table_html',['userInteractions'=>$userInteractions,'user_id'=>$user_id,'user_name'=>$user_name])
+                @include('pages.admin._partial._users_interactions_list_table_html',['user_interactions'=>$user_interactions,'user_id'=>$user_id,'user_name'=>$user_name])
 {{--                ,['users' => $users] ,['userInteractions'=>$userInteractions]--}}
             </div>
             <!-- END Dynamic Table Full Pagination -->

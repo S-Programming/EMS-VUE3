@@ -17,11 +17,11 @@
         </thead>
         <tbody>
 {{--        @dd($userInteractions['users'])--}}
-        @if(isset($userInteractions))
-            @foreach($userInteractions as $userInteraction)
+        @if(isset($user_interactions))
+            @foreach($user_interactions as $user_interaction)
 {{--            @dd($userInteraction->users->first_name)--}}
                 <tr>
-                    <td class="font-w600 font-size-sm">{{$userInteraction->users->first_name??''}}</td><td class="font-w600 font-size-sm">{!!$userInteraction->description??''!!}</td>
+                    <td class="font-w600 font-size-sm">{{$user_interaction->users->first_name??''}}</td><td class="font-w600 font-size-sm">{!!$user_interaction->description??''!!}</td>
                 </tr>
 
             @endforeach

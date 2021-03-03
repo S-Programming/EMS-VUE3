@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             {{-- @if(isset($todayAttendance) && !empty($todayAttendance)) --}}
-            @foreach($todayAttendance as $data)
+            @foreach($attendance as $data)
             <tr>
                 <td>{{$data->user_id??''}}</td>
                 {{-- @if(isset($name) && !empty($name)) --}}

@@ -29,7 +29,7 @@ class ProjectManagerController extends Controller
     {
         $user_id = $this->getAuthUserId();
         $project_lists = Project::with('technologystack')->with('document')->where('user_id',$user_id)->get();
-        return view('pages.projectManager.projectManagers')->with('project_lists', $project_lists);
+        return view('pages.projectManager.projectManagers')->with(['project_lists'=> $project_lists,'user_id'=>$user_id]);
     }
     /**
      * Display Developer Request Modal.
@@ -62,5 +62,39 @@ class ProjectManagerController extends Controller
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
         return $this->sendJsonResponse($this->projectManagerService->confirmDevelopersRequest($request));
+    }
+
+    /**
+     * Working Projects of Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function userPendingProjectsList(Request $request)
+    {
+        dd('kkkk');
+    }
+    /**
+ * Working Projects of Project Manager.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @param  int  $id
+ * @return \Illuminate\Http\Response
+ */
+    public function userWorkingProjectsList(Request $request)
+    {
+        dd('kkkk');
+    }
+    /**
+     * Working Projects of Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function userCompletedProjectsList(Request $request)
+    {
+        dd('kkkk');
     }
 }

@@ -67,7 +67,6 @@ class UserQueryService extends BaseService
      */
     public function confirmAddComment(Request $request)
     {
-//        dd($request->status);
         $user_query_id = $request->user_query_id;
         $user_qurie = UserQuries::where('id',$user_query_id)->first();
         $user_qurie->comment = $request->admin_comment;
