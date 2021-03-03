@@ -50,6 +50,49 @@ class ProjectManagerService extends BaseService
         $user_id = $this->getAuthUserId();
         $project_lists = Project::where('user_id',$user_id)->get();
         $html = view('pages.projectManager._partial._assign_project_list_table_html', ['project_lists' => $project_lists])->render();
-        return $this->successResponse('success',['html' => $html, 'html_section_id' => 'project-technology-stack-section']);
+        return $this->successResponse('success',['html' => $html, 'html_section_id' => 'pm-project-section']);
+    }
+    /**
+     * Working Projects List of Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function userWorkingProjectsList(Request $request)
+    {
+        $user_id = $this->getAuthUserId();
+        $working_projects = Project::with('technologystack')->with('document')->where('user_id',$user_id)->where('project_status',2)->get();
+        $html = view('pages.projectManager._partial._working_project_list_table_html',['project_lists'=>$working_projects])->render();
+        return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'pm-project-section']);
+    }
+    /**
+     * Display popup for working project status.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function workingProjectStatusModal(Request $request)
+    {
+        $project_id = $request->id;
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $html = view('pages.projectManager._partial._project_status_modal',['id' => $containerId,'project_id'=>$project_id])->render();
+        return $this->successResponse('success', ['html' => $html]);
+
+
+    }
+    /**
+     * Click update for working project status.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmWorkingProjectStatus(Request $request)
+    {
+        $project_id = $request->id;
+        dd('project ka status update kro g');
+
     }
 }

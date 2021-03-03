@@ -73,21 +73,44 @@ class ProjectManagerController extends Controller
      */
     public function userPendingProjectsList(Request $request)
     {
-        dd('kkkk');
+        dd('userPendingProjectsList');
     }
     /**
- * Working Projects List of Project Manager.
- *
- * @param  \Illuminate\Http\Request  $request
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
+     * Working Projects List of Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function userWorkingProjectsList(Request $request)
     {
-        dd('kkkk');
+        return $this->sendJsonResponse($this->projectManagerService->userWorkingProjectsList($request));
     }
     /**
-     * Completed Projects of Project Manager.
+     * Display popup for working project status.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function workingProjectStatusModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->projectManagerService->workingProjectStatusModal($request));
+    }
+    /**
+     * Click update for working project status.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmWorkingProjectStatus(Request $request)
+    {
+        return $this->sendJsonResponse($this->projectManagerService->confirmWorkingProjectStatus($request));
+    }
+
+    /**
+     * Completed Projects List of Project Manager.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -95,6 +118,6 @@ class ProjectManagerController extends Controller
      */
     public function userCompletedProjectsList(Request $request)
     {
-        dd('kkkk');
+        dd('userCompletedProjectsList');
     }
 }

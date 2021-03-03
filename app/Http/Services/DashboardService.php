@@ -103,7 +103,7 @@ class DashboardService extends BaseService
         $user = $this->getAuthUser();
         $responseData = ['user' => $user, 'total_user_count' => $total_users];
         $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
-        return view('pages.admin.dashboard', $responseData);
+        return view('pages.engagementManager.dashboard', $responseData);
     }
     public function projectManagerDashboard(Request $request)
     {
@@ -111,6 +111,6 @@ class DashboardService extends BaseService
         $user = $this->getAuthUser();
         $responseData = ['user' => $user, 'total_user_count' => $total_users];
         $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
-        return view('pages.admin.dashboard', $responseData);
+        return view('pages.projectManager.dashboard', $responseData);
     }
 }

@@ -30,7 +30,12 @@
                     <td class="font-w600 font-size-sm">{{$project->users->first_name??''}} {{$project->users->last_name??''}}</td>
                     <td class="font-w600 font-size-sm">
                         @foreach($project->technologystack as $data)
-                            {{$data->name??''}}
+                                   |   {{$data->name??''}} |
+<!--                        --><?php
+//                            echo str_replace(" ", ",","sasas dsds");
+//                        ?>
+{{--                            @if(count($project->technologystack)>count($project->technologystack)-1)--}}
+{{--                            @endif--}}
                         @endforeach
                     </td>
                     <td class="text-center font-w600 font-size-sm">{{$project->number_of_developers??''}}</td>

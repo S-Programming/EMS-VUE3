@@ -17,6 +17,8 @@ class ProjectManager
 
             Route::post('/user/pending/projects', [ProjectManagerController::class, 'userPendingProjectsList'])->name('project.manager.working.projects');
             Route::post('/user/working/projects', [ProjectManagerController::class, 'userWorkingProjectsList'])->name('project.manager.working.projects');
+            Route::post('/working/project/Status/modal', [ProjectManagerController::class, 'workingProjectStatusModal'])->name('project.manager.working.project.status.modal');
+            Route::post('confirm/working/project/Status', [ProjectManagerController::class, 'confirmWorkingProjectStatus'])->name('project.manager.confirm.working.project.status');
             Route::post('/user/completed/projects', [ProjectManagerController::class, 'userCompletedProjectsList'])->name('project.manager.working.projects');
 //            Route::post('/add/technology/stack/modal', [ProjectManagerController::class, 'technologyStackModal'])->name('technology.stack.add.modal');
 //            Route::post('/confirm/add/technology/stack', [ProjectManagerController::class, 'confirmAddTechnologyStack'])->name('confirm.add.technology.stack');

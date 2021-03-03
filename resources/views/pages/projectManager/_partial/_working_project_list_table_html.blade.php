@@ -1,8 +1,8 @@
 <div class="block-header">
     <h3 class="block-title">Dynamic Table <small>Full pagination</small></h3>
-{{--    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_technology_stack_modal')" data-validation="validation-span-id"--}}
-{{--              id="validation-span-id">Add--}}
-{{--    </x-button>--}}
+    {{--    <x-button class="btn btn-primary" onclick="commonAjaxModel('add_technology_stack_modal')" data-validation="validation-span-id"--}}
+    {{--              id="validation-span-id">Add--}}
+    {{--    </x-button>--}}
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Dropdown button
@@ -29,7 +29,7 @@
             <!-- <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
             <th class="d-none d-sm-table-cell" style="width: 15%;">Access</th>
             <th style="width: 15%;">Registered</th> -->
-            <th style="width: 15%;">opertaion</th>
+            <th style="width: 15%;">Status</th>
         </tr>
         </thead>
         <tbody>
@@ -44,15 +44,12 @@
                     <td class="font-w600 font-size-sm">{{$project_list->number_of_developers}}</td>
 
                     <td class="font-w600 font-size-sm"><a class="btn btn-success" href="{{ asset('assets/uploads/files/$project_list->document[0]->path')}}" download="{{$project_list->document[0]->path??''}}">{{$project_list->document[0]->path??''}}</a></td>
-                    @if($project_list->project_status === 0)
-                    <td>
-                         <button class="btn btn-info" onclick="commonAjaxModel('developers/request/modal',{{$project_list->id}})">Developer Request</button>
-                    </td>
-                        @elseif($project_list->project_status === 1)
-                            <td>
-                                <button class="btn btn-secondary" disabled>Developer Request</button>
-                            </td>
-                    @endif
+{{--                    @if($project_list->project_status === 2)--}}
+                        <td>
+                            <button class="btn btn-secondary" onclick="commonAjaxModel('working/project/Status/modal',{{$project_list->id}})">Status</button>
+{{--                            /working/project/Status/modal--}}
+                        </td>
+{{--                    @endif--}}
                 </tr>
             @endforeach
         @endif

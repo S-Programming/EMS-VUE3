@@ -48,9 +48,6 @@ class DashboardController extends Controller
     public function dashboard(Request $request)
     {
         return $this->dashboardService->getDashboard($request);
-
-
-
     }
 
 
