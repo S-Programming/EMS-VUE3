@@ -17,7 +17,9 @@ class RequestStatusController extends Controller
         $this->requestStatusService = $requestStatusService;
     }
     /**
-     * It will return a Leave Status List
+     * This method is used to  show all Request Status
+     * To the user so that he apply leave request
+     * according to them.
      *
      * @return Body
      */
@@ -31,7 +33,7 @@ class RequestStatusController extends Controller
     }
 
     /**
-     * It will return a HTML for the Leave Status Modal container
+     * Display a popup modal to add new request status ].
      *
      * @return Body
      */
@@ -41,7 +43,7 @@ class RequestStatusController extends Controller
     }
 
     /**
-     * Method for the Adding Leave Status
+     * Click Yes button to add request status confirmly.
      *
      * @return Body
      */
@@ -51,7 +53,7 @@ class RequestStatusController extends Controller
     }
 
     /**
-     * Method for Editing Leave Status on Modal PoPUP
+     * Display a popup modal to edit request status.
      *
      * @return Body
      */
@@ -61,7 +63,7 @@ class RequestStatusController extends Controller
     }
 
     /**
-     * Method for Update Leave Status
+     * Click Yes Button to edit or update request status confirmly.
      *
      * @return Body
      */
@@ -71,7 +73,7 @@ class RequestStatusController extends Controller
     }
 
     /**
-     * It will return a HTML for the Modal container for confirmation of deletion
+     * Display a popup modal to delete Request Status.
      *
      * @return Body
      */
@@ -81,7 +83,7 @@ class RequestStatusController extends Controller
     }
 
     /**
-     * Method for the Deleting Leave Status
+     * Click Yes button to delete Request Status confirmly.
      *
      * @return Body
      */

@@ -27,9 +27,9 @@ class ProjectManagerController extends Controller
      */
     public function index()
     {
-        $user_id = $this->getAuthUserId();
-        $project_lists = Project::with('technologystack')->with('document')->where('user_id',$user_id)->get();
-        return view('pages.projectManager.projectManagers')->with(['project_lists'=> $project_lists,'user_id'=>$user_id]);
+        $project_manager_id = $this->getAuthUserId();
+        $project_lists = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)->orderBy('created_at', 'DESC')->get();
+        return view('pages.projectManager.projectManagers')->with(['project_lists'=> $project_lists,'user_id'=>$project_manager_id]);
     }
     /**
      * Display Developer Request Modal.
@@ -116,7 +116,7 @@ class ProjectManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function userCompletedProjectsList(Request $request)
+    public function CompletedProjectsList(Request $request)
     {
         dd('userCompletedProjectsList');
     }

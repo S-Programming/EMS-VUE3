@@ -18,7 +18,7 @@ class RoleController extends Controller
         $this->roleService = $roleService;
     }
     /**
-     * Display a listing of the resource.
+     * Display all roles list.
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,19 +28,19 @@ class RoleController extends Controller
         return view('pages.role.roles')->with(['roles'=> $roles]);
     }
     /**
-     * It will return a HTML for the Modal container
+     * Display a popup to Add New role.
      *
-     * @return Body
+     * @return \Illuminate\Http\Response
      */
-    public function roleModal(Request $request)
+    public function addRoleModal(Request $request)
     {
-        return $this->sendJsonResponse($this->roleService->roleModal($request));
+        return $this->sendJsonResponse($this->roleService->addRoleModal($request));
     }
 
     /**
-     * Method for the Adding Users
+     * Add New role Confirmly.
      *
-     * @return Body
+     * @return \Illuminate\Http\Response
      */
     public function confirmAddRole(Request $request)
     {
@@ -55,18 +55,18 @@ class RoleController extends Controller
 
 
     /**
-     * It will return a HTML for the Modal container for confirmation of deletion
+     * Display a popup to delete Role.
      *
-     * @return Body
+     * @return \Illuminate\Http\Response
      */
     public function roleDeleteModal(Request $request)
     {
         return $this->sendJsonResponse($this->roleService->roleDeleteModal($request));
     }
     /**
-     * Method for the Deleting Users
+     * Click Yes to confirmly delete the Role.
      *
-     * @return Body
+     * @return \Illuminate\Http\Response
      */
     public function confirmDeleteRole(Request $request)
     {

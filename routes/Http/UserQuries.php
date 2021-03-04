@@ -10,7 +10,7 @@ class UserQuries
     {
         Route::group(['middleware' => ['auth:sanctum']], function () {
 //            Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
-            Route::get('add/userquery', [UserQuriesController::class,'addUserQuery'])->name('userquery.add');
+            Route::get('add/userquery', [UserQuriesController::class,'userQueryList'])->name('userquery.add');
 //            Route::get('feedback', [FeedbackController::class,'addFeedback'])->name('feedback');
             Route::post('add/userquery/modal', [UserQuriesController::class,'addUserQueryModal'])->name('userquery.add.modal');
 //            Route::post('add/feedback/modal', [FeedbackController::class,'addFeedbackModal'])->name('feedback.add.modal');

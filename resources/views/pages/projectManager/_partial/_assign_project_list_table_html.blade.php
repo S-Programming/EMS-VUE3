@@ -48,7 +48,7 @@
                     <td>
                          <button class="btn btn-info" onclick="commonAjaxModel('developers/request/modal',{{$project_list->id}})">Developer Request</button>
                     </td>
-                        @elseif($project_list->project_status === 1)
+                        @elseif($project_list->project_status === 1 OR $project_list->project_status === 2)
                             <td>
                                 <button class="btn btn-secondary" disabled>Developer Request</button>
                             </td>

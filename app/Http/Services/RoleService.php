@@ -12,6 +12,28 @@ use Illuminate\Http\Request;
 
 class RoleService extends BaseService
 {
+    /**
+     * Display a popup to Add New role.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addRoleModal(Request $request)
+    {
+        $role_id = $request->id;
+        $role_data = Role::find($role_id);
+        //        dd(CommonUtilsFacade::isCheckIn());
+        $containerId = $request->input('containerId', 'common_popup_modal');
+
+        $html = view('pages.role._partial._add_role_modal', ['id' => $containerId, 'data' => null, 'role_data' => $role_data])->render();
+
+        return $this->successResponse('success', ['html' => $html]);
+    }
+
+    /**
+     * Add New role Confirmly.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function confirmAddRole(Request $request)
     {
 
@@ -39,19 +61,11 @@ class RoleService extends BaseService
         $html = view('pages.role._partial._roles_list_table_html', compact('roles', $roles))->render();
         return $this->successResponse('Role has Successfully Added', ['html' => $html, 'html_section_id' => 'rolelist-section']);
     }
-
-    public function roleModal(Request $request)
-    {
-        $role_id = $request->id;
-        $role_data = Role::find($role_id);
-        //        dd(CommonUtilsFacade::isCheckIn());
-        $containerId = $request->input('containerId', 'common_popup_modal');
-        
-        $html = view('pages.role._partial._add_role_modal', ['id' => $containerId, 'data' => null, 'role_data' => $role_data])->render();
-
-        return $this->successResponse('success', ['html' => $html]);
-    }
-
+    /**
+     * Display a popup to delete Role.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function roleDeleteModal(Request $request)
     {
         $role_id = $request->id;
@@ -62,7 +76,11 @@ class RoleService extends BaseService
 
         return $this->successResponse('success', ['html' => $html]);
     }
-
+    /**
+     * Click Yes to confirmly delete the Role.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function confirmDeleteRole(Request $request)
     {
         //$login_id = $this->getAuthUserId();

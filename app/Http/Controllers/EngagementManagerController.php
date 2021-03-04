@@ -38,16 +38,5 @@ class EngagementManagerController extends Controller
     {
         return $this->sendJsonResponse($this->engagementManagerService->confirmAssignProjectDevelopers($request));
     }
-    /**
-     * Display view for working project list.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function workingProjectList(Request $request)
-    {
-        $projects = Project::with('users')->where('project_status',2)->with('technologystack')->orderBy('created_at','DESC')->get();
-        return view('pages.engagementManager.woking_projects_list',['projects'=>$projects]);
-    }
+
 }

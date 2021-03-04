@@ -4,6 +4,7 @@
 namespace App\Http\Services;
 
 
+use App\Http\Enums\ProjectStatus;
 use App\Http\Services\BaseService\BaseService;
 use App\Models\Menu;
 use App\Models\MenuRole;
@@ -36,7 +37,7 @@ class engagementManagerService extends BaseService
     public function assignProjectDevelopersModal(Request $request)
     {
         $project_id = $request->id;
-        $developers = RoleUser::with('user')->where('role_id',5)->get();
+        $developers = RoleUser::with('user')->where('role_id',\App\Http\Enums\RoleUser::UIDeveloper)->get();
         $developers_dropdown = view('utils.developers_dropdown', ['developers' => $developers])->render();
         $containerId = $request->input('containerId', 'common_popup_modal');
         $html = view('pages.engagementManager._partial._assign_developers_modal', ['id' => $containerId,'project_id' => $project_id,'developers_dropdown'=>$developers_dropdown])->render();
@@ -73,7 +74,7 @@ class engagementManagerService extends BaseService
 //        2 when developers assign
         $project->save();
 
-        $projects = Project::with('users')->where('project_status',"!=",2)->with('technologystack')->get();
+        $projects = Project::with('users')->with('technologystack')->where('project_status',"!=",ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
         $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
         return $this->successResponse('Developers Assign Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
 

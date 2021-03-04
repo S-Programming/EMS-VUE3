@@ -33,7 +33,7 @@ class UserQuriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addUserQuery(Request $request)
+    public function userQueryList(Request $request)
     {
         $user_quries = UserQuries::where('user_id',$this->getAuthUserId())->get();
         $html = view('pages.user_query._partial._user_query_list_table_html',['html_section_id' => 'user-query-list-section'])->render();

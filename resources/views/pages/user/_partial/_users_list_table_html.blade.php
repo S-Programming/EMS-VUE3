@@ -55,7 +55,7 @@
                          <button class="btn btn-info" onclick="commonAjaxModel('edit/user/modal',{{$user->id}})"><i class="fa fa-edit"></i></button>
                         <button class="btn btn-danger" onclick="commonAjaxModel('delete/user/modal',{{$user->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
 {{--                        <a class="btn btn-info"  onclick="ajaxCallOnclick('specific_user_profile',{user_id:{{$user->id}} })"><i class="fas fa-eye"></i></a>--}}
-                        <a class="btn btn-info"  href="{{ route('user.specific.profile',$user->id)   }}"><i class="fas fa-user"></i></a>
+                        <a class="btn btn-info"  href="{{ route('admin.user.profile',$user->id)   }}"><i class="fas fa-user"></i></a>
 
                     </td>
                 </tr>

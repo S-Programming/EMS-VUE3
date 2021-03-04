@@ -19,16 +19,22 @@ use Carbon\Carbon;
 
 class RequestStatusService extends BaseService
 {
-    
-
-    /* All Leave Status Methods */
+    /**
+     * Display a popup modal to add new request status ].
+     *
+     * @return Body
+     */
     public function addStatusModal(Request $request)
     {
         $containerId = $request->input('containerId', 'common_popup_modal');
         $html = view('pages.requestStatus._partial._add_status_modal', ['id' => $containerId, 'data' => null])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
-
+    /**
+     * Click Yes button to add request status confirmly.
+     *
+     * @return Body
+     */
     public function statusConfirmAdd(Request $request)
     {
         if (!isset($request) && empty($request)) { // what will be condition
@@ -44,7 +50,11 @@ class RequestStatusService extends BaseService
         $html = view('pages.requestStatus._partial._request_status_list_table_html', compact('request_status', $request_status))->render();
         return $this->successResponse('Status has Successfully Added', ['html' => $html, 'html_section_id' => 'request-status-section']);
     }
-
+    /**
+     * Display a popup modal to edit request status.
+     *
+     * @return Body
+     */
     public function editStatusModal(Request $request)
     {
 
@@ -54,7 +64,11 @@ class RequestStatusService extends BaseService
         $html = view('pages.requestStatus._partial._edit_status_modal', ['id' => $containerId, 'data' => null, 'request_status' => $request_status])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
-
+    /**
+     * Click Yes Button to edit or update request status confirmly.
+     *
+     * @return Body
+     */
     public function statusUpdate(Request $request)
     {
         if (!isset($request) && empty($request)) { // what will be condition
@@ -71,7 +85,11 @@ class RequestStatusService extends BaseService
         $html = view('pages.requestStatus._partial._request_status_list_table_html', compact('request_status', $request_status))->render();
         return $this->successResponse('Status has Successfully Updated', ['html' => $html, 'html_section_id' => 'request-status-section']);
     }
-
+    /**
+     * Display a popup modal to delete Request Status.
+     *
+     * @return Body
+     */
     public function statusDeleteModal(Request $request)
     {
         $request_status_id = $request->id;
@@ -79,7 +97,11 @@ class RequestStatusService extends BaseService
         $html = view('pages.requestStatus._partial._delete_status_modal', ['id' => $containerId, 'request_status_id' => $request_status_id])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
-
+    /**
+     * Click Yes button to delete Request Status confirmly.
+     *
+     * @return Body
+     */
     public function statusDeleteConfirm(Request $request)
     {
         $request_status_id = $request->request_status_id;
@@ -89,5 +111,5 @@ class RequestStatusService extends BaseService
         $html = view('pages.requestStatus._partial._request_status_list_table_html', compact('request_status', $request_status))->render();
         return $this->successResponse('Status has Successfully Deleted', ['html' => $html, 'html_section_id' => 'request-status-section']);
     }
-   
+
 }

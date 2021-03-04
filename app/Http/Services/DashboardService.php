@@ -16,7 +16,7 @@ class DashboardService extends BaseService
 {
 
     /**
-     * Create a new controller instance.
+     * This method is used to assign dashboard according to role.
      *
      * @return void
      */
@@ -42,7 +42,12 @@ class DashboardService extends BaseService
             }
         }
     }
-
+    /**
+     * Return User Dashboard to the user with some data.
+     * That is used in dashboard.
+     *
+     * @return void
+     */
     public function userDashboard(Request $request)
     {
         // Current Month Checkins count
@@ -88,7 +93,11 @@ class DashboardService extends BaseService
         // $html = view('pages.user._partial._checkin_history_html', ['user_history' =>  $responseData['checkin_history']])->render();
         return view('pages.user.dashboard', $responseData)->with(['checkin_history_html' => $checkin_history_html]);
     }
-
+    /**
+     * Return Admin Dashboard To the Admin User.
+     *
+     * @return void
+     */
     public function adminDashboard(Request $request)
     {
         $total_users = User::all()->count();
@@ -97,6 +106,11 @@ class DashboardService extends BaseService
         $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
         return view('pages.admin.dashboard', $responseData);
     }
+    /**
+     * Return EngagementManager Dashboard To the EngagementManager User.
+     *
+     * @return void
+     */
     public function engagementManagerDashboard(Request $request)
     {
         $total_users = User::all()->count();
@@ -105,6 +119,11 @@ class DashboardService extends BaseService
         $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
         return view('pages.engagementManager.dashboard', $responseData);
     }
+    /**
+     * Return projectManager Dashboard  To the projectManager User.
+     *
+     * @return void
+     */
     public function projectManagerDashboard(Request $request)
     {
         $total_users = User::all()->count();

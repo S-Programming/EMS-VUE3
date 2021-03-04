@@ -3,7 +3,7 @@
         <h3 class="block-title">Add Your Discussion Point</h3>
     </x-slot>
     <x-slot name="modal_content">
-        <form action="{{ route("user.confirm.add.discussionPoint") }}" method="POST" id="add-discussion-point-modal" data-modal-id="{{$id??'common_popup_modal'}}">
+        <form action="{{ route("admin.confirm.add.discussionPoint") }}" method="POST" id="add-discussion-point-modal" data-modal-id="{{$id??'common_popup_modal'}}">
             @csrf
             @php
                 $inyMceConfig = theme_tinyMCE_default_config();

@@ -4,6 +4,7 @@
 namespace App\Http\Services;
 
 
+use App\Http\Enums\ProjectStatus;
 use App\Http\Services\BaseService\BaseService;
 use App\Models\Project;
 use App\Models\User;
@@ -45,10 +46,10 @@ class ProjectManagerService extends BaseService
         $project->pm_description = $request->project_manager_description;
         $project->start_date = Carbon::parse($request->start_date);
         $project->estimate_time = $request->estimate_time;
-        $project->project_status = 1;
+        $project->project_status = ProjectStatus::DevelopersRequest;
         $project->save();
-        $user_id = $this->getAuthUserId();
-        $project_lists = Project::where('user_id',$user_id)->get();
+        $project_manager_id = $this->getAuthUserId();
+        $project_lists = Project::where('project_manager_id',$project_manager_id)->orderBy('created_at', 'DESC')->get();
         $html = view('pages.projectManager._partial._assign_project_list_table_html', ['project_lists' => $project_lists])->render();
         return $this->successResponse('success',['html' => $html, 'html_section_id' => 'pm-project-section']);
     }
@@ -61,8 +62,8 @@ class ProjectManagerService extends BaseService
      */
     public function userWorkingProjectsList(Request $request)
     {
-        $user_id = $this->getAuthUserId();
-        $working_projects = Project::with('technologystack')->with('document')->where('user_id',$user_id)->where('project_status',2)->get();
+        $project_manager_id = $this->getAuthUserId();
+        $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)->where('project_status',2)->orderBy('created_at', 'DESC')->get();
         $html = view('pages.projectManager._partial._working_project_list_table_html',['project_lists'=>$working_projects])->render();
         return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'pm-project-section']);
     }
@@ -91,6 +92,7 @@ class ProjectManagerService extends BaseService
      */
     public function confirmWorkingProjectStatus(Request $request)
     {
+        dd($request->all());
         $project_id = $request->id;
         dd('project ka status update kro g');
 

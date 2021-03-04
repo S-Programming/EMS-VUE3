@@ -5,7 +5,7 @@
     <x-slot name="modal_content">
         <div class="row">
             <div class="col-sm-10 offset-1">
-                <form method="POST" action="{{ route('user.confirm.add.project') }}" id="user-project-manager-id" data-modal-id="{{$id??'common_popup_modal'}}"  enctype="multipart/form-data">
+                <form method="POST" action="{{ route('project.confirm.add.project') }}" id="user-project-manager-id" data-modal-id="{{$id??'common_popup_modal'}}"  enctype="multipart/form-data">
                     @csrf
                     @php
                     $inyMceConfig = theme_tinyMCE_default_config();

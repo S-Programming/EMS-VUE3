@@ -5,7 +5,7 @@
     <x-slot name="modal_content">
         <div class="row">
             <div class="col-sm-10 offset-1">
-                <form method="POST" action="{{ route('user.confirm.edit.project') }}" id="project-id"
+                <form method="POST" action="{{ route('project.confirm.edit') }}" id="project-id"
                       data-modal-id="{{$id??'common_popup_modal'}}">
                     @csrf
                     @php

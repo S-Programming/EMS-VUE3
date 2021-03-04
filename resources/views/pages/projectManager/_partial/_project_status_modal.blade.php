@@ -1,6 +1,6 @@
 <x-modal :id="$id??'common_popup_modal'" :class="$class??''" :extra="['cls'=>'bg-primary-dark']">
     <x-slot name="modal_header_content">
-        <h3 class="block-title">Project Status</h3>
+        <h3 class="block-title">Update Project Status</h3>
     </x-slot>
     <x-slot name="modal_content">
         <div class="row">
@@ -16,7 +16,21 @@
                                     <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden"
                                              name="id" value="{{$project_id??0}}"/>
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Project Completion Status</label>
+                                    <select class="form-control" name="project_completion_status" id="project-status">
+                                        <option>10%</option>
+                                        <option>20%</option>
+                                        <option>30%</option>
+                                        <option>40%</option>
+                                        <option>50%</option>
+                                        <option>60%</option>
+                                        <option>70%</option>
+                                        <option>80%</option>
+                                        <option>90%</option>
+                                        <option>100%</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

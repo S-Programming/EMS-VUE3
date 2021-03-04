@@ -25,7 +25,7 @@
         <div id="userlist-section" class="block block-rounded">
 
 {{--            @include('pages.admin._partial._users_interactions_list_table_html',['userInteractions' => $userInteractions])--}}
-            @include('pages.admin.discussions._partial._discussions_list',['userInteractions' => $userInteractions])
+            @include('pages.admin.discussions._partial._discussions_list',['user_interactions' => $user_interactions])
         </div>
         <!-- END Dynamic Table Full Pagination -->
     </div>
