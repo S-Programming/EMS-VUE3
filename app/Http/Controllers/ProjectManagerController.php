@@ -28,7 +28,9 @@ class ProjectManagerController extends Controller
     public function index()
     {
         $project_manager_id = $this->getAuthUserId();
-        $project_lists = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)->orderBy('created_at', 'DESC')->get();
+        $project_lists = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)
+        ->where('project_progress','!=','Completed')
+        ->orderBy('created_at', 'DESC')->get();
         return view('pages.projectManager.projectManagers')->with(['project_lists'=> $project_lists,'user_id'=>$project_manager_id]);
     }
     /**
@@ -63,18 +65,6 @@ class ProjectManagerController extends Controller
         }
         return $this->sendJsonResponse($this->projectManagerService->confirmDevelopersRequest($request));
     }
-
-    /**
-     * Pending Projects List of Project Manager.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function userPendingProjectsList(Request $request)
-    {
-        dd('userPendingProjectsList');
-    }
     /**
      * Working Projects List of Project Manager.
      *
@@ -82,9 +72,9 @@ class ProjectManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function userWorkingProjectsList(Request $request)
+    public function workingProjectsList(Request $request)
     {
-        return $this->sendJsonResponse($this->projectManagerService->userWorkingProjectsList($request));
+        return $this->sendJsonResponse($this->projectManagerService->workingProjectsList($request));
     }
     /**
      * Display popup for working project status.
@@ -116,8 +106,8 @@ class ProjectManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function CompletedProjectsList(Request $request)
+    public function completedProjectsList(Request $request)
     {
-        dd('userCompletedProjectsList');
+        return $this->sendJsonResponse($this->projectManagerService->completedProjectsList($request));
     }
 }

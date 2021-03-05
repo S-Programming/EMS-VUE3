@@ -22,6 +22,8 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('project_manager_id')->nullable();
             $table->integer('number_of_developers')->nullable();
             $table->string('pm_description')->nullable();
+            $table->string('project_progress')->default('0%');
+            $table->string('project_progress_comment')->nullable();
             $table->tinyInteger('project_status')->default('0');
             $table->timestamps();
             $table->foreign('project_manager_id')->references('id')->on('users')->onDelete('cascade');

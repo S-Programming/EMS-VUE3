@@ -7,6 +7,7 @@ namespace App\Http\Services;
 use App\Http\Services\BaseService\BaseService;
 use App\Models\DocumentProject;
 use App\Models\Project;
+use App\Models\ProjectTechnologyStack;
 use App\Models\RoleUser;
 use App\Models\TechnologyStack;
 use Carbon\Carbon;
@@ -47,10 +48,11 @@ class ProjectService extends BaseService
         $project->description =$request->project_description;
         $project->project_manager_id =$request->project_manager_id;
         $project->save();
-        for($i=0;$i<count($request->technology_stack_id);$i++)
-        {
-            $project->technologystack()->attach(['technology_stack_id'=>$request->technology_stack_id[$i]]);
-        }
+        $project->technologystack()->attach($request->technology_stack_id);
+//        for($i=0;$i<count($request->technology_stack_id);$i++)
+//        {
+//            $project->technologystack()->attach(['technology_stack_id'=>$request->technology_stack_id[$i]]);
+//        }
         $project_id = $project->id;
         $file = $request->file('project_document');
         $file_name = $file->getClientOriginalName();
@@ -74,13 +76,34 @@ class ProjectService extends BaseService
      */
     public function editProjectModal(Request $request)
     {
+        //dd("sadsad");
         $project_id = $request->id;
+        $technologies = TechnologyStack::all();
         $project = Project::find($project_id);
         $project_manager_id = $project->project_manager_id;
+        $projectTechnologies = [];
         $project_managers = RoleUser::with('user')->where('role_id',\App\Http\Enums\RoleUser::ProjectManager)->get();
+        //dd($project->technologystack->id);
+//        if (isset($user_data->roles) && !empty($user_data->roles)) {
+//            foreach ($user_data->roles as $role) {
+//                if ($role->id > 0) {
+//                    $userRoles[$role->id] = $role->id;
+//                }
+//            }
+//        }
+        if(isset($project->technologystack) && !empty($project->technologystack))
+        {
+            foreach ($project->technologystack as $technologies) {
+              //  dd($technologies->id);
+                if ($technologies->id > 0) {
+                    $projectTechnologies[$technologies->id] = $technologies->id;
+                }
+            }
+        }
         $containerId = $request->input('containerId', 'common_popup_modal');
+        $technology_stack_dropdown = view('utils.technology_stack_dropdown',['technologies'=>$technologies,'projectTechnologies'=>$projectTechnologies])->render();
         $project_managers_dropdown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers,'project_manager_id'=>$project_manager_id])->render();
-        $html = view('pages.admin.projects._partial._edit_project_modal', ['id' => $containerId, 'data' => null, 'project_managers_dropdown' => $project_managers_dropdown,'project'=>$project])->render();
+        $html = view('pages.admin.projects._partial._edit_project_modal', ['id' => $containerId,'technology_stack_dropdown'=>$technology_stack_dropdown, 'data' => null, 'project_managers_dropdown' => $project_managers_dropdown,'project'=>$project])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
     /**
@@ -92,12 +115,14 @@ class ProjectService extends BaseService
      */
     public function confirmEditProjectModal(Request $request)
     {
+      //  dd($request->technology_stack_id);
         $project_id = $request->id;
         $project = Project::find($project_id);
         $project->name = $request->project_name;
         $project->description =$request->project_description;
         $project->project_manager_id =$request->project_manager_id;
         $project->save();
+        $project->technologystack()->sync($request->technology_stack_id);
         $projects = Project::with('users')->orderBy('created_at', 'DESC')->get();
         $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
         return $this->successResponse('Project Updated Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);

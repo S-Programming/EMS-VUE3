@@ -60,10 +60,13 @@ class ProjectManagerService extends BaseService
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function userWorkingProjectsList(Request $request)
+    public function workingProjectsList(Request $request)
     {
         $project_manager_id = $this->getAuthUserId();
-        $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)->where('project_status',2)->orderBy('created_at', 'DESC')->get();
+        $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)
+            ->where('project_status',ProjectStatus::WorkingProject)
+            ->where('project_progress','!=','Completed')
+            ->orderBy('created_at', 'DESC')->get();
         $html = view('pages.projectManager._partial._working_project_list_table_html',['project_lists'=>$working_projects])->render();
         return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'pm-project-section']);
     }
@@ -92,9 +95,45 @@ class ProjectManagerService extends BaseService
      */
     public function confirmWorkingProjectStatus(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         $project_id = $request->id;
-        dd('project ka status update kro g');
+        $project = Project::find($project_id);
+        $project_status = $request->project_completion_status;
+        if($project_status == '100%'){
+            $project->project_progress = ProjectStatus::CompletedProject;
+        }
+        else
+            {
+                $project->project_progress = $request->project_completion_status;
+        }
+        $project->save();
+        $project_manager_id = $this->getAuthUserId();
+        $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)
+        ->where('project_status',ProjectStatus::WorkingProject)
+        ->where('project_progress','!=','Completed')
+        ->orderBy('created_at', 'DESC')->get();
+        $project_manager_id = $this->getAuthUserId();
+        $html = view('pages.projectManager._partial._working_project_list_table_html',['project_lists'=>$working_projects])->render();
+//        ,'user_id'=>$project_manager_id
+        return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'pm-project-section']);
+//        dd('project ka status update kro g');
 
+    }
+    /**
+     * Completed Projects List of Project Manager.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function completedProjectsList(Request $request)
+    {
+        $project_manager_id = $this->getAuthUserId();
+        $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)
+        ->where('project_status',ProjectStatus::WorkingProject)
+        ->where('project_progress','=','Completed')
+        ->orderBy('created_at', 'DESC')->get();
+        $html = view('pages.projectManager._partial._working_project_list_table_html',['project_lists'=>$working_projects])->render();
+        return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'pm-project-section']);
     }
 }

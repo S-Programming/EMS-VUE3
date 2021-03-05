@@ -9,6 +9,6 @@ final class ProjectStatus
     const WorkingProject = 2;
     const AssignDevelopers = 3;
     const Pending = 4;
-    const CompletedProject = 5;
+    const CompletedProject = 'Completed';
     const PauseProject = 6;
 }

@@ -60,7 +60,8 @@ class engagementManagerService extends BaseService
         }
 
         $project_id = $request->id;
-        for ($i=0; $i<count($request->developers);$i=$i+1) {
+        $count=count($request->developers??[]);
+        for ($i=0; $i<$count;$i=$i+1) {
             $project_developers = new DevelopersProject;
             $project_developers->project_id = $project_id;
             $project_developers->user_id = $request->developers[$i];
@@ -77,6 +78,40 @@ class engagementManagerService extends BaseService
         $projects = Project::with('users')->with('technologystack')->where('project_status',"!=",ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
         $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
         return $this->successResponse('Developers Assign Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
+
+    }
+    /**
+     * Display a popup modal for comments on project progress.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function commentOnProgressModal(Request $request)
+    {
+        $project_id = $request->id;
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $html = view('pages.engagementManager._partial._project_progress_comment_modal',['id' => $containerId,'project_id'=>$project_id])->render();
+        return $this->successResponse('success', ['html' => $html]);
+    }
+    /**
+     * Click comment button to comment confirmly.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmCommentOnProgress(Request $request)
+    {
+//        dd($request->all());
+        $project_id = $request->project_id;
+        $project = Project::find($project_id);
+        $project->project_progress_comment = $request->project_progress_comment;
+        $project->save();
+        $projects = Project::with('users')->with('technologystack')->where('project_status',ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
+        $html = view('pages.engagementManager._partial._working_projects_list_table_html',['projects'=>$projects])->render();
+        return $this->successResponse('Developers Assign Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
+
 
     }
 }

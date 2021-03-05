@@ -38,5 +38,26 @@ class EngagementManagerController extends Controller
     {
         return $this->sendJsonResponse($this->engagementManagerService->confirmAssignProjectDevelopers($request));
     }
-
+    /**
+     * Display a popup modal for comments on project progress.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function commentOnProgressModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->engagementManagerService->commentOnProgressModal($request));
+    }
+    /**
+     * Click comment button to comment confirmly.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmCommentOnProgress(Request $request)
+    {
+        return $this->sendJsonResponse($this->engagementManagerService->confirmCommentOnProgress($request));
+    }
 }

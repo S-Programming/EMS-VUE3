@@ -35,6 +35,10 @@
 {{--                                    @dd($project_managers)--}}
                                     {!!$project_managers_dropdown??''!!}
                                 </div>
+                                <div class="form-group">
+                                    <label for="roles">&nbsp Technology Stack</label>
+                                    {!!$technology_stack_dropdown!!}
+                                </div>
 {{--                                <div class="form-group">--}}
 {{--                                    <label>Date</label>--}}
 {{--                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" data-min-date="today" value="{{$project->start_date??''}}" readonly="readonly">--}}

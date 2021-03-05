@@ -49,13 +49,12 @@ class ProjectController extends Controller
      */
     public function confirmAddProject(Request $request)
     {
-//        dd($request->all());
         $validator = Validator::make($request->all(), [
             'project_name' => 'required|min:3|string',
             'project_description' => 'required|min:3',
             'project_manager_id' => 'required|numeric',
             'technology_stack_id.*' => 'required|distinct|numeric|min:1',
-//            'project_document' => 'required|csv,txt,xlx,xls,pdf|max:2048',
+            'project_document' => 'required|max:10000|mimes:pdf,docx',
         ]);
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
@@ -86,7 +85,7 @@ class ProjectController extends Controller
             'project_name' => 'required|min:3|max:30',
             'project_description' => 'required|min:3|max:500',
             'project_manager_id' => 'required|numeric',
-//            'date' => 'required',
+            'technology_stack_id.*' => 'required|distinct|numeric|min:1',
         ]);
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
