@@ -6,11 +6,11 @@ use App\Models\Project;
 use App\Http\Services\engagementManagerService;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EngagementManagerController extends Controller
 {
     protected $engagementManagerService;
-//    UserService $engagementManagerService
     public function __construct(engagementManagerService $engagementManagerService)
     {
         $this->middleware('auth');
@@ -36,6 +36,14 @@ class EngagementManagerController extends Controller
      */
     public function confirmAssignProjectDevelopers(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'developers' => 'required|array|min:1',
+            'developers.*' => 'required|distinct',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->engagementManagerService->confirmAssignProjectDevelopers($request));
     }
     /**

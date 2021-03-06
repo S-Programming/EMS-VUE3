@@ -93,15 +93,17 @@ class ProjectService extends BaseService
 //        }
         if(isset($project->technologystack) && !empty($project->technologystack))
         {
-            foreach ($project->technologystack as $technologies) {
-              //  dd($technologies->id);
-                if ($technologies->id > 0) {
-                    $projectTechnologies[$technologies->id] = $technologies->id;
+            foreach ($project->technologystack as $data) {
+              //  dd($data->id);
+                if ($data->id > 0) {
+                    $projectTechnologies[$data->id] = $data->id;
                 }
             }
         }
+//        dd($projectTechnologies);
+
         $containerId = $request->input('containerId', 'common_popup_modal');
-        $technology_stack_dropdown = view('utils.technology_stack_dropdown',['technologies'=>$technologies,'projectTechnologies'=>$projectTechnologies])->render();
+        $technology_stack_dropdown = view('utils.technology_stack_dropdown',['technologies'=>($technologies ?? null),'projectTechnologies'=>$projectTechnologies])->render();
         $project_managers_dropdown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers,'project_manager_id'=>$project_manager_id])->render();
         $html = view('pages.admin.projects._partial._edit_project_modal', ['id' => $containerId,'technology_stack_dropdown'=>$technology_stack_dropdown, 'data' => null, 'project_managers_dropdown' => $project_managers_dropdown,'project'=>$project])->render();
         return $this->successResponse('success', ['html' => $html]);

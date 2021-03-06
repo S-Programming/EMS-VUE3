@@ -52,8 +52,9 @@ class ProjectController extends Controller
         $validator = Validator::make($request->all(), [
             'project_name' => 'required|min:3|string',
             'project_description' => 'required|min:3',
-            'project_manager_id' => 'required|numeric',
-            'technology_stack_id.*' => 'required|distinct|numeric|min:1',
+            'project_manager_id' => 'required',
+            'technology_stack_id' => 'required|array|min:1',
+            'technology_stack_id.*' => 'required|distinct',
             'project_document' => 'required|max:10000|mimes:pdf,docx',
         ]);
         if ($validator->fails()) {

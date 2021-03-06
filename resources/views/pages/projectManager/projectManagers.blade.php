@@ -5,7 +5,8 @@
 	    <div class="content content-full">
 	        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
 	            <h1 class="flex-sm-fill h3 my-2">
-	                DataTables <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">Tables transformed with dynamic features.</small>
+	                Projects Assigned
+{{--                    <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">Tables transformed with dynamic features.</small>--}}
 	            </h1>
 	            <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
 	                <ol class="breadcrumb breadcrumb-alt">
@@ -21,7 +22,7 @@
 	</div>
     <div class="dropdown mr-3" align="right">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown button
+            Projects
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 {{--            <button class="dropdown-item btn btn-sm" href="{{route('assign.project.list')}}">Pending</button>--}}

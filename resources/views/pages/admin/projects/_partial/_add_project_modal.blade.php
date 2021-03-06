@@ -18,7 +18,7 @@
                             <div class="py-2">
                                 <div class="form-group">
                                     <label for="project_name">&nbsp Project Name</label>
-                                    <x-input id="project_name" class="form-control form-control-alt form-control-lg" type="text" name="project_name" required autofocus />
+                                    <x-input id="project_name" class="form-control form-control-alt form-control-lg" type="text" name="project_name"  autofocus />
                                 </div>
                                 <div class="form-group">
                                     <label class="d-block" for="project_document">Project Document</label>
@@ -33,8 +33,8 @@
                                     {!!$project_managers_dropdown??''!!}
                                 </div>
                                 <div class="form-group">
-                                    <label for="roles">&nbsp Technology Stack</label>
-                                    {!!$technology_stack_dropdown!!}
+                                    <label for="technologystack">&nbsp Technology Stack</label>
+                                    {!!$technology_stack_dropdown??''!!}
                                 </div>
 {{--                                <div class="form-group">--}}
 {{--                                    <label>Date</label>--}}

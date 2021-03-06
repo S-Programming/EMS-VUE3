@@ -31,13 +31,14 @@
                                     <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="project_description">{!!$project->description??''!!}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="roles">&nbsp Project Managers</label>
+                                    <label for="project_managers">&nbsp Project Managers</label>
 {{--                                    @dd($project_managers)--}}
                                     {!!$project_managers_dropdown??''!!}
                                 </div>
                                 <div class="form-group">
-                                    <label for="roles">&nbsp Technology Stack</label>
-                                    {!!$technology_stack_dropdown!!}
+                                    <label for="technologies">&nbsp Technology Stack</label>
+                                    {!!$technology_stack_dropdown??''!!}
+{{--                                    @include('utils.technology_stack_dropdown',['technologies'=>$technologies,'projectTechnologies'=>$projectTechnologies])--}}
                                 </div>
 {{--                                <div class="form-group">--}}
 {{--                                    <label>Date</label>--}}

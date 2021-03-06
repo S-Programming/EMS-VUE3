@@ -52,13 +52,6 @@ class engagementManagerService extends BaseService
      */
     public function confirmAssignProjectDevelopers(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'developers.*' => 'required|numeric',
-        ]);
-        if ($validator->fails()) {
-            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
-        }
-
         $project_id = $request->id;
         $count=count($request->developers??[]);
         for ($i=0; $i<$count;$i=$i+1) {
