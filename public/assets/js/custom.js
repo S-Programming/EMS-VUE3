@@ -113,8 +113,19 @@ function validateFieldsByFormId(e) {
 
 function validateFields(formId) {
     var fields = $("#" + formId + " :input").serializeArray();
-   //console.log(fields);
     var error = [];
+    $("#" + formId + " :file").each(function () {
+        const fileInputName = $(this)[0].name;
+        let fileInputNameValue = '';
+        const myFiles = $(this)[0].files;
+        Object.keys(myFiles).map(function (key, index) {
+            const file = myFiles[key];
+            fileInputNameValue = file.name;
+            console.log(file);
+        });
+        fields.push({name: fileInputName, value: fileInputNameValue})
+    });
+    console.log(fields, formId);
     var skipArray = ['action', 'date_range', 'date'];
     var emailArray = ['email'];
     var phoneNumberArray = ['phone_number'];
@@ -307,8 +318,6 @@ function closeModalById(id) {
     uploadedFilesData = [];
 
 }
-
-
 
 
 function ajaxCallOnclick(route, extraData) {
@@ -557,18 +566,16 @@ $(function () {
         $("#result").val('');
         if (!EmailMask($("#email").val())) {
             $('#result').text('Please enter valid email');
-        }
-        else {
+        } else {
             $.ajax({
                 url: "check_email",
                 type: "POST",
-                data: { email: email },
+                data: {email: email},
                 success: function (data) {
                     console.log(data);
                     if (data.status == 'success') {
                         $('#result').text('Email Already Exist');
-                    }
-                    else if (data.status == 'error') {
+                    } else if (data.status == 'error') {
                         $('#result').text('');
                     }
                 }

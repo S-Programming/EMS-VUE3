@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="d-block" for="project_document">Project Document</label>
-                                    <input class="form-control form-control-alt form-control-lg" type="file" id="project_document" name="project_document">
+                                    <input class="form-control form-control-alt form-control-lg" type="file" id="project_document" name="project_document" accept=".pdf">
                                 </div>
                                 <div class="form-group">
                                     <label>Project Description</label>
