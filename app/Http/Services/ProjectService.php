@@ -10,6 +10,7 @@ use App\Models\Project;
 use App\Models\ProjectTechnologyStack;
 use App\Models\RoleUser;
 use App\Models\TechnologyStack;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -76,6 +77,8 @@ class ProjectService extends BaseService
         $technologies = TechnologyStack::all();
         $project = Project::find($project_id);
         $project_manager_id = $project->project_manager_id;
+        $project_manager_data = User::where('id',$project_manager_id)->get();
+        $project_manager_name = $project_manager_data->first()->first_name;
         $projectTechnologies = [];
 //        $projectManagers = [];
         $project_managers = RoleUser::with('user')->where('role_id',\App\Http\Enums\RoleUser::ProjectManager)->get();
@@ -88,10 +91,9 @@ class ProjectService extends BaseService
                 }
             }
         }
-//        dd($projectTechnologies);
         $containerId = $request->input('containerId', 'common_popup_modal');
         $technology_stack_dropdown = view('utils.technology_stack_dropdown',['technologies'=>($technologies ?? null),'projectTechnologies'=>$projectTechnologies])->render();
-        $project_managers_dropdown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers,'project_manager_id'=>$project_manager_id])->render();
+        $project_managers_dropdown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers,'project_manager_name'=>$project_manager_name])->render();
         $html = view('pages.admin.projects._partial._edit_project_modal', ['id' => $containerId,'technology_stack_dropdown'=>$technology_stack_dropdown, 'data' => null, 'project_managers_dropdown' => $project_managers_dropdown,'project'=>$project])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
