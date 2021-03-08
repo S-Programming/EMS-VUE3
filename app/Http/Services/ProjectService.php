@@ -49,10 +49,6 @@ class ProjectService extends BaseService
         $project->project_manager_id =$request->project_manager_id;
         $project->save();
         $project->technologystack()->attach($request->technology_stack_id);
-//        for($i=0;$i<count($request->technology_stack_id);$i++)
-//        {
-//            $project->technologystack()->attach(['technology_stack_id'=>$request->technology_stack_id[$i]]);
-//        }
         $project_id = $project->id;
         $file = $request->file('project_document');
         $file_name = $file->getClientOriginalName();
@@ -76,32 +72,22 @@ class ProjectService extends BaseService
      */
     public function editProjectModal(Request $request)
     {
-        //dd("sadsad");
         $project_id = $request->id;
         $technologies = TechnologyStack::all();
         $project = Project::find($project_id);
         $project_manager_id = $project->project_manager_id;
         $projectTechnologies = [];
         $project_managers = RoleUser::with('user')->where('role_id',\App\Http\Enums\RoleUser::ProjectManager)->get();
-        //dd($project->technologystack->id);
-//        if (isset($user_data->roles) && !empty($user_data->roles)) {
-//            foreach ($user_data->roles as $role) {
-//                if ($role->id > 0) {
-//                    $userRoles[$role->id] = $role->id;
-//                }
-//            }
-//        }
+
         if(isset($project->technologystack) && !empty($project->technologystack))
         {
             foreach ($project->technologystack as $data) {
-              //  dd($data->id);
                 if ($data->id > 0) {
                     $projectTechnologies[$data->id] = $data->id;
                 }
             }
         }
 //        dd($projectTechnologies);
-
         $containerId = $request->input('containerId', 'common_popup_modal');
         $technology_stack_dropdown = view('utils.technology_stack_dropdown',['technologies'=>($technologies ?? null),'projectTechnologies'=>$projectTechnologies])->render();
         $project_managers_dropdown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers,'project_manager_id'=>$project_manager_id])->render();

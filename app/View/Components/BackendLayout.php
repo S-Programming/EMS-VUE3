@@ -4,7 +4,6 @@ namespace App\View\Components;
 
 use App\Http\Traits\AuthUser;
 use Illuminate\View\Component;
-
 class BackendLayout extends Component
 {
     use AuthUser;

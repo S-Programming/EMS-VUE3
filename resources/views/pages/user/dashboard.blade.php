@@ -8,6 +8,9 @@
         <!-- Row-01 -->
         <div class="row">
             <div class="col-6 col-sm-4 col-md-2 col-lg-2" id="checkin-section">
+{{--                @dd("asdsadadsasddadasdasdasdasdas");--}}
+
+{{--                @dd($is_checkin)--}}
                 @includeWhen(!$is_checkin,'pages.user._partial._checkin_html')
                 @includeWhen($is_checkin,'pages.user._partial._checkout_html')
             </div>
@@ -142,7 +145,7 @@
             </div>
             <div class="col-6 col-sm-4 col-md-3 col-xl-3">
                 <div class="block block-rounded d-flex flex-column">
-                    <center><dt class="font-size-h2 font-w600">Current Time</dt></center> 
+                    <center><dt class="font-size-h2 font-w600">Current Time</dt></center>
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
 

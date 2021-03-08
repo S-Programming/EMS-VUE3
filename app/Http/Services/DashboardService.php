@@ -87,6 +87,7 @@ class DashboardService extends BaseService
         if ($isCheckin) {
             $responseData['user_last_checkin_time'] = $this->userLastCheckinTime();
         }
+//        dd($isCheckin);
         //Checkin History Record show at Bottom
         $user_history = CheckinHistory::all();
         $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history]);

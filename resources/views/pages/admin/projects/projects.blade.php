@@ -24,10 +24,8 @@
     <div class="content">
         <!-- Dynamic Table Full Pagination -->
         <div id="project-list-section" class="block block-rounded">
-
             @include('pages.admin.projects._partial._project_list_table_html',['projects' => $projects])
         </div>
         <!-- END Dynamic Table Full Pagination -->
-
     </div>
 </x-backend-layout>

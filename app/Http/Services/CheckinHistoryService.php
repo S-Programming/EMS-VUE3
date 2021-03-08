@@ -55,6 +55,7 @@ class CheckinHistoryService extends BaseService
         $user_id = $this->getAuthUserId();
         if ($user_id > 0) {
             $html = view('pages.user._partial._checkin_html')->render();
+          //  dd($html);
             $checkin_history_data = CheckinHistory::where('user_id', $user_id)->latest()->first();
             if ($checkin_history_data != null) {
                 if (!$checkin_history_data->checkout) {

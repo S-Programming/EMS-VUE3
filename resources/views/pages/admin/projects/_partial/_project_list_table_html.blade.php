@@ -15,9 +15,6 @@
             <th class="text-nowrap">Developers</th>
             <th class="text-nowrap">start_date</th>
             <th class="text-nowrap">Estimate Time</th>
-
-
-
             <th class="text-nowrap">Assign Developers</th>
             <th style="width: 15%;">opertaion</th>
         </tr>
@@ -30,12 +27,7 @@
                     <td class="font-w600 font-size-sm">{{$project->users->first_name??''}} {{$project->users->last_name??''}}</td>
                     <td class="font-w600 font-size-sm">
                         @foreach($project->technologystack as $data)
-                                   |   {{$data->name??''}} |
-<!--                        --><?php
-//                            echo str_replace(" ", ",","sasas dsds");
-//                        ?>
-{{--                            @if(count($project->technologystack)>count($project->technologystack)-1)--}}
-{{--                            @endif--}}
+                                     {{$data->name??''}} |
                         @endforeach
                     </td>
                     <td class="text-center font-w600 font-size-sm">{{$project->number_of_developers??''}}</td>
