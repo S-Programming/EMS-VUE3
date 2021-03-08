@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Enums\ProjectStatus;
 use App\Models\TechnologyStack;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class ProjectManagerController extends Controller
     {
         $project_manager_id = $this->getAuthUserId();
         $project_lists = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)
-        ->where('project_progress','!=','Completed')
+//        ->where('project_progress','!=','Completed')
+        ->where('project_status','<=',ProjectStatus::DevelopersRequest)
         ->orderBy('created_at', 'DESC')->get();
         return view('pages.projectManager.projectManagers')->with(['project_lists'=> $project_lists,'user_id'=>$project_manager_id]);
     }

@@ -49,7 +49,9 @@ class ProjectManagerService extends BaseService
         $project->project_status = ProjectStatus::DevelopersRequest;
         $project->save();
         $project_manager_id = $this->getAuthUserId();
-        $project_lists = Project::where('project_manager_id',$project_manager_id)->orderBy('created_at', 'DESC')->get();
+        $project_lists = Project::where('project_status','<=',ProjectStatus::DevelopersRequest)
+            ->where('project_manager_id',$project_manager_id)
+            ->orderBy('created_at', 'DESC')->get();
         $html = view('pages.projectManager._partial._assign_project_list_table_html', ['project_lists' => $project_lists])->render();
         return $this->successResponse('success',['html' => $html, 'html_section_id' => 'pm-project-section']);
     }

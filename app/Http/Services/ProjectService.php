@@ -77,6 +77,7 @@ class ProjectService extends BaseService
         $project = Project::find($project_id);
         $project_manager_id = $project->project_manager_id;
         $projectTechnologies = [];
+//        $projectManagers = [];
         $project_managers = RoleUser::with('user')->where('role_id',\App\Http\Enums\RoleUser::ProjectManager)->get();
 
         if(isset($project->technologystack) && !empty($project->technologystack))

@@ -66,6 +66,7 @@ class engagementManagerService extends BaseService
 //        0 when project create and assign to project manager
 //        1 when project manager requests for developers
 //        2 when developers assign
+
         $project->save();
 
         $projects = Project::with('users')->with('technologystack')->where('project_status',"!=",ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();

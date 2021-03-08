@@ -27,6 +27,7 @@ class ProjectController extends Controller
     public function projectList(Request $request)
     {
         $projects = Project::with('users')->with('technologystack')->where('project_status',"!=",ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
+//        dd($projects);
         return view('pages.admin.projects.projects',['projects'=>$projects]);
     }
     /**
