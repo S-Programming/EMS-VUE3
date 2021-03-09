@@ -14,7 +14,7 @@ class Project extends Model
 ////        return $this->belongsTo(Project::class,'project_id','id');
 ////    }
     public function developers(){
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(DevelopersProject::class,'project_id','id');
     }
 
     public function users(){

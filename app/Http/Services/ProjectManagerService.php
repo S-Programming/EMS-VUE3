@@ -66,8 +66,9 @@ class ProjectManagerService extends BaseService
     public function workingProjectsList(Request $request)
     {
         $user_id = $this->getAuthUserId();
-//        $sadd = Project::with('users')->where('project_manager_id', $user_id)->get();
-//        dd($sadd->users);
+        // $project_data = Project::with('users')->where('project_manager_id', $user_id)->get();
+        // $project_data = Project::with('developers')->where('project_manager_id', $user_id)->get();
+        $project_data = Project::where('project_manager_id', $user_id)->with('developers')->get();
         if($user_id == \App\Http\Enums\RoleUser::ProjectManager) {
             $project_lists = Project::with('technologystack')->with('document')->where('project_manager_id', $user_id)
                 ->where('project_status', ProjectStatus::WORKING_PROJECT)
