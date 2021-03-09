@@ -17,29 +17,54 @@ use Illuminate\Http\Request;
 
 class ProjectService extends BaseService
 {
+
+    public function getProjects($filers = [])
+    {
+        $projects = Project::with('users', 'technologystack');
+        if (isset($filers) && !empty($filers)) {
+            $projects = $projects->where($filers);
+        }
+        $projects = $projects->orderBy('created_at', 'DESC')->get();
+        return $projects;
+
+     /*   if (isset($filers['project_status']) && trim($filers['project_status'])!='') {
+            $projects = $projects->where('project_status',$filers['project_status']);
+        }
+        if (isset($filers['first_name']) &&$filers['first_name']==1) {
+            $projects = $projects->where('first_name',$filers['first_name']);
+        }*/
+    }
+    public function getProjectById($id = 0)
+    {
+        $projects = $this->getProjects(['id'=>$id]);
+        return $projects;
+    }
+
+
     /**
      * Display popup to add project By Admin.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function addProjectModal(Request $request)
     {
 
         $technologies = TechnologyStack::all();
-        $project_managers = RoleUser::with('user')->where('role_id',4)->get();
+        $project_managers = RoleUser::with('user')->where('role_id', 4)->get();
         $containerId = $request->input('containerId', 'common_popup_modal');
-        $technology_stack_dropdown = view('utils.technology_stack_dropdown',['technologies'=>$technologies])->render();
+        $technology_stack_dropdown = view('utils.technology_stack_dropdown', ['technologies' => $technologies])->render();
         $project_managers_dropdown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers])->render();
-        $html = view('pages.admin.projects._partial._add_project_modal', ['id' => $containerId,'technology_stack_dropdown'=>$technology_stack_dropdown, 'data' => null, 'project_managers_dropdown' => $project_managers_dropdown])->render();
+        $html = view('pages.admin.projects._partial._add_project_modal', ['id' => $containerId, 'technology_stack_dropdown' => $technology_stack_dropdown, 'data' => null, 'project_managers_dropdown' => $project_managers_dropdown])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
+
     /**
      * Click Add to add project in the project list.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function confirmAddProject(Request $request)
@@ -47,8 +72,8 @@ class ProjectService extends BaseService
 
         $project = new Project;
         $project->name = $request->project_name;
-        $project->description =$request->project_description;
-        $project->project_manager_id =$request->project_manager_id;
+        $project->description = $request->project_description;
+        $project->project_manager_id = $request->project_manager_id;
         $project->save();
         $project->technologystack()->attach($request->technology_stack_id);
         $project_id = $project->id;
@@ -61,15 +86,16 @@ class ProjectService extends BaseService
         $project_document->path = $file_name;
         $project_document->project_id = $project_id;
         $project_document->save();
-        $projects = Project::with('users')->where('project_status','<',ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
-        $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
-        return $this->successResponse('Project Added Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
+        $projects = Project::with('users')->where('project_status', '<', ProjectStatus::WORKING_PROJECT)->orderBy('created_at', 'DESC')->get();
+        $html = view('pages.admin.projects._partial._project_list_table_html', ['projects' => $projects])->render();
+        return $this->successResponse('Project Added Successfully', ['html' => $html, 'html_section_id' => 'project-list-section']);
     }
+
     /**
      * Display popup to edit Project Attributes.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function editProjectModal(Request $request)
@@ -78,14 +104,13 @@ class ProjectService extends BaseService
         $technologies = TechnologyStack::all();
         $project = Project::find($project_id);
         $project_manager_id = $project->project_manager_id;
-        $project_manager_data = User::where('id',$project_manager_id)->get();
+        $project_manager_data = User::where('id', $project_manager_id)->get();
         $project_manager_name = $project_manager_data->first()->first_name;
         $projectTechnologies = [];
 //        $projectManagers = [];
-        $project_managers = RoleUser::with('user')->where('role_id',\App\Http\Enums\RoleUser::ProjectManager)->get();
+        $project_managers = RoleUser::with('user')->where('role_id', \App\Http\Enums\RoleUser::ProjectManager)->get();
 
-        if(isset($project->technologystack) && !empty($project->technologystack))
-        {
+        if (isset($project->technologystack) && !empty($project->technologystack)) {
             foreach ($project->technologystack as $data) {
                 if ($data->id > 0) {
                     $projectTechnologies[$data->id] = $data->id;
@@ -93,37 +118,39 @@ class ProjectService extends BaseService
             }
         }
         $containerId = $request->input('containerId', 'common_popup_modal');
-        $technology_stack_dropdown = view('utils.technology_stack_dropdown',['technologies'=>($technologies ?? null),'projectTechnologies'=>$projectTechnologies])->render();
-        $project_managers_dropdown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers,'project_manager_name'=>$project_manager_name])->render();
-        $html = view('pages.admin.projects._partial._edit_project_modal', ['id' => $containerId,'technology_stack_dropdown'=>$technology_stack_dropdown, 'data' => null, 'project_managers_dropdown' => $project_managers_dropdown,'project'=>$project])->render();
+        $technology_stack_dropdown = view('utils.technology_stack_dropdown', ['technologies' => ($technologies ?? null), 'projectTechnologies' => $projectTechnologies])->render();
+        $project_managers_dropdown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers, 'project_manager_name' => $project_manager_name])->render();
+        $html = view('pages.admin.projects._partial._edit_project_modal', ['id' => $containerId, 'technology_stack_dropdown' => $technology_stack_dropdown, 'data' => null, 'project_managers_dropdown' => $project_managers_dropdown, 'project' => $project])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
+
     /**
      * Click Update Button to edit Project Attributes.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function confirmEditProjectModal(Request $request)
     {
-      //  dd($request->technology_stack_id);
+        //  dd($request->technology_stack_id);
         $project_id = $request->id;
         $project = Project::find($project_id);
         $project->name = $request->project_name;
-        $project->description =$request->project_description;
-        $project->project_manager_id =$request->project_manager_id;
+        $project->description = $request->project_description;
+        $project->project_manager_id = $request->project_manager_id;
         $project->save();
         $project->technologystack()->sync($request->technology_stack_id);
-        $projects = Project::with('users')->where('project_status','<',ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
-        $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
-        return $this->successResponse('Project Updated Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
+        $projects = Project::with('users')->where('project_status', '<', ProjectStatus::WORKING_PROJECT)->orderBy('created_at', 'DESC')->get();
+        $html = view('pages.admin.projects._partial._project_list_table_html', ['projects' => $projects])->render();
+        return $this->successResponse('Project Updated Successfully', ['html' => $html, 'html_section_id' => 'project-list-section']);
     }
+
     /**
      * Display popup to view the Project with detail.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function viewProjectModal(Request $request)
@@ -131,14 +158,15 @@ class ProjectService extends BaseService
         $project_id = $request->id;
         $project = Project::with('technologystack')->find($project_id);
         $containerId = $request->input('containerId', 'common_popup_modal');
-        $html = view('pages.admin.projects._partial._view_project_modal', ['id' => $containerId,'project'=>$project])->render();
+        $html = view('pages.admin.projects._partial._view_project_modal', ['id' => $containerId, 'project' => $project])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
+
     /**
      * Display Popup to delete Project form DB.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function deleteProjectModal(Request $request)
@@ -148,19 +176,22 @@ class ProjectService extends BaseService
         $html = view('pages.admin.projects._partial._delete_project_modal', ['id' => $containerId, 'project_id' => $project_id])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
+
     /**
      * Click Delete button to delete project from DB.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function confirmDeleteProjectModal(Request $request)
     {
+//        $this->getProjectById[]
         $project = Project::find($request->project_id);
         $project->delete();
-        $projects = Project::with('users')->where('project_status','<',ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
-        $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
-        return $this->successResponse('Project Deleted Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
+        $projects = Project::with('users')->where('project_status', '<', ProjectStatus::WORKING_PROJECT)->orderBy('created_at', 'DESC')->get();
+//        $projects = $this->getProjects(['project_status', '<', ProjectStatus::WORKING_PROJECT]);
+        $html = view('pages.admin.projects._partial._project_list_table_html', ['projects' => $projects])->render();
+        return $this->successResponse('Project Deleted Successfully', ['html' => $html, 'html_section_id' => 'project-list-section']);
     }
 }

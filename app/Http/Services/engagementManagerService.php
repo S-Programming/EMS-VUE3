@@ -53,6 +53,7 @@ class engagementManagerService extends BaseService
     public function confirmAssignProjectDevelopers(Request $request)
     {
         $project_id = $request->id;
+//        dd();
         $count=count($request->developers??[]);
         for ($i=0; $i<$count;$i=$i+1) {
             $project_developers = new DevelopersProject;
@@ -69,7 +70,7 @@ class engagementManagerService extends BaseService
 
         $project->save();
 
-        $projects = Project::with('users')->with('technologystack')->where('project_status',"<",ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
+        $projects = Project::with('users')->with('technologystack')->where('project_status',"<",ProjectStatus::WORKING_PROJECT)->orderBy('created_at', 'DESC')->get();
         $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
         return $this->successResponse('Developers Assign Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
 
@@ -104,7 +105,7 @@ class engagementManagerService extends BaseService
         $project = Project::find($project_id);
         $project->project_progress_comment = $request->project_progress_comment;
         $project->save();
-        $projects = Project::with('users')->with('technologystack')->where('project_status',ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
+        $projects = Project::with('users')->with('technologystack')->where('project_status',ProjectStatus::WORKING_PROJECT)->orderBy('created_at', 'DESC')->get();
         $html = view('pages.engagementManager._partial._working_projects_list_table_html',['projects'=>$projects])->render();
         return $this->successResponse('Developers Assign Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
 

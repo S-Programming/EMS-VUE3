@@ -66,11 +66,11 @@ class ProjectManagerService extends BaseService
     public function workingProjectsList(Request $request)
     {
         $user_id = $this->getAuthUserId();
-        $sadd = Project::with('users')->where('project_manager_id', $user_id)->get();
-        dd($sadd->users);
+//        $sadd = Project::with('users')->where('project_manager_id', $user_id)->get();
+//        dd($sadd->users);
         if($user_id == \App\Http\Enums\RoleUser::ProjectManager) {
             $project_lists = Project::with('technologystack')->with('document')->where('project_manager_id', $user_id)
-                ->where('project_status', ProjectStatus::WorkingProject)
+                ->where('project_status', ProjectStatus::WORKING_PROJECT)
 //                ->where('project_progress', '!=', 'Completed')
                 ->orderBy('created_at', 'DESC')->get();
 //            dd($project_lists);
@@ -79,7 +79,7 @@ class ProjectManagerService extends BaseService
         }elseif($user_id == \App\Http\Enums\RoleUser::EngagementManager)
         {
             $working_projects = Project::with('technologystack')->with('document')
-                ->where('project_status', ProjectStatus::WorkingProject)
+                ->where('project_status', ProjectStatus::WORKING_PROJECT)
                 ->orderBy('created_at', 'DESC')->get();
             $html = view('pages.engagementManager._partial._working_projects_list_table_html', ['projects' => $working_projects])->render();
             return $this->successResponse('Working Projects', ['html' => $html, 'html_section_id' => 'project-list-section']);
@@ -125,7 +125,7 @@ class ProjectManagerService extends BaseService
         $project->save();
         $project_manager_id = $this->getAuthUserId();
         $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)
-        ->where('project_status',ProjectStatus::WorkingProject)
+        ->where('project_status',ProjectStatus::WORKING_PROJECT)
         ->where('project_progress','!=','Completed')
         ->orderBy('created_at', 'DESC')->get();
         $project_manager_id = $this->getAuthUserId();
@@ -148,7 +148,7 @@ class ProjectManagerService extends BaseService
         if($user_id == \App\Http\Enums\RoleUser::ProjectManager){
 //            dd('PM');
             $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',\App\Http\Enums\RoleUser::ProjectManager)
-//                ->where('project_status',ProjectStatus::WorkingProject)
+//                ->where('project_status',ProjectStatus::WORKING_PROJECT)
                 ->where('project_progress','=','100%')
                 ->orderBy('created_at', 'DESC')->get();
 //            dd($working_projects);

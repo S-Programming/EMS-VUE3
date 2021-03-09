@@ -40,7 +40,11 @@
                     <td class="font-w600 font-size-sm">{{$project_list->name??''}}</td>
                     <td class="font-w600 font-size-sm">{!!$project_list->description??''!!}</td>
                     <td class="font-w600 font-size-sm">{{$project_list->start_date??''}}</td>
-                    <td class="font-w600 font-size-sm">{{$project_list->technologystack[0]->name??''}}</td>
+                    <td class="font-w600 font-size-sm">
+                    @foreach($project_list->technologystack as $data)
+                        {{$data->name??''}}
+                    @endforeach
+                    </td>
                     <td class="font-w600 font-size-sm">{{$project_list->number_of_developers}}</td>
 
                     <td class="font-w600 font-size-sm"><a class="btn btn-success" href="{{ asset('assets/uploads/files/$project_list->document[0]->path')}}" download="{{$project_list->document[0]->path??''}}">{{$project_list->document[0]->path??''}}</a></td>

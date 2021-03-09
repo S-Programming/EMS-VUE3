@@ -26,7 +26,9 @@ class ProjectController extends Controller
      */
     public function projectList(Request $request)
     {
-        $projects = Project::with('users')->with('technologystack')->where('project_status',"<",ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
+//        dd($request->all());
+        $projects = $this->projectService->getProjects();
+//        $projects = $this->projectService->getProjects(['project_status'=>ProjectStatus::WORKING_PROJECT,'project_manager_id'=>4]);
 //        dd($projects);
         $user_id = $this->getAuthUserId();
         return view('pages.admin.projects.projects',['projects'=>$projects,'user_id'=>$user_id]);
@@ -137,7 +139,7 @@ class ProjectController extends Controller
      */
     public function workingProjectList(Request $request)
     {
-        $projects = Project::with('users')->where('project_status',ProjectStatus::WorkingProject)->with('technologystack')->orderBy('created_at','DESC')->get();
+        $projects = Project::with('users')->where('project_status',ProjectStatus::WORKING_PROJECT)->with('technologystack')->orderBy('created_at','DESC')->get();
         return view('pages.engagementManager.woking_projects_list',['projects'=>$projects]);
     }
 }
