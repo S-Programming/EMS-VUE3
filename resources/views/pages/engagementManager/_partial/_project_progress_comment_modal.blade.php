@@ -18,7 +18,7 @@
                         <div class="col-md-12 col-lg-12">
                             <div class="form-group">
                                 <label>Type Your Comment</label>
-                                <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="project_progress_comment"></textarea>
+                                <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="project_progress_comment">{!!$project_comment??''!!}</textarea>
                             </div>
                         </div>
                     </div>

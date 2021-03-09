@@ -18,6 +18,7 @@
             <th>Technology Stack</th>
             <th>COMMENT ON PROGRESS</th>
             <th>Project Progress</th>
+            <th>Comment On Progress</th>
 {{--            <th>Assign Developers</th>--}}
             <!-- <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
             <th class="d-none d-sm-table-cell" style="width: 15%;">Access</th>
@@ -44,8 +45,12 @@
                     </td>
                     <td class="text-center font-w600 font-size-sm">{!!$project->project_progress_comment??''!!}</td>
 {{--                    <td class="font-w600 font-size-sm">{{$project->project_progress??''}}</td>--}}
-                    <td class="font-w600 font-size-sm"><button class="btn btn-success" onclick="commonAjaxModel('progress/comment/modal',{{$project->id}})" style="cursor:default">{{$project->project_progress??''}}</button></td>
-{{--                    <td class="font-w600 font-size-sm">{{$project->technologystack[0]->name??''}}</td>--}}
+{{--                    <td class="font-w600 font-size-sm"><button class="btn btn-success" onclick="commonAjaxModel('progress/comment/modal',{{$project->id}})" style="cursor:default">{{$project->project_progress??''}}</button></td>--}}
+                    <td class="font-w600 font-size-sm"><button class="btn btn-success" style="cursor: default">{{$project->project_progress??''}}</button></td>
+
+                    <td class="font-w600 font-size-sm"><button class="btn btn-info" onclick="commonAjaxModel('progress/comment/modal',{{$project->id}})" style="cursor:default">Comment</button></td>
+
+                    {{--                    <td class="font-w600 font-size-sm">{{$project->technologystack[0]->name??''}}</td>--}}
 {{--                    @if(isset($project->in_working_list) && $project->in_working_list===1)--}}
 {{--                        --}}{{--                        false--}}
 {{--                        <td class="font-w600 font-size-sm"><button type="button" class="btn btn-success" disabled> Submit </button></td>--}}

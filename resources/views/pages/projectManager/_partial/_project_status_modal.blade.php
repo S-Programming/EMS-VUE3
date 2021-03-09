@@ -19,6 +19,7 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Project Completion Status</label>
                                     <select class="form-control" name="project_completion_status" id="project-status">
+                                        <option>{{$project_progress??''}}</option>
                                         <option>10%</option>
                                         <option>20%</option>
                                         <option>30%</option>

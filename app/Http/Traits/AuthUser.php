@@ -70,6 +70,14 @@ trait AuthUser
     {
         return $this->hasRoleAccess(RoleUser::Admin);
     }
+    public function isEngagementManagerRole()
+    {
+        return $this->hasRoleAccess(RoleUser::EngagementManager);
+    }
+    public function isProjectManagerRole()
+    {
+        return $this->hasRoleAccess(RoleUser::ProjectManager);
+    }
     public function isDeveloperRole()
     {
         return $this->hasRoleAccess(RoleUser::Developer);

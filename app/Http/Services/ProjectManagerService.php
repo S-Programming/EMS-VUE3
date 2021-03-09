@@ -6,6 +6,7 @@ namespace App\Http\Services;
 
 use App\Http\Enums\ProjectStatus;
 use App\Http\Services\BaseService\BaseService;
+use App\Models\DevelopersProject;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\TechnologyStack;
@@ -64,13 +65,25 @@ class ProjectManagerService extends BaseService
      */
     public function workingProjectsList(Request $request)
     {
-        $project_manager_id = $this->getAuthUserId();
-        $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)
-            ->where('project_status',ProjectStatus::WorkingProject)
-            ->where('project_progress','!=','Completed')
-            ->orderBy('created_at', 'DESC')->get();
-        $html = view('pages.projectManager._partial._working_project_list_table_html',['project_lists'=>$working_projects])->render();
-        return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'pm-project-section']);
+        $user_id = $this->getAuthUserId();
+        $sadd = Project::with('users')->where('project_manager_id', $user_id)->get();
+        dd($sadd->users);
+        if($user_id == \App\Http\Enums\RoleUser::ProjectManager) {
+            $project_lists = Project::with('technologystack')->with('document')->where('project_manager_id', $user_id)
+                ->where('project_status', ProjectStatus::WorkingProject)
+//                ->where('project_progress', '!=', 'Completed')
+                ->orderBy('created_at', 'DESC')->get();
+//            dd($project_lists);
+            $html = view('pages.projectManager._partial._working_project_list_table_html', ['project_lists' => $project_lists])->render();
+            return $this->successResponse('Working Projects', ['html' => $html, 'html_section_id' => 'pm-project-section']);
+        }elseif($user_id == \App\Http\Enums\RoleUser::EngagementManager)
+        {
+            $working_projects = Project::with('technologystack')->with('document')
+                ->where('project_status', ProjectStatus::WorkingProject)
+                ->orderBy('created_at', 'DESC')->get();
+            $html = view('pages.engagementManager._partial._working_projects_list_table_html', ['projects' => $working_projects])->render();
+            return $this->successResponse('Working Projects', ['html' => $html, 'html_section_id' => 'project-list-section']);
+        }
     }
     /**
      * Display popup for working project status.
@@ -82,8 +95,11 @@ class ProjectManagerService extends BaseService
     public function workingProjectStatusModal(Request $request)
     {
         $project_id = $request->id;
+        $project = Project::find($project_id);
+        $project_progress = $project->project_progress;
+//        dd($project_progress);
         $containerId = $request->input('containerId', 'common_popup_modal');
-        $html = view('pages.projectManager._partial._project_status_modal',['id' => $containerId,'project_id'=>$project_id])->render();
+        $html = view('pages.projectManager._partial._project_status_modal',['id' => $containerId,'project_id'=>$project_id,'project_progress'=>$project_progress])->render();
         return $this->successResponse('success', ['html' => $html]);
 
 
@@ -97,16 +113,14 @@ class ProjectManagerService extends BaseService
      */
     public function confirmWorkingProjectStatus(Request $request)
     {
-//        dd($request->all());
         $project_id = $request->id;
         $project = Project::find($project_id);
-        $project_status = $request->project_completion_status;
-        if($project_status == '100%'){
-            $project->project_progress = ProjectStatus::CompletedProject;
-        }
-        else
-            {
-                $project->project_progress = $request->project_completion_status;
+
+        $project->project_progress = $request->project_completion_status;
+        if($project->project_progress == '100%'){
+            $project->project_status = 5;
+        } else{
+            $project->project_status = 2;
         }
         $project->save();
         $project_manager_id = $this->getAuthUserId();
@@ -130,12 +144,24 @@ class ProjectManagerService extends BaseService
      */
     public function completedProjectsList(Request $request)
     {
-        $project_manager_id = $this->getAuthUserId();
-        $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)
-        ->where('project_status',ProjectStatus::WorkingProject)
-        ->where('project_progress','=','Completed')
-        ->orderBy('created_at', 'DESC')->get();
-        $html = view('pages.projectManager._partial._working_project_list_table_html',['project_lists'=>$working_projects])->render();
-        return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'pm-project-section']);
+        $user_id = $this->getAuthUserId();
+        if($user_id == \App\Http\Enums\RoleUser::ProjectManager){
+//            dd('PM');
+            $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',\App\Http\Enums\RoleUser::ProjectManager)
+//                ->where('project_status',ProjectStatus::WorkingProject)
+                ->where('project_progress','=','100%')
+                ->orderBy('created_at', 'DESC')->get();
+//            dd($working_projects);
+            $html = view('pages.projectManager._partial._working_project_list_table_html',['project_lists'=>$working_projects])->render();
+            return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'pm-project-section']);
+        }elseif($user_id == \App\Http\Enums\RoleUser::EngagementManager)
+        {
+            $projects = Project::with('technologystack')->with('document')
+                ->where('project_progress','=','100%')
+                ->orderBy('created_at', 'DESC')->get();
+            $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
+            return $this->successResponse('Project Added Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
+        }
+
     }
 }

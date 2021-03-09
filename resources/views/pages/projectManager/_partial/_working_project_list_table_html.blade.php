@@ -25,6 +25,7 @@
             <th> Start Date </th>
             <th> Technology Stack </th>
             <th> Number of Developers </th>
+            <th> Assigned Developers </th>
             <th> Download Document </th>
             <th> Project Completion </th>
             <th> Comment On Progress </th>
@@ -44,14 +45,16 @@
                     <td class="font-w600 font-size-sm">{{$project_list->start_date??''}}</td>
                     <td class="font-w600 font-size-sm">{{$project_list->technologystack[0]->name??''}}</td>
                     <td class="font-w600 font-size-sm">{{$project_list->number_of_developers}}</td>
+                    <td class="font-w600 font-size-sm">{{$project_list->number_of_developers}}</td>
 
                     <td class="font-w600 font-size-sm"><a class="btn btn-success" href="{{ asset('assets/uploads/files/$project_list->document[0]->path')}}" download="{{$project_list->document[0]->path??''}}">{{$project_list->document[0]->path??''}}</a></td>
 {{--                    @if($project_list->project_status === 2)--}}
                     <td class="text-center font-size-sm">{{$project_list->project_progress??''}}</td>
-                    <td class="font-w600 font-size-sm">{!!$project_list->project_progress_comment!!}</td>
-                    @if($project_list->project_progress === 'Completed')
+                    <td class="font-w600 font-size-sm">{!!$project_list->project_progress_comment??''!!}</td>
+{{--                    <td class="font-w600 font-size-sm">Comment</td>--}}
+                    @if($project_list->project_progress === '100%')
                         <td>
-                            <button class="btn btn-secondary" disabled>{{$project_list->project_progress}}!</button>
+                            <button class="btn btn-secondary" disabled>Completed!</button>
                             {{--                            /working/project/Status/modal--}}
                         </td>
                     @else

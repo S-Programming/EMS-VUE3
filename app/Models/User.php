@@ -85,4 +85,8 @@ class User extends Authenticatable
     public function expense() {
         return $this->hasMany(Expense::class);
     }
+    public function project()
+    {
+        return $this->belongsToMany(Project::class);
+    }
 }

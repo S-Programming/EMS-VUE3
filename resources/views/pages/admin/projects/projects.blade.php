@@ -24,7 +24,7 @@
             Projects
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <button class="dropdown-item" onclick="location.href = '{{route('assign.project.list')}}'">Pending</button>
+{{--            <button class="dropdown-item" onclick="location.href = '{{route('assign.project.list')}}'">Pending</button>--}}
             <button class="dropdown-item" onclick="ajaxCallOnclick('user/working/projects',{user_id:{{($user_id??'')}}})">Working</button>
             <button class="dropdown-item" onclick="ajaxCallOnclick('user/completed/projects',{user_id:{{($user_id??'')}}})">Completed</button>
         </div>

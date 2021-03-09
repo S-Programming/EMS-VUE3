@@ -4,6 +4,7 @@
 namespace App\Http\Services;
 
 
+use App\Http\Enums\ProjectStatus;
 use App\Http\Services\BaseService\BaseService;
 use App\Models\DocumentProject;
 use App\Models\Project;
@@ -60,7 +61,7 @@ class ProjectService extends BaseService
         $project_document->path = $file_name;
         $project_document->project_id = $project_id;
         $project_document->save();
-        $projects = Project::with('users')->orderBy('created_at', 'DESC')->get();
+        $projects = Project::with('users')->where('project_status','<',ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
         $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
         return $this->successResponse('Project Added Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
     }
@@ -114,7 +115,7 @@ class ProjectService extends BaseService
         $project->project_manager_id =$request->project_manager_id;
         $project->save();
         $project->technologystack()->sync($request->technology_stack_id);
-        $projects = Project::with('users')->orderBy('created_at', 'DESC')->get();
+        $projects = Project::with('users')->where('project_status','<',ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
         $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
         return $this->successResponse('Project Updated Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
     }
@@ -158,8 +159,8 @@ class ProjectService extends BaseService
     {
         $project = Project::find($request->project_id);
         $project->delete();
-        $projects = Project::with('users')->orderBy('created_at', 'DESC')->get();
+        $projects = Project::with('users')->where('project_status','<',ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
         $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
-        return $this->successResponse('Project Added Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
+        return $this->successResponse('Project Deleted Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
     }
 }

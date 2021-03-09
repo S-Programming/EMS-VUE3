@@ -69,7 +69,7 @@ class engagementManagerService extends BaseService
 
         $project->save();
 
-        $projects = Project::with('users')->with('technologystack')->where('project_status',"!=",ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
+        $projects = Project::with('users')->with('technologystack')->where('project_status',"<",ProjectStatus::WorkingProject)->orderBy('created_at', 'DESC')->get();
         $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
         return $this->successResponse('Developers Assign Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
 
@@ -84,8 +84,10 @@ class engagementManagerService extends BaseService
     public function commentOnProgressModal(Request $request)
     {
         $project_id = $request->id;
+        $project = Project::find($project_id);
+        $project_comment = $project->project_progress_comment;
         $containerId = $request->input('containerId', 'common_popup_modal');
-        $html = view('pages.engagementManager._partial._project_progress_comment_modal',['id' => $containerId,'project_id'=>$project_id])->render();
+        $html = view('pages.engagementManager._partial._project_progress_comment_modal',['id' => $containerId,'project_id'=>$project_id,'project_comment'=>$project_comment])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
     /**

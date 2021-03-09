@@ -15,7 +15,10 @@
             <th class="text-nowrap">Developers</th>
             <th class="text-nowrap">start_date</th>
             <th class="text-nowrap">Estimate Time</th>
+{{--            @cannot('isEngagementManager')--}}
+{{--            @can('isProjectManager')--}}
             <th class="text-nowrap">Assign Developers</th>
+{{--            @endcan--}}
             <th style="width: 15%;">opertaion</th>
         </tr>
         </thead>
