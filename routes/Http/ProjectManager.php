@@ -10,15 +10,12 @@ class ProjectManager
     static function register()
     {
         Route::group(['middleware' => ['auth:sanctum']], function () {
-            Route::match(['get', 'post'],'/assign/project/list', [ProjectManagerController::class, 'index'])->name('assign.project.list');
-            Route::post('/developers/request/modal', [ProjectManagerController::class, 'developersRequestModal'])->name('assign.developers.request.modal');
-            Route::post('/confirm/developers/request', [ProjectManagerController::class, 'confirmDevelopersRequest'])->name('assign.confirm.developers.request');
+            Route::match(['get', 'post'],'/projects', [ProjectManagerController::class, 'assignProjectList'])->name('project.manager.assigned.projects');
+            Route::post('/developers/request/modal', [ProjectManagerController::class, 'developersRequestModal'])->name('project.manager.developers.request.modal');
+            Route::post('/confirm/developers/request', [ProjectManagerController::class, 'confirmDevelopersRequest'])->name('project.manager.confirm.developers.request');
 
 
-            Route::post('user/working/projects', [ProjectManagerController::class, 'workingProjectsList'])->name('project.manager.working.projects');
-            Route::post('/working/project/Status/modal', [ProjectManagerController::class, 'workingProjectStatusModal'])->name('project.manager.working.project.status.modal');
-            Route::post('confirm/working/project/Status', [ProjectManagerController::class, 'confirmWorkingProjectStatus'])->name('project.manager.confirm.working.project.status');
-            Route::post('user/completed/projects', [ProjectManagerController::class, 'completedProjectsList'])->name('project.manager.completed.projects');
+
 //            Route::post('/add/technology/stack/modal', [ProjectManagerController::class, 'technologyStackModal'])->name('technology.stack.add.modal');
 //            Route::post('/confirm/add/technology/stack', [ProjectManagerController::class, 'confirmAddTechnologyStack'])->name('confirm.add.technology.stack');
 //            Route::post('edit/technology/stack/modal', [ProjectManagerController::class, 'editTechnologyStackModal'])->name('edit.technology.stack.modal');

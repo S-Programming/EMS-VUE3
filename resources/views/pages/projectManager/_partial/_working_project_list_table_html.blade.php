@@ -36,30 +36,34 @@
         </tr>
         </thead>
         <tbody>
-        @if($project_lists)
-            @foreach($project_lists as $project_list)
+        @if($projects)
+            @foreach($projects as $project)
                 <tr>
-{{--                    <td class="text-center font-size-sm">{{$project_list->id??''}}</td>--}}
-                    <td class="font-w600 font-size-sm">{{$project_list->name??''}}</td>
-                    <td class="font-w600 font-size-sm">{!!$project_list->description??''!!}</td>
-                    <td class="font-w600 font-size-sm">{{$project_list->start_date??''}}</td>
-                    <td class="font-w600 font-size-sm">{{$project_list->technologystack[0]->name??''}}</td>
-                    <td class="font-w600 font-size-sm">{{$project_list->number_of_developers}}</td>
-                    <td class="font-w600 font-size-sm">{{$project_list->number_of_developers}}</td>
-
-                    <td class="font-w600 font-size-sm"><a class="btn btn-success" href="{{ asset('assets/uploads/files/$project_list->document[0]->path')}}" download="{{$project_list->document[0]->path??''}}">{{$project_list->document[0]->path??''}}</a></td>
+{{--                    <td class="text-center font-size-sm">{{$project->id??''}}</td>--}}
+                    <td class="font-w600 font-size-sm">{{$project->name??''}}</td>
+                    <td class="font-w600 font-size-sm">{!!$project->description??''!!}</td>
+                    <td class="font-w600 font-size-sm">{{$project->start_date??''}}</td>
+                    <td class="font-w600 font-size-sm">{{$project->technologystack[0]->name??''}}</td>
+                    <td class="font-w600 font-size-sm">{{$project->number_of_developers}}</td>
+                    <td class="font-w600 font-size-sm">
+                    @foreach($project->developers as $data)
+                    {{$data->user_id}}
+{{--                    {{$data->first_name}}--}}
+                    @endforeach
+                    </td>
+                    <td class="font-w600 font-size-sm"><a class="btn btn-success" href="{{ asset('assets/uploads/files/$project->document[0]->path')}}" download="{{$project->document[0]->path??''}}">{{$project->document[0]->path??''}}</a></td>
 {{--                    @if($project_list->project_status === 2)--}}
-                    <td class="text-center font-size-sm">{{$project_list->project_progress??''}}</td>
-                    <td class="font-w600 font-size-sm">{!!$project_list->project_progress_comment??''!!}</td>
+                    <td class="text-center font-size-sm">{{$project->project_progress??''}}</td>
+                    <td class="font-w600 font-size-sm">{!!$project->project_progress_comment??''!!}</td>
 {{--                    <td class="font-w600 font-size-sm">Comment</td>--}}
-                    @if($project_list->project_progress === '100%')
+                    @if($project->project_progress === '100%')
                         <td>
                             <button class="btn btn-secondary" disabled>Completed!</button>
                             {{--                            /working/project/Status/modal--}}
                         </td>
                     @else
                         <td>
-                            <button class="btn btn-secondary" onclick="commonAjaxModel('working/project/Status/modal',{{$project_list->id}})">Update Progress</button>
+                            <button class="btn btn-secondary" onclick="commonAjaxModel('working/project/Status/modal',{{$project->id}})">Update Progress</button>
 {{--                            /working/project/Status/modal--}}
                         </td>
                     @endif

@@ -4,10 +4,10 @@ namespace App\Http\Enums;
 
 final class ProjectStatus
 {
-    const AssignProject = 0;
-    const DevelopersRequest = 1;
+    const ASSIGN_PROJECT = 0;
+    const DEVELOPERS_REQUEST = 1;
     const WORKING_PROJECT = 2;
-    const AssignDevelopers = 3;
-    const Pending = 4;
-    const CompletedProject = 5;
+    const ASSIGN_DEVELOPERS = 3;
+    const PENDING = 4;
+    const COMPLETED_PROJECT = 5;
 }

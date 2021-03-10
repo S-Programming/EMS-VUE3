@@ -19,16 +19,26 @@
         </div>
     </div>
     <!-- END Hero -->
-    <div class="dropdown mr-3" align="right">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Projects
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+{{--    <div class="dropdown mr-3" align="right">--}}
+{{--        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--            Projects--}}
+{{--        </button>--}}
+{{--        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
 {{--            <button class="dropdown-item" onclick="location.href = '{{route('assign.project.list')}}'">Pending</button>--}}
-            <button class="dropdown-item" onclick="ajaxCallOnclick('user/working/projects',{user_id:{{($user_id??'')}}})">Working</button>
-            <button class="dropdown-item" onclick="ajaxCallOnclick('user/completed/projects',{user_id:{{($user_id??'')}}})">Completed</button>
-        </div>
+{{--            <button class="dropdown-item" onclick="ajaxCallOnclick('user/working/projects',{user_id:{{($user_id??'')}}})">Working</button>--}}
+{{--            <button class="dropdown-item" onclick="ajaxCallOnclick('user/completed/projects',{user_id:{{($user_id??'')}}})">Completed</button>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+    <div class="col-2 offset-10" >
+        <select class="dropdown form-control"
+                onchange="ajaxCallOnclick('projects/list',{filter_project:this.options[this.selectedIndex].value??'All Project list'})"
+                name="user_id">
+            <option value="10">All</option>
+            <option value="2">Working</option>
+            <option value="5">Completed</option>
+        </select>
     </div>
+
     <!-- Page Content -->
     <div class="content">
         <!-- Dynamic Table Full Pagination -->

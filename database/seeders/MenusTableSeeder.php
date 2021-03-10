@@ -40,8 +40,8 @@ class MenusTableSeeder extends Seeder
 //            ['id' => 22, 'name' => 'Projects', 'parent_id' => 0, 'route' => 'user.projects.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 22, 'name' => 'Projects', 'parent_id' => 0, 'route' => 'project.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 23, 'name' => 'Technology Stack', 'parent_id' => 0, 'route' => 'technology.stack.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
-            ['id' => 24, 'name' => 'My Projects', 'parent_id' => 0, 'route' => 'assign.project.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
-            ['id' => 25, 'name' => 'Working Projects', 'parent_id' => 0, 'route' => 'engagement.manager.working.project.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 24, 'name' => 'My Projects', 'parent_id' => 0, 'route' => 'project.manager.assigned.projects', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+//            ['id' => 25, 'name' => 'Working Projects', 'parent_id' => 0, 'route' => 'engagement.manager.working.project.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
 //            ['id' => 26, 'name' => 'Admins', 'parent_id' => 5, 'route' => 'admin.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
         ];
         DB::table('menus')->insert($menus);

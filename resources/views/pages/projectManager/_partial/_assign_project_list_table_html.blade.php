@@ -1,18 +1,5 @@
 <div class="block-header">
     <h3 class="block-title">Dynamic Table <small>Full pagination</small></h3>
-    {{-- <x-button class="btn btn-primary" onclick="commonAjaxModel('add_technology_stack_modal')" data-validation="validation-span-id"--}}
-    {{-- id="validation-span-id">Add--}}
-    {{-- </x-button>--}}
-    {{-- <div class="dropdown">--}}
-    {{-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-    {{-- Dropdown button--}}
-    {{-- </button>--}}
-    {{-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
-    {{-- <button class="dropdown-item" onclick="ajaxCallOnclick('user/pending/projects',{user_id:{{($user_id??'')}}})">Pending</button>--}}
-    {{-- <button class="dropdown-item" onclick="ajaxCallOnclick('user/working/projects',{user_id:{{($user_id??'')}}})">Working</button>--}}
-    {{-- <button class="dropdown-item" onclick="ajaxCallOnclick('user/completed/projects',{user_id:{{($user_id??'')}}})">Completed</button>--}}
-    {{-- </div>--}}
-    {{-- </div>--}}
 </div>
 <div class="block-content block-content-full">
     <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
@@ -26,48 +13,30 @@
                 <th> Technology Stack </th>
                 <th> Number of Developers </th>
                 <th> Download Document </th>
-                <!-- <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
-            <th class="d-none d-sm-table-cell" style="width: 15%;">Access</th>
-            <th style="width: 15%;">Registered</th> -->
                 <th style="width: 15%;">opertaion</th>
             </tr>
         </thead>
         <tbody>
-            @if($project_lists)
-            @foreach($project_lists as $project_list)
-{{--<<<<<<< HEAD--}}
+            @if($projects)
+            @foreach($projects as $project)
                 <tr>
-{{--                    <td class="text-center font-size-sm">{{$project_list->id??''}}</td>--}}
-                    <td class="font-w600 font-size-sm">{{$project_list->name??''}}</td>
-                    <td class="font-w600 font-size-sm">{!!$project_list->description??''!!}</td>
-                    <td class="font-w600 font-size-sm">{{$project_list->start_date??''}}</td>
+                    <td class="font-w600 font-size-sm">{{$project->name??''}}</td>
+                    <td class="font-w600 font-size-sm">{!!$project->description??''!!}</td>
+                    <td class="font-w600 font-size-sm">{{$project->start_date??''}}</td>
                     <td class="font-w600 font-size-sm">
-                    @foreach($project_list->technologystack as $data)
+                    @foreach($project->technologystack as $data)
                         {{$data->name??''}}
                     @endforeach
                     </td>
-                    <td class="font-w600 font-size-sm">{{$project_list->number_of_developers}}</td>
-{{--=======--}}
-{{--            <tr>--}}
-{{--                --}}{{-- <td class="text-center font-size-sm">{{$project_list->id??''}}</td>--}}
-{{--                <td class="font-w600 font-size-sm">{{$project_list->name??''}}</td>--}}
-{{--                <td class="font-w600 font-size-sm">{!!$project_list->description??''!!}</td>--}}
-{{--                <td class="font-w600 font-size-sm">{{$project_list->start_date??''}}</td>--}}
-{{--                <!-- <td class="font-w600 font-size-sm">{{$project_list->technologystack[0]->name??''}}</td> -->--}}
-{{--                <td class="font-w600 font-size-sm">--}}
-{{--                    @foreach($project_list->technologystack as $data)--}}
-{{--                    {{$data->name??''}}--}}
-{{--                    @endforeach--}}
-{{--                </td>--}}
-{{--                <td class="font-w600 font-size-sm">{{$project_list->number_of_developers}}</td>--}}
-{{-->>>>>>> 9ea6fab66e128636da4713be6e2255d8339a50cc--}}
+                    <td class="font-w600 font-size-sm">{{$project->number_of_developers}}</td>
 
                 <td class="font-w600 font-size-sm"><a class="btn btn-success" href="{{ asset('assets/uploads/files/$project_list->document[0]->path')}}" download="{{$project_list->document[0]->path??''}}">{{$project_list->document[0]->path??''}}</a></td>
-                @if($project_list->project_status === 0)
+                @if($project->project_status === 0)
                 <td>
-                    <button class="btn btn-info" onclick="commonAjaxModel('developers/request/modal',{{$project_list->id}})">Developer Request</button>
+                    <button class="btn btn-info" onclick="commonAjaxModel('developers/request/modal',{{$project->id}})">Developer Request</button>
                 </td>
-                @elseif($project_list->project_status === 1 OR $project_list->project_status === 2)
+{{--                @elseif($project->project_status === 1 OR $project->project_status === 2)--}}
+                @elseif($project->project_status > 0)
                 <td>
                     <button class="btn btn-secondary" disabled>Developer Request</button>
                 </td>

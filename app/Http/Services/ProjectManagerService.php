@@ -14,9 +14,17 @@ use App\Models\RoleUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Services\ProjectService;
+
 
 class ProjectManagerService extends BaseService
 {
+    protected $projectService;
+
+    public function __construct(ProjectService $projectService)
+    {
+        $this->projectService = $projectService;
+    }
     /**
      * Display Developer Request Modal.
      *
@@ -47,122 +55,11 @@ class ProjectManagerService extends BaseService
         $project->pm_description = $request->project_manager_description;
         $project->start_date = Carbon::parse($request->start_date);
         $project->estimate_time = $request->estimate_time;
-        $project->project_status = ProjectStatus::DevelopersRequest;
+        $project->project_status = ProjectStatus::DEVELOPERS_REQUEST;
         $project->save();
-        $project_manager_id = $this->getAuthUserId();
-        $project_lists = Project::where('project_status','<=',ProjectStatus::DevelopersRequest)
-            ->where('project_manager_id',$project_manager_id)
-            ->orderBy('created_at', 'DESC')->get();
-        $html = view('pages.projectManager._partial._assign_project_list_table_html', ['project_lists' => $project_lists])->render();
+        $user_id = $this->getAuthUserId();
+        $projects = $this->projectService->getProjects(['project_manager_id'=>$user_id]);
+        $html = view('pages.projectManager._partial._assign_project_list_table_html', ['projects' => $projects])->render();
         return $this->successResponse('success',['html' => $html, 'html_section_id' => 'pm-project-section']);
-    }
-    /**
-     * Working Projects List of Project Manager.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function workingProjectsList(Request $request)
-    {
-        $user_id = $this->getAuthUserId();
-        // $project_data = Project::with('users')->where('project_manager_id', $user_id)->get();
-        // $project_data = Project::with('developers')->where('project_manager_id', $user_id)->get();
-        $project_data = Project::where('project_manager_id', $user_id)->with('developers')->get();
-        if($user_id == \App\Http\Enums\RoleUser::ProjectManager) {
-            $project_lists = Project::with('technologystack')->with('document')->where('project_manager_id', $user_id)
-                ->where('project_status', ProjectStatus::WORKING_PROJECT)
-//                ->where('project_progress', '!=', 'Completed')
-                ->orderBy('created_at', 'DESC')->get();
-//            dd($project_lists);
-            $html = view('pages.projectManager._partial._working_project_list_table_html', ['project_lists' => $project_lists])->render();
-            return $this->successResponse('Working Projects', ['html' => $html, 'html_section_id' => 'pm-project-section']);
-        }elseif($user_id == \App\Http\Enums\RoleUser::EngagementManager)
-        {
-            $working_projects = Project::with('technologystack')->with('document')
-                ->where('project_status', ProjectStatus::WORKING_PROJECT)
-                ->orderBy('created_at', 'DESC')->get();
-            $html = view('pages.engagementManager._partial._working_projects_list_table_html', ['projects' => $working_projects])->render();
-            return $this->successResponse('Working Projects', ['html' => $html, 'html_section_id' => 'project-list-section']);
-        }
-    }
-    /**
-     * Display popup for working project status.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function workingProjectStatusModal(Request $request)
-    {
-        $project_id = $request->id;
-        $project = Project::find($project_id);
-        $project_progress = $project->project_progress;
-//        dd($project_progress);
-        $containerId = $request->input('containerId', 'common_popup_modal');
-        $html = view('pages.projectManager._partial._project_status_modal',['id' => $containerId,'project_id'=>$project_id,'project_progress'=>$project_progress])->render();
-        return $this->successResponse('success', ['html' => $html]);
-
-
-    }
-    /**
-     * Click update for working project status.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function confirmWorkingProjectStatus(Request $request)
-    {
-        $project_id = $request->id;
-        $project = Project::find($project_id);
-
-        $project->project_progress = $request->project_completion_status;
-        if($project->project_progress == '100%'){
-            $project->project_status = 5;
-        } else{
-            $project->project_status = 2;
-        }
-        $project->save();
-        $project_manager_id = $this->getAuthUserId();
-        $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)
-        ->where('project_status',ProjectStatus::WORKING_PROJECT)
-        ->where('project_progress','!=','Completed')
-        ->orderBy('created_at', 'DESC')->get();
-        $project_manager_id = $this->getAuthUserId();
-        $html = view('pages.projectManager._partial._working_project_list_table_html',['project_lists'=>$working_projects])->render();
-//        ,'user_id'=>$project_manager_id
-        return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'pm-project-section']);
-//        dd('project ka status update kro g');
-
-    }
-    /**
-     * Completed Projects List of Project Manager.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function completedProjectsList(Request $request)
-    {
-        $user_id = $this->getAuthUserId();
-        if($user_id == \App\Http\Enums\RoleUser::ProjectManager){
-//            dd('PM');
-            $working_projects = Project::with('technologystack')->with('document')->where('project_manager_id',\App\Http\Enums\RoleUser::ProjectManager)
-//                ->where('project_status',ProjectStatus::WORKING_PROJECT)
-                ->where('project_progress','=','100%')
-                ->orderBy('created_at', 'DESC')->get();
-//            dd($working_projects);
-            $html = view('pages.projectManager._partial._working_project_list_table_html',['project_lists'=>$working_projects])->render();
-            return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'pm-project-section']);
-        }elseif($user_id == \App\Http\Enums\RoleUser::EngagementManager)
-        {
-            $projects = Project::with('technologystack')->with('document')
-                ->where('project_progress','=','100%')
-                ->orderBy('created_at', 'DESC')->get();
-            $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
-            return $this->successResponse('Project Added Successfully',['html'=>$html,'html_section_id'=>'project-list-section']);
-        }
-
     }
 }

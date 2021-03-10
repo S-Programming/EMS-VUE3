@@ -7,17 +7,20 @@ use App\Models\TechnologyStack;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Services\ProjectManagerService;
+use App\Http\Services\ProjectService;
 use App\Models\Project;
 use Illuminate\Support\Facades\Validator;
 
 class ProjectManagerController extends Controller
 {
     protected $projectManagerService;
+    protected $projectService;
 
-    public function __construct(ProjectManagerService $projectManagerService)
+    public function __construct(ProjectManagerService $projectManagerService,ProjectService $projectService)
     {
         $this->middleware('auth');
         $this->projectManagerService = $projectManagerService;
+        $this->projectService = $projectService;
     }
     /**
      * Display Assigning Project List to Project Manager.
@@ -26,14 +29,15 @@ class ProjectManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function assignProjectList()
     {
-        $project_manager_id = $this->getAuthUserId();
-        $project_lists = Project::with('technologystack')->with('document')->where('project_manager_id',$project_manager_id)
-//        ->where('project_progress','!=','Completed')
-        ->where('project_status','<=',ProjectStatus::DevelopersRequest)
-        ->orderBy('created_at', 'DESC')->get();
-        return view('pages.projectManager.projectManagers')->with(['project_lists'=> $project_lists,'user_id'=>$project_manager_id]);
+        $user_id = $this->getAuthUserId();
+        $projects = $this->projectService->getProjects(['project_manager_id'=>$user_id]);
+        return view('pages.projectManager.projectManagers')->with(['projects'=> $projects,'user_id'=>$user_id]);
+//        $projects = Project::with('technologystack')->with('document')->where('project_manager_id',$user_id)
+////        ->where('project_progress','!=','Completed')
+////        ->where('project_status','<=',ProjectStatus::DevelopersRequest)
+//        ->orderBy('created_at', 'DESC')->get();
     }
     /**
      * Display Developer Request Modal.
@@ -67,49 +71,5 @@ class ProjectManagerController extends Controller
         }
         return $this->sendJsonResponse($this->projectManagerService->confirmDevelopersRequest($request));
     }
-    /**
-     * Working Projects List of Project Manager.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function workingProjectsList(Request $request)
-    {
-        return $this->sendJsonResponse($this->projectManagerService->workingProjectsList($request));
-    }
-    /**
-     * Display popup for working project status.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function workingProjectStatusModal(Request $request)
-    {
-        return $this->sendJsonResponse($this->projectManagerService->workingProjectStatusModal($request));
-    }
-    /**
-     * Click update for working project status.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function confirmWorkingProjectStatus(Request $request)
-    {
-        return $this->sendJsonResponse($this->projectManagerService->confirmWorkingProjectStatus($request));
-    }
 
-    /**
-     * Completed Projects List of Project Manager.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function completedProjectsList(Request $request)
-    {
-        return $this->sendJsonResponse($this->projectManagerService->completedProjectsList($request));
-    }
 }
