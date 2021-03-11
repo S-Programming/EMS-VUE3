@@ -43,6 +43,9 @@
                         <td class="font-w600 font-size-sm text-nowrap"><button type="button" class="btn btn-secondary" disabled> Assign Developers </button></td>
                     @elseif($project->project_status===1)
                         <td class="font-w600 font-size-sm"><button type="button" class="btn btn-success" onclick="commonAjaxModel('assign/developers/modal',{{$project->id}})"> Assign Developers </button></td>
+                    @elseif($project->project_status===2)
+                        <td class="font-w600 font-size-sm"><button type="button" class="btn btn-warning" disabled> Developers Assigned </button></td>
+
                     @endif
                     <td>
                         <button class="btn btn-info" onclick="commonAjaxModel('edit/project/modal',{{$project->id}})"><i class="fa fa-edit"></i></button>

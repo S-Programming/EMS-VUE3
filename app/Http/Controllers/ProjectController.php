@@ -29,12 +29,6 @@ class ProjectController extends Controller
     {
         // this is for render view
         $user_id = $this->getAuthUserId();
-//        if($request->filter_project == ProjectStatus::ALL_PROJECT && $user_id == RoleUser::ProjectManager)
-//        {
-//            $projects = $this->projectService->getProjects(['project_manager_id'=>$user_id,'project_status'=>ProjectStatus::ALL_PROJECT]);
-//            $projects_list = view('pages.projectManager._partial._assign_project_list_table_html', ['projects' => $projects])->render();
-//            return view('pages.admin.projects.projects',[ 'projects_list' => $projects_list,'html_section_id' => 'project-list-section']);
-//        }
         if(!isset($request->filter_project))
         {
             if($user_id == RoleUser::ProjectManager)
@@ -47,14 +41,8 @@ class ProjectController extends Controller
             }
             return view('pages.admin.projects.projects',['projects_list' => $projects_list, 'html_section_id' => 'project-list-section']);
         }
-//        if ($filter == ProjectStatus::ALL_PROJECT) {
-//            $projects = $this->getProjects();
-//            $html = view('pages.admin.projects._partial._project_list_table_html', ['projects' => $projects])->render();
-//        }
         //this is for render partial views
         return $this->sendJsonResponse($this->projectService->projectList($request));
-//        $projects = $this->projectService->getProjects();
-//        return view('pages.admin.projects.projects',['projects'=>$projects,'html_section_id' => 'project-list-section']);
     }
     /**
      * Display popup to add project By Admin.
