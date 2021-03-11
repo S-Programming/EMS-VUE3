@@ -19,16 +19,6 @@
         </div>
     </div>
     <!-- END Hero -->
-{{--    <div class="dropdown mr-3" align="right">--}}
-{{--        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--            Projects--}}
-{{--        </button>--}}
-{{--        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
-{{--            <button class="dropdown-item" onclick="location.href = '{{route('assign.project.list')}}'">Pending</button>--}}
-{{--            <button class="dropdown-item" onclick="ajaxCallOnclick('user/working/projects',{user_id:{{($user_id??'')}}})">Working</button>--}}
-{{--            <button class="dropdown-item" onclick="ajaxCallOnclick('user/completed/projects',{user_id:{{($user_id??'')}}})">Completed</button>--}}
-{{--        </div>--}}
-{{--    </div>--}}
     <div class="col-2 offset-10" >
         <select class="dropdown form-control"
                 onchange="ajaxCallOnclick('projects/list',{filter_project:this.options[this.selectedIndex].value??'All Project list'})"
@@ -43,7 +33,8 @@
     <div class="content">
         <!-- Dynamic Table Full Pagination -->
         <div id="project-list-section" class="block block-rounded">
-            @include('pages.admin.projects._partial._project_list_table_html',['projects' => $projects])
+            {!! $projects_list??'' !!}
+{{--            @include('pages.admin.projects._partial._project_list_table_html',['projects' => $projects])--}}
         </div>
         <!-- END Dynamic Table Full Pagination -->
     </div>

@@ -10,4 +10,5 @@ final class ProjectStatus
     const ASSIGN_DEVELOPERS = 3;
     const PENDING = 4;
     const COMPLETED_PROJECT = 5;
+    const ALL_PROJECT = 10;
 }

@@ -54,23 +54,33 @@ class ProjectService extends BaseService
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function projectList(Request $request,$filter)
+    public function projectList(Request $request)
     {
 
-            if($filter == ProjectStatus::WORKING_PROJECT){
-                $projects = $this->getProjects(['project_status'=>ProjectStatus::WORKING_PROJECT]);
-                $html = view('pages.engagementManager._partial._working_projects_list_table_html', ['projects' => $projects])->render();
-                return $this->successResponse('Working Projects', ['html' => $html,'projects'=>$projects,'html_section_id' => 'project-list-section']);
-            }elseif ($filter == ProjectStatus::COMPLETED_PROJECT){
-                $projects = $this->getProjects(['project_status'=>ProjectStatus::COMPLETED_PROJECT]);
-                $html = view('pages.engagementManager._partial._working_projects_list_table_html',['projects'=>$projects])->render();
-//                $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
-                return $this->successResponse('Completed Projects!',['html'=>$html,'html_section_id'=>'project-list-section']);
-            }elseif ($filter == "10"){
-                $projects = $this->getProjects();
-                $html = view('pages.admin.projects._partial._project_list_table_html',['projects' => $projects])->render();
-                return $this->successResponse('All Projects!',['html'=>$html,'html_section_id'=>'project-list-section']);
+        $filter = $request->filter_project;
+        if(isset($filter) && !empty($filter)) {
+            $user_id = $this->getAuthUserId();
+            if ($filter == ProjectStatus::ALL_PROJECT) {
+                if($user_id == \App\Http\Enums\RoleUser::ProjectManager)
+                {
+                    $projects = $this->getProjects(['project_manager_id' => $user_id]);
+                    $html = view('pages.projectManager._partial._assign_project_list_table_html', ['projects' => $projects])->render();
+                }else{
+                    $projects = $this->getProjects();
+                    $html = view('pages.admin.projects._partial._project_list_table_html', ['projects' => $projects])->render();
+                }
             }
+            $id = ($user_id == \App\Http\Enums\RoleUser::ProjectManager) ? [['project_manager_id', '=', $user_id]] : [];
+            $status_filters = statusFilter($filter);
+            $filter_project = array_merge($id, $status_filters);
+            $projects = $this->getProjects($filter_project);
+            if ($user_id == \App\Http\Enums\RoleUser::ProjectManager) {
+                $html = view('pages.projectManager._partial._working_project_list_table_html', ['projects' => $projects])->render();
+            } else {
+                $html = view('pages.engagementManager._partial._working_projects_list_table_html', ['projects' => $projects])->render();
+            }
+        }
+        return $this->successResponse('Projects', ['html' => $html, 'html_section_id' => 'project-list-section']);
     }
     /**
      * Display popup to add project By Admin.

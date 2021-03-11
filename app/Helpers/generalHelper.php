@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Enums\ProjectStatus;
 use Carbon\Carbon;
 
 if (!function_exists('debug')) {
@@ -137,3 +138,19 @@ if (!function_exists('historyDateFilter')) {
         return $filters;
     }
 }
+if (!function_exists('statusFilter')) {
+    function statusFilter($status = '')
+    {
+        $filters = [];
+        switch ($status) {
+            case "2":
+                $filters = [['project_status','=',ProjectStatus::WORKING_PROJECT]];
+                break;
+            case "5":
+                $filters = [['project_status','=',ProjectStatus::COMPLETED_PROJECT]];
+                break;
+        }
+        return $filters;
+    }
+}
+
