@@ -53,10 +53,10 @@
                     </td>
                     <td class="font-w600 font-size-sm"><a class="btn btn-success" href="{{ asset('assets/uploads/files/$project->document[0]->path')}}" download="{{$project->document[0]->path??''}}">{{$project->document[0]->path??''}}</a></td>
 {{--                    @if($project_list->project_status === 2)--}}
-                    <td class="text-center font-size-sm">{{$project->project_progress??''}}</td>
+                    <td class="text-center font-size-sm">{{$project->project_progress??''}}%</td>
                     <td class="font-w600 font-size-sm">{!!$project->project_progress_comment??''!!}</td>
 {{--                    <td class="font-w600 font-size-sm">Comment</td>--}}
-                    @if($project->project_progress === '100%')
+                    @if($project->project_progress === '100')
                         <td>
                             <button class="btn btn-secondary" disabled>Completed!</button>
                             {{--                            /working/project/Status/modal--}}

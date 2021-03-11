@@ -65,7 +65,7 @@ class ProjectService extends BaseService
             $projects = $this->getProjects($filter_project);
             if ($user_id == \App\Http\Enums\RoleUser::ProjectManager) {
                 if ($filter == ProjectStatus::ALL_PROJECT) {
-                    $projects = $this->getProjects(['project_manager_id' => $user_id]);
+                    $projects = $this->getProjects(['project_manager_id' => $user_id,'project_status'=>ProjectStatus::DEVELOPERS_REQUEST]);
                     $html = view('pages.projectManager._partial._assign_project_list_table_html', ['projects' => $projects])->render();
                 }else{
                     $html = view('pages.projectManager._partial._working_project_list_table_html', ['projects' => $projects])->render();

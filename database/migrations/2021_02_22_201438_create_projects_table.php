@@ -22,7 +22,7 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('project_manager_id')->nullable();
             $table->integer('number_of_developers')->nullable();
             $table->string('pm_description')->nullable();
-            $table->string('project_progress')->default('0%');
+            $table->string('project_progress')->default('0');
             $table->string('project_progress_comment')->nullable();
             $table->tinyInteger('project_status')->default('10');
             $table->timestamps();
