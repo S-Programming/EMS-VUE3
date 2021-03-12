@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserInteractionSeeder::class);
         $this->call(ProjectTechnologyStackSeeder::class);
         $this->call(DevelopersProjectSeeder::class);
+        $this->call(JobSeeder::class);
 
     }
 }

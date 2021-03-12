@@ -242,26 +242,26 @@ class ProjectService extends BaseService
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function workingProjectsList(Request $request)
-    {
-
-        $user_id = $this->getAuthUserId();
-//        $project_data = Project::where('project_manager_id', $user_id)->with('developers')->get();
-        if($user_id == \App\Http\Enums\RoleUser::ProjectManager) {
-            $projects = $this->getProjects(['project_manager_id'=>$user_id,'project_status'=>ProjectStatus::WORKING_PROJECT]);
-//            $proje = DevelopersProject::with('users')->get();
-//            dd($proje);
-//            $developer_user = DevelopersProject::with('users')->get();
-            dd($projects[0]->developers);
-            $html = view('pages.projectManager._partial._working_project_list_table_html', ['projects' => $projects])->render();
-            return $this->successResponse('Working Projects', ['html' => $html, 'html_section_id' => 'pm-project-section']);
-        }elseif($user_id == \App\Http\Enums\RoleUser::EngagementManager)
-        {
-            $projects = $this->getProjects(['project_status'=>ProjectStatus::WORKING_PROJECT]);
-            $html = view('pages.engagementManager._partial._working_projects_list_table_html', ['projects' => $projects])->render();
-            return $this->successResponse('Working Projects', ['html' => $html, 'html_section_id' => 'project-list-section']);
-        }
-    }
+//    public function workingProjectsList(Request $request)
+//    {
+//
+//        $user_id = $this->getAuthUserId();
+////        $project_data = Project::where('project_manager_id', $user_id)->with('developers')->get();
+//        if($user_id == \App\Http\Enums\RoleUser::ProjectManager) {
+//            $projects = $this->getProjects(['project_manager_id'=>$user_id,'project_status'=>ProjectStatus::WORKING_PROJECT]);
+////            $proje = DevelopersProject::with('users')->get();
+////            dd($proje);
+////            $developer_user = DevelopersProject::with('users')->get();
+//            dd($projects[0]->developers);
+//            $html = view('pages.projectManager._partial._working_project_list_table_html', ['projects' => $projects])->render();
+//            return $this->successResponse('Working Projects', ['html' => $html, 'html_section_id' => 'pm-project-section']);
+//        }elseif($user_id == \App\Http\Enums\RoleUser::EngagementManager)
+//        {
+//            $projects = $this->getProjects(['project_status'=>ProjectStatus::WORKING_PROJECT]);
+//            $html = view('pages.engagementManager._partial._working_projects_list_table_html', ['projects' => $projects])->render();
+//            return $this->successResponse('Working Projects', ['html' => $html, 'html_section_id' => 'project-list-section']);
+//        }
+//    }
     /**
      * Display popup for working project status.
      *
@@ -312,20 +312,20 @@ class ProjectService extends BaseService
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function completedProjectsList(Request $request)
-    {
-        $user_id = $this->getAuthUserId();
-        if($user_id == \App\Http\Enums\RoleUser::ProjectManager){
-            $projects = $this->getProjects(['project_manager_id'=>\App\Http\Enums\RoleUser::ProjectManager,'project_status'=>ProjectStatus::COMPLETED_PROJECT]);
-            $html = view('pages.projectManager._partial._working_project_list_table_html',['projects'=>$projects])->render();
-            return $this->successResponse('Completed Projects!',['html'=>$html,'html_section_id'=>'pm-project-section']);
-        }elseif($user_id == \App\Http\Enums\RoleUser::EngagementManager)
-        {
-            $projects = $this->getProjects(['project_status'=>ProjectStatus::COMPLETED_PROJECT]);
-            $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
-            return $this->successResponse('Completed Projects!',['html'=>$html,'html_section_id'=>'project-list-section']);
-        }
-
-    }
+//    public function completedProjectsList(Request $request)
+//    {
+//        $user_id = $this->getAuthUserId();
+//        if($user_id == \App\Http\Enums\RoleUser::ProjectManager){
+//            $projects = $this->getProjects(['project_manager_id'=>\App\Http\Enums\RoleUser::ProjectManager,'project_status'=>ProjectStatus::COMPLETED_PROJECT]);
+//            $html = view('pages.projectManager._partial._working_project_list_table_html',['projects'=>$projects])->render();
+//            return $this->successResponse('Completed Projects!',['html'=>$html,'html_section_id'=>'pm-project-section']);
+//        }elseif($user_id == \App\Http\Enums\RoleUser::EngagementManager)
+//        {
+//            $projects = $this->getProjects(['project_status'=>ProjectStatus::COMPLETED_PROJECT]);
+//            $html = view('pages.admin.projects._partial._project_list_table_html',['projects'=>$projects])->render();
+//            return $this->successResponse('Completed Projects!',['html'=>$html,'html_section_id'=>'project-list-section']);
+//        }
+//
+//    }
 
 }
