@@ -33,7 +33,8 @@ class ProjectController extends Controller
         {
             if($user_id == RoleUser::ProjectManager)
             {
-                $projects = $this->projectService->getProjects(['project_manager_id'=>$user_id,['project_status','<',ProjectStatus::WORKING_PROJECT]]);
+//                $projects = $this->projectService->getProjects(['project_manager_id'=>$user_id,['project_status','<',ProjectStatus::WORKING_PROJECT]]);
+                $projects = $this->projectService->getProjects(['project_manager_id'=>$user_id]);
                 $projects_list = view('pages.projectManager._partial._assign_project_list_table_html', ['projects' => $projects])->render();
             }else{
                 $projects = $this->projectService->getProjects();

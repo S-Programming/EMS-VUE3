@@ -23,6 +23,8 @@ class RolesTableSeeder extends Seeder
             ['id' => 7, 'name' => 'UIDesigner', 'route' => '/dashboard'],
             ['id' => 8, 'name' => 'QualityAssurance', 'route' => '/dashboard'],
 
+            ['id' => 9, 'name' => 'HumanResource', 'route' => '/dashboard'],
+
 
 
         ];

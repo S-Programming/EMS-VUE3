@@ -21,6 +21,8 @@ class UsersTableSeeder extends Seeder
             ['id' => 5, 'first_name' => 'Simple', 'last_name' => 'User', 'email' => 'abbasnaumani+5@gmail.com', 'phone_number' => '4545454545', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
             ['id' => 6, 'first_name' => 'Muhammad', 'last_name' => 'Saddique', 'email' => 'saddiquearain99@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
 
+            ['id' => 9, 'first_name' => 'HR', 'last_name' => 'Waqas', 'email' => 'abbasnaumani+9@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+
             ['id' => 10, 'first_name' => 'umair', 'last_name' => 'hanif', 'email' => 'umair@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
             ['id' => 11, 'first_name' => 'zubair', 'last_name' => 'hanif', 'email' => 'zubair@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
             ['id' => 12, 'first_name' => 'imran', 'last_name' => 'Nazim', 'email' => 'imran@gmail.com', 'phone_number' => '+923161880989', 'password' => bcrypt('12345678'), 'is_active' => 1, 'is_approved' => 1, 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],

@@ -12,4 +12,5 @@ final class RoleUser
     const Developer = 6;
     const UIDesigner = 7;
     const QualityAssurance = 8;
+    const HUMAN_RESOURCE_MANAGER = 9;
 }

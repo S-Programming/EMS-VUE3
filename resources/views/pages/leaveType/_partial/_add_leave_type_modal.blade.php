@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-sm-10 offset-1">
                 <form method="POST" action="{{ route('leave.type.confirm.add') }}" id="leave-type-add-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
-                    @csrf
+{{--                    @csrf--}}
                     <div class="card">
                         <div class="card-body">
                             <div class="py-2">

@@ -13,7 +13,8 @@ class User
     {
 
 
-        Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
+//        Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
+        Route::group(['middleware' => ['auth:sanctum']], function () {
          //   if($this->getAuthUserId())
             Route::get('/user', [UserController::class, 'index'])->name('user.list');
         });

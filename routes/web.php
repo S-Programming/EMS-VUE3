@@ -20,11 +20,12 @@ use Route\Http\Attendance;
 use Route\Http\Pdf;
 use Route\Http\ProjectManager;
 use Route\Http\EngagementManager;
+use Route\Http\HumanResource;
 use Route\Http\RequestStatus;
 use Route\Http\Test;
 use Route\Http\UserQuries;
 use Route\Http\TechnologyStack;
-
+use Route\Http\Job;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,4 +74,6 @@ ProjectManager::register();
 EngagementManager::register();
 Admin::register();
 SuperAdmin::register();
+Job::register();
+HumanResource::register();
 

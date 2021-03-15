@@ -65,7 +65,8 @@ class ProjectService extends BaseService
             $projects = $this->getProjects($filter_project);
             if ($user_id == \App\Http\Enums\RoleUser::ProjectManager) {
                 if ($filter == ProjectStatus::ALL_PROJECT) {
-                    $projects = $this->getProjects(['project_manager_id' => $user_id,'project_status'=>ProjectStatus::DEVELOPERS_REQUEST]);
+//                    $projects = $this->getProjects(['project_manager_id' => $user_id,['project_status','<',ProjectStatus::WORKING_PROJECT]]);
+                    $projects = $this->getProjects(['project_manager_id' => $user_id]);
                     $html = view('pages.projectManager._partial._assign_project_list_table_html', ['projects' => $projects])->render();
                 }else{
                     $html = view('pages.projectManager._partial._working_project_list_table_html', ['projects' => $projects])->render();
@@ -114,6 +115,7 @@ class ProjectService extends BaseService
         $project->name = $request->project_name;
         $project->description = $request->project_description;
         $project->project_manager_id = $request->project_manager_id;
+        $project->project_status = ProjectStatus::ASSIGN_PROJECT;
         $project->save();
         $project->technologystack()->attach($request->technology_stack_id);
         $project_id = $project->id;
@@ -292,17 +294,18 @@ class ProjectService extends BaseService
     {
         $project_id = $request->id;
         $project = Project::find($project_id);
-        $project->project_progress = $request->project_completion_status;
-        if($project->project_progress == '100%'){
-            $project->project_status = 5;
+        $completion_status = substr_replace($request->project_completion_status, "", -1);
+        $project->project_progress = $completion_status;
+        if($project->project_progress == '100'){
+            $project->project_status = ProjectStatus::COMPLETED_PROJECT;
         } else{
-            $project->project_status = 2;
+            $project->project_status = ProjectStatus::WORKING_PROJECT;
         }
         $project->save();
         $project_manager_id = $this->getAuthUserId();
         $projects = $this->getProjects(['project_manager_id'=>$project_manager_id,'project_status'=>ProjectStatus::WORKING_PROJECT]);
         $html = view('pages.projectManager._partial._working_project_list_table_html',['projects'=>$projects])->render();
-        return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'pm-project-section']);
+        return $this->successResponse('Working Projects',['html'=>$html,'html_section_id'=>'project-list-section']);
 
     }
     /**

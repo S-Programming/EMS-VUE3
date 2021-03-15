@@ -37,6 +37,10 @@ class DashboardService extends BaseService
             {
                 return $this->projectManagerDashboard($request);
             }
+            elseif(in_array(RoleUser::HUMAN_RESOURCE_MANAGER, $userRoles))
+            {
+                return $this->humanResourceManagerDashboard($request);
+            }
             else {
                 return $this->userDashboard($request);
             }
@@ -132,5 +136,18 @@ class DashboardService extends BaseService
         $responseData = ['user' => $user, 'total_user_count' => $total_users];
         $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
         return view('pages.projectManager.dashboard', $responseData);
+    }
+    /**
+     * Return projectManager Dashboard  To the projectManager User.
+     *
+     * @return void
+     */
+    public function humanResourceManagerDashboard(Request $request)
+    {
+        $total_users = User::all()->count();
+        $user = $this->getAuthUser();
+        $responseData = ['user' => $user, 'total_user_count' => $total_users];
+        $responseData['checkin_history'] = $user ? $user->checkinHistory : null;
+        return view('pages.humanResource.dashboard', $responseData);
     }
 }

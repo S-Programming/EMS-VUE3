@@ -78,6 +78,10 @@ trait AuthUser
     {
         return $this->hasRoleAccess(RoleUser::ProjectManager);
     }
+    public function isHumanResourceManagerRole()
+    {
+        return $this->hasRoleAccess(RoleUser::HUMAN_RESOURCE_MANAGER);
+    }
     public function isDeveloperRole()
     {
         return $this->hasRoleAccess(RoleUser::Developer);

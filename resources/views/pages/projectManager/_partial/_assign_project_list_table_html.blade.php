@@ -40,10 +40,14 @@
                 <td>
                     <button class="btn btn-secondary" disabled>Developer Request</button>
                 </td>
-{{--                @elseif($project->project_status === 2)--}}
-{{--                    <td>--}}
-{{--                        <button class="btn btn-secondary" disabled>Working</button>--}}
-{{--                    </td>--}}
+                @elseif($project->project_status === 2)
+                    <td>
+                        <button class="btn btn-secondary" disabled>Working</button>
+                    </td>
+                @elseif($project->project_status === 5)
+                        <td>
+                            <button class="btn btn-secondary" disabled>Completed</button>
+                        </td>
                 @endif
             </tr>
             @endforeach
