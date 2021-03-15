@@ -29,9 +29,10 @@ class ProjectController extends Controller
     {
         // this is for render view
         $user_id = $this->getAuthUserId();
+        $user_roles = $this->userRoles();
         if(!isset($request->filter_project))
         {
-            if($user_id == RoleUser::ProjectManager)
+            if(in_array(RoleUser::ProjectManager,$user_roles))
             {
 //                $projects = $this->projectService->getProjects(['project_manager_id'=>$user_id,['project_status','<',ProjectStatus::WORKING_PROJECT]]);
                 $projects = $this->projectService->getProjects(['project_manager_id'=>$user_id]);
