@@ -170,59 +170,7 @@
         <!-- /Row-02 -->
 
         <!-- Row-03-->
-        <div class="row">
-            <div class="col-xl-12 d-flex flex-column">
-                <div class="block block-rounded">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title bold">My Checkin History</h3>
-                        <div class="block-options">
-
-                            <div class="mt-3 mt-sm-0 ml-sm-3">
-                                <button type="button" class="btn btn-sm btn-alt-primary" data-toggle="class-toggle"
-                                        data-target="#one-dashboard-search-orders" data-class="d-none">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                                <div class="d-inline-block">
-                                    <select class="dropdown form-control "
-                                            onchange="ajaxCallOnclick('user_report_history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})"
-                                            name="user_id">
-                                        <option>All</option>
-                                        <option>Previous Week</option>
-                                        <option>Current Week</option>
-                                        <option>Previous Month</option>
-                                        <option>Current Month</option>
-                                        {{-- <option value="All">All</option> --}}
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="one-dashboard-search-orders" class="block-content border-bottom d-none">
-                        <!-- Search Form -->
-                        <form action="#" method="POST" onsubmit="">
-                            <div class="form-group push">
-                                <div class="input-group">
-                                    <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id=""
-                                           name="demo-search" placeholder="JS flatpickr"
-                                           data-mode="range"
-                                           data-min-date="today">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <button type="submit" class="btn btn-sm"><i class="fa fa-search"></i></button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- END Search Form -->
-                    </div>
-                    <div class="block-content" id="self-checkin-history">
-                        {!!$checkin_history_html!!}
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!-- /Row-03-->
 
         <!-- 04 -->
@@ -291,7 +239,7 @@
                                 </button> --}}
                                 <label>Choose History</label>
                                 <div class="Zd-inline-block">
-                                    <select class="dropdown form-control " onchange="ajaxCallOnclick('user_report_history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_id">
+                                    <select class="dropdown form-control " onchange="ajaxCallOnclick('user/report/history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_id">
                                         <option>All</option>
                                         <option>Previous Week</option>
                                         <option>Current Week</option>

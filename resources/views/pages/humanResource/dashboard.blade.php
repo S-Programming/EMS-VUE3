@@ -246,7 +246,7 @@
                         </button>
                         <div class="d-inline-block">
                             <select class="dropdown form-control "
-                                    onchange="ajaxCallOnclick('user_report_history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})"
+                                    onchange="ajaxCallOnclick('user/report/history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})"
                                     name="user_id">
                                 <option>All</option>
                                 <option>Previous Week</option>
