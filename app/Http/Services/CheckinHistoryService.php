@@ -45,8 +45,11 @@ class CheckinHistoryService extends BaseService
                 $attendence->is_present = 1;
                 $attendence->save();
             }
+            $user_history = CheckinHistory::where('user_id', $user_id)->get();
             $html = view('pages.user._partial._checkout_html')->render();
-            return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section', 'module' => 'checkin']);
+            $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
+            return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section', 'module' => 'checkin']);
+            
         }
     }
 
@@ -62,7 +65,14 @@ class CheckinHistoryService extends BaseService
                     $checkin_history_data->checkout = Carbon::now();
                     $checkin_history_data->description = $request->description ?? '';
                     $checkin_history_data->save();
-                    return $this->successResponse('CheckOut Successfully!', ['html' => $html, 'html_section_id' => 'checkin-section']);
+                    $user_history = CheckinHistory::where('user_id', $user_id)->get();
+                    
+                    $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
+                    // dd($checkin_history_html);
+                //    dd($checkin_history_html,"data");
+                    return $this->successResponse('You are successfully checked-out', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section']);
+
+                    //return $this->successResponse('CheckOut Successfully!', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section']);
                 }
             }
             return $this->errorResponse('Something went wrong, please contact support team, thanks', ['errors' => ['Something went wrong, please contact support team, thanks'], 'html' => $html]);

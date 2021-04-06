@@ -62,6 +62,10 @@ function validateFieldsByFormId(e) {
                     if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined') {
                         $('#' + data.html_section_id).html(data.html);
                     }
+                    if (typeof data.checkin_history_html != 'undefined' && typeof data.html_history_section_id != 'undefined' && data.checkin_history_html != '') {
+                        $('#' + data.html_history_section_id).html(data.checkin_history_html);
+                        console.log(data.checkin_history_html,"saddique");
+                    }
                     if ($('body').hasClass('modal-open') && typeof modalId != 'undefined' && modalId != '') {
                         closeModalById(modalId);
                     }
@@ -123,7 +127,7 @@ function validateFields(formId) {
             fileInputNameValue = file.name;
             console.log(file);
         });
-        fields.push({name: fileInputName, value: fileInputNameValue})
+        fields.push({ name: fileInputName, value: fileInputNameValue })
     });
     console.log(fields, formId);
     var skipArray = ['action', 'date_range', 'date'];
@@ -236,16 +240,16 @@ function notificationAlert(type, content, title, timeOut) {
     };
     switch (type) {
         case 'success':
-            toastr.success(content, title, {timeOut: timeOut});
+            toastr.success(content, title, { timeOut: timeOut });
             break;
         case 'error':
-            toastr.error(content, title, {timeOut: timeOut});
+            toastr.error(content, title, { timeOut: timeOut });
             break;
         case 'info':
-            toastr.info(content, title, {timeOut: timeOut});
+            toastr.info(content, title, { timeOut: timeOut });
             break;
         case 'warning':
-            toastr.warning(content, title, {timeOut: timeOut});
+            toastr.warning(content, title, { timeOut: timeOut });
             break;
     }
 }
@@ -274,7 +278,7 @@ function commonAjaxModel(route, id, containerId) {
     }
     if (route != '') {
         var url = baseURL + '/' + route;
-        var dataToPost = {"containerId": containerId, "id": id};
+        var dataToPost = { "containerId": containerId, "id": id };
         $.ajax({
             type: "POST",
             url: url,
@@ -341,6 +345,10 @@ function ajaxCallOnclick(route, extraData) {
                 if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
                     $('#' + data.html_section_id).html(data.html);
                 }
+                if (typeof data.checkin_history_html != 'undefined' && typeof data.html_history_section_id != 'undefined' && data.checkin_history_html != '') {
+                    $('#' + data.html_history_section_id).html(data.checkin_history_html);
+                    console.log(data.checkin_history_html,"saddique");
+                }
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     if (typeof dataToPost.method_to_execute != 'undefined' && dataToPost.method_to_execute != '') {
@@ -374,7 +382,7 @@ function ajaxCallOnclick(route, extraData) {
 var startCheckinTimer = function (startTime) {
     const startDateTime = (typeof startTime != "undefined" && startTime != '' && startTime != null) ? startTime : null;
     var countDownDate = startDateTime ? new Date(startDateTime).getTime() : new Date().getTime(); //"Jan 8, 2021 6:37:25"
-// Update the count down every 1 second
+    // Update the count down every 1 second
     const intervalRef = setInterval(function () {
 
         // Get today's date and time
@@ -570,7 +578,7 @@ $(function () {
             $.ajax({
                 url: "check_email",
                 type: "POST",
-                data: {email: email},
+                data: { email: email },
                 success: function (data) {
                     console.log(data);
                     if (data.status == 'success') {
