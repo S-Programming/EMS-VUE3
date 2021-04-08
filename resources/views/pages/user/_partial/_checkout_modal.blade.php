@@ -15,8 +15,23 @@
                 echo theme_tinyMCE_script($inyMceConfig);
                 @endphp
                 <div class="py-3">
+                    <p class="font-size-h3">What I have done today?</p>
                     <div class="form-group">
-                        <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="description"  required autofocus ></textarea>
+                        <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="done_today"  required autofocus ></textarea>
+                    </div>
+                </div>
+
+                <div class="py-3">
+                    <p class="font-size-h3">What I'll do tomorrow?</p>
+                    <div class="form-group">
+                        <textarea class="form-control form-control-lg"  name="do_tomorrow"  required autofocus ></textarea>
+                    </div>
+                </div>
+
+                <div class="py-3">
+                    <p class="font-size-h3">Any Questions / Roadblocks?</p>
+                    <div class="form-group">
+                        <textarea class="form-control form-control-lg"  name="questions"  required autofocus ></textarea>
                     </div>
                 </div>
                 <div class="block-content block-content-full text-right border-top">

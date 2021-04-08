@@ -3,8 +3,7 @@
     <!-- Hero -->
     <div class="bg-body-light">
         <div class="content content-full">
-            <div
-                class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2 text-center text-sm-left">
+            <!-- <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2 text-center text-sm-left">
                 <div class="flex-sm-fill">
                     <h1 class="h3 font-w700 mb-2">
                         Engagement Manager Dashboard
@@ -20,41 +19,33 @@
                     </button>
                     <div class="d-inline-block">
                         <div class="dropdown d-inline-block">
-                            <button type="button" class="btn btn-sm btn-alt-primary" id="dropdown-recent-orders-filters"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-sm btn-alt-primary" id="dropdown-recent-orders-filters" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-fw fa-flask"></i>
                                 Filters
                                 <i class="fa fa-angle-down ml-1"></i>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right font-size-sm"
-                                 aria-labelledby="dropdown-recent-orders-filters">
-                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                                   href="javascript:void(0)">
+                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right font-size-sm" aria-labelledby="dropdown-recent-orders-filters">
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
                                     Pending..
                                     <span class="badge badge-primary badge-pill">35</span>
                                 </a>
-                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                                   href="javascript:void(0)">
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
                                     Processing
                                     <span class="badge badge-primary badge-pill">15</span>
                                 </a>
-                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                                   href="javascript:void(0)">
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
                                     For Delivery
                                     <span class="badge badge-primary badge-pill">20</span>
                                 </a>
-                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                                   href="javascript:void(0)">
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
                                     Canceled
                                     <span class="badge badge-primary badge-pill">72</span>
                                 </a>
-                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                                   href="javascript:void(0)">
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
                                     Delivered
                                     <span class="badge badge-primary badge-pill">890</span>
                                 </a>
-                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between"
-                                   href="javascript:void(0)">
+                                <a class="dropdown-item font-w500 d-flex align-items-center justify-content-between" href="javascript:void(0)">
                                     All
                                     <span class="badge badge-primary badge-pill">997</span>
                                 </a>
@@ -62,7 +53,66 @@
                         </div>
                     </div>
                 </div>
+            </div> -->
+
+            <div class="row row-deck">
+                <div class="col-6 col-sm-4 col-md-3 col-xl-4">
+                    <div class="block block-rounded d-flex flex-column">
+                        <div class="block-content block-content-full flex-grow-1 flex-column d-flex justify-content-center align-items-center bg-primary">
+                            <p class="text-light text-center font-size-h2 font-w700">0</p>
+                            <p class="text-light text-center font-size-h2 font-w700">Total Projects</p>
+                            <!-- <div class="item item-rounded bg-body">
+                            <i class="fa fa-shopping-cart font-size-h3 text-primary"></i>
+                        </div> -->
+                        </div>
+                        <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                            <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
+                                View all Total Projects
+                                <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-4 col-md-3 col-xl-4">
+                    <div class="block block-rounded d-flex flex-column">
+                        <div class="block-content block-content-full flex-grow-1 flex-column d-flex justify-content-center align-items-center bg-success">
+                            <p class="text-light text-center font-size-h2 font-w700">0</p>
+                            <p class="text-light text-center font-size-h2 font-w700">Completed Projects</p>
+                            <!-- <div class="item item-rounded bg-body">
+                            <i class="fa fa-shopping-cart font-size-h3 text-primary"></i>
+                        </div> -->
+                        </div>
+                        <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                            <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
+                                View all Completed Projects
+                                <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-3 col-xl-4">
+                    <div class="block block-rounded d-flex flex-column">
+                        <div class="block-content block-content-full flex-grow-1 flex-column d-flex justify-content-center align-items-center bg-warning">
+                            <p class="text-light text-center font-size-h2 font-w700">0</p>
+                            <p class="text-light text-center font-size-h2 font-w700">Working Projects</p>
+                            <!-- <div class="item item-rounded bg-body">
+                            <i class="fa fa-shopping-cart font-size-h3 text-primary"></i>
+                        </div> -->
+                        </div>
+                        <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                            <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
+                                View all Working Projects
+                                <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
+
         </div>
     </div>
     <!-- END Hero -->
@@ -75,10 +125,9 @@
                 <!-- Earnings Summary -->
                 <div class="block block-rounded flex-grow-1 d-flex flex-column">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Earnings Summary</h3>
+                        <h3 class="block-title">Completed vs Working Projects Summary</h3>
                         <div class="block-options">
-                            <button type="button" class="btn-block-option" data-toggle="block-option"
-                                    data-action="state_toggle" data-action-mode="demo">
+                            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
                                 <i class="si si-refresh"></i>
                             </button>
                             <button type="button" class="btn-block-option">
@@ -94,30 +143,30 @@
                     </div>
                     <div class="block-content bg-body-light">
                         <div class="row items-push text-center w-100">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <dl class="mb-0">
                                     <dt class="font-size-h3 font-w700">
-                                        <i class="fa fa-arrow-up font-size-lg text-success"></i> 2.5%
+                                        <i class="fa fa-arrow-up font-size-lg text-success"></i> 0%
                                     </dt>
-                                    <dd class="text-muted mb-0">Customer Growth</dd>
+                                    <dd class="text-muted mb-0">Completed Projects</dd>
                                 </dl>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <dl class="mb-0">
                                     <dt class="font-size-h3 font-w700">
-                                        <i class="fa fa-arrow-up font-size-lg text-success"></i> 3.8%
+                                        <i class="fa fa-arrow-down font-size-lg text-danger"></i> 0%
                                     </dt>
-                                    <dd class="text-muted mb-0">Page Views</dd>
+                                    <dd class="text-muted mb-0">Working Projects</dd>
                                 </dl>
                             </div>
-                            <div class="col-sm-4">
+                            <!-- <div class="col-sm-4">
                                 <dl class="mb-0">
                                     <dt class="font-size-h3 font-w700">
                                         <i class="fa fa-arrow-up font-size-lg text-success"></i> 1.7%
                                     </dt>
                                     <dd class="text-muted mb-0">New Products</dd>
                                 </dl>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -132,32 +181,19 @@
                         <div class="block block-rounded d-flex flex-column">
                             <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between">
                                 <dl class="mb-0">
-                                    <dt class="font-size-h2 font-w700">{{$total_user_count??0}}</dt>
-                                    <dd class="text-muted mb-0">Total Users</dd>
+                                    <!-- <dt class="font-size-h2 font-w700">{{$total_user_count??0}}</dt> -->
+                                    <dd class="text-muted mb-0">Working Projects</dd>
                                 </dl>
                                 <div>
-                                    <div
-                                        class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-danger bg-danger-light">
+                                    <div class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-danger bg-danger-light">
                                         <i class="fa fa-caret-down mr-1"></i>
-                                        2.2%
+                                        0%
                                     </div>
                                 </div>
                             </div>
                             <div class="block-content p-1 text-center overflow-hidden">
                                 <!-- Sparkline Line: Orders -->
-                                <span class="js-sparkline" data-type="line"
-                                      data-points="[33,29,32,37,38,30,34,28,43,45,26,45,49,39]"
-                                      data-width="100%"
-                                      data-height="70px"
-                                      data-chart-range-min="20"
-                                      data-line-color="rgba(210, 108, 122, .4)"
-                                      data-fill-color="rgba(210, 108, 122, .15)"
-                                      data-spot-color="transparent"
-                                      data-min-spot-color="transparent"
-                                      data-max-spot-color="transparent"
-                                      data-highlight-spot-color="#D26C7A"
-                                      data-highlight-line-color="#D26C7A"
-                                      data-tooltip-suffix="Orders"></span>
+                                <span class="js-sparkline" data-type="line" data-points="[33,29,32,37,38,30,34,28,43,45,26,45,49,39]" data-width="100%" data-height="70px" data-chart-range-min="20" data-line-color="rgba(210, 108, 122, .4)" data-fill-color="rgba(210, 108, 122, .15)" data-spot-color="transparent" data-min-spot-color="transparent" data-max-spot-color="transparent" data-highlight-spot-color="#D26C7A" data-highlight-line-color="#D26C7A" data-tooltip-suffix="Orders"></span>
                             </div>
                         </div>
                     </div>
@@ -165,32 +201,19 @@
                         <div class="block block-rounded d-flex flex-column">
                             <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between">
                                 <dl class="mb-0">
-                                    <dt class="font-size-h2 font-w700">$5,234.21</dt>
-                                    <dd class="text-muted mb-0">Total Earnings</dd>
+                                    <!-- <dt class="font-size-h2 font-w700">$5,234.21</dt> -->
+                                    <dd class="text-muted mb-0">Completed Projects</dd>
                                 </dl>
                                 <div>
-                                    <div
-                                        class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-success bg-success-light">
+                                    <div class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-success bg-success-light">
                                         <i class="fa fa-caret-up mr-1"></i>
-                                        4.2%
+                                        0%
                                     </div>
                                 </div>
                             </div>
                             <div class="block-content p-1 text-center oveflow-hidden">
                                 <!-- Sparkline Line: Earnings -->
-                                <span class="js-sparkline" data-type="line"
-                                      data-points="[716,1185,750,1365,956,890,1200,968,1158,1025,920,1190,720,1352]"
-                                      data-width="100%"
-                                      data-height="70px"
-                                      data-chart-range-min="300"
-                                      data-line-color="rgba(70,195,123, .4)"
-                                      data-fill-color="rgba(70,195,123, .15)"
-                                      data-spot-color="transparent"
-                                      data-min-spot-color="transparent"
-                                      data-max-spot-color="transparent"
-                                      data-highlight-spot-color="#46C37B"
-                                      data-highlight-line-color="#46C37B"
-                                      data-tooltip-prefix="$"></span>
+                                <span class="js-sparkline" data-type="line" data-points="[716,1185,750,1365,956,890,1200,968,1158,1025,920,1190,720,1352]" data-width="100%" data-height="70px" data-chart-range-min="300" data-line-color="rgba(70,195,123, .4)" data-fill-color="rgba(70,195,123, .15)" data-spot-color="transparent" data-min-spot-color="transparent" data-max-spot-color="transparent" data-highlight-spot-color="#46C37B" data-highlight-line-color="#46C37B" data-tooltip-prefix="$"></span>
                             </div>
                         </div>
                     </div>
@@ -198,32 +221,19 @@
                         <div class="block block-rounded d-flex flex-column">
                             <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between">
                                 <dl class="mb-0">
-                                    <dt class="font-size-h2 font-w700">264</dt>
-                                    <dd class="text-muted mb-0">New Customers</dd>
+                                    <!-- <dt class="font-size-h2 font-w700">264</dt> -->
+                                    <dd class="text-muted mb-0">Total Projects</dd>
                                 </dl>
                                 <div>
-                                    <div
-                                        class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-success bg-success-light">
+                                    <div class="d-inline-block px-2 py-1 rounded-lg font-size-sm font-w600 text-success bg-success-light">
                                         <i class="fa fa-caret-up mr-1"></i>
-                                        9.3%
+                                        0%
                                     </div>
                                 </div>
                             </div>
                             <div class="block-content p-1 text-center oveflow-hidden">
                                 <!-- Sparkline Line: New Customers -->
-                                <span class="js-sparkline" data-type="line"
-                                      data-points="[25,15,36,14,29,19,36,41,28,26,29,33,23,41]"
-                                      data-width="100%"
-                                      data-height="70px"
-                                      data-chart-range-min="0"
-                                      data-line-color="rgba(70,195,123, .4)"
-                                      data-fill-color="rgba(70,195,123, .15)"
-                                      data-spot-color="transparent"
-                                      data-min-spot-color="transparent"
-                                      data-max-spot-color="transparent"
-                                      data-highlight-spot-color="#46C37B"
-                                      data-highlight-line-color="#46C37B"
-                                      data-tooltip-prefix="$"></span>
+                                <span class="js-sparkline" data-type="line" data-points="[25,15,36,14,29,19,36,41,28,26,29,33,23,41]" data-width="100%" data-height="70px" data-chart-range-min="0" data-line-color="rgba(70,195,123, .4)" data-fill-color="rgba(70,195,123, .15)" data-spot-color="transparent" data-min-spot-color="transparent" data-max-spot-color="transparent" data-highlight-spot-color="#46C37B" data-highlight-line-color="#46C37B" data-tooltip-prefix="$"></span>
                             </div>
                         </div>
                     </div>
@@ -234,20 +244,17 @@
         <!-- END Statistics -->
 
         <!-- Recent Orders -->
-        <div class="block block-rounded">
+        <!-- <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <h3 class="block-title bold">My Checkin History</h3>
                 <div class="block-options">
 
                     <div class="mt-3 mt-sm-0 ml-sm-3">
-                        <button type="button" class="btn btn-sm btn-alt-primary" data-toggle="class-toggle"
-                                data-target="#one-dashboard-search-orders" data-class="d-none">
+                        <button type="button" class="btn btn-sm btn-alt-primary" data-toggle="class-toggle" data-target="#one-dashboard-search-orders" data-class="d-none">
                             <i class="fa fa-search"></i>
                         </button>
                         <div class="d-inline-block">
-                            <select class="dropdown form-control "
-                                    onchange="ajaxCallOnclick('user/report/history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})"
-                                    name="user_id">
+                            <select class="dropdown form-control " onchange="ajaxCallOnclick('user/report/history',{history_report:this.options[this.selectedIndex].text??'All Checkin History'})" name="user_id">
                                 <option>All</option>
                                 <option>Previous Week</option>
                                 <option>Current Week</option>
@@ -260,26 +267,22 @@
                 </div>
             </div>
             <div id="one-dashboard-search-orders" class="block-content border-bottom d-none">
-                <!-- Search Form -->
                 <form action="be_pages_dashboard.html" method="POST" onsubmit="return false;">
                     <div class="form-group push">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="one-ecom-orders-search"
-                                   name="one-ecom-orders-search" placeholder="Search recent orders..">
+                            <input type="text" class="form-control" id="one-ecom-orders-search" name="one-ecom-orders-search" placeholder="Search recent orders..">
                             <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-search"></i>
-                                            </span>
+                                <span class="input-group-text">
+                                    <i class="fa fa-search"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </form>
-                <!-- END Search Form -->
             </div>
             <div class="block-content" id="self-checkin-history">
-            {!!$checkin_history_html ??''!!}
-            <!-- Recent Orders Table -->
-            {{-- <div class="table-responsive">
+                {!!$checkin_history_html ??''!!}
+                {{-- <div class="table-responsive">
                 <table class="table table-borderless table-striped table-vcenter">
                     <thead>
                     <tr>
@@ -295,19 +298,16 @@
                         @foreach($checkin_history as $data)
                             <tr>
                                 <th>{{$data->user_id??''}}</th>
-                                <th>{{$data->checkin??''}}</th>
-                                <th>{{$data->checkout ?? ""}}</th>
-                                <th>{{$data->created_at->format('d M') ?? ""}}</th>
-                                <th>{!!$data->description??'' !!}</th>
-                            </tr>
-                        @endforeach
-                    @endif
-                    </tbody>
+                <th>{{$data->checkin??''}}</th>
+                <th>{{$data->checkout ?? ""}}</th>
+                <th>{{$data->created_at->format('d M') ?? ""}}</th>
+                <th>{!!$data->description??'' !!}</th>
+                </tr>
+                @endforeach
+                @endif
+                </tbody>
                 </table>
             </div> --}}
-            <!-- END Recent Orders Table -->
-
-                <!-- Pagination -->
             {{-- <nav aria-label="Photos Search Navigation">
                 <ul class="pagination pagination-sm justify-content-end mt-2">
                     <li class="page-item">
@@ -334,10 +334,9 @@
                     </li>
                 </ul>
             </nav> --}}
-            <!-- END Pagination -->
-            </div>
-        </div>
-        <!-- END Recent Orders -->
+        </div> -->
+    </div>
+    <!-- END Recent Orders -->
     </div>
     <!-- END Page Content -->
 </x-backend-layout>

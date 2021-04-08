@@ -7,7 +7,8 @@
                 <i class="fa fa-circle-notch text-primary"></i>
             </span>
             <span class="smini-hide font-size-h5 tracking-wider">
-                One<span class="font-w400">UI</span>
+                <img src="{{ asset('assets/images/ks-logo.png') }}" alt="tag" width="120">
+                <!-- One<span class="font-w400">UI</span> -->
             </span>
         </a>
         <!-- END Logo -->
@@ -16,41 +17,33 @@
         <div>
             <!-- Options -->
             <div class="dropdown d-inline-block ml-2">
-                <a class="btn btn-sm btn-dual" id="sidebar-themes-dropdown" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false" href="#">
+                <a class="btn btn-sm btn-dual" id="sidebar-themes-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="si si-drop"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right font-size-sm smini-hide border-0"
-                     aria-labelledby="sidebar-themes-dropdown">
+                <div class="dropdown-menu dropdown-menu-right font-size-sm smini-hide border-0" aria-labelledby="sidebar-themes-dropdown">
                     <!-- Color Themes -->
                     <!-- Layout API, functionality initialized in Template._uiHandleTheme() -->
-                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500"
-                       data-toggle="theme" data-theme="default" href="#">
+                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="default" href="#">
                         <span>Default</span>
                         <i class="fa fa-circle text-default"></i>
                     </a>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500"
-                       data-toggle="theme" data-theme="{{ asset('assets/css/themes/amethyst.css') }}" href="#">
+                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="{{ asset('assets/css/themes/amethyst.css') }}" href="#">
                         <span>Amethyst</span>
                         <i class="fa fa-circle text-amethyst"></i>
                     </a>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500"
-                       data-toggle="theme" data-theme="{{ asset('assets/css/themes/city.css') }}" href="#">
+                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="{{ asset('assets/css/themes/city.css') }}" href="#">
                         <span>City</span>
                         <i class="fa fa-circle text-city"></i>
                     </a>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500"
-                       data-toggle="theme" data-theme="{{ asset('assets/css/themes/flat.css') }}" href="#">
+                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="{{ asset('assets/css/themes/flat.css') }}" href="#">
                         <span>Flat</span>
                         <i class="fa fa-circle text-flat"></i>
                     </a>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500"
-                       data-toggle="theme" data-theme="{{ asset('assets/css/themes/modern.css') }}" href="#">
+                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="{{ asset('assets/css/themes/modern.css') }}" href="#">
                         <span>Modern</span>
                         <i class="fa fa-circle text-modern"></i>
                     </a>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500"
-                       data-toggle="theme" data-theme="{{ asset('assets/css/themes/smooth.css') }}" href="#">
+                    <a class="dropdown-item d-flex align-items-center justify-content-between font-w500" data-toggle="theme" data-theme="{{ asset('assets/css/themes/smooth.css') }}" href="#">
                         <span>Smooth</span>
                         <i class="fa fa-circle text-smooth"></i>
                     </a>
@@ -60,12 +53,10 @@
 
                     <!-- Sidebar Styles -->
                     <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                    <a class="dropdown-item font-w500" data-toggle="layout" data-action="sidebar_style_light"
-                       href="#">
+                    <a class="dropdown-item font-w500" data-toggle="layout" data-action="sidebar_style_light" href="#">
                         <span>Sidebar Light</span>
                     </a>
-                    <a class="dropdown-item font-w500" data-toggle="layout" data-action="sidebar_style_dark"
-                       href="#">
+                    <a class="dropdown-item font-w500" data-toggle="layout" data-action="sidebar_style_dark" href="#">
                         <span>Sidebar Dark</span>
                     </a>
                     <!-- Sidebar Styles -->
@@ -74,12 +65,10 @@
 
                     <!-- Header Styles -->
                     <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                    <a class="dropdown-item font-w500" data-toggle="layout" data-action="header_style_light"
-                       href="#">
+                    <a class="dropdown-item font-w500" data-toggle="layout" data-action="header_style_light" href="#">
                         <span>Header Light</span>
                     </a>
-                    <a class="dropdown-item font-w500" data-toggle="layout" data-action="header_style_dark"
-                       href="#">
+                    <a class="dropdown-item font-w500" data-toggle="layout" data-action="header_style_dark" href="#">
                         <span>Header Dark</span>
                     </a>
                     <!-- Header Styles -->
@@ -89,8 +78,7 @@
 
             <!-- Close Sidebar, Visible only on mobile screens -->
             <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-            <a class="d-lg-none btn btn-sm btn-dual ml-1" data-toggle="layout" data-action="sidebar_close"
-               href="javascript:void(0)">
+            <a class="d-lg-none btn btn-sm btn-dual ml-1" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
                 <i class="fa fa-fw fa-times"></i>
             </a>
             <!-- END Close Sidebar -->

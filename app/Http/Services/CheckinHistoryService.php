@@ -63,7 +63,9 @@ class CheckinHistoryService extends BaseService
             if ($checkin_history_data != null) {
                 if (!$checkin_history_data->checkout) {
                     $checkin_history_data->checkout = Carbon::now();
-                    $checkin_history_data->description = $request->description ?? '';
+                    $checkin_history_data->done_today = $request->done_today ?? '';
+                    $checkin_history_data->do_tomorrow = $request->do_tomorrow ?? '';
+                    $checkin_history_data->questions = $request->questions ?? '';
                     $checkin_history_data->save();
                     $user_history = CheckinHistory::where('user_id', $user_id)->get();
                     

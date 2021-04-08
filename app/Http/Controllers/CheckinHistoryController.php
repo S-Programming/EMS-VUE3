@@ -69,7 +69,9 @@ class CheckinHistoryController extends Controller
     public function confirmCheckout(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'description' => 'required|max:50',   //min:3 not working
+            'done_today' => 'required|max:500',   //min:3 not working
+            'do_tomorrow' => 'required|max:500',   //min:3 not working
+            'questions' => 'required|max:500',   //min:3 not working
         ]);
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);

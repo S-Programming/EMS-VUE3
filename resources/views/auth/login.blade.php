@@ -17,10 +17,11 @@
                                     @endif
 
 
-                                    <a class="btn-block-option" href="{{ route('register') }}" data-toggle="tooltip"
+                                    <!-- For Registration -->
+                                    <!-- <a class="btn-block-option" href="{{ route('register') }}" data-toggle="tooltip"
                                        data-placement="left" title="New Account">
                                         <i class="fa fa-user-plus"></i>
-                                    </a>
+                                    </a> -->
                                 </div>
                             </div>
                             <div class="block-content">
