@@ -89,8 +89,25 @@ class CheckinHistoryController extends Controller
         $user_history = CheckinHistory::all();
         $user_days = view('utils.durationfilter')->render();
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-        return view('pages.user.users_checkin_report', ['user_history' => ($user_history ?? null), 'user_history_html' => $html, 'users' => $this->getAllUsers(),'user_days'=>$user_days]);
+        return view('pages.user.users_checkin_report', ['user_history' => ($user_history ?? null), 'user_history_html' => $html, 'users' => $this->getAllUsers(), 'user_days' => $user_days]);
     }
+
+    public function userOwnCheckinList(Request $request)
+    {
+
+        $user_history = CheckinHistory::where('user_id', $this->getAuthUserId())->get();
+        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history]);
+        // $html = view('pages.user._partial._checkin_history_html', ['user_history' =>  $responseData['checkin_history']])->render();
+        return view('pages.user.users_own_checkin_report')->with(['checkin_history_html' => $checkin_history_html]);
+
+
+        // $user_id = $this->getAuthUserId();
+        // $user_history = CheckinHistory::where('user_id', $user_id)->get();
+        // // $user_days = view('utils.durationfilter')->render();
+        // $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
+        // return view('pages.user.users_own_checkin_report', ['user_history' => ($user_history ?? null), 'checkin-history-section' => $html]);
+    }
+
 
     public function getUserCheckinRecord(Request $request)
     {

@@ -36,13 +36,15 @@ class MenusTableSeeder extends Seeder
             ['id' => 18, 'name' => 'User Quries', 'parent_id' => 0, 'route' => 'userquery.admin.view.userqueries', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 19, 'name' => 'Comments', 'parent_id' => 0, 'route' => 'userquery.comments', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 20, 'name' => 'Discussions', 'parent_id' => 0, 'route' => 'admin.user.discussions', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
-//            ['id' => 21, 'name' => 'Project Manager', 'parent_id' => 0, 'route' => 'user.project.managers', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
-//            ['id' => 22, 'name' => 'Projects', 'parent_id' => 0, 'route' => 'user.projects.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            //            ['id' => 21, 'name' => 'Project Manager', 'parent_id' => 0, 'route' => 'user.project.managers', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            //            ['id' => 22, 'name' => 'Projects', 'parent_id' => 0, 'route' => 'user.projects.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 22, 'name' => 'Projects', 'parent_id' => 0, 'route' => 'project.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 23, 'name' => 'Technology Stack', 'parent_id' => 0, 'route' => 'technology.stack.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 24, 'name' => 'Jobs', 'parent_id' => 0, 'route' => 'job.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
-//            ['id' => 25, 'name' => 'Working Projects', 'parent_id' => 0, 'route' => 'engagement.manager.working.project.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
-//            ['id' => 26, 'name' => 'Admins', 'parent_id' => 5, 'route' => 'admin.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            //            ['id' => 25, 'name' => 'Working Projects', 'parent_id' => 0, 'route' => 'engagement.manager.working.project.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            //            ['id' => 26, 'name' => 'Admins', 'parent_id' => 5, 'route' => 'admin.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 25, 'name' => 'Own Checkin History', 'parent_id' => 0, 'route' => 'checkin.users.own_report', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+
         ];
         DB::table('menus')->insert($menus);
     }

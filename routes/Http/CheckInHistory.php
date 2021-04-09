@@ -19,6 +19,7 @@ class CheckInHistory
             Route::post('/confirm/checkout', [CheckinHistoryController::class, 'confirmCheckout'])->name('confirm.checkout');
 
             Route::get('/users/checkin/report', [CheckinHistoryController::class, 'userCheckinList'])->name('checkin.users.report');
+            Route::get('/users/checkin/own_report', [CheckinHistoryController::class, 'userOwnCheckinList'])->name('checkin.users.own_report');
 
             Route::post('/get/user/checkin', [CheckinHistoryController::class, 'getUserCheckinRecord'])->name('checkin.history.user');
 

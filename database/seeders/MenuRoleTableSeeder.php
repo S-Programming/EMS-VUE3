@@ -70,6 +70,7 @@ class MenuRoleTableSeeder extends Seeder
             ['is_allow' => 1, 'role_id' => 5, 'menu_id' => 16],
             ['is_allow' => 1, 'role_id' => 5, 'menu_id' => 17],
             ['is_allow' => 1, 'role_id' => 5, 'menu_id' => 19],
+            ['is_allow' => 1, 'role_id' => 5, 'menu_id' => 25],
             //Human Resource Manager
             ['is_allow' => 1, 'role_id' => 9, 'menu_id' => 2],
             ['is_allow' => 1, 'role_id' => 9, 'menu_id' => 4],
