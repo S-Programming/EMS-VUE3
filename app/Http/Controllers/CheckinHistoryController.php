@@ -84,7 +84,7 @@ class CheckinHistoryController extends Controller
      *
      * @return Body
      */
-    public function userCheckinList(Request $request)
+    public function allUsersCheckinList(Request $request)
     {
         $user_history = CheckinHistory::all();
         $user_days = view('utils.durationfilter')->render();
@@ -92,7 +92,7 @@ class CheckinHistoryController extends Controller
         return view('pages.user.users_checkin_report', ['user_history' => ($user_history ?? null), 'user_history_html' => $html, 'users' => $this->getAllUsers(), 'user_days' => $user_days]);
     }
 
-    public function userOwnCheckinList(Request $request)
+    public function checkinList(Request $request)
     {
 
         $user_history = CheckinHistory::where('user_id', $this->getAuthUserId())->get();

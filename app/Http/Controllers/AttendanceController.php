@@ -25,7 +25,8 @@ class AttendanceController extends Controller
     */
     public function index()
     {
-    	return view('pages.attendance.attendance_mark');
+        $cureent_date = Carbon::now()->toTimeString();
+    	return view('pages.attendance.attendance_mark')->with(['cureent_date' => $cureent_date]);
     }
     public function markAttendance(Request $request)
     {

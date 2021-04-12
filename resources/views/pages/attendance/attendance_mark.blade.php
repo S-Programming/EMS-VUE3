@@ -39,7 +39,7 @@
                             	<div class="col-4">
                             		<div class="form-group">
                             			<label for="entry_time">&nbsp; Entry Time</label>
-                                    	<x-input id="entry_time" class="form-control form-control-alt form-control-lg" type="text" name="entry_time" placeholder="--:--:--" disabled/>
+                                    	<x-input id="entry_time" class="form-control form-control-alt form-control-lg" value="{{$cureent_date}}" type="text" name="entry_time" placeholder="--:--:--" disabled/>
 	                                 </div>
                             	</div>
                             	<div class="col-4">
@@ -87,13 +87,11 @@
                                   id="validation-span-id">
                             <i class="fa fa-fw fa-check mr-1"></i>{{ __('Entry Mark') }}
                         </x-button>
-                        @if($attendance_entry_mark)
                         <x-button class="btn btn-primary" onclick="validateFieldsByFormId(this)"
                                   data-validation="validation-span-id"
                                   id="validation-span-id">
                             <i class="fa fa-fw fa-check mr-1"></i>{{ __('Exit Mark') }}
                         </x-button>
-                        @endif
                     </div>
                 </form>
             </div>

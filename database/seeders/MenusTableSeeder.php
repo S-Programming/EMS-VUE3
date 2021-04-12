@@ -20,7 +20,7 @@ class MenusTableSeeder extends Seeder
             ['id' => 3, 'name' => 'User Profile', 'parent_id' => 5, 'route' => 'user.edit.profile', 'sort_order' => 0, 'class' => 'nav-main-link-submenu', 'icon' => 'fa fa-users', 'is_count' => 0, 'is_active' => 1],
             ['id' => 4, 'name' => 'Role', 'parent_id' => 0, 'route' => 'role.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 5, 'name' => 'User Section', 'parent_id' => 0, 'route' => 'user.*', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
-            ['id' => 6, 'name' => 'Checkin History', 'parent_id' => 0, 'route' => 'checkin.users.report', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 6, 'name' => 'All Users Checkin History', 'parent_id' => 0, 'route' => 'all.users.checkin.report', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
 
             ['id' => 7, 'name' => 'Approval Section', 'parent_id' => 0, 'route' => 'approve.*', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 8, 'name' => 'Apply Leave', 'parent_id' => 0, 'route' => 'leave.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
@@ -43,7 +43,7 @@ class MenusTableSeeder extends Seeder
             ['id' => 24, 'name' => 'Jobs', 'parent_id' => 0, 'route' => 'job.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             //            ['id' => 25, 'name' => 'Working Projects', 'parent_id' => 0, 'route' => 'engagement.manager.working.project.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             //            ['id' => 26, 'name' => 'Admins', 'parent_id' => 5, 'route' => 'admin.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
-            ['id' => 25, 'name' => 'Own Checkin History', 'parent_id' => 0, 'route' => 'checkin.users.own_report', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 25, 'name' => 'Checkin History', 'parent_id' => 0, 'route' => 'checkin.report', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
 
         ];
         DB::table('menus')->insert($menus);
