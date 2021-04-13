@@ -24,6 +24,7 @@ class CheckinHistoryService extends BaseService
         $user_id = $this->getAuthUserId();
         if ($user_id > 0) {
             $checkin_history_data = CheckinHistory::where('user_id', $user_id)->latest()->first();
+            
             if (!is_null($checkin_history_data)) {
                 $today = Carbon::parse($checkin_history_data->checkin);
                 /*## Need to improve logic, If user already checkin then will not be able to checkin again*/
@@ -177,7 +178,7 @@ class CheckinHistoryService extends BaseService
     {
         $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
         $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
-
+        // dd($start_date, '-', $end_date);
         ## End Date User Record Included
         $result = CheckinHistory::whereDate('checkin', '>=', $start_date)->whereDate('checkin', '<=', $end_date)->get();
 

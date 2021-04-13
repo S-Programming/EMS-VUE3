@@ -87,10 +87,10 @@
                             Leaves Summary
                             <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
                         </a> -->
-                        <dt class="font-size-h2 font-w600 text-dark text-center">Leaves Summary</dt>
+                        <dt class="font-size-h3 font-w600 text-dark text-center">Leaves Summary</dt>
                     </div>
 
-                    <div id="jQuery" class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center bg-warning">
+                    <div id="jQuery" class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center bg-info">
                         <dl class="mb-0">
                             <dd class="text-muted mb-0">
                                 <p class="text-light"> This Month : {{$monthlyCheckins}} </p>
@@ -120,7 +120,14 @@
 
             <div class="col-6 col-sm-4 col-md-3 col-xl-3">
                 <div class="block block-rounded d-flex flex-column">
-                    <div class="block-content block-content-full flex-grow-1 flex-column d-flex justify-content-center align-items-center bg-success">
+                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                        <!-- <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
+                            Leaves Summary
+                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                        </a> -->
+                        <dt class="font-size-h3 font-w600 text-dark text-center">Total Leaves</dt>
+                    </div>
+                    <div class="block-content block-content-full flex-grow-1 flex-column d-flex justify-content-center align-items-center bg-secondary">
                         <p class="text-light text-center font-size-h2 font-w700">0</p>
                         <p class="text-light text-center font-size-h2 font-w700">Leaves</p>
                         <!-- <div class="item item-rounded bg-body">
@@ -137,6 +144,13 @@
             </div>
             <div class="col-6 col-sm-4 col-md-3 col-xl-3">
                 <div class="block block-rounded d-flex flex-column">
+                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                        <!-- <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
+                            Leaves Summary
+                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                        </a> -->
+                        <dt class="font-size-h3 font-w600 text-dark text-center">Total Presents</dt>
+                    </div>
                     <div class="block-content block-content-full flex-grow-1 flex-column d-flex justify-content-center align-items-center bg-success">
                         <p class="text-light text-center font-size-h2 font-w700">0</p>
                         <p class="text-light text-center font-size-h2 font-w700">Presents</p>
@@ -160,15 +174,20 @@
                             View all Presents
                             <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
                         </a> -->
-                        <dt class="font-size-h2 font-w600 text-dark text-center">Current Time</dt>
+                        <dt class="font-size-h3 font-w600 text-dark text-center">Current Time</dt>
                     </div>
-                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center bg-info">
+                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center bg-primary">
                         <p class="text-light text-center" id="current-timer"></p>
                         <!-- <div class="item item-rounded bg-body">
                             <i class="fa fa-shopping-cart font-size-h3 text-primary"></i>
                         </div> -->
                     </div>
-
+                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                        <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
+                            View all times
+                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 

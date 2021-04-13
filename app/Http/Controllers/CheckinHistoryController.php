@@ -34,6 +34,19 @@ class CheckinHistoryController extends Controller
      */
     public function checkinModal(Request $request)
     {
+        $user_id =  $this->getAuthUserId();
+        $checkin_history_data = CheckinHistory::where('user_id', $user_id)->pluck('checkin')->toArray();
+        $checkin_date_count = count($checkin_history_data);
+        $todate = Carbon::now()->format('Y-m-d');
+        if ($checkin_date_count > 0) {
+            foreach ($checkin_history_data as $checkin_data) {
+                $checkin_date_explode = explode(' ', $checkin_data);
+                $checkin_date = $checkin_date_explode[0];
+                if ($checkin_date == $todate) {
+                    return $this->sendJsonResponse('You are already Checkin Today');
+                }
+            }
+        }
         $containerId = $request->input('containerId', 'common_popup_modal');
         $html = view('pages.user._partial._checkin_modal', ['id' => $containerId, 'data' => null])->render();
         return $this->success('success', ['html' => $html]);
