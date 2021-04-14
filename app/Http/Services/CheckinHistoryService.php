@@ -24,7 +24,7 @@ class CheckinHistoryService extends BaseService
         $user_id = $this->getAuthUserId();
         if ($user_id > 0) {
             $checkin_history_data = CheckinHistory::where('user_id', $user_id)->latest()->first();
-            
+
             if (!is_null($checkin_history_data)) {
                 $today = Carbon::parse($checkin_history_data->checkin);
                 /*## Need to improve logic, If user already checkin then will not be able to checkin again*/
@@ -50,7 +50,6 @@ class CheckinHistoryService extends BaseService
             $html = view('pages.user._partial._checkout_html')->render();
             $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
             return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section', 'module' => 'checkin']);
-            
         }
     }
 
@@ -59,7 +58,7 @@ class CheckinHistoryService extends BaseService
         $user_id = $this->getAuthUserId();
         if ($user_id > 0) {
             $html = view('pages.user._partial._checkin_html')->render();
-          //  dd($html);
+            //  dd($html);
             $checkin_history_data = CheckinHistory::where('user_id', $user_id)->latest()->first();
             if ($checkin_history_data != null) {
                 if (!$checkin_history_data->checkout) {
@@ -69,10 +68,10 @@ class CheckinHistoryService extends BaseService
                     $checkin_history_data->questions = $request->questions ?? '';
                     $checkin_history_data->save();
                     $user_history = CheckinHistory::where('user_id', $user_id)->get();
-                    
+
                     $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
                     // dd($checkin_history_html);
-                //    dd($checkin_history_html,"data");
+                    //    dd($checkin_history_html,"data");
                     return $this->successResponse('You are successfully checked-out', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section']);
 
                     //return $this->successResponse('CheckOut Successfully!', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section']);
@@ -85,22 +84,29 @@ class CheckinHistoryService extends BaseService
     public function getUserCheckinRecord(Request $request)
     {
         $user_id = $request->user_id;
-        $filters = ($user_id > 0) ? [['user_id', '=', $user_id]] : [];
         $date_filters = historyDateFilter($request->user_days);
-        $filters = array_merge($date_filters, $filters);
-       // dd($filters);
-        $checkin_history_data = CheckinHistory::where($filters)->get();
-        $count = $checkin_history_data->count();
-        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkin_history_data, 'totalCheckins' => $count])->render();
-        if ($count > 0)
-        {
-            return $this->successResponse('Record Found successfully', ['html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
-        }
-        else
-        {
-            return $this->errorResponse('Record Not Found', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
+        if ($user_id == 'All' && $date_filters == []) {
+            $checkin_history_data = CheckinHistory::all();
+            return $this->filter_detail($checkin_history_data);
         }
 
+        if ($user_id == 'All' && !$date_filters == []) {
+            $checkin_history_data = CheckinHistory::where($date_filters)->get();
+            return $this->filter_detail($checkin_history_data);
+        }
+
+        if ($user_id > 0 && $date_filters == []) {
+            $filters = ($user_id > 0) ? [['user_id', '=', $user_id]] : [];
+            $checkin_history_data = CheckinHistory::where($filters)->get();
+            return $this->filter_detail($checkin_history_data);
+        }
+
+        $filters = ($user_id > 0) ? [['user_id', '=', $user_id]] : [];
+        $filters = array_merge($date_filters, $filters);
+        $checkin_history_data = CheckinHistory::where($filters)->get();
+        return $this->filter_detail($checkin_history_data);
+
+        
         /*if ($request->user_days == 'All' && $request->user_id == 'All') {
             $user_history = CheckinHistory::all();
             $count = $user_history->count();
@@ -166,14 +172,24 @@ class CheckinHistoryService extends BaseService
                 return $this->errorResponse('Checkin_History Not Exists', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
             }
         }*/
-
-
     }
     /**
      * Method used for showing users checkins between two dates
      *
      *
      */
+
+    public function filter_detail($checkin_history_data)
+    {
+        $count = $checkin_history_data->count();
+        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkin_history_data, 'totalCheckins' => $count])->render();
+        if ($count > 0) {
+            return $this->successResponse('Record Found successfully', ['html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
+        } else {
+            return $this->errorResponse('Record Not Found', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
+        }
+    }
+
     public function checkinHistoryBtDates(Request $request)
     {
         $start_date = Carbon::parse($request->start_date)->format('Y-m-d');

@@ -47,6 +47,9 @@ class CheckinHistoryController extends Controller
                 }
             }
         }
+        if (Carbon::now()->format('l') == 'Sunday') {
+            return $this->sendJsonResponse('Today is Sunday not checkin');
+        }
         $containerId = $request->input('containerId', 'common_popup_modal');
         $html = view('pages.user._partial._checkin_modal', ['id' => $containerId, 'data' => null])->render();
         return $this->success('success', ['html' => $html]);
@@ -102,7 +105,7 @@ class CheckinHistoryController extends Controller
         $user_history = CheckinHistory::all();
         $user_days = view('utils.durationfilter')->render();
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-        return view('pages.user.users_checkin_report', ['user_history' => ($user_history ?? null), 'user_history_html' => $html, 'users' => $this->getAllUsers(), 'user_days' => $user_days]);
+        return view('pages.user.users_checkin_report', ['user_history_html' => $html, 'users' => $this->getAllUsers(), 'user_days' => $user_days]);
     }
 
     public function checkinList(Request $request)

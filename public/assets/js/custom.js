@@ -341,13 +341,14 @@ function ajaxCallOnclick(route, extraData) {
             data: dataToPost,//dataToPost,
             dataType: "json",
             success: function (data) {
-                //console.log('RN',data)
+                console.log(data.html);
+                // console.log('RN',data)
                 if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
                     $('#' + data.html_section_id).html(data.html);
                 }
                 if (typeof data.checkin_history_html != 'undefined' && typeof data.html_history_section_id != 'undefined' && data.checkin_history_html != '') {
                     $('#' + data.html_history_section_id).html(data.checkin_history_html);
-                    console.log(data.checkin_history_html,"saddique");
+                   
                 }
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
