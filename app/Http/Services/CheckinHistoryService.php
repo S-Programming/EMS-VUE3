@@ -182,7 +182,7 @@ class CheckinHistoryService extends BaseService
     public function filter_detail($checkin_history_data)
     {
         $count = $checkin_history_data->count();
-        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkin_history_data, 'totalCheckins' => $count])->render();
+        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkin_history_data])->render();
         if ($count > 0) {
             return $this->successResponse('Record Found successfully', ['html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
         } else {
@@ -192,17 +192,18 @@ class CheckinHistoryService extends BaseService
 
     public function checkinHistoryBtDates(Request $request)
     {
+
         $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
         $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
         // dd($start_date, '-', $end_date);
         ## End Date User Record Included
-        $result = CheckinHistory::whereDate('checkin', '>=', $start_date)->whereDate('checkin', '<=', $end_date)->get();
-
-        $html = view('pages.user._partial._checkin_history_html', ['user_history' => $result])->render();
-        if ($result->count() > 0) {
-            return $this->successResponse('Checkin_History Received successfully', ['html' => $html, 'html_section_id' => 'self-checkin-history']);
+        $checkin_history_data = CheckinHistory::whereDate('checkin', '>=', $start_date)->whereDate('checkin', '<=', $end_date)->where('user_id',$this->getAuthUserId())->get();
+        $count = $checkin_history_data->count();
+        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkin_history_data])->render();
+        if ($count > 0) {
+            return $this->successResponse('Record Found successfully', ['html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
         } else {
-            return $this->errorResponse('Checkin_History Not Found', ['errors' => ['Checkin_History Not Found'], 'html' => $html, 'html_section_id' => 'self-checkin-history']);
+            return $this->errorResponse('Record Not Found', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
         }
     }
     /**
