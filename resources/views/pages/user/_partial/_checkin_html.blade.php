@@ -16,7 +16,8 @@
     </div>
     <div class="block-content py-2 bg-body-light">
         <p class="font-w600 font-size-sm text-muted mb-0">
-            Checkin
+        {{ session()->get('total_work_time') ?? 'Checkin'}}
+            <!-- {{$total_work_time??'Checkin'}} -->
         </p>
     </div>
 </a>

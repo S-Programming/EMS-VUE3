@@ -57,7 +57,6 @@ class CheckinHistoryService extends BaseService
     {
         $user_id = $this->getAuthUserId();
         if ($user_id > 0) {
-            $html = view('pages.user._partial._checkin_html')->render();
             //  dd($html);
             $checkin_history_data = CheckinHistory::where('user_id', $user_id)->latest()->first();
             if ($checkin_history_data != null) {
@@ -67,12 +66,17 @@ class CheckinHistoryService extends BaseService
                     $checkin_history_data->do_tomorrow = $request->do_tomorrow ?? '';
                     $checkin_history_data->questions = $request->questions ?? '';
                     $checkin_history_data->save();
-                    $user_history = CheckinHistory::where('user_id', $user_id)->get();
-
-                    $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
+                    $user_history = CheckinHistory::where('user_id', $user_id)->get()->last();
+                    $start_time = Carbon::parse($user_history->checkin);
+                    $end_time = Carbon::parse($user_history->checkout);
+                    $total_work_time =  $start_time->diff($end_time)->format('%H:%I:%S');
+                    Session::put('total_work_time', $total_work_time);
+                    // dd($total_work_time);
+                    //$checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
                     // dd($checkin_history_html);
                     //    dd($checkin_history_html,"data");
-                    return $this->successResponse('You are successfully checked-out', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section']);
+                    $html = view('pages.user._partial._checkin_html')->render();
+                    return $this->successResponse('You are successfully checked-out', ['html' => $html, 'html_section_id' => 'checkin-section', 'html_history_section_id' => 'checkin-history-section']);
 
                     //return $this->successResponse('CheckOut Successfully!', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section']);
                 }
@@ -106,7 +110,7 @@ class CheckinHistoryService extends BaseService
         $checkin_history_data = CheckinHistory::where($filters)->get();
         return $this->filter_detail($checkin_history_data);
 
-        
+
         /*if ($request->user_days == 'All' && $request->user_id == 'All') {
             $user_history = CheckinHistory::all();
             $count = $user_history->count();
@@ -197,7 +201,7 @@ class CheckinHistoryService extends BaseService
         $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
         // dd($start_date, '-', $end_date);
         ## End Date User Record Included
-        $checkin_history_data = CheckinHistory::whereDate('checkin', '>=', $start_date)->whereDate('checkin', '<=', $end_date)->where('user_id',$this->getAuthUserId())->get();
+        $checkin_history_data = CheckinHistory::whereDate('checkin', '>=', $start_date)->whereDate('checkin', '<=', $end_date)->where('user_id', $this->getAuthUserId())->get();
         $count = $checkin_history_data->count();
         $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkin_history_data])->render();
         if ($count > 0) {
