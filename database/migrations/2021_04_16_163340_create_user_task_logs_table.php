@@ -13,13 +13,13 @@ class CreateUserTasklogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_tasklogs', function (Blueprint $table) {
+        Schema::create('user_task_logs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('checkin_id');
             $table->unsignedBigInteger('project_id');
             $table->string('description');
-            $table->time('time');
+            $table->string('time');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('checkin_id')->references('id')->on('checkin_history')->onDelete('cascade');
@@ -35,7 +35,7 @@ class CreateUserTasklogsTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('user_tasklogs');
+        Schema::dropIfExists('user_task_logs');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

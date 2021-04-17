@@ -35,6 +35,8 @@ class CheckInHistory
             // Today Report Routes
             Route::get('/today/report', [CheckinHistoryController::class, 'todayReport'])->name('today.report');
             Route::post('/add/report/modal', [CheckinHistoryController::class, 'addReportModal'])->name('add.report.modal');
+            Route::post('/add/report', [CheckinHistoryController::class, 'addReport'])->name('add.report');
+
         });
     }
 }

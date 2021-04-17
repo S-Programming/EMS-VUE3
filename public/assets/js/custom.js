@@ -24,7 +24,6 @@ function validateFieldsByFormId(e) {
     const formURL = $(e).closest('form').attr('action');
     const modalId = $(e).closest('form').data('modal-id');
     const validationSpanId = $(e).data('validation');
-    console.log(modalId);
     var error = validateFields(formId);
     var errorMsg = '';
     var flag = true;
@@ -348,7 +347,7 @@ function ajaxCallOnclick(route, extraData) {
                 }
                 if (typeof data.checkin_history_html != 'undefined' && typeof data.html_history_section_id != 'undefined' && data.checkin_history_html != '') {
                     $('#' + data.html_history_section_id).html(data.checkin_history_html);
-                   
+
                 }
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');

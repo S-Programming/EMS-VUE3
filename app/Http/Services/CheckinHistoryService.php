@@ -10,6 +10,7 @@ use App\Models\RoleUser;
 use App\Models\TechnologyStack;
 use App\Models\Project;
 use App\Models\DevelopersProject;
+use App\Models\UserTaskLog;
 use App\Models\Attendance;
 use App\Models\User;
 use Carbon\Carbon;
@@ -73,7 +74,7 @@ class CheckinHistoryService extends BaseService
                     $user_history = CheckinHistory::where('user_id', $user_id)->get()->last();
                     $start_time = Carbon::parse($user_history->checkin);
                     $end_time = Carbon::parse($user_history->checkout);
-                    $total_work_time =  $start_time->diff($end_time)->format('%H:%I:%S');
+                    $total_work_time = $start_time->diff($end_time)->format('%H:%I:%S');
                     Session::put('total_work_time', $total_work_time);
                     // dd($total_work_time);
                     //$checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
@@ -181,6 +182,7 @@ class CheckinHistoryService extends BaseService
             }
         }*/
     }
+
     /**
      * Method used for showing users checkins between two dates
      *
@@ -214,6 +216,7 @@ class CheckinHistoryService extends BaseService
             return $this->errorResponse('Record Not Found', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
         }
     }
+
     /**
      * Method used for showing delete popup modal
      *
@@ -227,6 +230,7 @@ class CheckinHistoryService extends BaseService
 
         return $this->successResponse('success', ['html' => $html]);
     }
+
     /**
      * method use for confirm deletion of user checkin history
      *
@@ -244,6 +248,7 @@ class CheckinHistoryService extends BaseService
         // dd($html);
         return $this->successResponse('User is Successfully Deleted', ['html' => $html, 'html_section_id' => 'checkin-history']);
     }
+
     /**
      * Method used for showing editing the users checkin report on pop up modal
      *
@@ -258,6 +263,7 @@ class CheckinHistoryService extends BaseService
         $html = view('pages.admin._partial._edit_user_checkin_modal', ['id' => $containerId, 'data' => null, 'user_checkin_data' => $user_checkin_data])->render();
         return $this->successResponse('success', ['html' => $html]);
     }
+
     /**
      * Method used for confirm update the user checkin report
      *
@@ -281,13 +287,63 @@ class CheckinHistoryService extends BaseService
     //Today Report
     public function addReportModal(Request $request)
     {
-        $containerId = $request->input('containerId', 'common_popup_modal');
-        $user_id = $this->getAuthUserId();
-        $projects_data = DevelopersProject::with('Project')->where('user_id', $user_id)->get();
+        $container_id = $request->input('containerId', 'common_popup_modal');
+        $userId = $this->getAuthUserId();
+        $projects_data = DevelopersProject::with('Project')->where('user_id', $userId)->get();
         $project_dropdown = view('utils.projects', ['projects_data' => $projects_data])->render();
-        // dd($project_managers_dropdown);
-        $html = view('pages.user._partial._add_report_modal', ['id' => $containerId, 'data' => null, 'project_dropdown' => $project_dropdown])->render();
-        // $html = view('pages.user._partial._add_report_modal', ['id' => $containerId, 'data' => null])->render();
+        $userLastCheckinDetails = $this->userLastCheckinDetails();
+        $last_checkin_id = $userLastCheckinDetails->id??0;
+        $last_checkin_time = $userLastCheckinDetails->checkin??0;
+        if(isset($last_checkin_time) && !empty($last_checkin_time)){
+            $carbon_checkin_time = Carbon::createFromDate($last_checkin_time);
+            $difference_in_minutes = $carbon_checkin_time->diffInMinutes(Carbon::now());
+            $sumTime = UserTaskLog::where('user_id',$userId)->sum('time');
+            $difference_in_minutes = $difference_in_minutes - intval($sumTime);
+            ## We have to subtract the logged minutes here
+            $minutes = $difference_in_minutes > 0 ? ($difference_in_minutes % 60) : 0;
+            $hours = $difference_in_minutes > 60 ? intval((($difference_in_minutes - $minutes) / 60)) : 0;
+            $last_checkin_time = $carbon_checkin_time->format('Y-m-d h:i:s A');
+        }
+        $modal_data = [
+            'id' => $container_id,
+            'last_checkin_id' => $last_checkin_id,
+            'project_dropdown' => $project_dropdown,
+            'last_checkin_time' => $last_checkin_time?? '',
+            'hours' => $hours??'',
+            'minutes' => $minutes??'',
+        ];
+        $html = view('pages.user._partial._add_report_modal', $modal_data)->render();
         return $this->successResponse('success', ['html' => $html]);
+    }
+
+    public function addReport(Request $request)
+    {
+        $userId = $this->getAuthUserId();
+        $userTaskLogs = new UserTaskLog;
+        $hours = $request->hours;
+        $minutes = $request->minutes;
+        $userLastCheckinDetails = $this->userLastCheckinDetails();
+        $last_checkin_id = $userLastCheckinDetails->id??0;
+        $last_checkin_time = $userLastCheckinDetails->checkin??0;
+        $carbon_checkin_time = Carbon::createFromDate($last_checkin_time);
+        $difference_in_minutes = $carbon_checkin_time->diffInMinutes(Carbon::now());
+        if($hours > 0 && $minutes > 0)
+        {
+            $minutes = $minutes + ($hours * 60);
+        }
+        $sumTime = UserTaskLog::where('user_id',$userId)->sum('time');
+        $logAbleTime=$difference_in_minutes-intval($sumTime);
+        if($minutes > intval($logAbleTime))
+        {
+            return $this->errorResponse('Your logged time exceed to actual spent time');
+        }
+//        dd($minutes,$logAbleTime);
+        $userTaskLogs->user_id = $this->getAuthUserId();
+        $userTaskLogs->checkin_id = $request->checkin_id;
+        $userTaskLogs->project_id = $request->project_id;
+        $userTaskLogs->description = $request->task_details;
+        $userTaskLogs->time = $minutes;
+        $userTaskLogs->save();
+        return $this->successResponse('You are successfully add report');
     }
 }
