@@ -1,16 +1,9 @@
 <x-backend-layout>
-    <!-- Hero -->
-
-
-    <!-- New Dashboard huh -->
     <!-- Page Content -->
     <div class="content">
         <!-- Row-01 -->
         <div class="row">
             <div class="col-6 col-sm-4 col-md-2 col-lg-2" id="checkin-section">
-                {{-- @dd("asdsadadsasddadasdasdasdasdas");--}}
-
-                {{-- @dd($is_checkin)--}}
                 @includeWhen(!$is_checkin,'pages.user._partial._checkin_html')
                 @includeWhen($is_checkin,'pages.user._partial._checkout_html')
             </div>

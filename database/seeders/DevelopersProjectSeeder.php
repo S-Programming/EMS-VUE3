@@ -17,9 +17,9 @@ class DevelopersProjectSeeder extends Seeder
     {
         //
         $developers=[
-            ['project_id'=>1,'user_id'=>21,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
-            ['project_id'=>3,'user_id'=>23,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
-            ['project_id'=>4,'user_id'=>24,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['project_id'=>1,'user_id'=>5,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['project_id'=>3,'user_id'=>6,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['project_id'=>4,'user_id'=>7,'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
         ];
         DB::table('developers_projects')->insert($developers);
     }
