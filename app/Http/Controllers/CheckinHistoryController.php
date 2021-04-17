@@ -193,4 +193,15 @@ class CheckinHistoryController extends Controller
         }
         return $this->sendJsonResponse($this->checkinHistoryService->updateCheckinUser($request));
     }
+
+    // Today Report view
+    public function todayReport(){
+        return view('pages.user.today_report');
+    }
+
+    // Add Feport Model load
+    public function addReportModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->checkinHistoryService->addReportModal($request));
+    }
 }

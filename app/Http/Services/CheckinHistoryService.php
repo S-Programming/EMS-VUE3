@@ -6,6 +6,10 @@ namespace App\Http\Services;
 
 use App\Http\Services\BaseService\BaseService;
 use App\Models\CheckinHistory;
+use App\Models\RoleUser;
+use App\Models\TechnologyStack;
+use App\Models\Project;
+use App\Models\DevelopersProject;
 use App\Models\Attendance;
 use App\Models\User;
 use Carbon\Carbon;
@@ -272,5 +276,26 @@ class CheckinHistoryService extends BaseService
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
 
         return $this->successResponse('Checkin History Record Successfully Updated', ['html' => $html, 'html_section_id' => 'checkin-history']);
+    }
+
+    //Today Report
+    public function addReportModal(Request $request)
+    {
+        // $technologies = TechnologyStack::all();
+        // $project_managers = RoleUser::with('user')->where('role_id', 4)->get();
+        // $containerId = $request->input('containerId', 'common_popup_modal');
+        // $technology_stack_dropdown = view('utils.technology_stack_dropdown', ['technologies' => $technologies])->render();
+        // $project_managers_dropdown = view('utils.project_managers_dropdown', ['project_managers' => $project_managers])->render();
+        // $html = view('pages.admin.projects._partial._add_project_modal', ['id' => $containerId, 'technology_stack_dropdown' => $technology_stack_dropdown, 'data' => null, 'project_managers_dropdown' => $project_managers_dropdown])->render();
+        // return $this->successResponse('success', ['html' => $html]);
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $user_id = $this->getAuthUserId();
+        $projects_data = DevelopersProject::with('Project')->where('user_id', $user_id)->get();
+        $project_dropdown = view('utils.projects', ['projects_data' => $projects_data])->render();
+
+        // dd($project_managers_dropdown);
+        $html = view('pages.user._partial._add_report_modal', ['id' => $containerId, 'data' => null, 'project_dropdown' => $project_dropdown])->render();
+        // $html = view('pages.user._partial._add_report_modal', ['id' => $containerId, 'data' => null])->render();
+        return $this->successResponse('success', ['html' => $html]);
     }
 }

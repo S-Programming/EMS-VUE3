@@ -31,6 +31,10 @@ class CheckInHistory
 
             Route::post('/update/checkin/user', [CheckinHistoryController::class, 'updateCheckinUser'])->name('checkin.update.user');
             Route::get('/test', [CheckinHistoryController::class, 'show'])->name('checkin.test');
+
+            // Today Report Routes
+            Route::get('/today/report', [CheckinHistoryController::class, 'todayReport'])->name('today.report');
+            Route::post('/add/report/modal', [CheckinHistoryController::class, 'addReportModal'])->name('add.report.modal');
         });
     }
 }
