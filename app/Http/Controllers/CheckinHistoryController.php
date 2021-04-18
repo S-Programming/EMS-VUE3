@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Facades\CommonUtilsFacade;
 use App\Http\Services\CheckinHistoryService;
 use Illuminate\Http\Request;
+use App\Models\UserTaskLog;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CheckinHistory;
 use App\Models\User;
@@ -196,7 +197,11 @@ class CheckinHistoryController extends Controller
 
     // Today Report view
     public function todayReport(){
-        return view('pages.user.today_report');
+        $userId = $this->getAuthUserId();
+        $user_task_logs = UserTaskLog::where('user_id',$userId)->get();
+        $user_task_logs = UserTaskLog::with('Project')->with('User')->where('user_id', $userId)->get();
+        $html = view('pages.user._partial._checkin_task_log_html', ['user_task_logs' => $user_task_logs])->render();
+        return view('pages.user.today_report', ['user_report_html' => $html]);
     }
 
     // Add Report Model load

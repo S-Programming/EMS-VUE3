@@ -50,9 +50,9 @@
                     <textarea id="task_details" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg" name="task_details" required autofocus></textarea>
                 </div>
                 <div class="block-content block-content-full text-right border-top">
-                    <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">Cancel</button>
                     <x-button class="checkout-btn btn btn-primary" onclick="validateFieldsByFormId(this)" data-validation="report-span-id" id="report-span-id">
-                        <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Check Out') }}
+                        <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Save Report') }}
                     </x-button>
                 </div>
             </form>

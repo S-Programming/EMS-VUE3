@@ -11,4 +11,14 @@ class UserTaskLog extends Model
 
     protected $table = 'user_task_logs';
     public $fillable = ['user_id', 'checkin_id', 'project_id', 'description', 'time', 'created_at', 'updated_at'];
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function Project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

@@ -8,7 +8,7 @@
         <!-- Row-01 -->
         <div class="row row-deck">
 
-            <div class="col-6 col-sm-12 col-md-12 col-xl-12">
+            <div class="col-6 col-sm-12 col-md-12 col-xl-8">
                 <div class="block block-rounded d-flex flex-column">
                     <div class="card-body">
                         <form method="POST" action="{{ route('confirm.checkout') }}" id="checkout-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
@@ -22,8 +22,12 @@
                                     <button type="button" class="btn btn-primary float-right" onclick="commonAjaxModel('add/report/modal')">Add Report</button>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <textarea class="form-control form-control-lg" name="done_today" disabled required autofocus></textarea>
+                            </div> -->
+
+                            <div class="block-content" id="user-task-logs">
+                                {!! $user_report_html??'' !!}
                             </div>
                             <div class="py-3">
                                 <p class="font-size-h3">What I'll do tomorrow?</p>
