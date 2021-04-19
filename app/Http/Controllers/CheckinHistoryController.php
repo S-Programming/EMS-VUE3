@@ -196,12 +196,19 @@ class CheckinHistoryController extends Controller
     }
 
     // Today Report view
+    // public function todayReport(){
+    //     $userId = $this->getAuthUserId();
+    //     $user_task_logs = UserTaskLog::with('Project')->with('User')->where('user_id', $userId)->whereDate('created_at', Carbon::today())->get();
+    //     $html = view('pages.user._partial._checkin_task_log_html', ['user_task_logs' => $user_task_logs])->render();
+    //     return view('pages.user.today_report', ['user_report_html' => $html]);
+    // }
+
+
     public function todayReport(){
         $userId = $this->getAuthUserId();
-        $user_task_logs = UserTaskLog::where('user_id',$userId)->get();
-        $user_task_logs = UserTaskLog::with('Project')->with('User')->where('user_id', $userId)->get();
-        $html = view('pages.user._partial._checkin_task_log_html', ['user_task_logs' => $user_task_logs])->render();
-        return view('pages.user.today_report', ['user_report_html' => $html]);
+        $user_task_logs = UserTaskLog::with('Project')->with('User')->where('user_id', $userId)->whereDate('created_at', Carbon::today())->get();
+        $html = view('pages.user._partial._user_task_log_list_table_html')->render();
+        return view('pages.user.today_report', ['html' => $html, 'user_task_logs' => $user_task_logs, 'html_section_id' => 'user-task-log-section']);
     }
 
     // Add Report Model load
@@ -216,4 +223,27 @@ class CheckinHistoryController extends Controller
         return $this->sendJsonResponse($this->checkinHistoryService->addReport($request));
     }
 
+    //Edit User Task Log Modal
+    public function editUserTaskLogModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->checkinHistoryService->editUserTaskLogModal($request));
+    }
+
+    //Edit User Task Log
+    public function editUserTaskLog(Request $request)
+    {
+        return $this->sendJsonResponse($this->checkinHistoryService->editUserTaskLog($request));
+    }
+
+    //Delete User Task Log Modal
+    public function deleteUserTaskLogModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->checkinHistoryService->deleteUserTaskLogModal($request));
+    }
+
+    //Delete User Task Log
+    public function deleteUserTaskLog(Request $request)
+    {
+        return $this->sendJsonResponse($this->checkinHistoryService->deleteUserTaskLog($request));
+    }
 }

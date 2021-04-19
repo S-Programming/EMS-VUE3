@@ -26,9 +26,19 @@
                                 <textarea class="form-control form-control-lg" name="done_today" disabled required autofocus></textarea>
                             </div> -->
 
-                            <div class="block-content" id="user-task-logs">
-                                {!! $user_report_html??'' !!}
+                            <div class="content">
+                                <!-- Dynamic Table Full Pagination -->
+                                <div id="user-task-log-section" class="block block-rounded">
+
+                                    @include('pages.user._partial._user_task_log_list_table_html',['user_task_logs' => $user_task_logs])
+                                </div>
+                                <!-- END Dynamic Table Full Pagination -->
+
                             </div>
+
+                            <!-- <div class="block-content" id="user-task-logs">
+                                {!! $user_report_html??'' !!}
+                            </div> -->
                             <div class="py-3">
                                 <p class="font-size-h3">What I'll do tomorrow?</p>
                                 <div class="form-group">

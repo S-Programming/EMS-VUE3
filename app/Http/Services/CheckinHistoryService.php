@@ -292,12 +292,12 @@ class CheckinHistoryService extends BaseService
         $projects_data = DevelopersProject::with('Project')->where('user_id', $userId)->get();
         $project_dropdown = view('utils.projects', ['projects_data' => $projects_data])->render();
         $userLastCheckinDetails = $this->userLastCheckinDetails();
-        $last_checkin_id = $userLastCheckinDetails->id??0;
-        $last_checkin_time = $userLastCheckinDetails->checkin??0;
-        if(isset($last_checkin_time) && !empty($last_checkin_time)){
+        $last_checkin_id = $userLastCheckinDetails->id ?? 0;
+        $last_checkin_time = $userLastCheckinDetails->checkin ?? 0;
+        if (isset($last_checkin_time) && !empty($last_checkin_time)) {
             $carbon_checkin_time = Carbon::createFromDate($last_checkin_time);
             $difference_in_minutes = $carbon_checkin_time->diffInMinutes(Carbon::now());
-            $sumTime = UserTaskLog::where('user_id',$userId)->sum('time');
+            $sumTime = UserTaskLog::where('user_id', $userId)->whereDate('created_at', Carbon::today())->sum('time');
             $difference_in_minutes = $difference_in_minutes - intval($sumTime);
             ## We have to subtract the logged minutes here
             $minutes = $difference_in_minutes > 0 ? ($difference_in_minutes % 60) : 0;
@@ -308,14 +308,15 @@ class CheckinHistoryService extends BaseService
             'id' => $container_id,
             'last_checkin_id' => $last_checkin_id,
             'project_dropdown' => $project_dropdown,
-            'last_checkin_time' => $last_checkin_time?? '',
-            'hours' => $hours??'',
-            'minutes' => $minutes??'',
+            'last_checkin_time' => $last_checkin_time ?? '',
+            'hours' => $hours ?? '',
+            'minutes' => $minutes ?? '',
         ];
         $html = view('pages.user._partial._add_report_modal', $modal_data)->render();
         return $this->successResponse('success', ['html' => $html]);
     }
 
+    //Add Report
     public function addReport(Request $request)
     {
         $userId = $this->getAuthUserId();
@@ -323,27 +324,120 @@ class CheckinHistoryService extends BaseService
         $hours = $request->hours;
         $minutes = $request->minutes;
         $userLastCheckinDetails = $this->userLastCheckinDetails();
-        $last_checkin_id = $userLastCheckinDetails->id??0;
-        $last_checkin_time = $userLastCheckinDetails->checkin??0;
+        $last_checkin_id = $userLastCheckinDetails->id ?? 0;
+        $last_checkin_time = $userLastCheckinDetails->checkin ?? 0;
         $carbon_checkin_time = Carbon::createFromDate($last_checkin_time);
         $difference_in_minutes = $carbon_checkin_time->diffInMinutes(Carbon::now());
-        if($hours > 0 && $minutes > 0)
-        {
+        if ($hours > 0 && $minutes > 0) {
             $minutes = $minutes + ($hours * 60);
         }
-        $sumTime = UserTaskLog::where('user_id',$userId)->sum('time');
-        $logAbleTime=$difference_in_minutes-intval($sumTime);
-        if($minutes > intval($logAbleTime))
-        {
+        $sumTime = UserTaskLog::where('user_id', $userId)->whereDate('created_at', Carbon::today())->sum('time');
+        $logAbleTime = $difference_in_minutes - intval($sumTime);
+        if ($minutes > intval($logAbleTime)) {
             return $this->errorResponse('Your logged time exceed to actual spent time');
         }
-//        dd($minutes,$logAbleTime);
+        //        dd($minutes,$logAbleTime);
         $userTaskLogs->user_id = $this->getAuthUserId();
         $userTaskLogs->checkin_id = $request->checkin_id;
         $userTaskLogs->project_id = $request->project_id;
         $userTaskLogs->description = $request->task_details;
         $userTaskLogs->time = $minutes;
         $userTaskLogs->save();
-        return $this->successResponse('You are successfully add report');
+        $user_task_logs = UserTaskLog::where('user_id', $userId)->whereDate('created_at', Carbon::today())->get();
+
+        $html = view('pages.user._partial._user_task_log_list_table_html', compact('user_task_logs', $user_task_logs))->render();
+        return $this->successResponse('Report has Successfully Added', ['html' => $html, 'html_section_id' => 'user-task-log-section']);
+
+
+        //return $this->successResponse('You are successfully add report',['userTaskLogs' => $userTaskLogs]);
+    }
+
+    //Edit User Task Log
+    public function editUserTaskLogModal(Request $request)
+    {
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $userTaskLogId = $request->id;
+        $projects_data = DevelopersProject::with('Project')->where('user_id', $this->getAuthUserId())->get();
+        $userLastCheckinDetails = $this->userLastCheckinDetails();
+        $last_checkin_id = $userLastCheckinDetails->id ?? 0;
+        $last_checkin_time = $userLastCheckinDetails->checkin ?? 0;
+        $project_dropdown = view('utils.projects', ['projects_data' => $projects_data])->render();
+        $userTaskLogData = UserTaskLog::find($userTaskLogId);
+        $time = $userTaskLogData->time;
+        $minutes = $time > 0 ? ($time % 60) : 0;
+        $hours = $time > 60 ? intval((($time - $minutes) / 60)) : 0;
+        $modal_data = [
+            'id' => $containerId,
+            'user_task_log_id' => $userTaskLogId,
+            'project_dropdown' => $project_dropdown,
+            'last_checkin_time' => $last_checkin_time ?? '',
+            'hours' => $hours ?? '',
+            'minutes' => $minutes ?? '',
+            'description' => $userTaskLogData->description
+        ];
+        $html = view('pages.user._partial._edit_report_modal',  $modal_data)->render();
+        // $html = view('pages.user._partial._edit_report_modal')->render();
+        return $this->successResponse('success', ['html' => $html]);
+    }
+
+    //Edit User Task Log
+    public function editUserTaskLog(Request $request)
+    {
+        if (!isset($request) && empty($request)) { // what will be condition
+            return $this->errorResponse('Leave Type Submittion Failed');
+        }
+        $hours = $request->hours;
+        $minutes = $request->minutes;
+        $userLastCheckinDetails = $this->userLastCheckinDetails();
+        $last_checkin_id = $userLastCheckinDetails->id ?? 0;
+        $last_checkin_time = $userLastCheckinDetails->checkin ?? 0;
+        $carbon_checkin_time = Carbon::createFromDate($last_checkin_time);
+        $difference_in_minutes = $carbon_checkin_time->diffInMinutes(Carbon::now());
+        if ($hours > 0 && $minutes > 0) {
+            $minutes = $minutes + ($hours * 60);
+        }
+        $sumTime = UserTaskLog::where('user_id', $this->getAuthUserId())->whereDate('created_at', Carbon::today())->sum('time');
+        $logAbleTime = $difference_in_minutes - intval($sumTime);
+        if ($minutes > intval($logAbleTime)) {
+            return $this->errorResponse('Your logged time exceed to actual spent time');
+        }
+        if (isset($request) && !empty($request)) {
+            $userTaskLogId = $request->user_task_log_id;
+            $user_task_logs = UserTaskLog::find($userTaskLogId);
+            $user_task_logs->description = $request->task_details;
+            $user_task_logs->time = $request->minutes;
+            $user_task_logs->save();
+        }
+
+        $user_task_logs = UserTaskLog::where('user_id', $this->getAuthUserId())->whereDate('created_at', Carbon::today())->get();
+
+        $html = view('pages.user._partial._user_task_log_list_table_html', compact('user_task_logs', $user_task_logs))->render();
+        return $this->successResponse('Report has Successfully Updated', ['html' => $html, 'html_section_id' => 'user-task-log-section']);
+        // $html = view('pages.user._partial._checkin_task_log_html', ['user_task_logs' => $user_task_logs])->render();
+        // return $this->successResponse('User Task Log has Successfully Updated', ['user_report_html' => $html]);
+    }
+
+    //Delete User Task Log Modal
+    public function deleteUserTaskLogModal(Request $request)
+    {
+        $user_task_log_id = $request->id;
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $html = view('pages.user._partial._delete_user_task_log_modal', ['id' => $containerId, 'user_task_log_id' => $user_task_log_id])->render();
+        return $this->successResponse('success', ['html' => $html]);
+    }
+
+    //Delete User Task Log
+    public function deleteUserTaskLog(Request $request)
+    {
+        $user_task_log_id = $request->user_task_log_id;
+        $user_task_logs = UserTaskLog::find($user_task_log_id);
+        $user_task_logs->delete();
+        $user_task_logs = UserTaskLog::where('user_id', $this->getAuthUserId())->whereDate('created_at', Carbon::today())->get();
+
+        $html = view('pages.user._partial._user_task_log_list_table_html', compact('user_task_logs', $user_task_logs))->render();
+        return $this->successResponse('Report has Successfully Deleted', ['html' => $html, 'html_section_id' => 'user-task-log-section']);
+        // $user_task_logs = UserTaskLog::all();
+        // $html = view('pages.user._partial._checkin_task_log_html', ['user_task_logs' => $user_task_logs])->render();
+        // return $this->successResponse('User Task Log has Successfully Deleted', ['user_report_html' => $html]);
     }
 }

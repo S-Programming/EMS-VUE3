@@ -36,6 +36,10 @@ class CheckInHistory
             Route::get('/today/report', [CheckinHistoryController::class, 'todayReport'])->name('today.report');
             Route::post('/add/report/modal', [CheckinHistoryController::class, 'addReportModal'])->name('add.report.modal');
             Route::post('/add/report', [CheckinHistoryController::class, 'addReport'])->name('add.report');
+            Route::post('/edit/user/task/log/modal', [CheckinHistoryController::class, 'editUserTaskLogModal'])->name('edit.user.task.log.modal');
+            Route::post('/edit/user/task/log', [CheckinHistoryController::class, 'editUserTaskLog'])->name('edit.user.task.log');
+            Route::post('/delete/user/task/log/modal', [CheckinHistoryController::class, 'deleteUserTaskLogModal'])->name('delete.user.task.log.modal');
+            Route::post('/delete/user/task/log', [CheckinHistoryController::class, 'deleteUserTaskLog'])->name('delete.user.task.log');
 
         });
     }
