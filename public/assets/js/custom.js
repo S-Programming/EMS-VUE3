@@ -19,7 +19,7 @@ $(function () {
 
 
 function validateFieldsByFormId(e) {
-    event.preventDefault();
+    //event.preventDefault();
     const formId = $(e).closest('form').attr('id');
     const formURL = $(e).closest('form').attr('action');
     const modalId = $(e).closest('form').data('modal-id');
@@ -51,6 +51,7 @@ function validateFieldsByFormId(e) {
                 if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
                     $('#' + data.html_section_id).html(data.html);
                 }
+                console.log('before', data);
                 if (data.status == 'success') {
                     notificationAlert('success', data.message, 'Success!');
                     if (data.redirect_to != '' && typeof (data.redirect_to) != "undefined") {
@@ -63,7 +64,7 @@ function validateFieldsByFormId(e) {
                     }
                     if (typeof data.checkin_history_html != 'undefined' && typeof data.html_history_section_id != 'undefined' && data.checkin_history_html != '') {
                         $('#' + data.html_history_section_id).html(data.checkin_history_html);
-                        console.log(data.checkin_history_html,"saddique");
+                        console.log(data.checkin_history_html, "saddique");
                     }
                     if ($('body').hasClass('modal-open') && typeof modalId != 'undefined' && modalId != '') {
                         closeModalById(modalId);
@@ -86,6 +87,9 @@ function validateFieldsByFormId(e) {
                         });
                     }
                     notificationAlert('error', errorMsg, 'Inconceivable!');
+                }
+                if (typeof data.show_modal != 'undefined' && typeof data.modal_id != 'undefined' && data.html != '') {
+                    showModelById(data.modal_id, data);
                 }
                 $(`#` + validationSpanId).html(buttonHtml);
             },
@@ -285,14 +289,7 @@ function commonAjaxModel(route, id, containerId) {
             dataType: "json",
             success: function (data) {
                 if (data.status == 'success') {
-                    /*If Modal Div not defined*/
-                    if ($('#' + containerId + '_mp').length == 0) {
-                        $("body").append('<div id="' + containerId + '_mp"></div>');
-                    }
-                    /*Put Modal HTML in Modal Placeholder*/
-                    $('#' + containerId + '_mp').html(data.html);
-                    /*Show Modal*/
-                    $('#' + containerId).modal('show');
+                    showModelById(containerId, data)
                 }
                 if (data.status == 'error') {
 
@@ -307,6 +304,25 @@ function commonAjaxModel(route, id, containerId) {
         notificationAlert('error', 'Route is not defined', 'Inconceivable!');
     }
     //  tinymce.remove('.tinymce-editor-cls');
+}
+
+/**
+ * Created by Abbas Naumani on 2/5/2018.
+ */
+function showModelById(containerId, data) {
+    if (typeof (containerId) == "undefined" || containerId == '') {
+        containerId = 'common_popup_modal';
+    }
+    /*If Modal Div not defined*/
+    if ($('#' + containerId + '_mp').length == 0) {
+        $("body").append('<div id="' + containerId + '_mp"></div>');
+    }
+    /*Put Modal HTML in Modal Placeholder*/
+    $('#' + containerId + '_mp').html(data.html);
+    /*Show Modal*/
+    $('#' + containerId).modal('show');
+
+
 }
 
 /*
@@ -344,6 +360,9 @@ function ajaxCallOnclick(route, extraData) {
                 // console.log('RN',data)
                 if (typeof data.html != 'undefined' && typeof data.html_section_id != 'undefined' && data.html != '') {
                     $('#' + data.html_section_id).html(data.html);
+                }
+                if (typeof data.show_modal != 'undefined' && typeof data.modal_id != 'undefined' && data.html != '') {
+                    showModelById(data.modal_id, data);
                 }
                 if (typeof data.checkin_history_html != 'undefined' && typeof data.html_history_section_id != 'undefined' && data.checkin_history_html != '') {
                     $('#' + data.html_history_section_id).html(data.checkin_history_html);
@@ -597,3 +616,11 @@ function EmailMask(email) {
     return expr.test(email);
 }
 
+function updateFormAction(id) {
+    let el = $(`#${id}`);
+    const formURL = el.closest('form').attr('action');
+    console.log('sad', formURL);
+    el.closest('form').attr('action', formURL + '/1');
+    console.log('updated', el.closest('form').attr('action'));
+    validateFieldsByFormId(el);
+}

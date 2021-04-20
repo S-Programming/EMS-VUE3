@@ -11,7 +11,7 @@
             <div class="col-6 col-sm-12 col-md-12 col-xl-8">
                 <div class="block block-rounded d-flex flex-column">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('confirm.checkout') }}" id="checkout-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
+                        <form method="POST" action="{{ route('report.submit') }}" id="checkout-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
                             @csrf
                             <div class="row">
                                 <div class="col-8">
@@ -29,7 +29,6 @@
                             <div class="content">
                                 <!-- Dynamic Table Full Pagination -->
                                 <div id="user-task-log-section" class="block block-rounded">
-
                                     @include('pages.user._partial._user_task_log_list_table_html',['user_task_logs' => $user_task_logs])
                                 </div>
                                 <!-- END Dynamic Table Full Pagination -->
@@ -52,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="block-content block-content-full text-right border-top">
-                                <x-button class="checkout-btn btn-lg btn-block btn btn-primary" onclick="validateFieldsByFormId(this)" data-validation="validation-span-id" id="validation-span-id">
+                                <x-button class="checkout-btn btn-lg btn-block btn btn-primary" onclick="validateFieldsByFormId(this)" data-validation="submit-report-span-id" id="submit-report-span-id">
                                     <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Submit Report') }}
                                 </x-button>
                             </div>

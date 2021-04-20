@@ -10,7 +10,8 @@
 </a> -->
 
 
-<a class="block block-rounded block-link-shadow text-center bg-secondary" href="javascript:void(0)" onclick="commonAjaxModel('checkout/modal')">
+<!-- <a class="block block-rounded block-link-shadow text-center bg-secondary" href="javascript:void(0)" onclick="commonAjaxModel('checkout/modal')"> -->
+<a class="block block-rounded block-link-shadow text-center bg-secondary" href="{{url('/today/report')}}" >
     <div class="block-content block-content-full">
         <div class="font-size-h3 text-light">Checkout</div>
     </div>

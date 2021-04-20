@@ -83,17 +83,17 @@ class CheckinHistoryController extends Controller
      *
      * @return
      */
-    public function confirmCheckout(Request $request)
+    public function confirmCheckout(Request $request, $force = null)
     {
         $validator = Validator::make($request->all(), [
-            'done_today' => 'required|max:500',   //min:3 not working
+            // 'done_today' => 'required|max:500',   //min:3 not working
             'do_tomorrow' => 'required|max:500',   //min:3 not working
             'questions' => 'required|max:500',   //min:3 not working
         ]);
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
-        return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckout($request));
+        return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckout($request, $force));
     }
 
     /**
@@ -204,7 +204,8 @@ class CheckinHistoryController extends Controller
     // }
 
 
-    public function todayReport(){
+    public function todayReport()
+    {
         $userId = $this->getAuthUserId();
         $user_task_logs = UserTaskLog::with('Project')->with('User')->where('user_id', $userId)->whereDate('created_at', Carbon::today())->get();
         $html = view('pages.user._partial._user_task_log_list_table_html')->render();

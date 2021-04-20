@@ -19,9 +19,10 @@ class CreateCheckinHistoryTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->dateTime('checkin');
             $table->dateTime('checkout')->nullable();
-            $table->string('done_today')->nullable();
+            // $table->string('done_today')->nullable();
             $table->string('do_tomorrow')->nullable();
             $table->string('questions')->nullable();
+            $table->boolean('is_submit_report')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
