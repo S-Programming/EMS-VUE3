@@ -4,7 +4,7 @@
     </x-slot>
     <x-slot name="modal_content">
         <div class="block-content font-size-sm">
-            <form method="POST" action="{{ route('edit.user.task.log') }}" id="report-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
+            <form method="POST" action="{{ route('report.edit') }}" id="report-form-id" data-modal-id="{{$id??'common_popup_modal'}}">
                 @csrf
 
                 @php

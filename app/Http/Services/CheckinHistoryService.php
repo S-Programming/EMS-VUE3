@@ -96,7 +96,6 @@ class CheckinHistoryService extends BaseService
         if ($user_id > 0) {
 
             $user_task_logs = UserTaskLog::where('user_id', $user_id)->whereDate('created_at', Carbon::today())->get();
-            dd(UserTaskLog::with('CheckinHistory')->get());
             $user_task_logs_count = count($user_task_logs);
             if ($user_task_logs_count > 0) {
                 $checkin_history_data = CheckinHistory::where('user_id', $user_id)->latest()->first();

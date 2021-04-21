@@ -21,9 +21,4 @@ class UserTaskLog extends Model
     {
         return $this->belongsTo(Project::class);
     }
-
-    public function CheckinHistory()
-    {
-        return $this->belongsTo(CheckinHistory::class);
-    }
 }

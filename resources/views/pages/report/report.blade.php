@@ -19,7 +19,7 @@
                                     <p class="font-size-h6">Modify and add new tasks to your daily report</p>
                                 </div>
                                 <div class="col-4">
-                                    <button type="button" class="btn btn-primary float-right" onclick="commonAjaxModel('add/report/modal')">Add Report</button>
+                                    <button type="button" class="btn btn-primary float-right" onclick="commonAjaxModel('report/create/modal')">Add Report</button>
                                 </div>
                             </div>
                             <!-- <div class="form-group">
@@ -28,8 +28,8 @@
 
                             <div class="content">
                                 <!-- Dynamic Table Full Pagination -->
-                                <div id="user-task-log-section" class="block block-rounded">
-                                    @include('pages.user._partial._user_task_log_list_table_html',['user_task_logs' => $user_task_logs])
+                                <div id="task-log-table-section" class="block block-rounded">
+                                    @include('pages.report._partial._task_log_table_html',['userTaskLogs' => $userTaskLogs ?? ''])
                                 </div>
                                 <!-- END Dynamic Table Full Pagination -->
 
