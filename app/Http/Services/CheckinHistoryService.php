@@ -96,6 +96,7 @@ class CheckinHistoryService extends BaseService
         if ($user_id > 0) {
 
             $user_task_logs = UserTaskLog::where('user_id', $user_id)->whereDate('created_at', Carbon::today())->get();
+            dd(UserTaskLog::with('CheckinHistory')->get());
             $user_task_logs_count = count($user_task_logs);
             if ($user_task_logs_count > 0) {
                 $checkin_history_data = CheckinHistory::where('user_id', $user_id)->latest()->first();
@@ -115,8 +116,8 @@ class CheckinHistoryService extends BaseService
                                 ## We have to subtract the logged minutes here
                                 $minutes = $difference_in_minutes > 0 ? ($difference_in_minutes % 60) : 0;
                                 $hours = $difference_in_minutes > 60 ? intval((($difference_in_minutes - $minutes) / 60)) : 0;
-                                //  $total_time = $hours . ':' . $minutes;
-                                //Session::put('total_work_time', $total_time);
+                                 $total_time = $hours.'h'. ' ' . $minutes.'m' ?? 0;
+                                Session::put('total_work_time', $total_time);
                                 // $last_checkin_time = $carbon_checkin_time->format('Y-m-d h:i:s A');
                                 if ($remaining_difference_in_minutes > 30) {
                                     //dd('Task log time remaining are you sure you want to check out');
