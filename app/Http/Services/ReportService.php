@@ -6,16 +6,9 @@ namespace App\Http\Services;
 
 use App\Http\Services\BaseService\BaseService;
 use App\Models\CheckinHistory;
-use App\Models\RoleUser;
-use App\Models\TechnologyStack;
-use App\Models\Project;
 use App\Models\DevelopersProject;
 use App\Models\UserTaskLog;
-use App\Models\Attendance;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Session;
 
@@ -189,5 +182,58 @@ class ReportService extends BaseService
         $userTaskLogs = UserTaskLog::where('user_id', $this->getAuthUserId())->whereDate('created_at', Carbon::today())->get();
         $html = view('pages.report._partial._task_log_table_html', compact('userTaskLogs', $userTaskLogs))->render();
         return $this->successResponse('Report has Successfully Deleted', ['html' => $html, 'html_section_id' => 'task-log-table-section']);
+    }
+
+    /**
+     * Report Submit
+     *
+     * @return Body
+     */
+    public function reportSubmit(Request $request, $force = null)
+    {
+        $userId = $this->getAuthUserId();
+        if ($userId > 0) {
+            $userTaskLogs = UserTaskLog::where('user_id', $userId)->whereDate('created_at', Carbon::today())->get();
+            $userTaskLogsCount = count($userTaskLogs);
+            if ($userTaskLogsCount > 0) {
+                $checkinHistoryData = CheckinHistory::where('user_id', $userId)->latest()->first();
+                if ($checkinHistoryData != null) {
+                    if (!$checkinHistoryData->checkout) {
+                        if (!$force) {
+                            $userLastCheckinDetails = $this->userLastCheckinDetails();
+                            $lastCheckinId = $userLastCheckinDetails->id ?? 0;
+                            $lastCheckinTime = $userLastCheckinDetails->checkin ?? 0;
+                            if (isset($lastCheckinTime) && !empty($lastCheckinTime)) {
+                                $carbonCheckinTime = Carbon::createFromDate($lastCheckinTime);
+                                $differenceInMinutes = $carbonCheckinTime->diffInMinutes(Carbon::now());
+                                $sumTime = UserTaskLog::where('user_id', $userId)->whereDate('created_at', Carbon::today())->sum('time');
+                                $remainingDifferenceInMinutes = $differenceInMinutes - intval($sumTime);
+                                ## We have to subtract the logged minutes here
+                                $minutes = $differenceInMinutes > 0 ? ($differenceInMinutes % 60) : 0;
+                                $hours = $differenceInMinutes > 60 ? intval((($differenceInMinutes - $minutes) / 60)) : 0;
+                                $totalTime = $hours . 'h' . ' ' . $minutes . 'm' ?? 0;
+                                Session::put('total_work_time', $totalTime);
+                                if ($remainingDifferenceInMinutes > 30) {
+                                    $containerId = $request->input('containerId', 'common_popup_modal');
+                                    $html = view('pages.user._partial._confirmation_checkout_modal', ['id' => $containerId])->render();
+
+                                    return $this->successResponse('success', ['html' => $html, 'show_modal' => 1, 'modal_id' => 'common_popup_modal']);
+                                }
+                            }
+                        }
+                        $checkinHistoryData->checkout = Carbon::now();
+                        $checkinHistoryData->do_tomorrow = $request->do_tomorrow ?? '';
+                        $checkinHistoryData->questions = $request->questions ?? '';
+                        $checkinHistoryData->is_submit_report = 1;
+                        $checkinHistoryData->save();
+                        $html = view('pages.user._partial._checkin_html')->render();
+                        return $this->successResponse('You are successfully checked-out', ['html' => $html, 'html_section_id' => 'checkin-section', 'html_history_section_id' => 'checkin-history-section']);
+                    }
+                }
+            } else {
+                return $this->errorResponse('You are not add today task log');
+            }
+            return $this->errorResponse('Something went wrong, please contact support team, thanks', ['errors' => ['Something went wrong, please contact support team, thanks'], 'html' => $html ?? '']);
+        }
     }
 }

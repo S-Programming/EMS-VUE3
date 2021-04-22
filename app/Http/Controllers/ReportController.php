@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Facades\CommonUtilsFacade;
 use App\Http\Services\ReportService;
 use Illuminate\Http\Request;
 use App\Models\UserTaskLog;
-use Illuminate\Support\Facades\Auth;
-use App\Models\CheckinHistory;
-use App\Models\User;
 use http\Message\Body;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
-use Session;
 
 class ReportController extends Controller
 {
@@ -54,6 +49,15 @@ class ReportController extends Controller
      */
     public function reportCreate(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'checkin_date' => 'required',
+            'hours' => 'required',
+            'minutes' => 'required',
+            'task_details' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->reportService->reportCreate($request));
     }
 
@@ -74,6 +78,15 @@ class ReportController extends Controller
      */
     public function reportEdit(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'checkin_date' => 'required',
+            'hours' => 'required',
+            'minutes' => 'required',
+            'task_details' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->reportService->reportEdit($request));
     }
 
@@ -95,5 +108,22 @@ class ReportController extends Controller
     public function reportDelete(Request $request)
     {
         return $this->sendJsonResponse($this->reportService->reportDelete($request));
+    }
+
+    /**
+     * Report Submit
+     *
+     * @return Body
+     */
+    public function reportSubmit(Request $request, $force = null)
+    {
+        $validator = Validator::make($request->all(), [
+            'do_tomorrow' => 'required|max:500',   //min:3 not working
+            'questions' => 'required|max:500',   //min:3 not working
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
+        return $this->sendJsonResponse($this->reportService->reportSubmit($request, $force));
     }
 }
