@@ -39,9 +39,14 @@ trait AuthUser
 
     public function userLastCheckinTime()
     {
+        $userLastCheckinRecord =$this->userLastCheckinDetails();
+        return (!is_null($userLastCheckinRecord) && !is_null($userLastCheckinRecord->checkin)) ? $userLastCheckinRecord->checkin : null;
+    }
+    public function userLastCheckinDetails()
+    {
         $user = $this->getAuthUser();
         $userLastCheckinRecord = $user ? $user->lastCheckin() : null;
-        return (!is_null($userLastCheckinRecord) && !is_null($userLastCheckinRecord->checkin)) ? $userLastCheckinRecord->checkin : null;
+        return $userLastCheckinRecord;
     }
 
     public function userRoles()

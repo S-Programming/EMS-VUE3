@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
-class CreateCheckinHistoryTable extends Migration
+class CreateUserTasklogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,18 +13,17 @@ class CreateCheckinHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('checkin_history', function (Blueprint $table) {
+        Schema::create('user_task_logs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->dateTime('checkin');
-            $table->dateTime('checkout')->nullable();
-            // $table->string('done_today')->nullable();
-            $table->string('do_tomorrow')->nullable();
-            $table->string('questions')->nullable();
-            $table->boolean('is_submit_report')->default(0);
+            $table->unsignedBigInteger('checkin_id');
+            $table->unsignedBigInteger('project_id');
+            $table->string('description');
+            $table->string('time');
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('checkin_id')->references('id')->on('checkin_history')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 
@@ -37,7 +35,7 @@ class CreateCheckinHistoryTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('checkin_history');
+        Schema::dropIfExists('user_task_logs');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

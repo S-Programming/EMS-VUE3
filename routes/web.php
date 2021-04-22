@@ -26,6 +26,8 @@ use Route\Http\Test;
 use Route\Http\UserQuries;
 use Route\Http\TechnologyStack;
 use Route\Http\Job;
+use Route\Http\Report;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,6 +68,7 @@ Expense::register();
 Holiday::register();
 Pdf::register();
 Project::register();
+Report::register();
 Test::register();
 //Feedback::register();
 UserQuries::register();

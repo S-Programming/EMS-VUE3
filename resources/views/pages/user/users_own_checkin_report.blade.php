@@ -95,8 +95,8 @@
                 </form>
                 <!-- END Search Form -->
             </div>
-            <div class="block-content" id="checkin-history-section">
-                {!!$checkin_history_html ??''!!}
+            <div class="block-content" id="checkin-history">
+                {!! $user_history_html??'' !!}
             </div>
         </div>
     </div>

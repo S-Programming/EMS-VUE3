@@ -297,7 +297,7 @@ class DashboardService extends BaseService
             $responseData['user_last_checkin_time'] = $this->userLastCheckinTime();
         }
         $user_history = CheckinHistory::where('user_id', $this->getAuthUserId())->get();
-        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history,$responseData]);
+        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history, $responseData]);
         return ($checkin_history_html);
     }
 }

@@ -179,12 +179,6 @@ return [
          * KodeStuodo.net Service Providers...
          */
         App\Providers\HelperServiceProvider::class,
-
-
-        /* Location Service Providers....
-        */
-        Stevebauman\Location\LocationServiceProvider::class,
-
     ],
 
     /*
@@ -237,9 +231,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-
-        //Location Aliases
-        'Location' => 'Stevebauman\Location\Facades\Location',
 
     ],
 

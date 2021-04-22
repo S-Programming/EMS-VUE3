@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RequestStatusSeeder::class);
         $this->call(HolidaySeeder::class);
         $this->call(AttendanceSeeder::class);
+        $this->call(TagTableSeeder::class);
 //        $this->call(FeedbackTableSeeder::class);
         $this->call(QueryStatusSeeder::class);
         $this->call(UserQuriesSeeder::class);

@@ -132,7 +132,8 @@ if (!function_exists('historyDateFilter')) {
                 $filters = date_filter(Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->format('Y-m-d'), Carbon::now()->format('Y-m-d'), 'checkin');
                 break;
             case "Previous Week":
-                $filters = date_filter(Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->subWeek()->format('Y-m-d'), Carbon::now()->subWeek()->addDay()->format('Y-m-d'), 'checkin');
+                //$filters = date_filter(Carbon::now()->subDays(Carbon::now()->dayOfWeek - 1)->subWeek()->format('Y-m-d'), Carbon::now()->subWeek()->addDay()->format('Y-m-d'), 'checkin');
+                $filters = date_filter(Carbon::now()->startOfWeek()->subWeek()->format('Y-m-d'), Carbon::now()->endOfWeek(-1)->subWeek()->format('Y-m-d'), 'checkin');
                 break;
         }
         return $filters;
@@ -144,13 +145,12 @@ if (!function_exists('statusFilter')) {
         $filters = [];
         switch ($status) {
             case "2":
-                $filters = [['project_status','=',ProjectStatus::WORKING_PROJECT]];
+                $filters = [['project_status', '=', ProjectStatus::WORKING_PROJECT]];
                 break;
             case "5":
-                $filters = [['project_status','=',ProjectStatus::COMPLETED_PROJECT]];
+                $filters = [['project_status', '=', ProjectStatus::COMPLETED_PROJECT]];
                 break;
         }
         return $filters;
     }
 }
-

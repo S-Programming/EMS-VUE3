@@ -76,9 +76,9 @@ class UserService extends BaseService
         $count = $checkin_history_data->count();
         $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkin_history_data, 'totalCheckins' => $count])->render();
         if ($count > 0) {
-            return $this->successResponse('Record Found successfully', ['html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
+            return $this->successResponse('Record Found successfully', ['html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
         } else {
-            return $this->errorResponse('Record Not Found', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'self-checkin-history']);
+            return $this->errorResponse('Record Not Found', ['errors' => ['History Not Exists'], 'html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
         }
     }
 
@@ -125,7 +125,7 @@ class UserService extends BaseService
             }
         }
         $user_id = $this->getAuthUserId();
-        $rolesDropDown = view('utils.roles', ['roles' => ($roles ?? null), 'user_roles' => $userRoles,'user_id'=>$user_id])->render();
+        $rolesDropDown = view('utils.roles', ['roles' => ($roles ?? null), 'user_roles' => $userRoles, 'user_id' => $user_id])->render();
         $html = view('pages.user._partial._add_user_modal', ['id' => $containerId, 'data' => null, 'roles_dropdown' => $rolesDropDown, 'user_data' => $user_data])->render();
 
         return $this->successResponse('success', ['html' => $html]);

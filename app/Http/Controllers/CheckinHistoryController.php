@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Facades\CommonUtilsFacade;
 use App\Http\Services\CheckinHistoryService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\CheckinHistory;
-use App\Models\User;
 use http\Message\Body;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
-use Session;
 
 class CheckinHistoryController extends Controller
 {
@@ -47,6 +43,9 @@ class CheckinHistoryController extends Controller
                 }
             }
         }
+        if (Carbon::now()->format('l') == 'Sunday') {
+            return $this->sendJsonResponse('Today is Sunday not checkin');
+        }
         $containerId = $request->input('containerId', 'common_popup_modal');
         $html = view('pages.user._partial._checkin_modal', ['id' => $containerId, 'data' => null])->render();
         return $this->success('success', ['html' => $html]);
@@ -74,23 +73,23 @@ class CheckinHistoryController extends Controller
         return $this->success('success', ['html' => $html]);
     }
 
-    /**
-     * Checking Method for the users to checkout
-     *
-     * @return
-     */
-    public function confirmCheckout(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'done_today' => 'required|max:500',   //min:3 not working
-            'do_tomorrow' => 'required|max:500',   //min:3 not working
-            'questions' => 'required|max:500',   //min:3 not working
-        ]);
-        if ($validator->fails()) {
-            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
-        }
-        return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckout($request));
-    }
+    // /**
+    //  * Checking Method for the users to checkout
+    //  *
+    //  * @return
+    //  */
+    // public function confirmCheckout(Request $request, $force = null)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         // 'done_today' => 'required|max:500',   //min:3 not working
+    //         'do_tomorrow' => 'required|max:500',   //min:3 not working
+    //         'questions' => 'required|max:500',   //min:3 not working
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+    //     }
+    //     return $this->sendJsonResponse($this->checkinHistoryService->confirmCheckout($request, $force));
+    // }
 
     /**
      * It will display all the users checkin history to Super Admin and Admin
@@ -102,23 +101,14 @@ class CheckinHistoryController extends Controller
         $user_history = CheckinHistory::all();
         $user_days = view('utils.durationfilter')->render();
         $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-        return view('pages.user.users_checkin_report', ['user_history' => ($user_history ?? null), 'user_history_html' => $html, 'users' => $this->getAllUsers(), 'user_days' => $user_days]);
+        return view('pages.user.users_checkin_report', ['user_history_html' => $html, 'users' => $this->getAllUsers(), 'user_days' => $user_days]);
     }
 
     public function checkinList(Request $request)
     {
-
         $user_history = CheckinHistory::where('user_id', $this->getAuthUserId())->get();
-        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history]);
-        // $html = view('pages.user._partial._checkin_history_html', ['user_history' =>  $responseData['checkin_history']])->render();
-        return view('pages.user.users_own_checkin_report')->with(['checkin_history_html' => $checkin_history_html]);
-
-
-        // $user_id = $this->getAuthUserId();
-        // $user_history = CheckinHistory::where('user_id', $user_id)->get();
-        // // $user_days = view('utils.durationfilter')->render();
-        // $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-        // return view('pages.user.users_own_checkin_report', ['user_history' => ($user_history ?? null), 'checkin-history-section' => $html]);
+        $html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
+        return view('pages.user.users_own_checkin_report')->with(['user_history_html' => $html]);
     }
 
 
@@ -164,11 +154,6 @@ class CheckinHistoryController extends Controller
     //user checkin history edit modal by Admin
     public function editCheckinUserModal(Request $request, CheckinHistory $checkinHistory)
     {
-        /* $user=$this->getAuthUser();
-       $tt= $user->can('update',$checkinHistory);
-      $authddd= $this->authorize('update', $checkinHistory);
-        dd($authddd,$tt,'Rogani Naan',$user);*/
-        //  dd($checkinHistory);
         //condition true when user is admin or super admin
         if ($this->authorize('update', $checkinHistory)) //condition false when user is simple user
         {
