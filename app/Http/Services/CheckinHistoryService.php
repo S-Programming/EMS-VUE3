@@ -7,8 +7,11 @@ namespace App\Http\Services;
 use App\Http\Services\BaseService\BaseService;
 use App\Models\CheckinHistory;
 use App\Models\Attendance;
+use App\Models\GlobalSetting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Enums\Tag;
+use App\Models\CheckinHistoryTag;
 
 class CheckinHistoryService extends BaseService
 {
@@ -42,10 +45,23 @@ class CheckinHistoryService extends BaseService
                 $attendence->is_present = 1;
                 $attendence->save();
             }
-            $user_history = CheckinHistory::where('user_id', $user_id)->get();
+            $user_history = CheckinHistory::where('user_id', $user_id)->whereDate('created_at', Carbon::today())->first();
+            
+            $checkinTime = $user_history->checkin;
+            $globalSetting = GlobalSetting::first();
+            $startTime = $globalSetting->checkin_time;
+            $marginTime = $globalSetting->checkin_margin;
+            $carbonStartTime = Carbon::createFromDate($startTime);
+            $differenceInMinutes = $carbonStartTime->diffInMinutes($checkinTime);
+            $checkinHistoryTag = new CheckinHistoryTag();
+            if($differenceInMinutes > $marginTime){
+                $checkinHistoryTag->tag_id = Tag::Early;
+            }
+            $checkinHistoryTag->tag_id = Tag::Late;
+            // dd($currentTime);
             $html = view('pages.user._partial._checkout_html')->render();
-            $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-            return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section', 'module' => 'checkin']);
+            //$checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
+            return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section', 'module' => 'checkin']);
         }
     }
 
