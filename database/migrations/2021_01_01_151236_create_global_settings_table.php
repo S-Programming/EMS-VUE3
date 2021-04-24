@@ -17,10 +17,6 @@ class CreateGlobalSettingsTable extends Migration
             $table->id();
             $table->string('display_name');
             $table->string('field_name');
-            $table->string('checkin_time');
-            $table->string('checkin_margin');
-            $table->string('working_hours');
-            $table->string('working_hour_margin');
             $table->text('value');
             $table->string('comments')->nullable();
             $table->enum('value_type', ['0', '1','2'])->default('0')->comment('0=string,1=integer,2=radio_button');

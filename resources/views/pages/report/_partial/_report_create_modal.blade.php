@@ -52,7 +52,7 @@
                 <div class="block-content block-content-full text-right border-top">
                     <button type="button" class="btn btn-alt-primary mr-1" data-dismiss="modal">Cancel</button>
                     <x-button class="checkout-btn btn btn-primary" onclick="validateFieldsByFormId(this)" data-validation="report-span-id" id="report-span-id">
-                        <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Save Report') }}
+                        <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Save') }}
                     </x-button>
                 </div>
             </form>

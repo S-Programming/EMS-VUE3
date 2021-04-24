@@ -22,7 +22,7 @@ class Report
             Route::post('/report/submit/{force?}', [ReportController::class, 'reportSubmit'])->name('report.submit');
             //Report today
             Route::post('/report/today/modal', [ReportController::class, 'reportTodayModal'])->name('report.today.modal');
-            
+
         });
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Services\BaseService;
 
 use App\Http\Traits\ApiResponse;
 use App\Http\Traits\AuthUser;
+use App\Http\Traits\GlobalSettingsTrait;
 use App\Http\Traits\UserTrait;
 use App\Http\Traits\CommonMethods;
 use App\Http\Traits\CookiesTrait;
@@ -19,4 +20,5 @@ class BaseService
     use ApiResponse;
     use AuthUser;
     use UserTrait;
+    use GlobalSettingsTrait;
 }
