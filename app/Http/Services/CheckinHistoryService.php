@@ -45,8 +45,10 @@ class CheckinHistoryService extends BaseService
                 $attendence->is_present = 1;
                 $attendence->save();
             }
+            $userLastCheckinDetails = $this->userLastCheckinDetails();
+            $lastCheckinId = $userLastCheckinDetails->id ?? 0;
             $user_history = CheckinHistory::where('user_id', $user_id)->whereDate('created_at', Carbon::today())->first();
-            
+
             $checkinTime = $user_history->checkin;
             $globalSetting = GlobalSetting::first();
             $startTime = $globalSetting->checkin_time;
@@ -54,10 +56,14 @@ class CheckinHistoryService extends BaseService
             $carbonStartTime = Carbon::createFromDate($startTime);
             $differenceInMinutes = $carbonStartTime->diffInMinutes($checkinTime);
             $checkinHistoryTag = new CheckinHistoryTag();
-            if($differenceInMinutes > $marginTime){
-                $checkinHistoryTag->tag_id = Tag::Early;
+            if ($differenceInMinutes > $marginTime) {
+                $checkinHistoryTag->tag_id = Tag::EARLY;
+                $checkinHistoryTag->checkin_id = $lastCheckinId;
+                $checkinHistoryTag->save();
             }
-            $checkinHistoryTag->tag_id = Tag::Late;
+            $checkinHistoryTag->tag_id = Tag::LATE;
+            $checkinHistoryTag->checkin_id = $lastCheckinId;
+            $checkinHistoryTag->save();
             // dd($currentTime);
             $html = view('pages.user._partial._checkout_html')->render();
             //$checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();

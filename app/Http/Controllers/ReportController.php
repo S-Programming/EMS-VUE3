@@ -126,4 +126,14 @@ class ReportController extends Controller
         }
         return $this->sendJsonResponse($this->reportService->reportSubmit($request, $force));
     }
+
+    /**
+     * Report Today Modal load
+     *
+     * @return Body
+     */
+    public function reportTodayModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->reportService->reportTodayModal($request));
+    }
 }

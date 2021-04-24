@@ -4,8 +4,8 @@ namespace App\Http\Enums;
 
 final class Tag
 {
-    const Early = 1;
-    const Late = 2;
-    const HalfDay = 3;
-    const LessThen = 4;
+    const EARLY = 1;
+    const LATE = 2;
+    const HALF_DAY = 3;
+    const LESS_THEN = 4;
 }

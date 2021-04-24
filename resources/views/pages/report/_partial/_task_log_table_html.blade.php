@@ -7,7 +7,9 @@
                 <th>Project</th>
                 <th>Description</th>
                 <th>Time</th>
+                @if(\Request::route()->getName() !== "report.today.modal")
                 <th>Action</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -16,12 +18,15 @@
             <tr>
                 <!-- <td>{{$data->user->first_name??''}} {{$data->user->last_name??''}}</td> -->
                 <td>{{$data->project->name??''}}</td>
-                <td>{{$data->description ??''}}</td>
+                <td>{!!$data->description ??''!!}</td>
                 <td>{{$data->time ?? ''}}</td>
+                @if(\Request::route()->getName() !== "report.today.modal")
                 <td>
                     <button class="btn btn-info" onclick="commonAjaxModel('report/edit/modal', {{$data->id}})"><i class="fa fa-edit"></i></button>
                     <button class="btn btn-danger" onclick="commonAjaxModel('report/delete/modal',{{$data->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </td>
+                @endif
+
             </tr>
             @endforeach
             @endif

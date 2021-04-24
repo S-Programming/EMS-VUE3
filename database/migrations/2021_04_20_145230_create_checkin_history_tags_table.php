@@ -16,8 +16,10 @@ class CreateCheckinHistoryTagsTable extends Migration
         Schema::create('checkin_history_tags', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tag_id');
+            $table->unsignedBigInteger('checkin_id')->nullable();;
             $table->timestamps();
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+            $table->foreign('checkin_id')->references('id')->on('checkin_history')->onDelete('cascade');
         });
     }
 

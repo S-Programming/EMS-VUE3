@@ -8,6 +8,9 @@ use App\Http\Services\BaseService\BaseService;
 use App\Models\CheckinHistory;
 use App\Models\DevelopersProject;
 use App\Models\UserTaskLog;
+use App\Models\GlobalSetting;
+use App\Models\CheckinHistoryTag;
+use App\Http\Enums\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Session;
@@ -66,7 +69,7 @@ class ReportService extends BaseService
         $lastCheckinTime = $userLastCheckinDetails->checkin ?? 0;
         $carbonCheckinTime = Carbon::createFromDate($lastCheckinTime);
         $differenceInMinutes = $carbonCheckinTime->diffInMinutes(Carbon::now());
-        if ($hours > 0 && $minutes > 0) {
+        if ($hours > 0 && $minutes >= 0) {
             $minutes = $minutes + ($hours * 60);
         }
         $sumTime = UserTaskLog::where('user_id', $userId)->whereDate('created_at', Carbon::today())->sum('time');
@@ -203,6 +206,42 @@ class ReportService extends BaseService
                             $userLastCheckinDetails = $this->userLastCheckinDetails();
                             $lastCheckinId = $userLastCheckinDetails->id ?? 0;
                             $lastCheckinTime = $userLastCheckinDetails->checkin ?? 0;
+
+                            //tag add code
+
+                            $globalSetting = GlobalSetting::first();
+                            $workingHours = $globalSetting->working_hours;
+                            $workingHourMargin = $globalSetting->working_hour_margin;
+                            $carbonCHeckinTime = Carbon::createFromDate($lastCheckinTime);
+                            $differenceInMinutes = $carbonCHeckinTime->diffInMinutes(Carbon::now());
+                            $workingHourInMinutes = intVal($workingHours) * 60;
+                            $workingHourMarginInMinutes = intVal($workingHourMargin) * 60;
+                            $differenceWorkingHourInMinutes = $workingHourInMinutes - $workingHourMarginInMinutes;
+                            $checkinHistoryTag = new CheckinHistoryTag();
+                            if ($differenceInMinutes < $workingHourInMinutes) {
+
+                                $data[] = array(
+                                    'tag_id'    => $tag_id = Tag::LESS_THEN,
+                                    'checkin_id'   => $lastCheckinId
+
+                                );
+                                // $checkinHistoryTag->tag_id = Tag::LESS_THEN;
+                                // $checkinHistoryTag->checkin_id = $lastCheckinId;
+                                // $checkinHistoryTag->save();
+                                if ($differenceInMinutes < $differenceWorkingHourInMinutes) {
+                                    $data[] = array(
+                                        'tag_id'    => $tag_id = Tag::HALF_DAY,
+                                        'checkin_id'   => $lastCheckinId
+                                    );
+                                    // $checkinHistoryTag->tag_id = Tag::HALF_DAY;
+                                    // $checkinHistoryTag->checkin_id = $lastCheckinId;
+                                    // $checkinHistoryTag->save();
+                                }
+                               
+                                dd($data);
+                                $checkinHistoryTag->save($data);
+                            }
+
                             if (isset($lastCheckinTime) && !empty($lastCheckinTime)) {
                                 $carbonCheckinTime = Carbon::createFromDate($lastCheckinTime);
                                 $differenceInMinutes = $carbonCheckinTime->diffInMinutes(Carbon::now());
@@ -235,5 +274,19 @@ class ReportService extends BaseService
             }
             return $this->errorResponse('Something went wrong, please contact support team, thanks', ['errors' => ['Something went wrong, please contact support team, thanks'], 'html' => $html ?? '']);
         }
+    }
+
+    /**
+     * Report Today Modal load and Task log data show 
+     *
+     * @return Body
+     */
+    public function reportTodayModal(Request $request)
+    {
+        $checkinId = $request->id;
+        $userTaskLogs = UserTaskLog::where('checkin_id', $checkinId)->get();
+        $containerId = $request->input('containerId', 'common_popup_modal');
+        $html = view('pages.report._partial._report_today_modal', ['id' => $containerId, 'userTaskLogs' => $userTaskLogs, 'html_section_id' => 'task-log-table-section'])->render();
+        return $this->successResponse('success', ['html' => $html]);
     }
 }
