@@ -27,9 +27,12 @@ class ReportController extends Controller
     public function index()
     {
         $userId = $this->getAuthUserId();
-        $userTaskLogs = UserTaskLog::with('Project')->with('User')->where('user_id', $userId)->whereDate('created_at', Carbon::today())->get();
+        $userLastCheckinDetails = $this->userLastCheckinDetails();
+        $lastCheckinId = $userLastCheckinDetails->id ?? 0;
+        $isSubmitReport = $userLastCheckinDetails->is_submit_report ?? 0;
+        $userTaskLogs = UserTaskLog::with('Project')->with('User')->where([['user_id', $userId], ['checkin_id', $lastCheckinId]])->get();
         $html = view('pages.report._partial._task_log_table_html')->render();
-        return view('pages.report.report', ['html' => $html, 'userTaskLogs' => $userTaskLogs, 'html_section_id' => 'task-log-table-section']);
+        return view('pages.report.create_task_report', ['html' => $html, 'userTaskLogs' => $userTaskLogs, 'html_section_id' => 'task-log-table-section','is_show_action'=>1,'is_submit_report'=>$isSubmitReport]);
     }
 
     /**
@@ -125,5 +128,15 @@ class ReportController extends Controller
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
         return $this->sendJsonResponse($this->reportService->reportSubmit($request, $force));
+    }
+
+    /**
+     * Report Today Modal load
+     *
+     * @return Body
+     */
+    public function reportTodayModal(Request $request)
+    {
+        return $this->sendJsonResponse($this->reportService->reportTodayModal($request));
     }
 }

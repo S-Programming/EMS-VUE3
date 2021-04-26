@@ -37,12 +37,12 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-//        $this->renderable(function (InvalidOrderException $e, $request) {
-//            return response()->view('errors.invalid-order', [], 500);
-//        });
-        $this->renderable(function (Throwable $e) {
-            $this->failureLog('Exception Generated', $e->getMessage(), ['code' => $e->getCode(), 'message' => $e->getMessage()]);
-            return response(['status' => 'error', 'message' => $e->getMessage()], $e->getCode() ?: 200);
+        $this->renderable(function (InvalidOrderException $e, $request) {
+            return response()->view('errors.invalid-order', [], 500);
         });
+//        $this->renderable(function (Throwable $e) {
+//            $this->failureLog('Exception Generated', $e->getMessage(), ['code' => $e->getCode(), 'message' => $e->getMessage()]);
+//            return response(['status' => 'error', 'message' => $e->getMessage()], $e->getCode() ?: 200);
+//        });
     }
 }

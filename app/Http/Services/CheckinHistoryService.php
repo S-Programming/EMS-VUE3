@@ -4,11 +4,15 @@
 namespace App\Http\Services;
 
 
+use App\Http\Enums\GlobalSettings;
 use App\Http\Services\BaseService\BaseService;
 use App\Models\CheckinHistory;
 use App\Models\Attendance;
+use App\Models\GlobalSetting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Enums\Tag;
+use App\Models\CheckinHistoryTag;
 
 class CheckinHistoryService extends BaseService
 {
@@ -42,113 +46,29 @@ class CheckinHistoryService extends BaseService
                 $attendence->is_present = 1;
                 $attendence->save();
             }
-            $user_history = CheckinHistory::where('user_id', $user_id)->get();
+            $userLastCheckinDetails = $this->userLastCheckinDetails();
+            $lastCheckinId = $userLastCheckinDetails->id ?? 0;
+            $user_history = CheckinHistory::where('user_id', $user_id)->whereDate('created_at', Carbon::today())->first();
+            $checkinTime = $user_history->checkin;
+            $startTime = $this->getGlobalSettingValueByName(GlobalSettings::CHECKIN_TIME);
+            $marginTime = $this->getGlobalSettingValueByName(GlobalSettings::CHECKIN_MARGIN);
+            $carbonStartTime = Carbon::createFromDate($startTime);
+            $differenceInMinutes = $carbonStartTime->diffInMinutes($checkinTime);
+            $checkinHistoryTag = new CheckinHistoryTag();
+            if ($differenceInMinutes > $marginTime) {
+                $checkinHistoryTag->tag_id = Tag::EARLY;
+                $checkinHistoryTag->checkin_history_id = $lastCheckinId;
+                $checkinHistoryTag->save();
+            }
+            $checkinHistoryTag->tag_id = Tag::LATE;
+            $checkinHistoryTag->checkin_history_id = $lastCheckinId;
+            $checkinHistoryTag->save();
+            // dd($currentTime);
             $html = view('pages.user._partial._checkout_html')->render();
-            $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-            return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section', 'module' => 'checkin']);
+            //$checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
+            return $this->successResponse('You are successfully checked-in', ['html' => $html, 'html_section_id' => 'checkin-section', 'module' => 'checkin']);
         }
     }
-
-    // public function confirmCheckout(Request $request)
-    // {
-    //     $user_id = $this->getAuthUserId();
-    //     if ($user_id > 0) {
-    //         //  dd($html);
-    //         $checkin_history_data = CheckinHistory::where('user_id', $user_id)->latest()->first();
-    //         if ($checkin_history_data != null) {
-    //             if (!$checkin_history_data->checkout) {
-    //                 $checkin_history_data->checkout = Carbon::now();
-    //                 $checkin_history_data->done_today = $request->done_today ?? '';
-    //                 $checkin_history_data->do_tomorrow = $request->do_tomorrow ?? '';
-    //                 $checkin_history_data->questions = $request->questions ?? '';
-    //                 $checkin_history_data->save();
-    //                 $user_history = CheckinHistory::where('user_id', $user_id)->get()->last();
-    //                 $start_time = Carbon::parse($user_history->checkin);
-    //                 $end_time = Carbon::parse($user_history->checkout);
-    //                 $total_work_time = $start_time->diff($end_time)->format('%H:%I:%S');
-    //                 Session::put('total_work_time', $total_work_time);
-    //                 // dd($total_work_time);
-    //                 //$checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-    //                 // dd($checkin_history_html);
-    //                 //    dd($checkin_history_html,"data");
-    //                 $html = view('pages.user._partial._checkin_html')->render();
-    //                 return $this->successResponse('You are successfully checked-out', ['html' => $html, 'html_section_id' => 'checkin-section', 'html_history_section_id' => 'checkin-history-section']);
-
-    //                 //return $this->successResponse('CheckOut Successfully!', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section']);
-    //             }
-    //         }
-    //         return $this->errorResponse('Something went wrong, please contact support team, thanks', ['errors' => ['Something went wrong, please contact support team, thanks'], 'html' => $html]);
-    //     }
-    // }
-
-    // public function confirmCheckout(Request $request, $force = null)
-    // {
-    //     $user_id = $this->getAuthUserId();
-    //     if ($user_id > 0) {
-
-    //         $user_task_logs = UserTaskLog::where('user_id', $user_id)->whereDate('created_at', Carbon::today())->get();
-    //         $user_task_logs_count = count($user_task_logs);
-    //         if ($user_task_logs_count > 0) {
-    //             $checkin_history_data = CheckinHistory::where('user_id', $user_id)->latest()->first();
-    //             if ($checkin_history_data != null) {
-    //                 if (!$checkin_history_data->checkout) {
-    //                     if (!$force) {
-
-    //                         $userLastCheckinDetails = $this->userLastCheckinDetails();
-    //                         $last_checkin_id = $userLastCheckinDetails->id ?? 0;
-    //                         $last_checkin_time = $userLastCheckinDetails->checkin ?? 0;
-    //                         if (isset($last_checkin_time) && !empty($last_checkin_time)) {
-
-    //                             $carbon_checkin_time = Carbon::createFromDate($last_checkin_time);
-    //                             $difference_in_minutes = $carbon_checkin_time->diffInMinutes(Carbon::now());
-    //                             $sumTime = UserTaskLog::where('user_id', $user_id)->whereDate('created_at', Carbon::today())->sum('time');
-    //                             $remaining_difference_in_minutes = $difference_in_minutes - intval($sumTime);
-    //                             ## We have to subtract the logged minutes here
-    //                             $minutes = $difference_in_minutes > 0 ? ($difference_in_minutes % 60) : 0;
-    //                             $hours = $difference_in_minutes > 60 ? intval((($difference_in_minutes - $minutes) / 60)) : 0;
-    //                              $total_time = $hours.'h'. ' ' . $minutes.'m' ?? 0;
-    //                             Session::put('total_work_time', $total_time);
-    //                             // $last_checkin_time = $carbon_checkin_time->format('Y-m-d h:i:s A');
-    //                             if ($remaining_difference_in_minutes > 30) {
-    //                                 //dd('Task log time remaining are you sure you want to check out');
-    //                                 $containerId = $request->input('containerId', 'common_popup_modal');
-    //                                 $html = view('pages.user._partial._confirmation_checkout_modal', ['id' => $containerId])->render();
-
-    //                                 return $this->successResponse('success', ['html' => $html, 'show_modal' => 1, 'modal_id' => 'common_popup_modal']);
-    //                                 // $html = view('pages.user._partial._confirmation_checkout_modal')->render();
-    //                                 // return $this->errorResponse('Task log time remaining are you sure you want to check out', ['html' => $html, 'html_section_id' => 'checkin-section', 'html_history_section_id' => 'checkin-history-section']);
-    //                                 //dd('Task log time remaining are you sure you want to check out');
-    //                             }
-    //                         }
-    //                     }
-    //                     $checkin_history_data->checkout = Carbon::now();
-    //                     $checkin_history_data->do_tomorrow = $request->do_tomorrow ?? '';
-    //                     $checkin_history_data->questions = $request->questions ?? '';
-    //                     $checkin_history_data->is_submit_report = 1;
-    //                     $checkin_history_data->save();
-    //                     // $user_history = CheckinHistory::where('user_id', $user_id)->get()->last();
-    //                     // $start_time = Carbon::parse($user_history->checkin);
-    //                     // $end_time = Carbon::parse($user_history->checkout);
-    //                     // $total_work_time = $start_time->diff($end_time)->format('%H:%I:%S');
-
-
-    //                     // dd($total_work_time);
-    //                     //$checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();
-    //                     // dd($checkin_history_html);
-    //                     //    dd($checkin_history_html,"data");
-    //                     $html = view('pages.user._partial._checkin_html')->render();
-    //                     return $this->successResponse('You are successfully checked-out', ['html' => $html, 'html_section_id' => 'checkin-section', 'html_history_section_id' => 'checkin-history-section']);
-
-    //                     //return $this->successResponse('CheckOut Successfully!', ['html' => $html, 'html_section_id' => 'checkin-section', 'checkin_history_html' => $checkin_history_html, 'html_history_section_id' => 'checkin-history-section']);
-    //                 }
-    //             }
-    //         } else {
-    //             return $this->errorResponse('You are not add today task log');
-    //         }
-
-    //         return $this->errorResponse('Something went wrong, please contact support team, thanks', ['errors' => ['Something went wrong, please contact support team, thanks'], 'html' => $html ?? '']);
-    //     }
-    // }
 
     public function getUserCheckinRecord(Request $request)
     {

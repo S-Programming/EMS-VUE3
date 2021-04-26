@@ -20,6 +20,9 @@ class Report
             Route::post('/report/delete/modal', [ReportController::class, 'reportDeleteModal'])->name('report.delete.modal');
             Route::post('/report/delete', [ReportController::class, 'reportDelete'])->name('report.delete');
             Route::post('/report/submit/{force?}', [ReportController::class, 'reportSubmit'])->name('report.submit');
+            //Report today
+            Route::post('/report/today/modal', [ReportController::class, 'reportTodayModal'])->name('report.today.modal');
+
         });
     }
 }

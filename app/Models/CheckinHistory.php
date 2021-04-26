@@ -11,8 +11,8 @@ class CheckinHistory extends Model
 
     protected $table = 'checkin_history';
 
-    public function getUserLastCheckIn()
+    public function tags()
     {
-
+        return $this->belongsToMany(Tag::class);
     }
 }

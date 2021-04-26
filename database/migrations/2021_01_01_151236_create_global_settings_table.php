@@ -31,6 +31,8 @@ class CreateGlobalSettingsTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('global_settings');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

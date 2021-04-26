@@ -19,6 +19,7 @@ $(function () {
 
 
 function validateFieldsByFormId(e) {
+    event.preventDefault();
     //event.preventDefault();
     const formId = $(e).closest('form').attr('id');
     const formURL = $(e).closest('form').attr('action');
@@ -94,6 +95,7 @@ function validateFieldsByFormId(e) {
                 $(`#` + validationSpanId).html(buttonHtml);
             },
             error: function (data) {
+                $(`#` + validationSpanId).html(buttonHtml);
                 e.disabled = false;
                 // Error...
                 console.log("erorrr");
@@ -112,7 +114,6 @@ function validateFieldsByFormId(e) {
                 });
                 notificationAlert('error', errorMsg, 'Inconceivable!');
                 //  bsAlert(errorMsg, 'alert-danger', 'alert_placeholder');
-                $(`#` + validationSpanId).html(buttonHtml);
             }
         });
     }
@@ -270,6 +271,7 @@ function reload_page(url) {
  * Created by Abbas Naumani on 2/5/2018.
  */
 function commonAjaxModel(route, id, containerId) {
+    event.preventDefault();
     if (typeof (containerId) == "undefined" || containerId == '') {
         containerId = 'common_popup_modal';
     }
