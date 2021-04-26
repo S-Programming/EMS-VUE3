@@ -55,14 +55,16 @@ class CheckinHistoryService extends BaseService
             $carbonStartTime = Carbon::createFromDate($startTime);
             $differenceInMinutes = $carbonStartTime->diffInMinutes($checkinTime);
             $checkinHistoryTag = new CheckinHistoryTag();
-            if ($differenceInMinutes > $marginTime) {
+            if ($differenceInMinutes < $marginTime) {
                 $checkinHistoryTag->tag_id = Tag::EARLY;
                 $checkinHistoryTag->checkin_history_id = $lastCheckinId;
                 $checkinHistoryTag->save();
             }
-            $checkinHistoryTag->tag_id = Tag::LATE;
-            $checkinHistoryTag->checkin_history_id = $lastCheckinId;
-            $checkinHistoryTag->save();
+            if ($differenceInMinutes > $marginTime) {
+                $checkinHistoryTag->tag_id = Tag::LATE;
+                $checkinHistoryTag->checkin_history_id = $lastCheckinId;
+                $checkinHistoryTag->save();
+            }
             // dd($currentTime);
             $html = view('pages.user._partial._checkout_html')->render();
             //$checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history])->render();

@@ -17,10 +17,10 @@ class TagTableSeeder extends Seeder
     {
         //
         $tag = [
-            ['name' => 'Early', 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
-            ['name' => 'Late', 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
-            ['name' => 'Half Day', 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
-            ['name' => 'Less then 8 hours', 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['name' => 'Early', 'color' => '#0d6efd', 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['name' => 'Late', 'color' =>  '#dc3545', 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['name' => 'Half Day', 'color' =>  '#ffc107', 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['name' => 'Less then 8 hours', 'color' =>  '#1b2a4e', 'created_at' => Carbon::now()->format('Y-m-d H:i:s')],
         ];
         DB::table('tags')->insert($tag);
     }

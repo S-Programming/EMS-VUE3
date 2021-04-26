@@ -79,7 +79,7 @@ class ReportService extends BaseService
         if (intval($minutes) > intval($logAbleTime)) {
             return $this->errorResponse('Your logged time exceed to actual spent time.');
         }
-        dd($sumTime, $logAbleTime);
+        // dd($sumTime, $logAbleTime);
         $userTaskLogs = new UserTaskLog;
         $userTaskLogs->user_id = $this->getAuthUserId();
         $userTaskLogs->checkin_id = $lastCheckinId;
@@ -221,6 +221,8 @@ class ReportService extends BaseService
                         /*## We have to subtract the logged minutes here*/
                         $minutes = $differenceInMinutes > 0 ? ($differenceInMinutes % 60) : 0;
                         $hours = $differenceInMinutes > 60 ? intval((($differenceInMinutes - $minutes) / 60)) : 0;
+                        $totalTime = $hours . 'h' . ' ' . $minutes . 'm' ?? 0;
+                        Session::put('total_work_time', $totalTime);
                         if (!$force && $remainingDifferenceInMinutes > 30) {
                             $containerId = $request->input('containerId', 'common_popup_modal');
                             $html = view('pages.user._partial._confirmation_checkout_modal', ['id' => $containerId])->render();
@@ -233,8 +235,10 @@ class ReportService extends BaseService
                             $checkinTags[] = Tag::HALF_DAY;
                         }
                         $checkinHistoryData->tags()->attach($checkinTags);
+                        $checkinHistoryData->checkout = Carbon::now();
                         $checkinHistoryData->do_tomorrow = $request->do_tomorrow ?? '';
                         $checkinHistoryData->questions = $request->questions ?? '';
+                        $checkinHistoryData->is_submit_report = 1;
                         $checkinHistoryData->save();
                         $html = view('pages.user._partial._checkin_html')->render();
                     }

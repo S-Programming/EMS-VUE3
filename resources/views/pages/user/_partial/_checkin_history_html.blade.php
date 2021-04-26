@@ -6,6 +6,7 @@
                 <th>Check In Time</th>
                 <th>Check Out Time</th>
                 <th>Day</th>
+                <th>Tags</th>
                 <th>Do Tomorrow</th>
                 <th>Any Question</th>
                 <!-- <th>Done Today</th> -->
@@ -23,6 +24,13 @@
                 <td>{{$data->checkin??''}}</td>
                 <td>{{$data->checkout ??''}}</td>
                 <td>{{$data->created_at->format('d M') ?? ''}}</td>
+                <td>
+                    @if(isset($data) && !empty($data))
+                    @foreach($data->tags as $tag)
+                    <span class="badge text-white" style="background-color: {{$tag->color}}"> {{$tag->name ?? ''}}</span>
+                    @endforeach
+                    @endif
+                </td>
                 <td>{!!$data->do_tomorrow??'' !!}</td>
                 <td>{!!$data->questions??'' !!}</td>
                 <!-- <td>{!!$data->done_today??'' !!}</td> -->
