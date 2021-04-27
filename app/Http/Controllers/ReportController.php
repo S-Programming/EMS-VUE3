@@ -127,7 +127,8 @@ class ReportController extends Controller
         if ($validator->fails()) {
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
-        return $this->sendJsonResponse($this->reportService->reportSubmit($request, $force));
+        $redirectionRoute = '/dashboard';
+        return $this->sendJsonResponse($this->reportService->reportSubmit($request, $force),['redirect_to' => $redirectionRoute]);
     }
 
     /**

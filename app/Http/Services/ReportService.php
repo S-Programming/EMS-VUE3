@@ -132,8 +132,9 @@ class ReportService extends BaseService
      */
     public function reportEdit(Request $request)
     {
+        $taskLogId = $request->user_task_log_id;
         if (!isset($request) && empty($request)) { // what will be condition
-            return $this->errorResponse('Leave Type Submittion Failed');
+            return $this->errorResponse('Task Report Submittion Failed');
         }
         $hours = $request->hours;
         $minutes = $request->minutes;
@@ -145,9 +146,10 @@ class ReportService extends BaseService
         if ($hours > 0 && $minutes > 0) {
             $minutes = $minutes + ($hours * 60);
         }
-        $sumTime = UserTaskLog::where('user_id', $this->getAuthUserId())->whereDate('created_at', Carbon::today())->sum('time');
+        $sumTime = UserTaskLog::where('user_id', $this->getAuthUserId())->whereDate('created_at', Carbon::today())->whereNotIn('id', [$taskLogId])->sum('time');
+        $sumTime = $sumTime + $minutes;
         $logAbleTime = $differenceInMinutes - intval($sumTime);
-        if ($minutes > intval($logAbleTime)) {
+        if ($sumTime > intVal($differenceInMinutes)) {
             return $this->errorResponse('Your logged time exceed to actual spent time');
         }
         if (isset($request) && !empty($request)) {
@@ -158,7 +160,8 @@ class ReportService extends BaseService
             $userTaskLogs->save();
         }
         $userTaskLogs = UserTaskLog::where('user_id', $this->getAuthUserId())->whereDate('created_at', Carbon::today())->get();
-        $html = view('pages.report._partial._task_log_table_html', compact('userTaskLogs', $userTaskLogs))->render();
+        $html = view('pages.report._partial._task_log_table_html', ['userTaskLogs' => $userTaskLogs, 'is_show_action' => 1])->render();
+        // $html = view('pages.report._partial._task_log_table_html', compact('userTaskLogs', $userTaskLogs))->render();
         return $this->successResponse('Report has Successfully Updated', ['html' => $html, 'html_section_id' => 'task-log-table-section']);
     }
 
@@ -186,7 +189,8 @@ class ReportService extends BaseService
         $userTaskLogs = UserTaskLog::find($TaskLogId);
         $userTaskLogs->delete();
         $userTaskLogs = UserTaskLog::where('user_id', $this->getAuthUserId())->whereDate('created_at', Carbon::today())->get();
-        $html = view('pages.report._partial._task_log_table_html', compact('userTaskLogs', $userTaskLogs))->render();
+        // $html = view('pages.report._partial._task_log_table_html', compact('userTaskLogs', $userTaskLogs))->render();
+        $html = view('pages.report._partial._task_log_table_html', ['userTaskLogs' => $userTaskLogs, 'is_show_action' => 1])->render();
         return $this->successResponse('Report has Successfully Deleted', ['html' => $html, 'html_section_id' => 'task-log-table-section']);
     }
 
