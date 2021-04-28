@@ -47,14 +47,14 @@
                                 <p class="font-size-h3">What I'll do tomorrow?</p>
                                 <div class="form-group">
                                     <textarea class="form-control form-control-lg"
-                                              name="do_tomorrow"></textarea>
+                                              name="do_tomorrow">Assigned tasks</textarea>
                                 </div>
                             </div>
                             <div class="py-3">
                                 <p class="font-size-h3">Any Questions / Roadblocks?</p>
                                 <div class="form-group">
                                     <textarea class="form-control form-control-lg"
-                                              name="questions"></textarea>
+                                              name="questions">N/A</textarea>
                                 </div>
                             </div>
                             @if(isset($is_submit_report)&&$is_submit_report==1)

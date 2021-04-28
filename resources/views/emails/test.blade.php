@@ -7,6 +7,7 @@
 
 <body>
   <h2>Task Log Detail</h2>
+  @dd($userTaskLogs,'Yoo',$checkinHistoryData)
   <div class="block-content block-content-full">
     @if(isset($userTaskLogs) && count($userTaskLogs)>0)
     <table class="table table-bordered table-striped table-vcenter table-hover table-bordered">
@@ -42,7 +43,7 @@
       </thead>
       <tbody>
         <tr>
-        @dd($userTaskLogs->checkin())
+        @dd($userTaskLogs,'Yoo')
           <!-- <td>{{$data->user->first_name??''}} {{$data->user->last_name??''}}</td> -->
           <td>{{$userTaskLogs->checkin->do_tomorrow??''}}</td>
           <td>{{$userTaskLogs->checkin->questions??''}}</td>

@@ -2,6 +2,8 @@
 
 namespace App\Mail;
 
+use App\Http\Enums\GlobalSettings;
+use App\Http\Traits\GlobalSettingsTrait;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -10,6 +12,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class TestEmail extends Mailable
 {
     use Queueable, SerializesModels;
+    use GlobalSettingsTrait;
 
     public $data;
 
@@ -20,9 +23,9 @@ class TestEmail extends Mailable
 
     public function build()
     {
-        $address = 'saadyounas955@gmail.com';
-        $subject = 'This is a demo Fradia!';
-        $name = 'Kode Studio';
+        $address = $this->getGlobalSettingValueByName(GlobalSettings::ADMIN_EMAIL);
+        $subject = 'Checkout Report!';
+        $name = 'KodeStudio.net';
 
         return $this->view('emails.test')
             ->from($address, $name)
@@ -30,6 +33,6 @@ class TestEmail extends Mailable
             ->bcc($address, $name)
             ->replyTo($address, $name)
             ->subject($subject)
-            ->with(['userTaskLogs' => $this->data]);
+            ->with($this->data);
     }
 }
