@@ -15,6 +15,9 @@ use App\Http\Enums\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestEmail;
+
 
 class ReportService extends BaseService
 {
@@ -245,6 +248,20 @@ class ReportService extends BaseService
                         $checkinHistoryData->is_submit_report = 1;
                         $checkinHistoryData->save();
                         $html = view('pages.user._partial._checkin_html')->render();
+                        $to_email = "mudassarhussain08@gmail.com";
+
+                        // $checkinHistory = CheckinHistory::with('taskLog')->where('user_id', $this->getAuthUserId())->whereDate('created_at', Carbon::today())->get();
+                        // dd($checkinHistory);
+
+                        $userTaskLogs = UserTaskLog::with('checkin')->where('user_id', $this->getAuthUserId())->whereDate('created_at', Carbon::today())->get();
+                        // dd($userTaskLogs);
+                        // foreach ($userTaskLogs as $data){
+                        //     dd($data->checkin->do_tomorrow);
+                        // }
+                        // $html = view('pages.report._partial._task_log_table_html', ['userTaskLogs' => $userTaskLogs, 'is_show_action' => 1])->render();
+                        //$html1 = view('emails.test',['data' => 'abc'])->render();
+                        Mail::to($to_email)->send(new TestEmail($userTaskLogs));
+                        dd('email');
                     }
                     return $this->successResponse('You are successfully checked-out', ['html' => $html ?? '', 'html_section_id' => 'checkin-section', 'html_history_section_id' => 'checkin-history-section']);
                 } else {

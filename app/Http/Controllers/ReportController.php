@@ -28,6 +28,12 @@ class ReportController extends Controller
     {
         $userId = $this->getAuthUserId();
         $userLastCheckinDetails = $this->userLastCheckinDetails();
+        $reportStatus = $userLastCheckinDetails->is_submit_report;
+        if($reportStatus == 1)
+        {
+            $redirectionRoute = '/dashboard';
+            return redirect($redirectionRoute);
+        }
         $lastCheckinId = $userLastCheckinDetails->id ?? 0;
         $isSubmitReport = $userLastCheckinDetails->is_submit_report ?? 0;
         $userTaskLogs = UserTaskLog::with('Project')->with('User')->where([['user_id', $userId], ['checkin_id', $lastCheckinId]])->get();
@@ -128,7 +134,7 @@ class ReportController extends Controller
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
         $redirectionRoute = '/dashboard';
-        return $this->sendJsonResponse($this->reportService->reportSubmit($request, $force),['redirect_to' => $redirectionRoute]);
+        return $this->sendJsonResponse($this->reportService->reportSubmit($request, $force));
     }
 
     /**

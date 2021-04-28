@@ -15,4 +15,9 @@ class CheckinHistory extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    // public function taskLog()
+    // {
+    //     return $this->hasMany(UserTaskLog::class);
+    // }
 }
