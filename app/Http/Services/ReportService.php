@@ -242,15 +242,14 @@ class ReportService extends BaseService
                             $checkinTags[] = Tag::HALF_DAY;
                         }
                         $checkinHistoryData->tags()->attach($checkinTags);
-                       // $checkinHistoryData->checkout = Carbon::now();
+                        $checkinHistoryData->checkout = Carbon::now();
                         $checkinHistoryData->do_tomorrow = $request->do_tomorrow ?? '';
                         $checkinHistoryData->questions = $request->questions ?? '';
-                     //   $checkinHistoryData->is_submit_report = 1;
+                        $checkinHistoryData->is_submit_report = 1;
                         $checkinHistoryData->save();
                         $html = view('pages.user._partial._checkin_html')->render();
                         $to_email = $this->getGlobalSettingValueByName(GlobalSettings::ADMIN_EMAIL);
                         Mail::to($to_email)->send(new TestEmail(['checkinHistoryData'=>$checkinHistoryData,'userTaskLogs'=>$userTaskLogs]));
-                        dd('email');
                     }
                     return $this->successResponse('You are successfully checked-out', ['html' => $html ?? '', 'html_section_id' => 'checkin-section', 'html_history_section_id' => 'checkin-history-section']);
                 } else {
