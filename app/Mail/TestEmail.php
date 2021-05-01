@@ -27,8 +27,9 @@ class TestEmail extends Mailable
     {
         $address = $this->getGlobalSettingValueByName(GlobalSettings::ADMIN_EMAIL);
         $user = $this->getAuthUser();
-        $subject = 'Checkout Report - ('.date('d-m-Y').')';
+        // $subject = 'Checkout Report - ('.date('d-m-Y').')';
         $name = isset($user->first_name) ? $user->first_name . ' ' . $user->last_name : 'KodeStudio.net';
+        $subject = 'Task Report ' .date('F j, Y'). ' - ['. $name. ']';
         return $this->view('emails.test')
             ->to($address, $name)
             ->from($user->email, $name)
