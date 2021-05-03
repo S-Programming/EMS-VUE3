@@ -1,3 +1,15 @@
+<style>
+    .click_here {
+        animation: blinker 1s linear infinite;
+
+    }
+
+    @keyframes blinker {
+        50% {
+            opacity: 0;
+        }
+    }
+</style>
 <x-guest-layout>
     <!-- Page Content -->
     <x-auth-card>
@@ -11,9 +23,9 @@
                                 <h3 class="block-title">Sign In</h3>
                                 <div class="block-options">
                                     @if (Route::has('password.request'))
-                                        <a class="btn-block-option font-size-sm" href="{{ route('password.request') }}">
-                                            {{ __('Forgot your password?') }}
-                                        </a>
+                                    <a class="btn-block-option font-size-sm" href="{{ route('password.request') }}">
+                                        {{ __('Forgot your password?') }}
+                                    </a>
                                     @endif
 
 
@@ -41,26 +53,25 @@
                                                 <x-input id="email" class="form-control form-control-alt form-control-lg" type="email" name="email" :value="old('email')" required autofocus />
                                             </div>
                                             <div class="form-group">
-                                                <x-input id="password" class="form-control form-control-alt form-control-lg"
-                                                         type="password"
-                                                         name="password"
-                                                         required autocomplete="current-password" />
+                                                <x-input id="password" class="form-control form-control-alt form-control-lg" type="password" name="password" required autocomplete="current-password" />
                                             </div>
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
-                                                    <x-input type="checkbox" class="custom-control-input" id="login-remember"
-                                                             name="login-remember" />
+                                                    <x-input type="checkbox" class="custom-control-input" id="login-remember" name="login-remember" />
                                                     <x-label class="custom-control-label font-w400" for="login-remember" :value="__('Remember Me')" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-6 col-xl-5">
-                                                <x-button class="btn btn-block btn-alt-primary" onclick="validateFieldsByFormId(this)" data-validation="validation-span-id"
-                                                          id="validation-span-id" >
+                                                <x-button class="btn btn-block btn-alt-primary" onclick="validateFieldsByFormId(this)" data-validation="validation-span-id" id="validation-span-id">
                                                     <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Sign In') }}
                                                 </x-button>
                                             </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <x-label class="font-w400" for="terms-and-conditions" :value="__('Terms & Conditions')" />
+                                            <a class="click_here" href="{{url('/policy')}}">Click here!</a>
                                         </div>
                                     </form>
                                     <!-- END Sign In Form -->

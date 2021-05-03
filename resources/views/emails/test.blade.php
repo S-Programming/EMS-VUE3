@@ -75,7 +75,7 @@
       border-bottom: 2px solid #e1e6e9;
     }
 
-    .custom-span{
+    .custom-span {
       padding-left: 10px;
     }
   </style>
@@ -98,7 +98,7 @@
         <tr>
           <td style="padding-right:10px">{{$data->project->name??''}}</td>
           <td>{!!$data->description ??''!!}</td>
-          <td>{{$data->time ?? ''}}</td>
+          <td>{{minutesToReadableFormat($data->time ?? 0)}}</td>
         </tr>
         @endforeach
       </tbody>
