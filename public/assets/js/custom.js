@@ -613,6 +613,33 @@ $(function () {
     });
 });
 
+$(function () {
+    $('#current_password').blur(function () {
+        // $('#result').text('test');
+        var current_password = $("#current_password").val();
+        var base_url = window.location.origin;
+        base_url = base_url + "/check/current/password";
+        $("#password_result").val('');
+        $.ajax({
+            url: base_url,
+            type: "POST",
+            data: { current_password: current_password },
+            success: function (data) {
+                console.log(data);
+                if (data.status == 'success') {
+                    $('#isValid').removeClass('notvalid');
+                    $('#isValid').addClass('isvalid');
+                    // $('#password_result').text('');
+                } else if (data.status == 'error') {
+                    $('#isValid').removeClass('isvalid');
+                    $('#isValid').addClass('notvalid');
+                    //$('#password_result').text(data.message.data);
+                }
+            }
+        });
+    });
+});
+
 function EmailMask(email) {
     var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return expr.test(email);

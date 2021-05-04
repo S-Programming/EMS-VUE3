@@ -21,12 +21,13 @@
             @if(isset($leaves) && !empty($leaves))
             @foreach($leaves as $leave)
             <tr>
-                <td class="font-w600 font-size-sm">{{date('Y-m-d',strtotime($leave->start_date))}}</td>
-                <td class="font-w600 font-size-sm">{{$leave->end_date}}</td>
-                <td class="font-w600 font-size-sm">{{$leave->type->type}}</td>
-                <td class="font-w600 font-size-sm">{!! $leave->description !!}</td>
-                <td class="font-w600 font-size-sm">{!! $leave->comments !!}</td>
-                <td class="font-w600 font-size-sm">{{$leave->requestStatus->status}}</td>
+                <!-- <td class="font-w600 font-size-sm">{{date('Y-m-d',strtotime($leave->start_date))}}</td> -->
+                <td class="font-w600 font-size-sm">{{$leave->start_date ?? 0}}</td>
+                <td class="font-w600 font-size-sm">{{$leave->end_date ?? 0}}</td>
+                <td class="font-w600 font-size-sm">{{$leave->type->type ?? ''}}</td>
+                <td class="font-w600 font-size-sm">{!! $leave->description ?? '' !!}</td>
+                <td class="font-w600 font-size-sm">{!! $leave->comments ?? '' !!}</td>
+                <td class="font-w600 font-size-sm">{{$leave->requestStatus->status ?? ''}}</td>
 
                 <!-- <td>
                     <button class="btn btn-info" onclick="commonAjaxModel('edit_role_modal',{{$leave->id}})"><i class="fa fa-edit"></i></button>

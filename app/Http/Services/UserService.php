@@ -22,6 +22,7 @@ use App\Models\UserInteraction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Route\Http\Report;
 
 class UserService extends BaseService
 {
@@ -172,6 +173,22 @@ class UserService extends BaseService
         } else {
 
             return $this->errorResponse('Profile Updation Failed');
+        }
+    }
+
+    /* Check current password from DB */
+    public function checkCurrentPassword(Request $request)
+    {
+        if (isset($request) && !empty($request)) {
+            $user_id = $this->getAuthUserId();
+            $user_data = User::find($user_id);
+            $db_password = $user_data->password;
+            $current_password = $request->current_password;
+            if (Hash::check($current_password, $db_password)) {
+                return $this->successResponse(['data' => 'Password Match']);
+            } else {
+                return $this->errorResponse(['data' => 'Password not match']);
+            }
         }
     }
 

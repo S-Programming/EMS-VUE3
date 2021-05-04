@@ -37,6 +37,7 @@ class User
             Route::post('/user/report/history', [UserController::class, 'userReportHistory'])->name('user.report.history');
 
             Route::post('/import/users/by/csv', [UserController::class, 'importUsersCsv'])->name('user.import.by.csv');
+            Route::post('/check/current/password', [UserController::class, 'checkCurrentPassword'])->name('check.current.password');
 
 //            Admin Route Admin Route
 //            Route::get('specific/user/profile/{user/id}', [UserController::class, 'viewUserProfilePlusInteractions'])->name('user.specific.profile');
