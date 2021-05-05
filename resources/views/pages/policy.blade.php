@@ -14,7 +14,7 @@
                             <div class="block-content">
                                 SOP - Leave Request
 
-                                An employee needs to create a leave request through PLPS’ request section at least one hour prior to the office start time in order for the respective day to be considered as informed leave.
+                                An employee needs to create a leave request through KSPS’ request section at least one hour prior to the office start time in order for the respective day to be considered as informed leave.
 
                                 It is recommended that the leave request is generated at least one day before and an employee should wait for the approval of their leave request unless there is an emergency case.
 
@@ -106,7 +106,7 @@
 
                                 Action Items:
 
-                                List the items here that needs to be addressed by Client or PureLogics.
+                                List the items here that needs to be addressed by Client or KodeStudio.
 
                                 These could be multiple points.
 
@@ -126,7 +126,7 @@
 
                                 Please follow the below mentioned SOP related to company assets:
 
-                                If any employee needs to take the laptop or any other company's asset to home for official use, then they must generate a request for the issuance of company assets via the request section in PLPS.
+                                If any employee needs to take the laptop or any other company's asset to home for official use, then they must generate a request for the issuance of company assets via the request section in KSPS.
 
                                 Please remember that all employees are expected to protect the company's assets and ensure their efficient use.
 
@@ -162,7 +162,7 @@
 
                                 If a client wants to send any device, gadget or gift, please inform the director, engagement manager, and Admin. Admin Department will guide you about delivery instructions.
 
-                                It is important that the company’s name (PureLogics) is not used in the invoice sent alongside the gift.
+                                It is important that the company’s name (KodeStudio) is not used in the invoice sent alongside the gift.
 
                                 The handler name should be Shahid Javed.
 
@@ -190,7 +190,7 @@
 
                                 Employees need to show their card to the front desk officer as they enter office.
 
-                                Employees need to wear their ID card in a visible manner at all times while in PureLogics’ premises. This is now a mandatory requirement.
+                                Employees need to wear their ID card in a visible manner at all times while in KodeStudio’ premises. This is now a mandatory requirement.
 
                                 All employees will be issued only one photo identification card at one time.
 
@@ -206,7 +206,7 @@
 
                                 ID cards that are replaced due to normal wear and tear, department change, name change, or lost/damaged due to a work incident will not be assessed a replacement fee.
 
-                                The card must be presented and/or surrendered upon demand by PureLogics; failure to do so, or lending the card to anyone, is considered misuse and may subject the holder to disciplinary action.
+                                The card must be presented and/or surrendered upon demand by KodeStudio; failure to do so, or lending the card to anyone, is considered misuse and may subject the holder to disciplinary action.
 
                                 Upon Designation Change:
 
