@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css')}}">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css?v=1.0') }}">
 
     <!-- CSS After -->
     @yield('css_after')
@@ -730,7 +730,7 @@ MAIN CONTENT LAYOUT
 
 <script src="{{ asset('assets/plugins/toastr/js/toastr.min.js') }}"></script>
 <!-- custom js -->
-<script src="{{ asset('assets/js/custom.js') }}"></script>
+<script src="{{ asset('assets/js/custom.js?v=1.0') }}"></script>
 
 
 @yield('js_after')

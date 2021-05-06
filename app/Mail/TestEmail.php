@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use App\Http\Enums\GlobalSettings;
 use App\Http\Traits\GlobalSettingsTrait;
+use App\Http\Traits\AuthUser;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -13,6 +14,7 @@ class TestEmail extends Mailable
 {
     use Queueable, SerializesModels;
     use GlobalSettingsTrait;
+    use AuthUser;
 
     public $data;
 
@@ -24,13 +26,14 @@ class TestEmail extends Mailable
     public function build()
     {
         $address = $this->getGlobalSettingValueByName(GlobalSettings::ADMIN_EMAIL);
-        $subject = 'Checkout Report!';
-        $name = 'KodeStudio.net';
-
+        $user = $this->getAuthUser();
+        // $subject = 'Checkout Report - ('.date('d-m-Y').')';
+        $name = isset($user->first_name) ? $user->first_name . ' ' . $user->last_name : 'KodeStudio.net';
+        $subject = 'Task Report ' .date('F j, Y'). ' - ['. $name. ']';
         return $this->view('emails.test')
-            ->from($address, $name)
-            ->cc($address, $name)
-            ->bcc($address, $name)
+            ->to($address, $name)
+            ->from($user->email, $name)
+            ->cc($user->email, $name)
             ->replyTo($address, $name)
             ->subject($subject)
             ->with($this->data);

@@ -9,20 +9,20 @@
                     @csrf
 
                     @php
-                        $inyMceConfig = theme_tinyMCE_default_config();
-                        $inyMceConfig['is_tiny_mce_modal'] = $id??'common_popup_modal';
-                        $inyMceConfig['selector'] = '.tinymce-editor-cls';
+                    $inyMceConfig = theme_tinyMCE_default_config();
+                    $inyMceConfig['is_tiny_mce_modal'] = $id??'common_popup_modal';
+                    $inyMceConfig['selector'] = '.tinymce-editor-cls';
                     echo theme_tinyMCE_script($inyMceConfig);
                     @endphp
                     <div class="card">
                         <div class="card-body">
                             <div class="py-2">
                                 <div class="form-group">
-                                   <!--  <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden" name="id" value="{{$user_data->id??0}}" />
+                                    <!--  <x-input id="id" class="form-control form-control-alt form-control-lg" type="hidden" name="id" value="{{$user_data->id??0}}" />
                                     -->
                                 </div>
                             </div>
-                           <div class="py-3">
+                            <div class="py-3">
                                 <div class="form-group">
                                     <label for="types">&nbsp Type</label>
                                     {!!$leave_types_dropdown??''!!}
@@ -31,34 +31,44 @@
                             <div class="py-3">
                                 <div class="form-group">
                                     <label for="types">&nbsp Description</label>
-                                    <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg"  name="description"  required autofocus ></textarea>
+                                    <textarea id="myTextareas" class="tinymce-editor-cls tinymce-modal form-control form-control-alt form-control-lg" name="description" required autofocus></textarea>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label>Multiple Days</label>
                                 <select class="form-control" name="multiple-days" onchange="showDate()">
                                     <option value="yes" selected>Yes</option>
                                     <option value="no">No</option>
                                 </select>
+                            </div> -->
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="half_day" value="1" name="half_day" checked>
+                                <label class="form-check-label" for="half_day">
+                                    Half Day
+                                </label>
                             </div>
-                            <div class="form-group hide-input" id="half-day">
+
+                            <!-- <div class="form-group hide-input" id="half-day">
                                 <label>Half Day</label>
                                 <select class="form-control" name="half_day">
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option>
                                 </select>
+                            </div> -->
+
+                            <!-- <div class="form-group" id="range-group">
+                                <label for="">Date Range: </label>
+                                <input type="text" class="js-flatpickr form-control bg-white flatpickr-input date-range-cls" id="date-range-id" name="date_range" placeholder="Select Holidays" {{--                                           data-mode="range"--}} data-min-date="today">
+                            </div> -->
+                            <div class="form-group">
+                                <label for="">Start Date </label>
+                                <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="start_date" name="start_date" placeholder="Start Date" data-min-date="today" readonly="readonly">
                             </div>
 
-                            <div class="form-group" id="range-group">
-                                <label for="">Date Range: </label>
-                                <input type="text" class="js-flatpickr form-control bg-white flatpickr-input date-range-cls" id="date-range-id"
-                                           name="date_range" placeholder="Select Holidays"
-{{--                                           data-mode="range"--}}
-                                           data-min-date="today">
-                            </div>
-                            <div class="form-group hide-input" id="date-group">
-                                <label for="">Select Date </label>
-                                <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="date" name="date" placeholder="Select Date" data-min-date="today" readonly="readonly">
+                            <div class="form-group">
+                                <label for="">End Date </label>
+                                <input type="text" class="js-flatpickr form-control bg-white flatpickr-input" id="end_date" name="end_date" placeholder="End Date" data-min-date="today" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -76,6 +86,6 @@
 </x-modal>
 <script type="text/javascript">
     flatpickr(".js-flatpickr", {
-        dateFormat:"d-m-Y"
+        dateFormat: "d-m-Y"
     });
 </script>

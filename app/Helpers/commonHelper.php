@@ -152,3 +152,14 @@ function theme_tinyMCE_default_config()
     $config['toolbar'] = true;
     return $config;
 }
+
+if (!function_exists('minutesToReadableFormat')) {
+    function minutesToReadableFormat($timeInMinutes=0)
+    {
+        $minutes = $timeInMinutes > 0 ? ($timeInMinutes % 60) : 0;
+        $hours = $timeInMinutes > 60 ? intval((($timeInMinutes - $minutes) / 60)) : 0;
+        $minutes = sprintf("%02d", $minutes);
+        $hours = sprintf("%02d", $hours);
+        return "$hours:$minutes";
+    }
+}

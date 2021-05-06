@@ -79,4 +79,3 @@ Admin::register();
 SuperAdmin::register();
 Job::register();
 HumanResource::register();
-

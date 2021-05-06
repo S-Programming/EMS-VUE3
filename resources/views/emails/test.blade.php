@@ -4,12 +4,31 @@
 <head>
   <meta charset="utf-8" />
   <style>
-    .font-size-h3 {
-      font-size: 1.5rem;
+    .table-summary {
+      width: 50%;
+      border: 0;
     }
 
-    .font-size-h6 {
-      font-size: 1rem;
+    tr.summary-information td {
+      background: #87bee8;
+      border: 0;
+      font-size: 20px;
+      font-weight: bold;
+      padding-left: 20px;
+      color: white;
+    }
+
+    tr.summary-detail td {
+      border: 0;
+    }
+
+    .font-size {
+      font-size: 1.5rem;
+      background-color: #87bee8;
+      width: 49%;
+      color: white;
+      font-weight: bold;
+      padding-left: 12px;
     }
 
     .table {
@@ -40,7 +59,7 @@
     }
 
     td {
-      padding-left: 20px;
+      padding-left: 10px;
     }
 
     .table thead th {
@@ -48,6 +67,8 @@
       text-transform: uppercase;
       letter-spacing: .0625rem;
       padding-left: 20px;
+      background: #f1f4f5;
+      padding: 10px;
     }
 
     .table-striped tbody tr:nth-of-type(odd) {
@@ -72,13 +93,52 @@
       vertical-align: bottom;
       border-bottom: 2px solid #e1e6e9;
     }
+
+    .custom-span {
+      padding-left: 10px;
+    }
   </style>
 </head>
 
 <body>
-  <p class="font-size-h3">What I Have Done Today?</p>
-  <p class="font-size-h6">Modify and add new tasks to your daily
-    report</p>
+
+  <section>
+    <table class="table-summary">
+      <tbody>
+        <tr class="summary-information">
+          <td style="padding-top: 10px;" colspan="3">Today's Summary</td>
+          <td rowspan="2" colspan="2">Date</td>
+        </tr>
+        <tr class="summary-information summary-name">
+          <td style="padding-bottom: 10px;" colspan="3">Name</td>
+        </tr>
+        <tr class="summary-detail">
+          <td>
+            <strong>Checked-in</strong>
+            <p>11-26AM - Remotely</p>
+          </td>
+          <td>
+            <strong>Report Time</strong>
+            <p>07-59PM</p>
+          </td>
+          <td>
+            <strong>Late/Early</strong>
+            <p>34 Mints Early</p>
+          </td>
+          <td>
+            <strong>Break Time</strong>
+            <p>31 Mints</p>
+          </td>
+          <td>
+            <strong>Idel Time</strong>
+            <p>1 Mints</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <p class="font-size" style="margin-bottom: 15px; padding-left:12px">What I Have Done Today?</p>
   <div class="block-content block-content-full">
     @if(isset($userTaskLogs) && count($userTaskLogs)>0)
     <table class="table table-bordered table-striped table-vcenter table-hover table-bordered">
@@ -94,7 +154,7 @@
         <tr>
           <td style="padding-right:10px">{{$data->project->name??''}}</td>
           <td>{!!$data->description ??''!!}</td>
-          <td>{{$data->time ?? ''}}</td>
+          <td>{{minutesToReadableFormat($data->time ?? 0)}}</td>
         </tr>
         @endforeach
       </tbody>
@@ -103,12 +163,12 @@
     </table>
   </div>
   <div>
-    <p class="font-size-h3">What I'll do tomorrow?</p>
-    <span>{{$checkinHistoryData->do_tomorrow??''}}</span>
+    <p class="font-size" style="padding-left:12px">What I'll do tomorrow?</p>
+    <span class="custom-span">{{$checkinHistoryData->do_tomorrow??''}}</span>
   </div>
-  <div>
-    <p class="font-size-h3">Any Questions / Roadblocks?</p>
-    <span>{{$checkinHistoryData->questions??''}}</span>
+  <div style="margin-top: 15px;">
+    <p class="font-size custom-p" style="padding-left:12px; margin-bottom:-40px;">Any Questions / Roadblocks?</p>
+    <span class="custom-span">{{$checkinHistoryData->questions??''}}</span>
   </div>
   @else
   <div> Adds Tasks to show here.</div>

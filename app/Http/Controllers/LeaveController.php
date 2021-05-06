@@ -50,12 +50,14 @@ class LeaveController extends Controller
      */
     public function confirmRequestLeave(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'type' => 'required|unique:leave_type|string|min:3|max:50',
-        // ]);
-        // if ($validator->fails()) {
-        //     return $this->error('Validation Failed', ['errors' => $validator->errors()]);
-        // }
+        $validator = Validator::make($request->all(), [
+            'description' => 'required',
+            'start_date' =>'required',
+            'end_date' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
         return $this->sendJsonResponse($this->leaveService->confirmRequestLeave($request));
     }
 

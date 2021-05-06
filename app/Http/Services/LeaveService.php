@@ -8,52 +8,55 @@ use App\Http\Services\BaseService\BaseService;
 use App\Models\LeaveHistory;
 use App\Models\RequestStatus;
 use App\Models\LeaveType;
-use App\Models\User;
-use App\Models\Role;
-use App\Models\RoleUser;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
-use Route\Http\Leave;
 use Carbon\Carbon;
-use App\Mail\TestEmail;
-use Notification;
-use App\Notifications\apllyLeaveNotification;
-use Illuminate\Notifications\Notifiable;
 
 class LeaveService extends BaseService
 {
     /* All Leave Methods */
     public function confirmRequestLeave(Request $request)
     {
-
-        //  dd($request->all());
         if (!isset($request) && empty($request)) { // what will be condition
             return $this->errorResponse('Leave Submittion Failed');
         }
-        if (isset($request) && !empty($request)) {
-            $user_id = $this->getAuthUserId();
-            $leave = new LeaveHistory;
-            $leave->user_id = $user_id;
-            $leave->leave_type_id = $request->leave_types;
-            $leave->description = $request->description;
-            $leave->half_day = $request->half_day;
-            if ($request->date_range != '') {
-                $date_range = explode('to', $request->date_range);
-                if(!isset($date_range[1]) && !empty($date_range[1])) {
-                    $leave->start_date = isset($date_range[0]) ? Carbon::parse($date_range[0]) : '';
-                    $leave->end_date = isset($date_range[1]) ? Carbon::parse($date_range[1]) : '';
-                }else{
-                    $leave->start_date = Carbon::parse($request->date_range);
+        $user_id = $this->getAuthUserId();
+        $start_date = Carbon::createFromDate($request->start_date);
+        $end_date = Carbon::createFromDate($request->end_date);
+        $leaves = LeaveHistory::with('type')->where('user_id', $user_id)->where('start_date', $start_date)->get();
+        if (count($leaves) > 0) {
+            return $this->successResponse('Today you already apply leave');
+        } else {
+            if (isset($request) && !empty($request)) {
+                $leave = new LeaveHistory;
+                $leave->user_id = $user_id;
+                $leave->leave_type_id = $request->leave_types;
+                $leave->description = $request->description;
+                $leave->half_day = $request->half_day ?? 0;
+                if ($start_date->lte($end_date)) {
+                    $leave->start_date = $start_date;
+                    $leave->end_date = $end_date;
+                    $leave->request_status_id = 1;
+                    $leave->save();
+                } else {
+                    return $this->errorResponse('start date greater then end date');
                 }
-            } else {
-                $leave->start_date = Carbon::parse($request->date);
-            }
-            $leave->request_status_id = 1;
-            // dd($leave);
-            $leave->save();
+                // if ($request->date_range != '') {
+                //     $date_range = explode('to', $request->date_range);
+                //     if(!isset($date_range[1]) && !empty($date_range[1])) {
+                //         $leave->start_date = isset($date_range[0]) ? Carbon::parse($date_range[0]) : '';
+                //         $leave->end_date = isset($date_range[1]) ? Carbon::parse($date_range[1]) : '';
+                //     }else{
+                //         $leave->start_date = Carbon::parse($request->date_range);
+                //     }
+                // } else {
+                //     $leave->start_date = Carbon::parse($request->date);
+                // }
 
-            $leaves = LeaveHistory::with('type')->where('user_id', $user_id)->get();
-            // $leaves = LeaveType::with('history')->get();
+                // dd($leave);
+
+
+                $leaves = LeaveHistory::with('type')->where('user_id', $user_id)->get();
+            }
         }
         $html = view('pages.leave._partial._leaves_list_table_html', compact('leaves', $leaves))->render();
         return $this->successResponse('Leave has Successfully Requested', ['html' => $html, 'html_section_id' => 'leavelist-section']);
@@ -168,7 +171,6 @@ class LeaveService extends BaseService
             } else {
                 return $this->successResponse('Not Approved', ['success' => ['Not Approved'], 'html' => $html, 'html_section_id' => 'approval-section']);
             }
-
         } else {
             return $this->errorResponse('Error in Approval', ['error' => ['Error in Approval'], 'html' => $html, 'html_section_id' => 'approval-section']);
         }
