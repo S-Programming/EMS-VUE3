@@ -1,3 +1,31 @@
+<style>
+    span.isvalid::after {
+        content: '✓';
+        color: #198754;
+        top: 25px !important;
+        right: 20px !important;
+        position: absolute;
+        font-size: 30px;
+    }
+
+    span.notvalid:after {
+        content: '×';
+        color: #dc3545;
+        top: 25px !important;
+        right: 20px !important;
+        position: absolute;
+        font-size: 30px;
+
+    }
+
+    .isvalid input[name=current_password] {
+        border: 2px solid green;
+    }
+
+    .notvalid input[name=current_password] {
+        border: 2px solid red;
+    }
+</style>
 <x-backend-layout>
     <!-- Hero -->
     <div class="bg-image" style="background-image: url('assets/images/photo8@2x.jpg');">
@@ -94,7 +122,8 @@
                         <div class="col-lg-8 col-xl-5">
                             <div class="form-group">
                                 <label for="current-password">Current Password</label>
-                                <input type="password" class="form-control" id="current_password" name="current_password">
+                                <span id="isValid" class=""><input type="password" class="form-control position-relative" id="current_password" name="current_password"></span>
+                                <p id="password_result"></p>
                             </div>
                             <div class="form-group row">
                                 <div class="col-12">

@@ -18,7 +18,7 @@
                 <!-- <td>{{$data->user->first_name??''}} {{$data->user->last_name??''}}</td> -->
                 <td>{{$data->project->name??''}}</td>
                 <td>{!!$data->description ??''!!}</td>
-                <td>{{$data->time ?? ''}}</td>
+                <td>{{minutesToReadableFormat($data->time ?? 0)}}</td>
                 @if(isset($is_show_action))
                 <td>
                     <button class="btn btn-info" onclick="commonAjaxModel('report/edit/modal', {{$data->id??0}})"><i class="fa fa-edit"></i></button>

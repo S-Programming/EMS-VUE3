@@ -85,6 +85,6 @@ class PasswordResetLinkController extends Controller
         return $response;
     }
 
-    
+
 
 }

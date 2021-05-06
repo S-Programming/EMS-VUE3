@@ -161,6 +161,24 @@ class UserController extends Controller
     }
 
     /**
+     * Check current password from DB.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function checkCurrentPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('Validation Failed', ['errors' => $validator->errors()]);
+        }
+        return $this->sendJsonResponse($this->userService->checkCurrentPassword($request));
+    }
+
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -178,5 +196,11 @@ class UserController extends Controller
             return $this->error('Validation Failed', ['errors' => $validator->errors()]);
         }
         return $this->sendJsonResponse($this->userService->userUpdatePassword($request));
+    }
+
+    /* Policy page */
+    public function userPolicy()
+    {
+        return view('pages.policy');
     }
 }

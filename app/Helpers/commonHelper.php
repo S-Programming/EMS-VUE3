@@ -152,3 +152,225 @@ function theme_tinyMCE_default_config()
     $config['toolbar'] = true;
     return $config;
 }
+
+if (!function_exists('minutesToReadableFormat')) {
+    function minutesToReadableFormat($timeInMinutes=0)
+    {
+        $minutes = $timeInMinutes > 0 ? ($timeInMinutes % 60) : 0;
+        $hours = $timeInMinutes > 60 ? intval((($timeInMinutes - $minutes) / 60)) : 0;
+        $minutes = sprintf("%02d", $minutes);
+        $hours = sprintf("%02d", $hours);
+        return "$hours:$minutes";
+    }
+}
+
+if (!function_exists('dataTable_script')) {
+    function dataTable_script($containerId, $config = array())
+    {
+        $config = ($config) ? $config : dt_default_config();
+        $script = '<script type="application/javascript"> $( document ).ready(function() {
+              var ' . $containerId . ' = $("#' . $containerId . '").DataTable({
+					"bSort": "' . $config['b_sorting'] . '",
+					"order": [[ ' . $config['order_col_indx'] . ', "' . $config['order'] . '" ]],
+                    "columnDefs": [{ targets: "no-sort", orderable: false}],
+					"pagingType": "' . $config['paging_type'] . '",
+					"pageLength": ' . $config['paging_length'] . ',
+                    "bFilter": false,
+                    "bLengthChange": ' . $config['length_change'] . ',
+                    "aLengthMenu": [[10, 25, 50, 75, 100, -1], [10, 25, 50, 75, 100, "All"]],
+					"bInfo": ' . $config['b_info'] . ',
+					"language": {
+				           "info": "_START_ - _END_ of _TOTAL_",
+						   "infoEmpty": "0 - 0 of 0",
+						   "emptyTable": "' . $config['empty_table'] . '",
+						   "paginate": {
+				             "first": "' . $config['paging_first'] . '",
+							 "last": "' . $config['paging_last'] . '",
+							 "next": "' . $config['paging_next'] . '",
+							 "previous": "' . $config['paging_previous'] . '",
+				           }
+				         },					';
+
+        $script .= ($config['footer_callback']) ? dt_footer_callback($config) : '';
+
+        $script .= '				});';
+
+        $script .= dt_drill_listener($containerId, $config);
+
+        $script .= '        }
+        );</script>';
+
+        return $script;
+    }
+}
+if (!function_exists('toolTip_script')) {
+    function toolTip_script()
+    {
+        $tooltip = 'tooltip';
+        $tooltip = "'" . $tooltip . "'";
+        $script = '<script>$(function () {
+              $("[data-toggle=' . $tooltip . ']").tooltip({ trigger: "hover" });';
+        $script .= '$("a").tooltip({ trigger: "hover" });';
+        $script .= '        }
+        );</script>';
+        return $script;
+    }
+}
+if (!function_exists('dt_default_config')) {
+    function dt_default_config()
+    {
+        $config['b_sorting'] = true; // Sorting
+        $config['order_col_indx'] = 0; // column index on which default sort would apply
+        $config['order'] = 'desc';
+        $config['paging_type'] = 'full'; // template of paging
+        $config['paging_length'] = 50; // number of rows per page
+        $config['b_info'] = 'true'; //Enable or disable the table information display
+        $config['empty_table'] = 'No data available in table';
+        $config['paging_first'] = "<i class='fa fa-angle-double-left'></i> First"; // First button text
+        $config['paging_last'] = "Last <i class='fa fa-angle-double-right'></i>"; // Last button text
+        $config['paging_next'] = "<i class='fa fa-angle-right'></i>"; // Next button text
+        $config['paging_previous'] = "<i class='fa fa-angle-left'></i>"; // Previous button text
+        $config['footer_callback'] = false;
+        $config['sum_selector'] = array('sum');
+        $config['page_column_total'] = false;
+        $config['column_total'] = false;
+        $config['drill_down'] = false;
+        $config['drill_field'] = '';
+        $config['drill_action'] = '';
+        $config['drill_ajaxfile'] = '';
+        $config['length_change'] = 'false'; // show pagination lenght menu
+        return $config;
+    }
+}
+if (!function_exists('dt_drill_listener')) {
+    function dt_drill_listener($containerId, $config = array())
+    {
+        $script = '';
+        if ($config['drill_down']) {
+            $config = ($config) ? $config : dt_default_config();
+            $script = '// Add event listener for opening and closing details
+				$("#' . $containerId . ' tbody").on("click", "td.details-control", function () {
+					var tr = $(this).closest("tr");
+					var field_value=$(this).attr("value");
+					var row = ' . $containerId . '.row( tr );
+					if ( row.child.isShown() ) {
+						// This row is already open - close it
+						row.child.hide();
+						tr.removeClass("shown");
+					}
+					else {
+						// Open this row
+						  var config = ' . json_encode($config) . ';
+					    drilldownReport(row,field_value,config);
+						tr.addClass("shown");
+					}
+				} );';
+        }
+        return $script;
+    }
+}
+if (!function_exists('dt_footer_callback')) {
+    function dt_footer_callback($config = array())
+    {
+        $config = ($config) ? $config : dt_default_config();
+        $script = '"footerCallback": function ( row, data, start, end, display ) {
+				var api = this.api(), data;
+				var perData = new Array();
+
+				// Remove the formatting to get integer data for summation
+				var intVal = function ( i ) {
+				var args=i;
+				args=args.toString();
+				args=args.split("(");
+				if (args[1]) {
+				i=args[0];
+				}
+					return typeof i === "string" ?
+						i.replace(/[\$\%,]/g, \'\')*1 :
+						typeof i === "number" ?
+							i : 0;
+				};';
+
+
+        foreach ($config['sum_selector'] as $key => $selector) {
+            $script .= '	this.api().columns(".' . $selector . '").every(function(){
+						var column = this;
+
+						';
+
+
+            // Total over all pages
+            if ($config['column_total']) {
+                $script .= '
+							total = column
+								.data()
+								.reduce( function (a, b) {
+									return intVal(a) + intVal(b);
+								}, 0 );';
+            }
+
+            // Total over this page
+            if ($config['page_column_total']) {
+                $script .= '
+							pageTotal = api
+								.column( column, { page: "current"} )
+								.data()
+								.reduce( function (a, b) {
+									return intVal(a) + intVal(b);
+								}, 0 );';
+            }
+            // Update footer
+            if ($selector == 'sum-doller') {
+                if ($config['column_total'])
+                    $script .= '$( column.footer() ).html("$"+number_format(pageTotal) +" ( $"+ number_format(total) +" )");';
+                else {
+                    $script .= '$( column.footer() ).html("$"+number_format(pageTotal));';
+                    $script .= 'if(pageTotal < 0) $( column.footer() ).css("color","#F00");';
+                    $script .= 'else $( column.footer() ).css("color","#000");';
+                    $script .= 'perData.push(pageTotal);';
+                }
+            } else if ($selector == 'sum-per') {
+                $script .= 'var sumPerVal = calcPercent(perData,$(column.header()).attr("rel"));';
+                $script .= '$( column.footer() ).html(sumPerVal);';
+
+            } else if ($selector == 'sum-and-per') {
+                $script .= 'perData.push(pageTotal);';
+                $script .= 'var perc = calcPercent(perData,$(column.header()).attr("rel"));';
+                $script .= '$( column.footer() ).html(pageTotal+" ("+perc+")");';
+            } else if ($selector == 'sum-to-per') {
+                $script .= 'var sumtoperc = calcPercent(perData,$(column.header()).attr("rel"));';
+                $script .= 'var sp = sumtoperc.replace("%","");';
+                $script .= 'perData.push(sp);';
+                $script .= 'if(sp < 0) $( column.footer() ).css("color","#F00");';
+                $script .= '$( column.footer() ).html(sumtoperc);';
+            } else {
+                if ($config['column_total']) {
+                    $script .= '$( column.footer() ).html(number_format(pageTotal) +" ( "+ number_format(total) +" )");';
+
+                } else {
+                    $script .= '$( column.footer() ).html(number_format(pageTotal));';
+                    $script .= 'perData.push(pageTotal);';
+                }
+            }
+            // Every Loop close here
+            $script .= '}); ';
+        }
+
+        $script .= '		}';
+        return $script;
+    }
+}
+if (!function_exists('dt_footer_html')) {
+    function dt_footer_html($cols = 10, $colspan = 1)
+    {
+        $html = '<tfoot>';
+        $html .= '<tr>';
+        $html .= '<th class="text-right" colspan="' . $colspan . '">Total:</th>';
+        for ($i = 1; $i <= ($cols - $colspan); $i++) {
+            $html .= '<th class="center"></th>';
+        }
+        $html .= '</tr>';
+        $html .= '</tfoot>';
+        return $html;
+    }
+}

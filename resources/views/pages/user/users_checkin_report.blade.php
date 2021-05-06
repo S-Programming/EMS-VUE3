@@ -28,7 +28,7 @@
                             <i class="fa fa-fw fa-search mr-1"></i>{{ __('Search') }}
                             </x-button>
                         </div>
-                    
+
                     </div>
                 </form>
             </div>
@@ -81,4 +81,7 @@
             <!-- END Pagination -->
         </div>
     </div>
+    @push('js_after_stack')
+        {!! dataTable_script('userCheckinHistoryTbl') !!}
+    @endpush
 </x-backend-layout>

@@ -49,6 +49,7 @@
         "files": [
             "app/Helpers/commonHelper.php",
             "app/Helpers/generalHelper.php",
+            "app/Helpers/themeHelper.php",
             "app/Helpers/mediaFileHelper.php"
         ]
     },
