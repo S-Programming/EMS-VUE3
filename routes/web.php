@@ -42,9 +42,6 @@ use Route\Http\Report;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/policy', function () {
-    return view('pages.policy');
-});
 
 require __DIR__ . '/auth.php';
 

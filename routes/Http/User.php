@@ -13,15 +13,15 @@ class User
     {
 
 
-//        Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
+        //        Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
         Route::group(['middleware' => ['auth:sanctum']], function () {
-         //   if($this->getAuthUserId())
+            //   if($this->getAuthUserId())
             Route::get('/user', [UserController::class, 'index'])->name('user.list');
         });
 
-//        Route::group(['middleware' => ['auth:sanctum','isSuperAdmin']], function () {
-//            Route::get('/user', [UserController::class, 'index'])->name('user.list');
-//        });
+        //        Route::group(['middleware' => ['auth:sanctum','isSuperAdmin']], function () {
+        //            Route::get('/user', [UserController::class, 'index'])->name('user.list');
+        //        });
         Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('/add/user/modal', [UserController::class, 'userModal'])->name('user.modal');
             Route::post('/edspecific/user/profileit/user/modal', [UserController::class, 'userModal'])->name('user.edit.modal');
@@ -38,15 +38,19 @@ class User
 
             Route::post('/import/users/by/csv', [UserController::class, 'importUsersCsv'])->name('user.import.by.csv');
             Route::post('/check/current/password', [UserController::class, 'checkCurrentPassword'])->name('check.current.password');
-
-//            Admin Route Admin Route
-//            Route::get('specific/user/profile/{user/id}', [UserController::class, 'viewUserProfilePlusInteractions'])->name('user.specific.profile');
-//            Route::post('add/user/interaction/point/modal', [UserController::class, 'addUserInteractionModal'])->name('user.add.userInteraction.point.modal');
-//            Route::post('users/confirm/add/discussionPoint', [UserController::class, 'confirmAddUserInteractionModal'])->name('user.confirm.add.discussionPoint');
-//            Route::post('users/edit/discussionPoint', [UserController::class, 'editUserInteractionModal'])->name('user.edit.discussionPoint');
-//            Route::post('delete/user/interaction/modal', [UserController::class, 'deleteUserInteraction'])->name('user.delete.user.interaction.modal');
-//            Route::post('confirm/delete/user/interaction', [UserController::class, 'deleteConfirmUserInteraction'])->name('user.confirm.delete.user_interaction');
-//            Route::get('discussions', [UserController::class, 'discussionsView'])->name('user.discussions');
+            
+            Route::get('/user/policy', [UserController::class, 'userPolicy'])->name('user.policy');
+            // Route::get('/policy', function () {
+            //     return view('pages.policy');
+            // });
+            //            Admin Route Admin Route
+            //            Route::get('specific/user/profile/{user/id}', [UserController::class, 'viewUserProfilePlusInteractions'])->name('user.specific.profile');
+            //            Route::post('add/user/interaction/point/modal', [UserController::class, 'addUserInteractionModal'])->name('user.add.userInteraction.point.modal');
+            //            Route::post('users/confirm/add/discussionPoint', [UserController::class, 'confirmAddUserInteractionModal'])->name('user.confirm.add.discussionPoint');
+            //            Route::post('users/edit/discussionPoint', [UserController::class, 'editUserInteractionModal'])->name('user.edit.discussionPoint');
+            //            Route::post('delete/user/interaction/modal', [UserController::class, 'deleteUserInteraction'])->name('user.delete.user.interaction.modal');
+            //            Route::post('confirm/delete/user/interaction', [UserController::class, 'deleteConfirmUserInteraction'])->name('user.confirm.delete.user_interaction');
+            //            Route::get('discussions', [UserController::class, 'discussionsView'])->name('user.discussions');
         });
 
         // only admin can upload csv

@@ -197,4 +197,10 @@ class UserController extends Controller
         }
         return $this->sendJsonResponse($this->userService->userUpdatePassword($request));
     }
+
+    /* Policy page */
+    public function userPolicy()
+    {
+        return view('pages.policy');
+    }
 }

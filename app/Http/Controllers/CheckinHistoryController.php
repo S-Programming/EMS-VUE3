@@ -106,7 +106,7 @@ class CheckinHistoryController extends Controller
 
     public function checkinList(Request $request)
     {
-        $user_history = CheckinHistory::where('user_id', $this->getAuthUserId())->with('tags')->get();
+        $user_history = CheckinHistory::where('user_id', $this->getAuthUserId())->with('tags')->orderBy('id', 'desc')->get();
         //dd($user_history->checkin);
         // dd($user_history);
         // foreach($user_history as $data) {

@@ -1,5 +1,5 @@
 <div class="block-content block-content-full">
-    <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
+    <table data-order='[[ 0, "desc" ]]' id="table-desc" class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
         <thead>
             <tr>
                 <!-- <th>User ID</th> -->

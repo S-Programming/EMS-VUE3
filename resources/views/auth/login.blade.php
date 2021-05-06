@@ -1,15 +1,3 @@
-<style>
-    .click_here {
-        animation: blinker 1s linear infinite;
-
-    }
-
-    @keyframes blinker {
-        50% {
-            opacity: 0;
-        }
-    }
-</style>
 <x-guest-layout>
     <!-- Page Content -->
     <x-auth-card>
@@ -68,10 +56,6 @@
                                                     <i class="fa fa-fw fa-sign-in-alt mr-1"></i>{{ __('Sign In') }}
                                                 </x-button>
                                             </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <x-label class="font-w400" for="terms-and-conditions" :value="__('Terms & Conditions')" />
-                                            <a class="click_here" href="{{url('/policy')}}">Click here!</a>
                                         </div>
                                     </form>
                                     <!-- END Sign In Form -->

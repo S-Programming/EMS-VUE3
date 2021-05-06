@@ -1,10 +1,10 @@
-<x-guest-layout>
+<x-backend-layout>
     <!-- Page Content -->
     <x-auth-card>
         <div class="hero-static">
             <div class="content">
                 <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-8 col-xl-8">
+                    <div class="col-md-10 col-lg-10 col-xl-10">
                         <!-- Sign In Block -->
                         <div class="block block-rounded block-themed mb-0">
                             <div class="block-header bg-primary-dark">
@@ -17,18 +17,13 @@
                                     <div class="card">
                                         <div class="card-header" id="sop-leave-request">
                                             <h5 class="mb-0">
-                                                <button class="btn btn-link" data-toggle="collapse"
-                                                        data-target="#sop-leave-request-content"
-                                                        aria-expanded="true"
-                                                        aria-controls="collapseOne">
+                                                <button class="btn btn-link" data-toggle="collapse" data-target="#sop-leave-request-content" aria-expanded="true" aria-controls="collapseOne">
                                                     SOP - Leave Request
                                                 </button>
                                             </h5>
                                         </div>
 
-                                        <div id="sop-leave-request-content" class="collapse show"
-                                             aria-labelledby="sop-leave-request"
-                                             data-parent="#accordion">
+                                        <div id="sop-leave-request-content" class="collapse show" aria-labelledby="sop-leave-request" data-parent="#accordion">
                                             <div class="card-body">
                                                 <ul>
                                                     <li>An employee needs to create a leave request
@@ -49,6 +44,8 @@
                                                         consensus after having a discussion with
                                                         higher management.
                                                     </li>
+                                                    <li>Allow 8 casual and 8 sick leaves in the year.
+                                                    </li>
                                                     <li>Uninformed leave(s) will effect performance
                                                         and result as deduction of salary.
                                                     </li>
@@ -59,18 +56,13 @@
                                     <div class="card">
                                         <div class="card-header" id="sop-late-arrivals">
                                             <h5 class="mb-0">
-                                                <button class="btn btn-link" data-toggle="collapse"
-                                                        data-target="#sop-late-arrivals-content"
-                                                        aria-expanded="true"
-                                                        aria-controls="collapseOne">
+                                                <button class="btn btn-link" data-toggle="collapse" data-target="#sop-late-arrivals-content" aria-expanded="true" aria-controls="collapseOne">
                                                     SOP - Late Arrivals
                                                 </button>
                                             </h5>
                                         </div>
 
-                                        <div id="sop-late-arrivals-content" class="collapse show"
-                                             aria-labelledby="sop-late-arrivals"
-                                             data-parent="#accordion">
+                                        <div id="sop-late-arrivals-content" class="collapse show" aria-labelledby="sop-late-arrivals" data-parent="#accordion">
                                             <div class="card-body">
                                                 <p>Strict measures will be taken against late
                                                     arrivals. You are advised to read and follow the
@@ -95,57 +87,52 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{--                                    <div class="card">--}}
-                                    {{--                                        <div class="card-header" id="sop-office-assets">--}}
-                                    {{--                                            <h5 class="mb-0">--}}
-                                    {{--                                                <button class="btn btn-link" data-toggle="collapse"--}}
-                                    {{--                                                        data-target="#sop-office-assets-content"--}}
-                                    {{--                                                        aria-expanded="true"--}}
-                                    {{--                                                        aria-controls="collapseOne">--}}
-                                    {{--                                                    SOP - Office Assets--}}
-                                    {{--                                                </button>--}}
-                                    {{--                                            </h5>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                        <div id="sop-office-assets-content" class="collapse"--}}
-                                    {{--                                             aria-labelledby="sop-office-assets"--}}
-                                    {{--                                             data-parent="#accordion">--}}
-                                    {{--                                            <div class="card-body">--}}
-                                    {{--                                                <p>Please follow the below mentioned SOP related to--}}
-                                    {{--                                                    company assets:</p>--}}
-                                    {{--                                                <ul>--}}
-                                    {{--                                                    <li>If any employee needs to take the laptop or--}}
-                                    {{--                                                        any other company's asset to home for--}}
-                                    {{--                                                        official use, then they must generate a--}}
-                                    {{--                                                        request for the issuance of company assets--}}
-                                    {{--                                                        via the request section in KSPS.--}}
-                                    {{--                                                    </li>--}}
-                                    {{--                                                    <li>Please remember that all employees are--}}
-                                    {{--                                                        expected to protect the company's assets and--}}
-                                    {{--                                                        ensure their efficient use.--}}
-                                    {{--                                                    </li>--}}
-                                    {{--                                                    <li>If any asset gets lost/damaged by an--}}
-                                    {{--                                                        employee then they will be responsible to--}}
-                                    {{--                                                        repair it or pay for the damages.--}}
-                                    {{--                                                    </li>--}}
-                                    {{--                                                </ul>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>                                 --}}
-                                    <div class="card">
+                                    {{-- <div class="card">--}}
+                                    {{-- <div class="card-header" id="sop-office-assets">--}}
+                                    {{-- <h5 class="mb-0">--}}
+                                    {{-- <button class="btn btn-link" data-toggle="collapse"--}}
+                                    {{-- data-target="#sop-office-assets-content"--}}
+                                    {{-- aria-expanded="true"--}}
+                                    {{-- aria-controls="collapseOne">--}}
+                                    {{-- SOP - Office Assets--}}
+                                    {{-- </button>--}}
+                                    {{-- </h5>--}}
+                                    {{-- </div>--}}
+                                    {{-- <div id="sop-office-assets-content" class="collapse"--}}
+                                    {{-- aria-labelledby="sop-office-assets"--}}
+                                    {{-- data-parent="#accordion">--}}
+                                    {{-- <div class="card-body">--}}
+                                    {{-- <p>Please follow the below mentioned SOP related to--}}
+                                    {{-- company assets:</p>--}}
+                                    {{-- <ul>--}}
+                                    {{-- <li>If any employee needs to take the laptop or--}}
+                                    {{-- any other company's asset to home for--}}
+                                    {{-- official use, then they must generate a--}}
+                                    {{-- request for the issuance of company assets--}}
+                                    {{-- via the request section in KSPS.--}}
+                                    {{-- </li>--}}
+                                    {{-- <li>Please remember that all employees are--}}
+                                    {{-- expected to protect the company's assets and--}}
+                                    {{-- ensure their efficient use.--}}
+                                    {{-- </li>--}}
+                                    {{-- <li>If any asset gets lost/damaged by an--}}
+                                    {{-- employee then they will be responsible to--}}
+                                    {{-- repair it or pay for the damages.--}}
+                                    {{-- </li>--}}
+                                    {{-- </ul>--}}
+                                    {{-- </div>--}}
+                                    {{-- </div>--}}
+                                    {{-- </div>                                 --}}
+                                    <div class="card mb-4">
                                         <div class="card-header" id="sop-overtime-meal">
                                             <h5 class="mb-0">
-                                                <button class="btn btn-link" data-toggle="collapse"
-                                                        data-target="#sop-overtime-meal-content"
-                                                        aria-expanded="true"
-                                                        aria-controls="collapseOne">
+                                                <button class="btn btn-link" data-toggle="collapse" data-target="#sop-overtime-meal-content" aria-expanded="true" aria-controls="collapseOne">
                                                     SOP - Overtime Meal
                                                 </button>
                                             </h5>
                                         </div>
 
-                                        <div id="sop-overtime-meal-content" class="collapse show"
-                                             aria-labelledby="sop-overtime-meal"
-                                             data-parent="#accordion">
+                                        <div id="sop-overtime-meal-content" class="collapse show" aria-labelledby="sop-overtime-meal" data-parent="#accordion">
                                             <div class="card-body">
                                                 <ul>
                                                     <li>Employees can avail reimbursement on a meal
@@ -177,10 +164,10 @@
                     </div>
                 </div>
             </div>
-            <div class="content content-full font-size-sm text-muted text-center">
+            <!-- <div class="content content-full font-size-sm text-muted text-center">
                 <strong>KodeStudio.net</strong> &copy; <span data-toggle="year-copy"></span>
-            </div>
+            </div> -->
         </div>
     </x-auth-card>
     <!-- END Page Content -->
-</x-guest-layout>
+</x-backend-layout>

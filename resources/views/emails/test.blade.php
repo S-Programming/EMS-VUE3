@@ -4,12 +4,31 @@
 <head>
   <meta charset="utf-8" />
   <style>
+    .table-summary {
+      width: 50%;
+      border: 0;
+    }
+
+    tr.summary-information td {
+      background: #87bee8;
+      border: 0;
+      font-size: 20px;
+      font-weight: bold;
+      padding-left: 20px;
+      color: white;
+    }
+
+    tr.summary-detail td {
+      border: 0;
+    }
+
     .font-size {
       font-size: 1.5rem;
       background-color: #87bee8;
       width: 49%;
       color: white;
       font-weight: bold;
+      padding-left: 12px;
     }
 
     .table {
@@ -82,6 +101,43 @@
 </head>
 
 <body>
+
+  <section>
+    <table class="table-summary">
+      <tbody>
+        <tr class="summary-information">
+          <td style="padding-top: 10px;" colspan="3">Today's Summary</td>
+          <td rowspan="2" colspan="2">Date</td>
+        </tr>
+        <tr class="summary-information summary-name">
+          <td style="padding-bottom: 10px;" colspan="3">Name</td>
+        </tr>
+        <tr class="summary-detail">
+          <td>
+            <strong>Checked-in</strong>
+            <p>11-26AM - Remotely</p>
+          </td>
+          <td>
+            <strong>Report Time</strong>
+            <p>07-59PM</p>
+          </td>
+          <td>
+            <strong>Late/Early</strong>
+            <p>34 Mints Early</p>
+          </td>
+          <td>
+            <strong>Break Time</strong>
+            <p>31 Mints</p>
+          </td>
+          <td>
+            <strong>Idel Time</strong>
+            <p>1 Mints</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
   <p class="font-size" style="margin-bottom: 15px; padding-left:12px">What I Have Done Today?</p>
   <div class="block-content block-content-full">
     @if(isset($userTaskLogs) && count($userTaskLogs)>0)

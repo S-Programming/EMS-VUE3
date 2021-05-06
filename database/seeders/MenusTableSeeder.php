@@ -45,6 +45,7 @@ class MenusTableSeeder extends Seeder
             //            ['id' => 26, 'name' => 'Admins', 'parent_id' => 5, 'route' => 'admin.list', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 25, 'name' => 'Checkin History', 'parent_id' => 0, 'route' => 'checkin.report', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
             ['id' => 26, 'name' => 'Today Report', 'parent_id' => 0, 'route' => 'report.index', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
+            ['id' => 27, 'name' => 'Policy', 'parent_id' => 0, 'route' => 'user.policy', 'sort_order' => 0, 'class' => 'nav-main-link-name', 'icon' => 'fa fa-user', 'is_count' => 0, 'is_active' => 1],
 
         ];
         DB::table('menus')->insert($menus);
