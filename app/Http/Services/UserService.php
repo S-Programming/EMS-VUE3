@@ -75,7 +75,7 @@ class UserService extends BaseService
         $filters = array_merge($date_filters, $filters);
         $checkin_history_data = CheckinHistory::where($filters)->get();
         $count = $checkin_history_data->count();
-        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkin_history_data, 'totalCheckins' => $count])->render();
+        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $checkin_history_data, 'totalCheckins' => $count,'is_json'=>$request->wantsJson()])->render();
         if ($count > 0) {
             return $this->successResponse('Record Found successfully', ['html' => $checkin_history_html, 'html_section_id' => 'checkin-history']);
         } else {

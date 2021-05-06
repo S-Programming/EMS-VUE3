@@ -721,7 +721,7 @@ MAIN CONTENT LAYOUT
 <script src="{{asset('assets/plugins/datatables/buttons/buttons.colVis.min.js')}}"></script>
 
 <!-- Page JS Code -->
-<script src="{{asset('assets/js/pages/be_tables_datatables.min.js')}}"></script>
+{{--<script src="{{asset('assets/js/pages/be_tables_datatables.min.js')}}"></script>--}}
 <script src="{{ asset('assets/js/pages/be_pages_dashboard.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/pages_ecom_dashboard.min.js') }}"></script>
 

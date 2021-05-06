@@ -89,7 +89,6 @@ class DashboardService extends BaseService
         // $user_history = CheckinHistory::all();
         $user_history = CheckinHistory::where('user_id', $this->getAuthUserId())->get();
         $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history]);
-        // $html = view('pages.user._partial._checkin_history_html', ['user_history' =>  $responseData['checkin_history']])->render();
         return view('pages.user.dashboard', $responseData)->with(['checkin_history_html' => $checkin_history_html]);
     }
     /**
@@ -148,7 +147,6 @@ class DashboardService extends BaseService
         // $user_history = CheckinHistory::all();
         $user_history = CheckinHistory::where('user_id', $this->getAuthUserId())->get();
         $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history]);
-        // $html = view('pages.user._partial._checkin_history_html', ['user_history' =>  $responseData['checkin_history']])->render();
         return view('pages.admin.dashboard', $responseData)->with(['checkin_history_html' => $checkin_history_html]);
     }
     /**
@@ -205,7 +203,6 @@ class DashboardService extends BaseService
         // $user_history = CheckinHistory::all();
         $user_history = CheckinHistory::where('user_id', $this->getAuthUserId())->get();
         $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history]);
-        // $html = view('pages.user._partial._checkin_history_html', ['user_history' =>  $responseData['checkin_history']])->render();
         return view('pages.engagementManager.dashboard', $responseData)->with(['checkin_history_html' => $checkin_history_html]);
 
 
@@ -260,7 +257,6 @@ class DashboardService extends BaseService
         // $user_history = CheckinHistory::all();
         $user_history = CheckinHistory::where('user_id', $this->getAuthUserId())->get();
         $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history]);
-        // $html = view('pages.user._partial._checkin_history_html', ['user_history' =>  $responseData['checkin_history']])->render();
         return view('pages.projectManager.dashboard', $responseData)->with(['checkin_history_html' => $checkin_history_html]);
         // $total_users = User::all()->count();
         // $user = $this->getAuthUser();
@@ -297,7 +293,7 @@ class DashboardService extends BaseService
             $responseData['user_last_checkin_time'] = $this->userLastCheckinTime();
         }
         $user_history = CheckinHistory::where('user_id', $this->getAuthUserId())->get();
-        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history, $responseData]);
+        $checkin_history_html = view('pages.user._partial._checkin_history_html', ['user_history' => $user_history, $responseData,'is_json'=>$request->wantsJson()]);
         return ($checkin_history_html);
     }
 }
