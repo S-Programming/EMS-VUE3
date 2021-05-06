@@ -105,6 +105,10 @@
                                                         you have special orders from the company
                                                         itself.
                                                     </li>
+                                                    <li>In-case of forgot to checkout penalty will
+                                                        be imposed, It can be very as per the habit
+                                                        of the employee.
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
