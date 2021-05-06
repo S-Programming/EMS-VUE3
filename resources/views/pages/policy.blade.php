@@ -17,13 +17,18 @@
                                     <div class="card">
                                         <div class="card-header" id="sop-leave-request">
                                             <h5 class="mb-0">
-                                                <button class="btn btn-link" data-toggle="collapse" data-target="#sop-leave-request-content" aria-expanded="true" aria-controls="collapseOne">
+                                                <button class="btn btn-link" data-toggle="collapse"
+                                                        data-target="#sop-leave-request-content"
+                                                        aria-expanded="true"
+                                                        aria-controls="collapseOne">
                                                     SOP - Leave Request
                                                 </button>
                                             </h5>
                                         </div>
 
-                                        <div id="sop-leave-request-content" class="collapse show" aria-labelledby="sop-leave-request" data-parent="#accordion">
+                                        <div id="sop-leave-request-content" class="collapse show"
+                                             aria-labelledby="sop-leave-request"
+                                             data-parent="#accordion">
                                             <div class="card-body">
                                                 <ul>
                                                     <li>An employee needs to create a leave request
@@ -44,10 +49,22 @@
                                                         consensus after having a discussion with
                                                         higher management.
                                                     </li>
-                                                    <li>Allow 8 casual and 8 sick leaves in the year.
+                                                    <li>8 casual and 8 sick leaves allowed in the
+                                                        year.
                                                     </li>
                                                     <li>Uninformed leave(s) will effect performance
                                                         and result as deduction of salary.
+                                                    </li>
+                                                    <li>Approval will be required for Half day and
+                                                        it should be informed at-least one day
+                                                        prior.
+                                                    </li>
+                                                    <li>Minimum 7 productive hours required to be
+                                                        consider a working day.
+                                                    </li>
+                                                    <li>Minimum 4 productive hours required for a
+                                                        Half day otherwise it will be consider as
+                                                        leave for the day.
                                                     </li>
                                                 </ul>
                                             </div>
@@ -56,13 +73,18 @@
                                     <div class="card">
                                         <div class="card-header" id="sop-late-arrivals">
                                             <h5 class="mb-0">
-                                                <button class="btn btn-link" data-toggle="collapse" data-target="#sop-late-arrivals-content" aria-expanded="true" aria-controls="collapseOne">
+                                                <button class="btn btn-link" data-toggle="collapse"
+                                                        data-target="#sop-late-arrivals-content"
+                                                        aria-expanded="true"
+                                                        aria-controls="collapseOne">
                                                     SOP - Late Arrivals
                                                 </button>
                                             </h5>
                                         </div>
 
-                                        <div id="sop-late-arrivals-content" class="collapse show" aria-labelledby="sop-late-arrivals" data-parent="#accordion">
+                                        <div id="sop-late-arrivals-content" class="collapse show"
+                                             aria-labelledby="sop-late-arrivals"
+                                             data-parent="#accordion">
                                             <div class="card-body">
                                                 <p>Strict measures will be taken against late
                                                     arrivals. You are advised to read and follow the
@@ -126,13 +148,18 @@
                                     <div class="card mb-4">
                                         <div class="card-header" id="sop-overtime-meal">
                                             <h5 class="mb-0">
-                                                <button class="btn btn-link" data-toggle="collapse" data-target="#sop-overtime-meal-content" aria-expanded="true" aria-controls="collapseOne">
+                                                <button class="btn btn-link" data-toggle="collapse"
+                                                        data-target="#sop-overtime-meal-content"
+                                                        aria-expanded="true"
+                                                        aria-controls="collapseOne">
                                                     SOP - Overtime Meal
                                                 </button>
                                             </h5>
                                         </div>
 
-                                        <div id="sop-overtime-meal-content" class="collapse show" aria-labelledby="sop-overtime-meal" data-parent="#accordion">
+                                        <div id="sop-overtime-meal-content" class="collapse show"
+                                             aria-labelledby="sop-overtime-meal"
+                                             data-parent="#accordion">
                                             <div class="card-body">
                                                 <ul>
                                                     <li>Employees can avail reimbursement on a meal
