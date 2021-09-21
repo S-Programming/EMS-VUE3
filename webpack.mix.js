@@ -21,11 +21,12 @@ mix
     .sass('resources/sass/oneui/themes/smooth.scss', 'public/css/themes/')
 
     /* JS */
-    .js('resources/js/app.js', 'public/js/laravel.app.js')
-    .js('resources/js/oneui/app.js', 'public/js/oneui.app.js')
+    .js('resources/js/app.js', 'public/js').vue()
+    .js('resources/js/app.js', 'public/js/laravel.app.js').vue()
+    .js('resources/js/oneui/app.js', 'public/js/oneui.app.js').vue()
 
     /* Page JS */
-    .js('resources/js/pages/tables_datatables.js', 'public/js/pages/tables_datatables.js')
+    .js('resources/js/pages/tables_datatables.js', 'public/js/pages/tables_datatables.js').vue()
 
     /* Tools */
     .browserSync('localhost:8000')

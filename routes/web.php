@@ -39,16 +39,19 @@ use Route\Http\Report;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/ems', function () {
+    return view('layouts.app');
 });
 
 require __DIR__ . '/auth.php';
 
 // Example Routes
+Route::get('/v/{any}', function () {
+    return view('layouts.app');
+});
 Route::get('/', function () {
-    $view = (Auth::check()) ? 'dashboard' : 'login';
-    return redirect()->route($view);
+    return view('layouts.app');
 });
 Route::view('/pages/slick', 'pages.slick');
 Route::view('/pages/datatables', 'pages.datatables');

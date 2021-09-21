@@ -1,8 +1,11 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_pages_tables_datatables_js"],{
+
+/***/ "./resources/js/pages/tables_datatables.js":
 /*!*************************************************!*\
   !*** ./resources/js/pages/tables_datatables.js ***!
   \*************************************************/
+/***/ (() => {
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -92,5 +95,7 @@ var pageTablesDatatables = /*#__PURE__*/function () {
 jQuery(function () {
   pageTablesDatatables.init();
 });
-/******/ })()
-;
+
+/***/ })
+
+}]);

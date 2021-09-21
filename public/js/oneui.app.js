@@ -1,97 +1,2037 @@
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
-/******/ })
-/************************************************************************/
-/******/ ({
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./resources/js/oneui/bootstrap.js":
+/*!*****************************************!*\
+  !*** ./resources/js/oneui/bootstrap.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var simplebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! simplebar */ "./node_modules/simplebar/dist/simplebar.esm.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var jquery_appear__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery.appear */ "./node_modules/jquery.appear/jquery.appear.js");
+/* harmony import */ var jquery_appear__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery_appear__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jquery_scroll_lock__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery-scroll-lock */ "./node_modules/jquery-scroll-lock/jquery-scrollLock.js");
+/* harmony import */ var jquery_scroll_lock__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery_scroll_lock__WEBPACK_IMPORTED_MODULE_5__);
+/*
+ *  Document   : bootstrap.js
+ *  Author     : pixelcave
+ *  Description: Import global dependencies
+ *
+ */
+
+/*
+ ********************************************************************************************
+ *
+ * If you would like to use webpack to handle all required core JS files, you can uncomment
+ * the following imports and window assignments to have them included in the compiled
+ * oneui.app.min.js as well.
+ *
+ * After that change, you won't have to include oneui.core.min.js in your pages any more
+ *
+ *********************************************************************************************
+ */
+// Import all vital core JS files..
+
+
+
+
+
+
+ // ..and assign to window the ones that need it
+
+window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
+window.SimpleBar = simplebar__WEBPACK_IMPORTED_MODULE_1__["default"];
+window.Cookies = (js_cookie__WEBPACK_IMPORTED_MODULE_2___default());
+
+/***/ }),
+
+/***/ "./resources/js/oneui/modules/helpers.js":
+/*!***********************************************!*\
+  !*** ./resources/js/oneui/modules/helpers.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Helpers)
+/* harmony export */ });
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./resources/js/oneui/modules/tools.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/*
+ *  Document   : helpers.js
+ *  Author     : pixelcave
+ *  Description: Various jQuery plugins inits as well as custom helpers
+ *
+ */
+// Import required modules
+ // Helper variables
+
+var sparklineResize = false;
+var sparklineTimeout; // Helpers
+
+var Helpers = /*#__PURE__*/function () {
+  function Helpers() {
+    _classCallCheck(this, Helpers);
+  }
+
+  _createClass(Helpers, null, [{
+    key: "run",
+    value:
+    /*
+     * Run helpers
+     *
+     */
+    function run(helpers) {
+      var _this = this;
+
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var helperList = {
+        'core-bootstrap-tooltip': function coreBootstrapTooltip() {
+          return _this.coreBootstrapTooltip();
+        },
+        'core-bootstrap-popover': function coreBootstrapPopover() {
+          return _this.coreBootstrapPopover();
+        },
+        'core-bootstrap-tabs': function coreBootstrapTabs() {
+          return _this.coreBootstrapTabs();
+        },
+        'core-bootstrap-custom-file-input': function coreBootstrapCustomFileInput() {
+          return _this.coreBootstrapCustomFileInput();
+        },
+        'core-toggle-class': function coreToggleClass() {
+          return _this.coreToggleClass();
+        },
+        'core-scroll-to': function coreScrollTo() {
+          return _this.coreScrollTo();
+        },
+        'core-year-copy': function coreYearCopy() {
+          return _this.coreYearCopy();
+        },
+        'core-appear': function coreAppear() {
+          return _this.coreAppear();
+        },
+        'core-ripple': function coreRipple() {
+          return _this.coreRipple();
+        },
+        print: function print() {
+          return _this.print();
+        },
+        'table-tools-sections': function tableToolsSections() {
+          return _this.tableToolsSections();
+        },
+        'table-tools-checkable': function tableToolsCheckable() {
+          return _this.tableToolsCheckable();
+        },
+        'magnific-popup': function magnificPopup() {
+          return _this.magnific();
+        },
+        summernote: function summernote() {
+          return _this.summernote();
+        },
+        ckeditor: function ckeditor() {
+          return _this.ckeditor();
+        },
+        ckeditor5: function ckeditor5() {
+          return _this.ckeditor5();
+        },
+        simplemde: function simplemde() {
+          return _this.simpleMDE();
+        },
+        slick: function slick() {
+          return _this.slick();
+        },
+        datepicker: function datepicker() {
+          return _this.datepicker();
+        },
+        colorpicker: function colorpicker() {
+          return _this.colorpicker();
+        },
+        'masked-inputs': function maskedInputs() {
+          return _this.maskedInputs();
+        },
+        select2: function select2() {
+          return _this.select2();
+        },
+        highlightjs: function highlightjs() {
+          return _this.highlightjs();
+        },
+        notify: function notify(options) {
+          return _this.notify(options);
+        },
+        'easy-pie-chart': function easyPieChart() {
+          return _this.easyPieChart();
+        },
+        maxlength: function maxlength() {
+          return _this.maxlength();
+        },
+        rangeslider: function rangeslider() {
+          return _this.rangeslider();
+        },
+        sparkline: function sparkline() {
+          return _this.sparkline();
+        },
+        validation: function validation() {
+          return _this.validation();
+        },
+        flatpickr: function flatpickr() {
+          return _this.flatpickr();
+        }
+      };
+
+      if (helpers instanceof Array) {
+        for (var index in helpers) {
+          if (helperList[helpers[index]]) {
+            helperList[helpers[index]](options);
+          }
+        }
+      } else {
+        if (helperList[helpers]) {
+          helperList[helpers](options);
+        }
+      }
+    }
+    /*
+     ********************************************************************************************
+     *
+     * CORE HELPERS
+     *
+     * Third party plugin inits or various custom user interface helpers to extend functionality
+     * They are called by default and can be used right away
+     *
+     *********************************************************************************************
+     */
+
+    /*
+     * Bootstrap Tooltip, for more examples you can check out https://getbootstrap.com/docs/4.5/components/tooltips/
+     *
+     * Helpers.run('core-bootstrap-tooltip');
+     *
+     * Example usage:
+     *
+     * <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Tooltip Text">Example</button> or
+     * <button type="button" class="btn btn-primary js-tooltip" title="Tooltip Text">Example</button>
+     *
+     */
+
+  }, {
+    key: "coreBootstrapTooltip",
+    value: function coreBootstrapTooltip() {
+      jQuery('[data-toggle="tooltip"]:not(.js-tooltip-enabled)').add('.js-tooltip:not(.js-tooltip-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-tooltip-enabled class to tag it as activated and init it
+
+        el.addClass('js-tooltip-enabled').tooltip({
+          container: el.data('container') || 'body',
+          animation: el.data('animation') || false
+        });
+      });
+    }
+    /*
+     * Bootstrap Popover, for more examples you can check out https://getbootstrap.com/docs/4.5/components/popovers/
+     *
+     * Helpers.run('core-bootstrap-popover');
+     *
+     * Example usage:
+     *
+     * <button type="button" class="btn btn-primary" data-toggle="popover" title="Popover Title" data-content="This is the content of the Popover">Example</button> or
+     * <button type="button" class="btn btn-primary js-popover" title="Popover Title" data-content="This is the content of the Popover">Example</button>
+     *
+     */
+
+  }, {
+    key: "coreBootstrapPopover",
+    value: function coreBootstrapPopover() {
+      jQuery('[data-toggle="popover"]:not(.js-popover-enabled)').add('.js-popover:not(.js-popover-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-popover-enabled class to tag it as activated and init it
+
+        el.addClass('js-popover-enabled').popover({
+          container: el.data('container') || 'body',
+          animation: el.data('animation') || false,
+          trigger: el.data('trigger') || 'hover focus'
+        });
+      });
+    }
+    /*
+     * Bootstrap Tab, for examples you can check out http://getbootstrap.com/docs/4.2/components/navs/#tabs
+     *
+     * Helpers.run('core-bootstrap-tabs');
+     *
+     * Example usage:
+     *
+     * Please check out the Tabs page for complete markup examples
+     *
+     */
+
+  }, {
+    key: "coreBootstrapTabs",
+    value: function coreBootstrapTabs() {
+      jQuery('[data-toggle="tabs"]:not(.js-tabs-enabled)').add('.js-tabs:not(.js-tabs-enabled)').each(function (index, element) {
+        // Add .js-tabs-enabled class to tag it as activated and init it
+        jQuery(element).addClass('js-tabs-enabled').find('a').on('click.pixelcave.helpers.core', function (e) {
+          e.preventDefault();
+          jQuery(e.currentTarget).tab('show');
+        });
+      });
+    }
+    /*
+     * Bootstrap Custom File Input Filename
+     *
+     * Helpers.run('core-bootstrap-custom-file-input');
+     *
+     * Example usage:
+     *
+     * Please check out the Tabs page for complete markup examples
+     *
+     */
+
+  }, {
+    key: "coreBootstrapCustomFileInput",
+    value: function coreBootstrapCustomFileInput() {
+      // Populate custom Bootstrap file inputs with selected filename
+      jQuery('[data-toggle="custom-file-input"]:not(.js-custom-file-input-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-custom-file-input-enabled class to tag it as activated
+
+        el.addClass('js-custom-file-input-enabled').on('change', function (e) {
+          var fileName = e.target.files.length > 1 ? e.target.files.length + ' ' + (el.data('lang-files') || 'Files') : e.target.files[0].name;
+          el.next('.custom-file-label').css('overflow-x', 'hidden').html(fileName);
+        });
+      });
+    }
+    /*
+     * Toggle class on element click
+     *
+     * Helpers.run('core-toggle-class');
+     *
+     * Example usage (on button click, "exampleClass" class is toggled on the element with id "elementID"):
+     *
+     * <button type="button" class="btn btn-primary" data-toggle="class-toggle" data-target="#elementID" data-class="exampleClass">Toggle</button>
+     *
+     * or
+     *
+     * <button type="button" class="btn btn-primary js-class-toggle" data-target="#elementID" data-class="exampleClass">Toggle</button>
+     *
+     */
+
+  }, {
+    key: "coreToggleClass",
+    value: function coreToggleClass() {
+      jQuery('[data-toggle="class-toggle"]:not(.js-class-toggle-enabled)').add('.js-class-toggle:not(.js-class-toggle-enabled)').on('click.pixelcave.helpers.core', function (e) {
+        var el = jQuery(e.currentTarget); // Add .js-class-toggle-enabled class to tag it as activated and then blur it
+
+        el.addClass('js-class-toggle-enabled').trigger('blur'); // Toggle class
+
+        jQuery(el.data('target').toString()).toggleClass(el.data('class').toString());
+      });
+    }
+    /*
+     * Scroll to element with animation
+     *
+     * Helpers.run('core-scroll-to');
+     *
+     * Example usage (on click, the page will scroll to element with id "elementID" in "500" ms):
+     *
+     * <a href="#elementID" data-toggle="scroll-to" data-speed="500">Go</a> or
+     * <button type="button" class="btn btn-primary" data-toggle="scroll-to" data-speed="500" data-target="#elementID">Go</button>
+     *
+     */
+
+  }, {
+    key: "coreScrollTo",
+    value: function coreScrollTo() {
+      jQuery('[data-toggle="scroll-to"]:not(.js-scroll-to-enabled)').on('click.pixelcave.helpers.core', function (e) {
+        e.stopPropagation(); // Set variables
+
+        var lHeader = jQuery('#page-header');
+        var el = jQuery(e.currentTarget);
+        var elTarget = el.data('target') || el.attr('href');
+        var elSpeed = el.data('speed') || 1000;
+        var headerHeight = lHeader.length && jQuery('#page-container').hasClass('page-header-fixed') ? lHeader.outerHeight() : 0; // Add .js-scroll-to-enabled class to tag it as activated
+
+        el.addClass('js-scroll-to-enabled'); // Scroll to element
+
+        jQuery('html, body').animate({
+          scrollTop: jQuery(elTarget).offset().top - headerHeight
+        }, elSpeed);
+      });
+    }
+    /*
+     * Add the correct copyright year to an element
+     *
+     * Helpers.run('core-year-copy');
+     *
+     * Example usage (it will get populated with current year if empty or will append it to specified year if needed):
+     *
+     * <span data-toggle="year-copy"></span> or
+     * <span data-toggle="year-copy">2018</span>
+     *
+     */
+
+  }, {
+    key: "coreYearCopy",
+    value: function coreYearCopy() {
+      var el = jQuery('[data-toggle="year-copy"]:not(.js-year-copy-enabled)');
+
+      if (el.length > 0) {
+        var date = new Date();
+        var curYear = date.getFullYear();
+        var baseYear = el.html().length > 0 ? el.html() : curYear; // Add .js-scroll-to-enabled class to tag it as activated and set the correct year
+
+        el.addClass('js-year-copy-enabled').html(parseInt(baseYear) >= curYear ? curYear : baseYear + '-' + curYear.toString().substr(2, 2));
+      }
+    }
+    /*
+     * jQuery Appear, for more examples you can check out https://github.com/bas2k/jquery.appear
+     *
+     * Helpers.run('core-appear');
+     *
+     * Example usage (the following div will appear on scrolling, remember to add the invisible class):
+     *
+     * <div class="invisible" data-toggle="appear">...</div>
+     *
+     */
+
+  }, {
+    key: "coreAppear",
+    value: function coreAppear() {
+      // Add a specific class on elements (when they become visible on scrolling)
+      jQuery('[data-toggle="appear"]:not(.js-appear-enabled)').each(function (index, element) {
+        var windowW = _tools__WEBPACK_IMPORTED_MODULE_0__["default"].getWidth();
+        var el = jQuery(element);
+        var elCssClass = el.data('class') || 'animated fadeIn';
+        var elOffset = el.data('offset') || 0;
+        var elTimeout = windowW < 992 ? 0 : el.data('timeout') ? el.data('timeout') : 0; // Add .js-appear-enabled class to tag it as activated and init it
+
+        el.addClass('js-appear-enabled').appear(function () {
+          setTimeout(function () {
+            el.removeClass('invisible').addClass(elCssClass);
+          }, elTimeout);
+        }, {
+          accY: elOffset
+        });
+      });
+    }
+    /*
+     * Ripple effect fuctionality
+     *
+     * Helpers.run('core-ripple');
+     *
+     * Example usage:
+     *
+     * <button type="button" class="btn btn-primary" data-toggle="click-ripple">Click Me!</button>
+     *
+     */
+
+  }, {
+    key: "coreRipple",
+    value: function coreRipple() {
+      jQuery('[data-toggle="click-ripple"]:not(.js-click-ripple-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-click-ripple-enabled class to tag it as activated and init it
+
+        el.addClass('js-click-ripple-enabled').css({
+          overflow: 'hidden',
+          position: 'relative',
+          'z-index': 1
+        }).on('click.pixelcave.helpers.core', function (e) {
+          var cssClass = 'click-ripple',
+              ripple,
+              d,
+              x,
+              y; // If the ripple element doesn't exist in this element, add it..
+
+          if (el.children('.' + cssClass).length === 0) {
+            el.prepend('<span class="' + cssClass + '"></span>');
+          } else {
+            // ..else remove .animate class from ripple element
+            el.children('.' + cssClass).removeClass('animate');
+          } // Get the ripple element
+
+
+          ripple = el.children('.' + cssClass); // If the ripple element doesn't have dimensions, set them accordingly
+
+          if (!ripple.height() && !ripple.width()) {
+            d = Math.max(el.outerWidth(), el.outerHeight());
+            ripple.css({
+              height: d,
+              width: d
+            });
+          } // Get coordinates for our ripple element
+
+
+          x = e.pageX - el.offset().left - ripple.width() / 2;
+          y = e.pageY - el.offset().top - ripple.height() / 2; // Position the ripple element and add the class .animate to it
+
+          ripple.css({
+            top: y + 'px',
+            left: x + 'px'
+          }).addClass('animate');
+        });
+      });
+    }
+    /*
+     ********************************************************************************************
+     *
+     * UI HELPERS (ON DEMAND)
+     *
+     * Third party plugin inits or various custom user interface helpers to extend functionality
+     * They need to be called in a page to be initialized. They are included to be easy to
+     * init them on demand on multiple pages (usually repeated init code in common components)
+     *
+     ********************************************************************************************
+     */
+
+    /*
+     * Print Page functionality
+     *
+     * Helpers.run('print');
+     *
+     */
+
+  }, {
+    key: "print",
+    value: function print() {
+      // Store all #page-container classes
+      var lPage = jQuery('#page-container');
+      var pageCls = lPage.prop('class'); // Remove all classes from #page-container
+
+      lPage.prop('class', ''); // Print the page
+
+      window.print(); // Restore all #page-container classes
+
+      lPage.prop('class', pageCls);
+    }
+    /*
+     * Table sections functionality
+     *
+     * Helpers.run('table-tools-sections');
+     *
+     * Example usage:
+     *
+     * Please check out the Table Helpers page for complete markup examples
+     *
+     */
+
+  }, {
+    key: "tableToolsSections",
+    value: function tableToolsSections() {
+      // For each table
+      jQuery('.js-table-sections:not(.js-table-sections-enabled)').each(function (index, element) {
+        var table = jQuery(element); // Add .js-table-sections-enabled class to tag it as activated
+
+        table.addClass('js-table-sections-enabled'); // When a row is clicked in tbody.js-table-sections-header
+
+        jQuery('.js-table-sections-header > tr', table).on('click.pixelcave.helpers', function (e) {
+          if (e.target.type !== 'checkbox' && e.target.type !== 'button' && e.target.tagName.toLowerCase() !== 'a' && !jQuery(e.target).parent('a').length && !jQuery(e.target).parent('button').length && !jQuery(e.target).parent('.custom-control').length && !jQuery(e.target).parent('label').length) {
+            var row = jQuery(e.currentTarget);
+            var tbody = row.parent('tbody');
+
+            if (!tbody.hasClass('show')) {
+              jQuery('tbody', table).removeClass('show table-active');
+            }
+
+            tbody.toggleClass('show table-active');
+          }
+        });
+      });
+    }
+    /*
+     * Checkable table functionality
+     *
+     * Helpers.run('table-tools-checkable');
+     *
+     * Example usage:
+     *
+     * Please check out the Table Helpers page for complete markup examples
+     *
+     */
+
+  }, {
+    key: "tableToolsCheckable",
+    value: function tableToolsCheckable() {
+      var _this2 = this;
+
+      // For each table
+      jQuery('.js-table-checkable:not(.js-table-checkable-enabled)').each(function (index, element) {
+        var table = jQuery(element); // Add .js-table-checkable-enabled class to tag it as activated
+
+        table.addClass('js-table-checkable-enabled'); // When a checkbox is clicked in thead
+
+        jQuery('thead input:checkbox', table).on('click.pixelcave.helpers', function (e) {
+          var checkedStatus = jQuery(e.currentTarget).prop('checked'); // Check or uncheck all checkboxes in tbody
+
+          jQuery('tbody input:checkbox', table).each(function (index, element) {
+            var checkbox = jQuery(element);
+            checkbox.prop('checked', checkedStatus).change();
+
+            _this2.tableToolscheckRow(checkbox, checkedStatus);
+          });
+        }); // When a checkbox is clicked in tbody
+
+        jQuery('tbody input:checkbox, tbody input + label', table).on('click.pixelcave.helpers', function (e) {
+          var checkbox = jQuery(e.currentTarget);
+          var checkedStatus = checkbox.prop('checked');
+
+          if (!checkedStatus) {
+            jQuery('thead input:checkbox', table).prop('checked', false);
+          } else {
+            if (jQuery('tbody input:checkbox:checked', table).length === jQuery('tbody input:checkbox', table).length) {
+              jQuery('thead input:checkbox', table).prop('checked', true);
+            }
+          }
+
+          _this2.tableToolscheckRow(checkbox, checkbox.prop('checked'));
+        }); // When a row is clicked in tbody
+
+        jQuery('tbody > tr', table).on('click.pixelcave.helpers', function (e) {
+          if (e.target.type !== 'checkbox' && e.target.type !== 'button' && e.target.tagName.toLowerCase() !== 'a' && !jQuery(e.target).parent('a').length && !jQuery(e.target).parent('button').length && !jQuery(e.target).parent('.custom-control').length && !jQuery(e.target).parent('label').length) {
+            var checkbox = jQuery('input:checkbox', e.currentTarget);
+            var checkedStatus = checkbox.prop('checked');
+            checkbox.prop('checked', !checkedStatus).change();
+
+            _this2.tableToolscheckRow(checkbox, !checkedStatus);
+
+            if (checkedStatus) {
+              jQuery('thead input:checkbox', table).prop('checked', false);
+            } else {
+              if (jQuery('tbody input:checkbox:checked', table).length === jQuery('tbody input:checkbox', table).length) {
+                jQuery('thead input:checkbox', table).prop('checked', true);
+              }
+            }
+          }
+        });
+      });
+    } // Checkable table functionality helper - Checks or unchecks table row
+
+  }, {
+    key: "tableToolscheckRow",
+    value: function tableToolscheckRow(checkbox, checkedStatus) {
+      if (checkedStatus) {
+        checkbox.closest('tr').addClass('table-active');
+      } else {
+        checkbox.closest('tr').removeClass('table-active');
+      }
+    }
+    /*
+     ********************************************************************************************
+     *
+     * All the following helpers require each plugin's resources (JS, CSS) to be included in order to work
+     *
+     ********************************************************************************************
+     */
+
+    /*
+     * Magnific Popup functionality, for more examples you can check out http://dimsemenov.com/plugins/magnific-popup/
+     *
+     * Helpers.run('magnific-popup');
+     *
+     * Example usage:
+     *
+     * Please check out the Gallery page in Components for complete markup examples
+     *
+     */
+
+  }, {
+    key: "magnific",
+    value: function magnific() {
+      // Gallery init
+      jQuery('.js-gallery:not(.js-gallery-enabled)').each(function (index, element) {
+        // Add .js-gallery-enabled class to tag it as activated and init it
+        jQuery(element).addClass('js-gallery-enabled').magnificPopup({
+          delegate: 'a.img-lightbox',
+          type: 'image',
+          gallery: {
+            enabled: true
+          }
+        });
+      });
+    }
+    /*
+     * Summernote init, for more examples you can check out https://summernote.org/
+     *
+     * Helpers.run('summernote');
+     *
+     * Example usage:
+     *
+     * <div class="js-summernote-air"><p>Hello inline Summernote!</p></div> or
+     * <div class="js-summernote">Hello Summernote!</div>
+     *
+     *
+     */
+
+  }, {
+    key: "summernote",
+    value: function summernote() {
+      // Init text editor in air mode (inline)
+      jQuery('.js-summernote-air:not(.js-summernote-air-enabled)').each(function (index, element) {
+        // Add .js-summernote-air-enabled class to tag it as activated and init it
+        jQuery(element).addClass('js-summernote-air-enabled').summernote({
+          airMode: true,
+          tooltip: false
+        });
+      }); // Init full text editor
+
+      jQuery('.js-summernote:not(.js-summernote-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-summernote-enabled class to tag it as activated and init it
+
+        el.addClass('js-summernote-enabled').summernote({
+          height: el.data('height') || 350,
+          minHeight: el.data('min-height') || null,
+          maxHeight: el.data('max-height') || null
+        });
+      });
+    }
+    /*
+     * CKEditor init, for more examples you can check out http://ckeditor.com/
+     *
+     * Helpers.run('ckeditor');
+     *
+     * Example usage:
+     *
+     * <textarea id="js-ckeditor" name="ckeditor">Hello CKEditor!</textarea> or
+     * <div id="js-ckeditor-inline">Hello inline CKEditor!</div>
+     *
+     */
+
+  }, {
+    key: "ckeditor",
+    value: function ckeditor() {
+      // Init inline text editor
+      if (jQuery('#js-ckeditor-inline:not(.js-ckeditor-inline-enabled)').length) {
+        jQuery('#js-ckeditor-inline').attr('contenteditable', 'true');
+        CKEDITOR.inline('js-ckeditor-inline'); // Add .js-ckeditor-inline-enabled class to tag it as activated
+
+        jQuery('#js-ckeditor-inline').addClass('js-ckeditor-inline-enabled');
+      } // Init full text editor
+
+
+      if (jQuery('#js-ckeditor:not(.js-ckeditor-enabled)').length) {
+        CKEDITOR.replace('js-ckeditor'); // Add .js-ckeditor-enabled class to tag it as activated
+
+        jQuery('#js-ckeditor').addClass('js-ckeditor-enabled');
+      }
+    }
+    /*
+     * CKEditor 5 init, for more examples you can check out http://ckeditor.com/
+     *
+     * Helpers.run('ckeditor5');
+     *
+     * Example usage:
+     *
+     * <div id="js-ckeditor5-classic">Hello classic CKEditor 5!</div>
+     * ..or..
+     * <div id="js-ckeditor5-inline">Hello inline CKEditor 5!</div>
+     *
+     */
+
+  }, {
+    key: "ckeditor5",
+    value: function ckeditor5() {
+      // Init inline text editor
+      if (jQuery('#js-ckeditor5-inline:not(.js-ckeditor5-inline-enabled)').length) {
+        InlineEditor.create(document.querySelector('#js-ckeditor5-inline')).then(function (editor) {
+          window.editor = editor;
+        })["catch"](function (error) {
+          console.error('There was a problem initializing the inline editor.', error);
+        }); // Add .js-ckeditor5-inline-enabled class to tag it as activated
+
+        jQuery('#js-ckeditor5-inline').addClass('js-ckeditor5-inline-enabled');
+      } // Init full text editor
+
+
+      if (jQuery('#js-ckeditor5-classic:not(.js-ckeditor5-classic-enabled)').length) {
+        ClassicEditor.create(document.querySelector('#js-ckeditor5-classic')).then(function (editor) {
+          window.editor = editor;
+        })["catch"](function (error) {
+          console.error('There was a problem initializing the classic editor.', error);
+        }); // Add .js-ckeditor5-classic-enabled class to tag it as activated
+
+        jQuery('#js-ckeditor5-classic').addClass('js-ckeditor5-classic-enabled');
+      }
+    }
+    /*
+     * SimpleMDE init, for more examples you can check out https://github.com/NextStepWebs/simplemde-markdown-editor
+     *
+     * Helpers.run('simplemde');
+     *
+     * Example usage:
+     *
+     * <textarea class="js-simplemde" id="simplemde" name="simplemde">Hello SimpleMDE!</textarea>
+     *
+     */
+
+  }, {
+    key: "simpleMDE",
+    value: function simpleMDE() {
+      // Init markdown editor (with .js-simplemde class)
+      jQuery('.js-simplemde:not(.js-simplemde-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-simplemde-enabled class to tag it as activated
+
+        el.addClass('js-simplemde-enabled'); // Init editor
+
+        new SimpleMDE({
+          element: el[0],
+          autoDownloadFontAwesome: false
+        });
+      });
+    }
+    /*
+     * Slick init, for more examples you can check out http://kenwheeler.github.io/slick/
+     *
+     * Helpers.run('slick');
+     *
+     * Example usage:
+     *
+     * <div class="js-slider">
+     *   <div>Slide #1</div>
+     *   <div>Slide #2</div>
+     *   <div>Slide #3</div>
+     * </div>
+     *
+     */
+
+  }, {
+    key: "slick",
+    value: function slick() {
+      // Get each slider element (with .js-slider class)
+      jQuery('.js-slider:not(.js-slider-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-slider-enabled class to tag it as activated and init it
+
+        el.addClass('js-slider-enabled').slick({
+          arrows: el.data('arrows') || false,
+          dots: el.data('dots') || false,
+          slidesToShow: el.data('slides-to-show') || 1,
+          centerMode: el.data('center-mode') || false,
+          autoplay: el.data('autoplay') || false,
+          autoplaySpeed: el.data('autoplay-speed') || 3000,
+          infinite: typeof el.data('infinite') === 'undefined' ? true : el.data('infinite')
+        });
+      });
+    }
+    /*
+     * Bootstrap Datepicker init, for more examples you can check out https://github.com/eternicode/bootstrap-datepicker
+     *
+     * Helpers.run('datepicker');
+     *
+     * Example usage:
+     *
+     * <input type="text" class="js-datepicker form-control">
+     *
+     */
+
+  }, {
+    key: "datepicker",
+    value: function datepicker() {
+      // Init datepicker (with .js-datepicker and .input-daterange class)
+      jQuery('.js-datepicker:not(.js-datepicker-enabled)').add('.input-daterange:not(.js-datepicker-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-datepicker-enabled class to tag it as activated and init it
+
+        el.addClass('js-datepicker-enabled').datepicker({
+          weekStart: el.data('week-start') || 0,
+          autoclose: el.data('autoclose') || false,
+          todayHighlight: el.data('today-highlight') || false,
+          orientation: 'bottom' // Position issue when using BS4, set it to bottom until officially supported
+
+        });
+      });
+    }
+    /*
+     * Bootstrap Colorpicker init, for more examples you can check out https://github.com/itsjavi/bootstrap-colorpicker/
+     *
+     * Helpers.run('colorpicker');
+     *
+     * Example usage:
+     *
+     * <input type="text" class="js-colorpicker form-control" value="#db4a39">
+     *
+     */
+
+  }, {
+    key: "colorpicker",
+    value: function colorpicker() {
+      // Get each colorpicker element (with .js-colorpicker class)
+      jQuery('.js-colorpicker:not(.js-colorpicker-enabled)').each(function (index, element) {
+        // Add .js-enabled class to tag it as activated and init it
+        jQuery(element).addClass('js-colorpicker-enabled').colorpicker();
+      });
+    }
+    /*
+     * Masked Inputs, for more examples you can check out https://github.com/digitalBush/jquery.maskedinput
+     *
+     * Helpers.run('masked-inputs');
+     *
+     * Example usage:
+     *
+     * Please check out the Form plugins page for complete markup examples
+     *
+     */
+
+  }, {
+    key: "maskedInputs",
+    value: function maskedInputs() {
+      // Init Masked Inputs
+      // a - Represents an alpha character (A-Z,a-z)
+      // 9 - Represents a numeric character (0-9)
+      // * - Represents an alphanumeric character (A-Z,a-z,0-9)
+      jQuery('.js-masked-date:not(.js-masked-enabled)').mask('99/99/9999');
+      jQuery('.js-masked-date-dash:not(.js-masked-enabled)').mask('99-99-9999');
+      jQuery('.js-masked-phone:not(.js-masked-enabled)').mask('(999) 999-9999');
+      jQuery('.js-masked-phone-ext:not(.js-masked-enabled)').mask('(999) 999-9999? x99999');
+      jQuery('.js-masked-taxid:not(.js-masked-enabled)').mask('99-9999999');
+      jQuery('.js-masked-ssn:not(.js-masked-enabled)').mask('999-99-9999');
+      jQuery('.js-masked-pkey:not(.js-masked-enabled)').mask('a*-999-a999');
+      jQuery('.js-masked-time:not(.js-masked-enabled)').mask('99:99');
+      jQuery('.js-masked-date').add('.js-masked-date-dash').add('.js-masked-phone').add('.js-masked-phone-ext').add('.js-masked-taxid').add('.js-masked-ssn').add('.js-masked-pkey').add('.js-masked-time').addClass('js-masked-enabled');
+    }
+    /*
+     * Select2, for more examples you can check out https://github.com/select2/select2
+     *
+     * Helpers.run('select2');
+     *
+     * Example usage:
+     *
+     * <select class="js-select2 form-control" style="width: 100%;" data-placeholder="Choose one..">
+     *   <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+     *   <option value="1">HTML</option>
+     *   <option value="2">CSS</option>
+     *   <option value="3">Javascript</option>
+     * </select>
+     *
+     */
+
+  }, {
+    key: "select2",
+    value: function select2() {
+      // Init Select2 (with .js-select2 class)
+      jQuery('.js-select2:not(.js-select2-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-select2-enabled class to tag it as activated and init it
+
+        el.addClass('js-select2-enabled').select2({
+          placeholder: el.data('placeholder') || false
+        });
+      });
+    }
+    /*
+     * Highlight.js, for more examples you can check out https://highlightjs.org/usage/
+     *
+     * Helpers.run('highlightjs');
+     *
+     * Example usage:
+     *
+     * Please check out the Syntax Highlighting page in Components for complete markup examples
+     *
+     */
+
+  }, {
+    key: "highlightjs",
+    value: function highlightjs() {
+      // Init Highlight.js
+      if (!hljs.isHighlighted) {
+        hljs.initHighlighting();
+      }
+    }
+    /*
+     * Bootstrap Notify, for more examples you can check out http://bootstrap-growl.remabledesigns.com/
+     *
+     * Helpers.run('notify');
+     *
+     * Example usage:
+     *
+     * Please check out the Notifications page for examples
+     *
+     */
+
+  }, {
+    key: "notify",
+    value: function notify() {
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      if (jQuery.isEmptyObject(options)) {
+        // Init notifications (with .js-notify class)
+        jQuery('.js-notify:not(.js-notify-enabled)').each(function (index, element) {
+          // Add .js-notify-enabled class to tag it as activated and init it
+          jQuery(element).addClass('js-notify-enabled').on('click.pixelcave.helpers', function (e) {
+            var el = jQuery(e.currentTarget); // Create notification
+
+            jQuery.notify({
+              icon: el.data('icon') || '',
+              message: el.data('message'),
+              url: el.data('url') || ''
+            }, {
+              element: 'body',
+              type: el.data('type') || 'info',
+              placement: {
+                from: el.data('from') || 'top',
+                align: el.data('align') || 'right'
+              },
+              allow_dismiss: true,
+              newest_on_top: true,
+              showProgressbar: false,
+              offset: 20,
+              spacing: 10,
+              z_index: 1033,
+              delay: 5000,
+              timer: 1000,
+              animate: {
+                enter: 'animated fadeIn',
+                exit: 'animated fadeOutDown'
+              }
+            });
+          });
+        });
+      } else {
+        // Create notification
+        jQuery.notify({
+          icon: options.icon || '',
+          message: options.message,
+          url: options.url || ''
+        }, {
+          element: options.element || 'body',
+          type: options.type || 'info',
+          placement: {
+            from: options.from || 'top',
+            align: options.align || 'right'
+          },
+          allow_dismiss: options.allow_dismiss === false ? false : true,
+          newest_on_top: options.newest_on_top === false ? false : true,
+          showProgressbar: options.show_progress_bar ? true : false,
+          offset: options.offset || 20,
+          spacing: options.spacing || 10,
+          z_index: options.z_index || 1033,
+          delay: options.delay || 5000,
+          timer: options.timer || 1000,
+          animate: {
+            enter: options.animate_enter || 'animated fadeIn',
+            exit: options.animate_exit || 'animated fadeOutDown'
+          }
+        });
+      }
+    }
+    /*
+     * Easy Pie Chart, for more examples you can check out http://rendro.github.io/easy-pie-chart/
+     *
+     * Helpers.run('easy-pie-chart');
+     *
+     * Example usage:
+     *
+     * <div class="js-pie-chart pie-chart" data-percent="25" data-line-width="2" data-size="100">
+     *   <span>..Content..</span>
+     * </div>
+     *
+     */
+
+  }, {
+    key: "easyPieChart",
+    value: function easyPieChart() {
+      // Init Easy Pie Charts (with .js-pie-chart class)
+      jQuery('.js-pie-chart:not(.js-pie-chart-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-pie-chart-enabled class to tag it as activated and init it
+
+        el.addClass('js-pie-chart-enabled').easyPieChart({
+          barColor: el.data('bar-color') || '#777777',
+          trackColor: el.data('track-color') || '#eeeeee',
+          lineWidth: el.data('line-width') || 3,
+          size: el.data('size') || '80',
+          animate: el.data('animate') || 750,
+          scaleColor: el.data('scale-color') || false
+        });
+      });
+    }
+    /*
+     * Bootstrap Maxlength, for more examples you can check out https://github.com/mimo84/bootstrap-maxlength
+     *
+     * Helpers.run('maxlength');
+     *
+     * Example usage:
+     *
+     * <input type="text" class="js-maxlength form-control" maxlength="20">
+     *
+     */
+
+  }, {
+    key: "maxlength",
+    value: function maxlength() {
+      // Init Bootstrap Maxlength (with .js-maxlength class)
+      jQuery('.js-maxlength:not(.js-maxlength-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-maxlength-enabled class to tag it as activated and init it
+
+        el.addClass('js-maxlength-enabled').maxlength({
+          alwaysShow: el.data('always-show') ? true : false,
+          threshold: el.data('threshold') || 10,
+          warningClass: el.data('warning-class') || 'badge badge-warning',
+          limitReachedClass: el.data('limit-reached-class') || 'badge badge-danger',
+          placement: el.data('placement') || 'bottom',
+          preText: el.data('pre-text') || '',
+          separator: el.data('separator') || '/',
+          postText: el.data('post-text') || ''
+        });
+      });
+    }
+    /*
+     * Ion Range Slider, for more examples you can check out https://github.com/IonDen/ion.rangeSlider
+     *
+     * Helpers.run('rangeslider');
+     *
+     * Example usage:
+     *
+     * <input type="text" class="js-rangeslider form-control" value="50">
+     *
+     */
+
+  }, {
+    key: "rangeslider",
+    value: function rangeslider() {
+      // Init Ion Range Slider (with .js-rangeslider class)
+      jQuery('.js-rangeslider:not(.js-rangeslider-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-rangeslider-enabled class to tag it as activated and init it
+
+        jQuery(element).addClass('js-rangeslider-enabled').ionRangeSlider({
+          input_values_separator: ';',
+          skin: el.data('skin') || 'round'
+        });
+      });
+    }
+    /*
+     * jQuery Sparkline Charts, for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-docs
+     *
+     * Helpers.run('sparkline');
+     *
+     * Example usage:
+     *
+     * <span class="js-sparkline" data-type="line" data-points="[10,20,30,25,15,40,45]"></span>
+     *
+     */
+
+  }, {
+    key: "sparkline",
+    value: function sparkline() {
+      var self = this; // Init jQuery Sparkline Charts (with .js-sparkline class)
+
+      jQuery('.js-sparkline:not(.js-sparkline-enabled)').each(function (index, element) {
+        var el = jQuery(element);
+        var type = el.data('type');
+        var options = {}; // Sparkline types
+
+        var types = {
+          line: function line() {
+            options['type'] = type;
+            options['lineWidth'] = el.data('line-width') || 2;
+            options['lineColor'] = el.data('line-color') || '#0665d0';
+            options['fillColor'] = el.data('fill-color') || '#0665d0';
+            options['spotColor'] = el.data('spot-color') || '#495057';
+            options['minSpotColor'] = el.data('min-spot-color') || '#495057';
+            options['maxSpotColor'] = el.data('max-spot-color') || '#495057';
+            options['highlightSpotColor'] = el.data('highlight-spot-color') || '#495057';
+            options['highlightLineColor'] = el.data('highlight-line-color') || '#495057';
+            options['spotRadius'] = el.data('spot-radius') || 2;
+            options['tooltipFormat'] = '{{prefix}}{{y}}{{suffix}}';
+          },
+          bar: function bar() {
+            options['type'] = type;
+            options['barWidth'] = el.data('bar-width') || 8;
+            options['barSpacing'] = el.data('bar-spacing') || 6;
+            options['barColor'] = el.data('bar-color') || '#0665d0';
+            options['tooltipFormat'] = '{{prefix}}{{value}}{{suffix}}';
+          },
+          pie: function pie() {
+            options['type'] = type;
+            options['sliceColors'] = ['#fadb7d', '#faad7d', '#75b0eb', '#abe37d'];
+            options['highlightLighten'] = el.data('highlight-lighten') || 1.1;
+            options['tooltipFormat'] = '{{prefix}}{{value}}{{suffix}}';
+          },
+          tristate: function tristate() {
+            options['type'] = type;
+            options['barWidth'] = el.data('bar-width') || 8;
+            options['barSpacing'] = el.data('bar-spacing') || 6;
+            options['posBarColor'] = el.data('pos-bar-color') || '#82b54b';
+            options['negBarColor'] = el.data('neg-bar-color') || '#e04f1a';
+          }
+        }; // If the correct type is set init the chart
+
+        if (types[type]) {
+          types[type](); // Extra options added only if specified
+
+          if (type === 'line') {
+            if (el.data('chart-range-min') >= 0 || el.data('chart-range-min')) {
+              options['chartRangeMin'] = el.data('chart-range-min');
+            }
+
+            if (el.data('chart-range-max') >= 0 || el.data('chart-range-max')) {
+              options['chartRangeMax'] = el.data('chart-range-max');
+            }
+          } // Add common options used in all types
+
+
+          options['width'] = el.data('width') || '120px';
+          options['height'] = el.data('height') || '80px';
+          options['tooltipPrefix'] = el.data('tooltip-prefix') ? el.data('tooltip-prefix') + ' ' : '';
+          options['tooltipSuffix'] = el.data('tooltip-suffix') ? ' ' + el.data('tooltip-suffix') : ''; // If we need a responsive width for the chart, then don't add .js-sparkline-enabled class and re-run the helper on window resize
+
+          if (options['width'] === '100%') {
+            if (!sparklineResize) {
+              // Make sure that we bind the event only once
+              sparklineResize = true; // On window resize, re-run the Sparkline helper
+
+              jQuery(window).on('resize.pixelcave.helpers.sparkline', function (e) {
+                clearTimeout(sparklineTimeout);
+                sparklineTimeout = setTimeout(function () {
+                  self.sparkline();
+                }, 500);
+              });
+            }
+          } else {
+            // It has a specific width (it doesn't need to re-init again on resize), so add .js-sparkline-enabled class to tag it as activated
+            jQuery(element).addClass('js-sparkline-enabled');
+          } // Finally init it
+
+
+          jQuery(element).sparkline(el.data('points') || [0], options);
+        } else {
+          console.log('[jQuery Sparkline JS Helper] Please add a correct type (line, bar, pie or tristate) in all your elements with \'js-sparkline\' class.');
+        }
+      });
+    }
+    /*
+     * jQuery Validation, for more examples you can check out https://github.com/jzaefferer/jquery-validation
+     *
+     * Helpers.run('validation');
+     *
+     * Example usage:
+     *
+     * By calling the helper, you set up the default options that will be used for jQuery Validation
+     *
+     */
+
+  }, {
+    key: "validation",
+    value: function validation() {
+      // Set default options for jQuery Validation plugin
+      jQuery.validator.setDefaults({
+        errorClass: 'invalid-feedback animated fadeIn',
+        errorElement: 'div',
+        errorPlacement: function errorPlacement(error, el) {
+          jQuery(el).addClass('is-invalid');
+          jQuery(el).parents('.form-group').append(error);
+        },
+        highlight: function highlight(el) {
+          jQuery(el).parents('.form-group').find('.is-invalid').removeClass('is-invalid').addClass('is-invalid');
+        },
+        success: function success(el) {
+          jQuery(el).parents('.form-group').find('.is-invalid').removeClass('is-invalid');
+          jQuery(el).remove();
+        }
+      });
+    }
+    /*
+     * Flatpickr init, for more examples you can check out https://github.com/flatpickr/flatpickr
+     *
+     * Helpers.run('flatpickr');
+     *
+     * Example usage:
+     *
+     * <input type="text" class="js-flatpickr form-control">
+     *
+     */
+
+  }, {
+    key: "flatpickr",
+    value: function (_flatpickr) {
+      function flatpickr() {
+        return _flatpickr.apply(this, arguments);
+      }
+
+      flatpickr.toString = function () {
+        return _flatpickr.toString();
+      };
+
+      return flatpickr;
+    }(function () {
+      // Init Flatpickr (with .js-flatpickr class)
+      jQuery('.js-flatpickr:not(.js-flatpickr-enabled)').each(function (index, element) {
+        var el = jQuery(element); // Add .js-flatpickr-enabled class to tag it as activated
+
+        el.addClass('js-flatpickr-enabled'); // Init it
+
+        flatpickr(el, {});
+      });
+    })
+  }]);
+
+  return Helpers;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/oneui/modules/template.js":
+/*!************************************************!*\
+  !*** ./resources/js/oneui/modules/template.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Template)
+/* harmony export */ });
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./resources/js/oneui/modules/tools.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./resources/js/oneui/modules/helpers.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/*
+ *  Document   : template.js
+ *  Author     : pixelcave
+ *  Description: UI Framework custom functionality
+ *
+ */
+// Import required modules
+
+ // Template
+
+var Template = /*#__PURE__*/function () {
+  /*
+   * Auto called when creating a new instance
+   *
+   */
+  function Template() {
+    _classCallCheck(this, Template);
+
+    this._uiInit();
+  }
+  /*
+   * Init all vital functionality
+   *
+   */
+
+
+  _createClass(Template, [{
+    key: "_uiInit",
+    value: function _uiInit() {
+      // Layout variables
+      this._lHtml = jQuery('html');
+      this._lBody = jQuery('body');
+      this._lpageLoader = jQuery('#page-loader');
+      this._lPage = jQuery('#page-container');
+      this._lSidebar = jQuery('#sidebar');
+      this._lSidebarScrollCon = jQuery('.js-sidebar-scroll', '#sidebar');
+      this._lSideOverlay = jQuery('#side-overlay');
+      this._lHeader = jQuery('#page-header');
+      this._lHeaderSearch = jQuery('#page-header-search');
+      this._lHeaderSearchInput = jQuery('#page-header-search-input');
+      this._lHeaderLoader = jQuery('#page-header-loader');
+      this._lMain = jQuery('#main-container');
+      this._lFooter = jQuery('#page-footer'); // Helper variables
+
+      this._lSidebarScroll = false;
+      this._lSideOverlayScroll = false;
+      this._windowW = _tools__WEBPACK_IMPORTED_MODULE_0__["default"].getWidth(); // Base UI Init
+
+      this._uiHandleSidebars('init');
+
+      this._uiHandleNav();
+
+      this._uiHandleTheme(); // API Init
+
+
+      this._uiApiLayout();
+
+      this._uiApiBlocks(); // Core Helpers Init
+
+
+      this.helpers(['core-bootstrap-tooltip', 'core-bootstrap-popover', 'core-bootstrap-tabs', 'core-bootstrap-custom-file-input', 'core-toggle-class', 'core-scroll-to', 'core-year-copy', 'core-appear', 'core-ripple']); // Page Loader (hide it)
+
+      this._uiHandlePageLoader();
+    }
+    /*
+     * Handles sidebar and side overlay scrolling functionality/styles
+     *
+     */
+
+  }, {
+    key: "_uiHandleSidebars",
+    value: function _uiHandleSidebars(mode) {
+      var self = this;
+
+      if (mode === 'init') {
+        // Add 'side-trans-enabled' class to #page-container (enables sidebar and side overlay transition on open/close)
+        // Fixes IE10, IE11 and Edge bug in which animation was executed on each page load - really annoying!
+        self._lPage.addClass('side-trans-enabled'); // Init custom scrolling
+
+
+        this._uiHandleSidebars();
+      } else {
+        // If .side-scroll is added to #page-container enable custom scrolling
+        if (self._lPage.hasClass('side-scroll')) {
+          // Init custom scrolling on Sidebar
+          if (self._lSidebar.length > 0 && !self._lSidebarScroll) {
+            self._lSidebarScroll = new SimpleBar(self._lSidebarScrollCon[0]); // Enable scrolling lock
+
+            jQuery('.simplebar-content-wrapper', self._lSidebar).scrollLock('enable');
+          } // Init custom scrolling on Side Overlay
+
+
+          if (self._lSideOverlay.length > 0 && !self._lSideOverlayScroll) {
+            self._lSideOverlayScroll = new SimpleBar(self._lSideOverlay[0]); // Enable scrolling lock
+
+            jQuery('.simplebar-content-wrapper', self._lSideOverlay).scrollLock('enable');
+          }
+        } else {
+          // If custom scrolling exists on Sidebar remove it
+          if (self._lSidebar && self._lSidebarScroll) {
+            // Disable scrolling lock
+            jQuery('.simplebar-content-wrapper', self._lSidebar).scrollLock('disable'); // Unmount Simplebar
+
+            self._lSidebarScroll.unMount();
+
+            self._lSidebarScroll = null; // Remove Simplebar leftovers
+
+            self._lSidebarScrollCon.removeAttr('data-simplebar').html(jQuery('.simplebar-content', self._lSidebar).html());
+          } // If custom scrolling exists on Side Overlay remove it
+
+
+          if (self._lSideOverlay && self._lSideOverlayScroll) {
+            // Disable scrolling lock
+            jQuery('.simplebar-content-wrapper', self._lSideOverlay).scrollLock('disable'); // Unmount Simplebar
+
+            self._lSideOverlayScroll.unMount();
+
+            self._lSideOverlayScroll = null; // Remove Simplebar leftovers
+
+            self._lSideOverlay.removeAttr('data-simplebar').html(jQuery('.simplebar-content', self._lSideOverlay).html());
+          }
+        }
+      }
+    }
+    /*
+     * Toggle Submenu functionality
+     *
+     */
+
+  }, {
+    key: "_uiHandleNav",
+    value: function _uiHandleNav() {
+      // Unbind event in case it is already enabled
+      this._lPage.off('click.pixelcave.menu'); // When a submenu link is clicked
+
+
+      this._lPage.on('click.pixelcave.menu', '[data-toggle="submenu"]', function (e) {
+        // Get link
+        var link = jQuery(e.currentTarget); // Check if we are in horizontal navigation, large screen and hover is enabled
+
+        if (!(_tools__WEBPACK_IMPORTED_MODULE_0__["default"].getWidth() > 991 && link.parents('.nav-main').hasClass('nav-main-horizontal nav-main-hover'))) {
+          // Get link's parent
+          var parentLi = link.parent('li');
+
+          if (parentLi.hasClass('open')) {
+            // If submenu is open, close it..
+            parentLi.removeClass('open');
+            link.attr('aria-expanded', 'false');
+          } else {
+            // .. else if submenu is closed, close all other (same level) submenus first before open it
+            link.closest('ul').children('li').removeClass('open');
+            parentLi.addClass('open');
+            link.attr('aria-expanded', 'true');
+          } // Remove focus from submenu link
+
+
+          link.trigger('blur');
+        }
+
+        return false;
+      });
+    }
+    /*
+     * Page loading screen functionality
+     *
+     */
+
+  }, {
+    key: "_uiHandlePageLoader",
+    value: function _uiHandlePageLoader() {
+      var mode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'hide';
+
+      if (mode === 'show') {
+        if (this._lpageLoader.length) {
+          this._lpageLoader.addClass('show');
+        } else {
+          this._lBody.prepend("<div id=\"page-loader\" class=\"show\"></div>");
+        }
+      } else if (mode === 'hide') {
+        if (this._lpageLoader.length) {
+          this._lpageLoader.removeClass('show');
+        }
+      }
+    }
+    /*
+     * Set active color theme functionality
+     *
+     */
+
+  }, {
+    key: "_uiHandleTheme",
+    value: function _uiHandleTheme() {
+      var themeEl = jQuery('#css-theme');
+      var cookies = this._lPage.hasClass('enable-cookies') ? true : false; // If cookies are enabled
+
+      if (cookies) {
+        var themeName = Cookies.get('oneuiThemeName') || false; // Update color theme
+
+        if (themeName) {
+          _tools__WEBPACK_IMPORTED_MODULE_0__["default"].updateTheme(themeEl, themeName);
+        } // Update theme element
+
+
+        themeEl = jQuery('#css-theme');
+      } // Set the active color theme link as active
+
+
+      jQuery('[data-toggle="theme"][data-theme="' + (themeEl.length ? themeEl.attr('href') : 'default') + '"]').addClass('active'); // Unbind event in case it is already enabled
+
+      this._lPage.off('click.pixelcave.themes'); // When a color theme link is clicked
+
+
+      this._lPage.on('click.pixelcave.themes', '[data-toggle="theme"]', function (e) {
+        e.preventDefault(); // Get element and data
+
+        var el = jQuery(e.currentTarget);
+        var themeName = el.data('theme'); // Set this color theme link as active
+
+        jQuery('[data-toggle="theme"]').removeClass('active');
+        jQuery('[data-toggle="theme"][data-theme="' + themeName + '"]').addClass('active'); // Update color theme
+
+        _tools__WEBPACK_IMPORTED_MODULE_0__["default"].updateTheme(themeEl, themeName); // Update theme element
+
+        themeEl = jQuery('#css-theme'); // If cookies are enabled, save the new active color theme
+
+        if (cookies) {
+          Cookies.set('oneuiThemeName', themeName, {
+            expires: 7
+          });
+        } // Blur the link/button
+
+
+        el.trigger('blur');
+      });
+    }
+    /*
+     * Layout API
+     *
+     */
+
+  }, {
+    key: "_uiApiLayout",
+    value: function _uiApiLayout() {
+      var mode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'init';
+      var self = this; // Get current window width
+
+      self._windowW = _tools__WEBPACK_IMPORTED_MODULE_0__["default"].getWidth(); // API with object literals
+
+      var layoutAPI = {
+        init: function init() {
+          // Unbind events in case they are already enabled
+          self._lPage.off('click.pixelcave.layout');
+
+          self._lPage.off('click.pixelcave.overlay'); // Call layout API on button click
+
+
+          self._lPage.on('click.pixelcave.layout', '[data-toggle="layout"]', function (e) {
+            var el = jQuery(e.currentTarget);
+
+            self._uiApiLayout(el.data('action'));
+
+            el.trigger('blur');
+          }); // Prepend Page Overlay div if enabled (used when Side Overlay opens)
+
+
+          if (self._lPage.hasClass('enable-page-overlay')) {
+            self._lPage.prepend('<div id="page-overlay"></div>');
+
+            jQuery('#page-overlay').on('click.pixelcave.overlay', function (e) {
+              self._uiApiLayout('side_overlay_close');
+            });
+          }
+        },
+        sidebar_pos_toggle: function sidebar_pos_toggle() {
+          self._lPage.toggleClass('sidebar-r');
+        },
+        sidebar_pos_left: function sidebar_pos_left() {
+          self._lPage.removeClass('sidebar-r');
+        },
+        sidebar_pos_right: function sidebar_pos_right() {
+          self._lPage.addClass('sidebar-r');
+        },
+        sidebar_toggle: function sidebar_toggle() {
+          if (self._windowW > 991) {
+            self._lPage.toggleClass('sidebar-o');
+          } else {
+            self._lPage.toggleClass('sidebar-o-xs');
+          }
+        },
+        sidebar_open: function sidebar_open() {
+          if (self._windowW > 991) {
+            self._lPage.addClass('sidebar-o');
+          } else {
+            self._lPage.addClass('sidebar-o-xs');
+          }
+        },
+        sidebar_close: function sidebar_close() {
+          if (self._windowW > 991) {
+            self._lPage.removeClass('sidebar-o');
+          } else {
+            self._lPage.removeClass('sidebar-o-xs');
+          }
+        },
+        sidebar_mini_toggle: function sidebar_mini_toggle() {
+          if (self._windowW > 991) {
+            self._lPage.toggleClass('sidebar-mini');
+          }
+        },
+        sidebar_mini_on: function sidebar_mini_on() {
+          if (self._windowW > 991) {
+            self._lPage.addClass('sidebar-mini');
+          }
+        },
+        sidebar_mini_off: function sidebar_mini_off() {
+          if (self._windowW > 991) {
+            self._lPage.removeClass('sidebar-mini');
+          }
+        },
+        sidebar_style_toggle: function sidebar_style_toggle() {
+          self._lPage.toggleClass('sidebar-dark');
+        },
+        sidebar_style_dark: function sidebar_style_dark() {
+          self._lPage.addClass('sidebar-dark');
+        },
+        sidebar_style_light: function sidebar_style_light() {
+          self._lPage.removeClass('sidebar-dark');
+        },
+        side_overlay_toggle: function side_overlay_toggle() {
+          if (self._lPage.hasClass('side-overlay-o')) {
+            self._uiApiLayout('side_overlay_close');
+          } else {
+            self._uiApiLayout('side_overlay_open');
+          }
+        },
+        side_overlay_open: function side_overlay_open() {
+          // When ESCAPE key is hit close the side overlay
+          jQuery(document).on('keydown.pixelcave.sideOverlay', function (e) {
+            if (e.which === 27) {
+              e.preventDefault();
+
+              self._uiApiLayout('side_overlay_close');
+            }
+          });
+
+          self._lPage.addClass('side-overlay-o');
+        },
+        side_overlay_close: function side_overlay_close() {
+          // Unbind ESCAPE key
+          jQuery(document).off('keydown.pixelcave.sideOverlay');
+
+          self._lPage.removeClass('side-overlay-o');
+        },
+        side_overlay_mode_hover_toggle: function side_overlay_mode_hover_toggle() {
+          self._lPage.toggleClass('side-overlay-hover');
+        },
+        side_overlay_mode_hover_on: function side_overlay_mode_hover_on() {
+          self._lPage.addClass('side-overlay-hover');
+        },
+        side_overlay_mode_hover_off: function side_overlay_mode_hover_off() {
+          self._lPage.removeClass('side-overlay-hover');
+        },
+        header_mode_toggle: function header_mode_toggle() {
+          self._lPage.toggleClass('page-header-fixed');
+        },
+        header_mode_static: function header_mode_static() {
+          self._lPage.removeClass('page-header-fixed');
+        },
+        header_mode_fixed: function header_mode_fixed() {
+          self._lPage.addClass('page-header-fixed');
+        },
+        header_style_toggle: function header_style_toggle() {
+          self._lPage.toggleClass('page-header-dark');
+        },
+        header_style_dark: function header_style_dark() {
+          self._lPage.addClass('page-header-dark');
+        },
+        header_style_light: function header_style_light() {
+          self._lPage.removeClass('page-header-dark');
+        },
+        header_search_on: function header_search_on() {
+          self._lHeaderSearch.addClass('show');
+
+          self._lHeaderSearchInput.focus(); // When ESCAPE key is hit close the search section
+
+
+          jQuery(document).on('keydown.pixelcave.header.search', function (e) {
+            if (e.which === 27) {
+              e.preventDefault();
+
+              self._uiApiLayout('header_search_off');
+            }
+          });
+        },
+        header_search_off: function header_search_off() {
+          self._lHeaderSearch.removeClass('show');
+
+          self._lHeaderSearchInput.trigger('blur'); // Unbind ESCAPE key
+
+
+          jQuery(document).off('keydown.pixelcave.header.search');
+        },
+        header_loader_on: function header_loader_on() {
+          self._lHeaderLoader.addClass('show');
+        },
+        header_loader_off: function header_loader_off() {
+          self._lHeaderLoader.removeClass('show');
+        },
+        side_scroll_toggle: function side_scroll_toggle() {
+          self._lPage.toggleClass('side-scroll');
+
+          self._uiHandleSidebars();
+        },
+        side_scroll_native: function side_scroll_native() {
+          self._lPage.removeClass('side-scroll');
+
+          self._uiHandleSidebars();
+        },
+        side_scroll_custom: function side_scroll_custom() {
+          self._lPage.addClass('side-scroll');
+
+          self._uiHandleSidebars();
+        },
+        content_layout_toggle: function content_layout_toggle() {
+          if (self._lPage.hasClass('main-content-boxed')) {
+            self._uiApiLayout('content_layout_narrow');
+          } else if (self._lPage.hasClass('main-content-narrow')) {
+            self._uiApiLayout('content_layout_full_width');
+          } else {
+            self._uiApiLayout('content_layout_boxed');
+          }
+        },
+        content_layout_boxed: function content_layout_boxed() {
+          self._lPage.removeClass('main-content-narrow').addClass('main-content-boxed');
+        },
+        content_layout_narrow: function content_layout_narrow() {
+          self._lPage.removeClass('main-content-boxed').addClass('main-content-narrow');
+        },
+        content_layout_full_width: function content_layout_full_width() {
+          self._lPage.removeClass('main-content-boxed main-content-narrow');
+        }
+      }; // Call layout API
+
+      if (layoutAPI[mode]) {
+        layoutAPI[mode]();
+      }
+    }
+    /*
+     * Blocks API
+     *
+     */
+
+  }, {
+    key: "_uiApiBlocks",
+    value: function _uiApiBlocks() {
+      var _this = this;
+
+      var mode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'init';
+      var block = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var self = this; // Helper variables
+
+      var elBlock, btnFullscreen, btnContentToggle; // Set default icons for fullscreen and content toggle buttons
+
+      var iconFullscreen = 'si si-size-fullscreen';
+      var iconFullscreenActive = 'si si-size-actual';
+      var iconContent = 'si si-arrow-up';
+      var iconContentActive = 'si si-arrow-down'; // API with object literals
+
+      var blockAPI = {
+        init: function init() {
+          // Auto add the default toggle icons to fullscreen and content toggle buttons
+          jQuery('[data-toggle="block-option"][data-action="fullscreen_toggle"]').each(function (index, element) {
+            var el = jQuery(element);
+            el.html('<i class="' + (jQuery(el).closest('.block').hasClass('block-mode-fullscreen') ? iconFullscreenActive : iconFullscreen) + '"></i>');
+          });
+          jQuery('[data-toggle="block-option"][data-action="content_toggle"]').each(function (index, element) {
+            var el = jQuery(element);
+            el.html('<i class="' + (el.closest('.block').hasClass('block-mode-hidden') ? iconContentActive : iconContent) + '"></i>');
+          }); // Unbind event in case it is already enabled
+
+          self._lPage.off('click.pixelcave.blocks'); // Call blocks API on option button click
+
+
+          self._lPage.on('click.pixelcave.blocks', '[data-toggle="block-option"]', function (e) {
+            _this._uiApiBlocks(jQuery(e.currentTarget).data('action'), jQuery(e.currentTarget).closest('.block'));
+          });
+        },
+        fullscreen_toggle: function fullscreen_toggle() {
+          elBlock.removeClass('block-mode-pinned').toggleClass('block-mode-fullscreen'); // Enable/disable scroll lock to block
+
+          if (elBlock.hasClass('block-mode-fullscreen')) {
+            jQuery(elBlock).scrollLock('enable');
+          } else {
+            jQuery(elBlock).scrollLock('disable');
+          } // Update block option icon
+
+
+          if (btnFullscreen.length) {
+            if (elBlock.hasClass('block-mode-fullscreen')) {
+              jQuery('i', btnFullscreen).removeClass(iconFullscreen).addClass(iconFullscreenActive);
+            } else {
+              jQuery('i', btnFullscreen).removeClass(iconFullscreenActive).addClass(iconFullscreen);
+            }
+          }
+        },
+        fullscreen_on: function fullscreen_on() {
+          elBlock.removeClass('block-mode-pinned').addClass('block-mode-fullscreen'); // Enable scroll lock to block
+
+          jQuery(elBlock).scrollLock('enable'); // Update block option icon
+
+          if (btnFullscreen.length) {
+            jQuery('i', btnFullscreen).removeClass(iconFullscreen).addClass(iconFullscreenActive);
+          }
+        },
+        fullscreen_off: function fullscreen_off() {
+          elBlock.removeClass('block-mode-fullscreen'); // Disable scroll lock to block
+
+          jQuery(elBlock).scrollLock('disable'); // Update block option icon
+
+          if (btnFullscreen.length) {
+            jQuery('i', btnFullscreen).removeClass(iconFullscreenActive).addClass(iconFullscreen);
+          }
+        },
+        content_toggle: function content_toggle() {
+          elBlock.toggleClass('block-mode-hidden'); // Update block option icon
+
+          if (btnContentToggle.length) {
+            if (elBlock.hasClass('block-mode-hidden')) {
+              jQuery('i', btnContentToggle).removeClass(iconContent).addClass(iconContentActive);
+            } else {
+              jQuery('i', btnContentToggle).removeClass(iconContentActive).addClass(iconContent);
+            }
+          }
+        },
+        content_hide: function content_hide() {
+          elBlock.addClass('block-mode-hidden'); // Update block option icon
+
+          if (btnContentToggle.length) {
+            jQuery('i', btnContentToggle).removeClass(iconContent).addClass(iconContentActive);
+          }
+        },
+        content_show: function content_show() {
+          elBlock.removeClass('block-mode-hidden'); // Update block option icon
+
+          if (btnContentToggle.length) {
+            jQuery('i', btnContentToggle).removeClass(iconContentActive).addClass(iconContent);
+          }
+        },
+        state_toggle: function state_toggle() {
+          elBlock.toggleClass('block-mode-loading'); // Return block to normal state if the demostration mode is on in the refresh option button - data-action-mode="demo"
+
+          if (jQuery('[data-toggle="block-option"][data-action="state_toggle"][data-action-mode="demo"]', elBlock).length) {
+            setTimeout(function () {
+              elBlock.removeClass('block-mode-loading');
+            }, 2000);
+          }
+        },
+        state_loading: function state_loading() {
+          elBlock.addClass('block-mode-loading');
+        },
+        state_normal: function state_normal() {
+          elBlock.removeClass('block-mode-loading');
+        },
+        pinned_toggle: function pinned_toggle() {
+          elBlock.removeClass('block-mode-fullscreen').toggleClass('block-mode-pinned');
+        },
+        pinned_on: function pinned_on() {
+          elBlock.removeClass('block-mode-fullscreen').addClass('block-mode-pinned');
+        },
+        pinned_off: function pinned_off() {
+          elBlock.removeClass('block-mode-pinned');
+        },
+        close: function close() {
+          elBlock.addClass('d-none');
+        },
+        open: function open() {
+          elBlock.removeClass('d-none');
+        }
+      };
+
+      if (mode === 'init') {
+        // Call Block API
+        blockAPI[mode]();
+      } else {
+        // Get block element
+        elBlock = block instanceof jQuery ? block : jQuery(block); // If element exists, procceed with block functionality
+
+        if (elBlock.length) {
+          // Get block option buttons if exist (need them to update their icons)
+          btnFullscreen = jQuery('[data-toggle="block-option"][data-action="fullscreen_toggle"]', elBlock);
+          btnContentToggle = jQuery('[data-toggle="block-option"][data-action="content_toggle"]', elBlock); // Call Block API
+
+          if (blockAPI[mode]) {
+            blockAPI[mode]();
+          }
+        }
+      }
+    }
+    /*
+     ********************************************************************************************
+     *
+     * Create aliases for easier/quicker access to vital methods
+     *
+     *********************************************************************************************
+     */
+
+    /*
+     * Init base functionality
+     *
+     */
+
+  }, {
+    key: "init",
+    value: function init() {
+      this._uiInit();
+    }
+    /*
+     * Layout API
+     *
+     */
+
+  }, {
+    key: "layout",
+    value: function layout(mode) {
+      this._uiApiLayout(mode);
+    }
+    /*
+     * Blocks API
+     *
+     */
+
+  }, {
+    key: "block",
+    value: function block(mode, _block) {
+      this._uiApiBlocks(mode, _block);
+    }
+    /*
+     * Handle Page Loader
+     *
+     */
+
+  }, {
+    key: "loader",
+    value: function loader(mode, colorClass) {
+      this._uiHandlePageLoader(mode, colorClass);
+    }
+    /*
+     * Run Helpers
+     *
+     */
+
+  }, {
+    key: "helpers",
+    value: function helpers(_helpers) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      _helpers__WEBPACK_IMPORTED_MODULE_1__["default"].run(_helpers, options);
+    }
+  }]);
+
+  return Template;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/oneui/modules/tools.js":
+/*!*********************************************!*\
+  !*** ./resources/js/oneui/modules/tools.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Tools)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/*
+ *  Document   : tools.js
+ *  Author     : pixelcave
+ *  Description: Various small tools
+ *
+ */
+// Tools
+var Tools = /*#__PURE__*/function () {
+  function Tools() {
+    _classCallCheck(this, Tools);
+  }
+
+  _createClass(Tools, null, [{
+    key: "updateTheme",
+    value:
+    /*
+     * Updates the color theme
+     *
+     */
+    function updateTheme(themeEl, themeName) {
+      if (themeName === 'default') {
+        if (themeEl.length) {
+          themeEl.remove();
+        }
+      } else {
+        if (themeEl.length) {
+          themeEl.attr('href', themeName);
+        } else {
+          jQuery('#css-main').after('<link rel="stylesheet" id="css-theme" href="' + themeName + '">');
+        }
+      }
+    }
+    /*
+     * Returns current browser's window width
+     *
+     */
+
+  }, {
+    key: "getWidth",
+    value: function getWidth() {
+      return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    }
+  }]);
+
+  return Tools;
+}();
+
+
+
+/***/ }),
 
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
   \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /*!
   * Bootstrap v4.5.3 (https://getbootstrap.com/)
@@ -100,7 +2040,7 @@
   */
 (function (global, factory) {
    true ? factory(exports, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")) :
-  undefined;
+  0;
 }(this, (function (exports, $, Popper) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
@@ -4518,8 +6458,7 @@
 /*!*******************************************!*\
   !*** ./node_modules/can-use-dom/index.js ***!
   \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 var canUseDOM = !!(
   typeof window !== 'undefined' &&
@@ -4535,8 +6474,7 @@ module.exports = canUseDOM;
 /*!******************************************************!*\
   !*** ./node_modules/core-js/internals/a-function.js ***!
   \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 module.exports = function (it) {
   if (typeof it != 'function') {
@@ -4551,8 +6489,7 @@ module.exports = function (it) {
 /*!****************************************************************!*\
   !*** ./node_modules/core-js/internals/a-possible-prototype.js ***!
   \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
 
@@ -4569,8 +6506,7 @@ module.exports = function (it) {
 /*!**************************************************************!*\
   !*** ./node_modules/core-js/internals/add-to-unscopables.js ***!
   \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "./node_modules/core-js/internals/well-known-symbol.js");
 var create = __webpack_require__(/*! ../internals/object-create */ "./node_modules/core-js/internals/object-create.js");
@@ -4600,8 +6536,7 @@ module.exports = function (key) {
 /*!****************************************************************!*\
   !*** ./node_modules/core-js/internals/advance-string-index.js ***!
   \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -4620,8 +6555,7 @@ module.exports = function (S, index, unicode) {
 /*!*******************************************************!*\
   !*** ./node_modules/core-js/internals/an-instance.js ***!
   \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 module.exports = function (it, Constructor, name) {
   if (!(it instanceof Constructor)) {
@@ -4636,8 +6570,7 @@ module.exports = function (it, Constructor, name) {
 /*!*****************************************************!*\
   !*** ./node_modules/core-js/internals/an-object.js ***!
   \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
 
@@ -4654,8 +6587,7 @@ module.exports = function (it) {
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/internals/array-for-each.js ***!
   \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -4679,8 +6611,7 @@ module.exports = (!STRICT_METHOD || !USES_TO_LENGTH) ? function forEach(callback
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/internals/array-includes.js ***!
   \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var toIndexedObject = __webpack_require__(/*! ../internals/to-indexed-object */ "./node_modules/core-js/internals/to-indexed-object.js");
 var toLength = __webpack_require__(/*! ../internals/to-length */ "./node_modules/core-js/internals/to-length.js");
@@ -4722,8 +6653,7 @@ module.exports = {
 /*!***********************************************************!*\
   !*** ./node_modules/core-js/internals/array-iteration.js ***!
   \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var bind = __webpack_require__(/*! ../internals/function-bind-context */ "./node_modules/core-js/internals/function-bind-context.js");
 var IndexedObject = __webpack_require__(/*! ../internals/indexed-object */ "./node_modules/core-js/internals/indexed-object.js");
@@ -4805,8 +6735,7 @@ module.exports = {
 /*!****************************************************************************!*\
   !*** ./node_modules/core-js/internals/array-method-has-species-support.js ***!
   \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
 var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "./node_modules/core-js/internals/well-known-symbol.js");
@@ -4835,8 +6764,7 @@ module.exports = function (METHOD_NAME) {
 /*!******************************************************************!*\
   !*** ./node_modules/core-js/internals/array-method-is-strict.js ***!
   \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -4857,8 +6785,7 @@ module.exports = function (METHOD_NAME, argument) {
 /*!***********************************************************************!*\
   !*** ./node_modules/core-js/internals/array-method-uses-to-length.js ***!
   \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
 var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
@@ -4895,8 +6822,7 @@ module.exports = function (METHOD_NAME, options) {
 /*!********************************************************!*\
   !*** ./node_modules/core-js/internals/array-reduce.js ***!
   \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var aFunction = __webpack_require__(/*! ../internals/a-function */ "./node_modules/core-js/internals/a-function.js");
 var toObject = __webpack_require__(/*! ../internals/to-object */ "./node_modules/core-js/internals/to-object.js");
@@ -4946,8 +6872,7 @@ module.exports = {
 /*!****************************************************************!*\
   !*** ./node_modules/core-js/internals/array-species-create.js ***!
   \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
 var isArray = __webpack_require__(/*! ../internals/is-array */ "./node_modules/core-js/internals/is-array.js");
@@ -4977,8 +6902,7 @@ module.exports = function (originalArray, length) {
 /*!**************************************************************************!*\
   !*** ./node_modules/core-js/internals/check-correctness-of-iteration.js ***!
   \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "./node_modules/core-js/internals/well-known-symbol.js");
 
@@ -5026,8 +6950,7 @@ module.exports = function (exec, SKIP_CLOSING) {
 /*!*******************************************************!*\
   !*** ./node_modules/core-js/internals/classof-raw.js ***!
   \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 var toString = {}.toString;
 
@@ -5042,8 +6965,7 @@ module.exports = function (it) {
 /*!***************************************************!*\
   !*** ./node_modules/core-js/internals/classof.js ***!
   \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var TO_STRING_TAG_SUPPORT = __webpack_require__(/*! ../internals/to-string-tag-support */ "./node_modules/core-js/internals/to-string-tag-support.js");
 var classofRaw = __webpack_require__(/*! ../internals/classof-raw */ "./node_modules/core-js/internals/classof-raw.js");
@@ -5079,8 +7001,7 @@ module.exports = TO_STRING_TAG_SUPPORT ? classofRaw : function (it) {
 /*!***********************************************************!*\
   !*** ./node_modules/core-js/internals/collection-weak.js ***!
   \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -5212,8 +7133,7 @@ module.exports = {
 /*!******************************************************!*\
   !*** ./node_modules/core-js/internals/collection.js ***!
   \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -5323,8 +7243,7 @@ module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
 /*!***********************************************************************!*\
   !*** ./node_modules/core-js/internals/copy-constructor-properties.js ***!
   \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var has = __webpack_require__(/*! ../internals/has */ "./node_modules/core-js/internals/has.js");
 var ownKeys = __webpack_require__(/*! ../internals/own-keys */ "./node_modules/core-js/internals/own-keys.js");
@@ -5348,8 +7267,7 @@ module.exports = function (target, source) {
 /*!********************************************************************!*\
   !*** ./node_modules/core-js/internals/correct-prototype-getter.js ***!
   \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
 
@@ -5366,8 +7284,7 @@ module.exports = !fails(function () {
 /*!***********************************************************************!*\
   !*** ./node_modules/core-js/internals/create-iterator-constructor.js ***!
   \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -5394,8 +7311,7 @@ module.exports = function (IteratorConstructor, NAME, next) {
 /*!**************************************************************************!*\
   !*** ./node_modules/core-js/internals/create-non-enumerable-property.js ***!
   \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
 var definePropertyModule = __webpack_require__(/*! ../internals/object-define-property */ "./node_modules/core-js/internals/object-define-property.js");
@@ -5415,8 +7331,7 @@ module.exports = DESCRIPTORS ? function (object, key, value) {
 /*!**********************************************************************!*\
   !*** ./node_modules/core-js/internals/create-property-descriptor.js ***!
   \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 module.exports = function (bitmap, value) {
   return {
@@ -5434,8 +7349,7 @@ module.exports = function (bitmap, value) {
 /*!***********************************************************!*\
   !*** ./node_modules/core-js/internals/define-iterator.js ***!
   \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -5536,8 +7450,7 @@ module.exports = function (Iterable, NAME, IteratorConstructor, next, DEFAULT, I
 /*!*******************************************************!*\
   !*** ./node_modules/core-js/internals/descriptors.js ***!
   \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
 
@@ -5553,8 +7466,7 @@ module.exports = !fails(function () {
 /*!*******************************************************************!*\
   !*** ./node_modules/core-js/internals/document-create-element.js ***!
   \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
@@ -5574,8 +7486,7 @@ module.exports = function (it) {
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/internals/dom-iterables.js ***!
   \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 // iterable DOM collections
 // flag - `iterable` interface - 'entries', 'keys', 'values', 'forEach' methods
@@ -5620,8 +7531,7 @@ module.exports = {
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/internals/engine-is-node.js ***!
   \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var classof = __webpack_require__(/*! ../internals/classof-raw */ "./node_modules/core-js/internals/classof-raw.js");
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
@@ -5635,8 +7545,7 @@ module.exports = classof(global.process) == 'process';
 /*!*************************************************************!*\
   !*** ./node_modules/core-js/internals/engine-user-agent.js ***!
   \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var getBuiltIn = __webpack_require__(/*! ../internals/get-built-in */ "./node_modules/core-js/internals/get-built-in.js");
 
@@ -5649,8 +7558,7 @@ module.exports = getBuiltIn('navigator', 'userAgent') || '';
 /*!*************************************************************!*\
   !*** ./node_modules/core-js/internals/engine-v8-version.js ***!
   \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 var userAgent = __webpack_require__(/*! ../internals/engine-user-agent */ "./node_modules/core-js/internals/engine-user-agent.js");
@@ -5680,8 +7588,7 @@ module.exports = version && +version;
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/internals/enum-bug-keys.js ***!
   \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 // IE8- don't enum bug keys
 module.exports = [
@@ -5701,8 +7608,7 @@ module.exports = [
 /*!**************************************************!*\
   !*** ./node_modules/core-js/internals/export.js ***!
   \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 var getOwnPropertyDescriptor = __webpack_require__(/*! ../internals/object-get-own-property-descriptor */ "./node_modules/core-js/internals/object-get-own-property-descriptor.js").f;
@@ -5766,8 +7672,7 @@ module.exports = function (options, source) {
 /*!*************************************************!*\
   !*** ./node_modules/core-js/internals/fails.js ***!
   \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 module.exports = function (exec) {
   try {
@@ -5784,8 +7689,7 @@ module.exports = function (exec) {
 /*!******************************************************************************!*\
   !*** ./node_modules/core-js/internals/fix-regexp-well-known-symbol-logic.js ***!
   \******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -5921,8 +7825,7 @@ module.exports = function (KEY, length, exec, sham) {
 /*!****************************************************!*\
   !*** ./node_modules/core-js/internals/freezing.js ***!
   \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
 
@@ -5937,8 +7840,7 @@ module.exports = !fails(function () {
 /*!*****************************************************************!*\
   !*** ./node_modules/core-js/internals/function-bind-context.js ***!
   \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var aFunction = __webpack_require__(/*! ../internals/a-function */ "./node_modules/core-js/internals/a-function.js");
 
@@ -5972,8 +7874,7 @@ module.exports = function (fn, that, length) {
 /*!********************************************************!*\
   !*** ./node_modules/core-js/internals/get-built-in.js ***!
   \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var path = __webpack_require__(/*! ../internals/path */ "./node_modules/core-js/internals/path.js");
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
@@ -5994,8 +7895,7 @@ module.exports = function (namespace, method) {
 /*!***************************************************************!*\
   !*** ./node_modules/core-js/internals/get-iterator-method.js ***!
   \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var classof = __webpack_require__(/*! ../internals/classof */ "./node_modules/core-js/internals/classof.js");
 var Iterators = __webpack_require__(/*! ../internals/iterators */ "./node_modules/core-js/internals/iterators.js");
@@ -6016,8 +7916,7 @@ module.exports = function (it) {
 /*!************************************************************!*\
   !*** ./node_modules/core-js/internals/get-substitution.js ***!
   \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var toObject = __webpack_require__(/*! ../internals/to-object */ "./node_modules/core-js/internals/to-object.js");
 
@@ -6067,10 +7966,9 @@ module.exports = function (matched, str, position, captures, namedCaptures, repl
 /*!**************************************************!*\
   !*** ./node_modules/core-js/internals/global.js ***!
   \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* WEBPACK VAR INJECTION */(function(global) {var check = function (it) {
+var check = function (it) {
   return it && it.Math == Math && it;
 };
 
@@ -6080,11 +7978,10 @@ module.exports =
   check(typeof globalThis == 'object' && globalThis) ||
   check(typeof window == 'object' && window) ||
   check(typeof self == 'object' && self) ||
-  check(typeof global == 'object' && global) ||
+  check(typeof __webpack_require__.g == 'object' && __webpack_require__.g) ||
   // eslint-disable-next-line no-new-func
   (function () { return this; })() || Function('return this')();
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -6092,8 +7989,7 @@ module.exports =
 /*!***********************************************!*\
   !*** ./node_modules/core-js/internals/has.js ***!
   \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 var hasOwnProperty = {}.hasOwnProperty;
 
@@ -6108,8 +8004,7 @@ module.exports = function (it, key) {
 /*!*******************************************************!*\
   !*** ./node_modules/core-js/internals/hidden-keys.js ***!
   \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 module.exports = {};
 
@@ -6120,8 +8015,7 @@ module.exports = {};
 /*!************************************************!*\
   !*** ./node_modules/core-js/internals/html.js ***!
   \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var getBuiltIn = __webpack_require__(/*! ../internals/get-built-in */ "./node_modules/core-js/internals/get-built-in.js");
 
@@ -6134,8 +8028,7 @@ module.exports = getBuiltIn('document', 'documentElement');
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/internals/ie8-dom-define.js ***!
   \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
 var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
@@ -6155,8 +8048,7 @@ module.exports = !DESCRIPTORS && !fails(function () {
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/internals/indexed-object.js ***!
   \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
 var classof = __webpack_require__(/*! ../internals/classof-raw */ "./node_modules/core-js/internals/classof-raw.js");
@@ -6179,8 +8071,7 @@ module.exports = fails(function () {
 /*!***************************************************************!*\
   !*** ./node_modules/core-js/internals/inherit-if-required.js ***!
   \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
 var setPrototypeOf = __webpack_require__(/*! ../internals/object-set-prototype-of */ "./node_modules/core-js/internals/object-set-prototype-of.js");
@@ -6207,8 +8098,7 @@ module.exports = function ($this, dummy, Wrapper) {
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/internals/inspect-source.js ***!
   \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var store = __webpack_require__(/*! ../internals/shared-store */ "./node_modules/core-js/internals/shared-store.js");
 
@@ -6230,8 +8120,7 @@ module.exports = store.inspectSource;
 /*!*************************************************************!*\
   !*** ./node_modules/core-js/internals/internal-metadata.js ***!
   \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var hiddenKeys = __webpack_require__(/*! ../internals/hidden-keys */ "./node_modules/core-js/internals/hidden-keys.js");
 var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
@@ -6302,8 +8191,7 @@ hiddenKeys[METADATA] = true;
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/internals/internal-state.js ***!
   \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var NATIVE_WEAK_MAP = __webpack_require__(/*! ../internals/native-weak-map */ "./node_modules/core-js/internals/native-weak-map.js");
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
@@ -6377,8 +8265,7 @@ module.exports = {
 /*!********************************************************************!*\
   !*** ./node_modules/core-js/internals/is-array-iterator-method.js ***!
   \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "./node_modules/core-js/internals/well-known-symbol.js");
 var Iterators = __webpack_require__(/*! ../internals/iterators */ "./node_modules/core-js/internals/iterators.js");
@@ -6398,8 +8285,7 @@ module.exports = function (it) {
 /*!****************************************************!*\
   !*** ./node_modules/core-js/internals/is-array.js ***!
   \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var classof = __webpack_require__(/*! ../internals/classof-raw */ "./node_modules/core-js/internals/classof-raw.js");
 
@@ -6416,8 +8302,7 @@ module.exports = Array.isArray || function isArray(arg) {
 /*!*****************************************************!*\
   !*** ./node_modules/core-js/internals/is-forced.js ***!
   \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
 
@@ -6448,8 +8333,7 @@ module.exports = isForced;
 /*!*****************************************************!*\
   !*** ./node_modules/core-js/internals/is-object.js ***!
   \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 module.exports = function (it) {
   return typeof it === 'object' ? it !== null : typeof it === 'function';
@@ -6462,8 +8346,7 @@ module.exports = function (it) {
 /*!***************************************************!*\
   !*** ./node_modules/core-js/internals/is-pure.js ***!
   \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 module.exports = false;
 
@@ -6474,8 +8357,7 @@ module.exports = false;
 /*!***************************************************!*\
   !*** ./node_modules/core-js/internals/iterate.js ***!
   \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var anObject = __webpack_require__(/*! ../internals/an-object */ "./node_modules/core-js/internals/an-object.js");
 var isArrayIteratorMethod = __webpack_require__(/*! ../internals/is-array-iterator-method */ "./node_modules/core-js/internals/is-array-iterator-method.js");
@@ -6543,8 +8425,7 @@ module.exports = function (iterable, unboundFunction, options) {
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/internals/iterator-close.js ***!
   \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var anObject = __webpack_require__(/*! ../internals/an-object */ "./node_modules/core-js/internals/an-object.js");
 
@@ -6562,8 +8443,7 @@ module.exports = function (iterator) {
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/internals/iterators-core.js ***!
   \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -6611,8 +8491,7 @@ module.exports = {
 /*!*****************************************************!*\
   !*** ./node_modules/core-js/internals/iterators.js ***!
   \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 module.exports = {};
 
@@ -6623,8 +8502,7 @@ module.exports = {};
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/internals/native-symbol.js ***!
   \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
 
@@ -6641,8 +8519,7 @@ module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
 /*!***********************************************************!*\
   !*** ./node_modules/core-js/internals/native-weak-map.js ***!
   \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 var inspectSource = __webpack_require__(/*! ../internals/inspect-source */ "./node_modules/core-js/internals/inspect-source.js");
@@ -6658,8 +8535,7 @@ module.exports = typeof WeakMap === 'function' && /native code/.test(inspectSour
 /*!************************************************************!*\
   !*** ./node_modules/core-js/internals/number-parse-int.js ***!
   \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 var trim = __webpack_require__(/*! ../internals/string-trim */ "./node_modules/core-js/internals/string-trim.js").trim;
@@ -6683,8 +8559,7 @@ module.exports = FORCED ? function parseInt(string, radix) {
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/internals/object-assign.js ***!
   \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -6747,8 +8622,7 @@ module.exports = !nativeAssign || fails(function () {
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/internals/object-create.js ***!
   \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var anObject = __webpack_require__(/*! ../internals/an-object */ "./node_modules/core-js/internals/an-object.js");
 var defineProperties = __webpack_require__(/*! ../internals/object-define-properties */ "./node_modules/core-js/internals/object-define-properties.js");
@@ -6836,8 +8710,7 @@ module.exports = Object.create || function create(O, Properties) {
 /*!********************************************************************!*\
   !*** ./node_modules/core-js/internals/object-define-properties.js ***!
   \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
 var definePropertyModule = __webpack_require__(/*! ../internals/object-define-property */ "./node_modules/core-js/internals/object-define-property.js");
@@ -6863,8 +8736,7 @@ module.exports = DESCRIPTORS ? Object.defineProperties : function defineProperti
 /*!******************************************************************!*\
   !*** ./node_modules/core-js/internals/object-define-property.js ***!
   \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
 var IE8_DOM_DEFINE = __webpack_require__(/*! ../internals/ie8-dom-define */ "./node_modules/core-js/internals/ie8-dom-define.js");
@@ -6894,8 +8766,7 @@ exports.f = DESCRIPTORS ? nativeDefineProperty : function defineProperty(O, P, A
 /*!******************************************************************************!*\
   !*** ./node_modules/core-js/internals/object-get-own-property-descriptor.js ***!
   \******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
 var propertyIsEnumerableModule = __webpack_require__(/*! ../internals/object-property-is-enumerable */ "./node_modules/core-js/internals/object-property-is-enumerable.js");
@@ -6925,8 +8796,7 @@ exports.f = DESCRIPTORS ? nativeGetOwnPropertyDescriptor : function getOwnProper
 /*!*************************************************************************!*\
   !*** ./node_modules/core-js/internals/object-get-own-property-names.js ***!
   \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 var internalObjectKeys = __webpack_require__(/*! ../internals/object-keys-internal */ "./node_modules/core-js/internals/object-keys-internal.js");
 var enumBugKeys = __webpack_require__(/*! ../internals/enum-bug-keys */ "./node_modules/core-js/internals/enum-bug-keys.js");
@@ -6946,8 +8816,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 /*!***************************************************************************!*\
   !*** ./node_modules/core-js/internals/object-get-own-property-symbols.js ***!
   \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 exports.f = Object.getOwnPropertySymbols;
 
@@ -6958,8 +8827,7 @@ exports.f = Object.getOwnPropertySymbols;
 /*!*******************************************************************!*\
   !*** ./node_modules/core-js/internals/object-get-prototype-of.js ***!
   \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var has = __webpack_require__(/*! ../internals/has */ "./node_modules/core-js/internals/has.js");
 var toObject = __webpack_require__(/*! ../internals/to-object */ "./node_modules/core-js/internals/to-object.js");
@@ -6986,8 +8854,7 @@ module.exports = CORRECT_PROTOTYPE_GETTER ? Object.getPrototypeOf : function (O)
 /*!****************************************************************!*\
   !*** ./node_modules/core-js/internals/object-keys-internal.js ***!
   \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var has = __webpack_require__(/*! ../internals/has */ "./node_modules/core-js/internals/has.js");
 var toIndexedObject = __webpack_require__(/*! ../internals/to-indexed-object */ "./node_modules/core-js/internals/to-indexed-object.js");
@@ -7014,8 +8881,7 @@ module.exports = function (object, names) {
 /*!*******************************************************!*\
   !*** ./node_modules/core-js/internals/object-keys.js ***!
   \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var internalObjectKeys = __webpack_require__(/*! ../internals/object-keys-internal */ "./node_modules/core-js/internals/object-keys-internal.js");
 var enumBugKeys = __webpack_require__(/*! ../internals/enum-bug-keys */ "./node_modules/core-js/internals/enum-bug-keys.js");
@@ -7033,8 +8899,7 @@ module.exports = Object.keys || function keys(O) {
 /*!*************************************************************************!*\
   !*** ./node_modules/core-js/internals/object-property-is-enumerable.js ***!
   \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -7058,8 +8923,7 @@ exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
 /*!*******************************************************************!*\
   !*** ./node_modules/core-js/internals/object-set-prototype-of.js ***!
   \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var anObject = __webpack_require__(/*! ../internals/an-object */ "./node_modules/core-js/internals/an-object.js");
 var aPossiblePrototype = __webpack_require__(/*! ../internals/a-possible-prototype */ "./node_modules/core-js/internals/a-possible-prototype.js");
@@ -7093,8 +8957,7 @@ module.exports = Object.setPrototypeOf || ('__proto__' in {} ? function () {
 /*!************************************************************!*\
   !*** ./node_modules/core-js/internals/object-to-string.js ***!
   \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -7114,8 +8977,7 @@ module.exports = TO_STRING_TAG_SUPPORT ? {}.toString : function toString() {
 /*!****************************************************!*\
   !*** ./node_modules/core-js/internals/own-keys.js ***!
   \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var getBuiltIn = __webpack_require__(/*! ../internals/get-built-in */ "./node_modules/core-js/internals/get-built-in.js");
 var getOwnPropertyNamesModule = __webpack_require__(/*! ../internals/object-get-own-property-names */ "./node_modules/core-js/internals/object-get-own-property-names.js");
@@ -7136,8 +8998,7 @@ module.exports = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
 /*!************************************************!*\
   !*** ./node_modules/core-js/internals/path.js ***!
   \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 
@@ -7150,8 +9011,7 @@ module.exports = global;
 /*!********************************************************!*\
   !*** ./node_modules/core-js/internals/redefine-all.js ***!
   \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var redefine = __webpack_require__(/*! ../internals/redefine */ "./node_modules/core-js/internals/redefine.js");
 
@@ -7167,8 +9027,7 @@ module.exports = function (target, src, options) {
 /*!****************************************************!*\
   !*** ./node_modules/core-js/internals/redefine.js ***!
   \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 var createNonEnumerableProperty = __webpack_require__(/*! ../internals/create-non-enumerable-property */ "./node_modules/core-js/internals/create-non-enumerable-property.js");
@@ -7218,8 +9077,7 @@ var TEMPLATE = String(String).split('String');
 /*!****************************************************************!*\
   !*** ./node_modules/core-js/internals/regexp-exec-abstract.js ***!
   \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var classof = __webpack_require__(/*! ./classof-raw */ "./node_modules/core-js/internals/classof-raw.js");
 var regexpExec = __webpack_require__(/*! ./regexp-exec */ "./node_modules/core-js/internals/regexp-exec.js");
@@ -7251,8 +9109,7 @@ module.exports = function (R, S) {
 /*!*******************************************************!*\
   !*** ./node_modules/core-js/internals/regexp-exec.js ***!
   \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -7350,8 +9207,7 @@ module.exports = patchedExec;
 /*!********************************************************!*\
   !*** ./node_modules/core-js/internals/regexp-flags.js ***!
   \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -7378,8 +9234,7 @@ module.exports = function () {
 /*!*****************************************************************!*\
   !*** ./node_modules/core-js/internals/regexp-sticky-helpers.js ***!
   \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -7413,8 +9268,7 @@ exports.BROKEN_CARET = fails(function () {
 /*!********************************************************************!*\
   !*** ./node_modules/core-js/internals/require-object-coercible.js ***!
   \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 // `RequireObjectCoercible` abstract operation
 // https://tc39.es/ecma262/#sec-requireobjectcoercible
@@ -7430,8 +9284,7 @@ module.exports = function (it) {
 /*!******************************************************!*\
   !*** ./node_modules/core-js/internals/set-global.js ***!
   \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 var createNonEnumerableProperty = __webpack_require__(/*! ../internals/create-non-enumerable-property */ "./node_modules/core-js/internals/create-non-enumerable-property.js");
@@ -7451,8 +9304,7 @@ module.exports = function (key, value) {
 /*!*************************************************************!*\
   !*** ./node_modules/core-js/internals/set-to-string-tag.js ***!
   \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var defineProperty = __webpack_require__(/*! ../internals/object-define-property */ "./node_modules/core-js/internals/object-define-property.js").f;
 var has = __webpack_require__(/*! ../internals/has */ "./node_modules/core-js/internals/has.js");
@@ -7473,8 +9325,7 @@ module.exports = function (it, TAG, STATIC) {
 /*!******************************************************!*\
   !*** ./node_modules/core-js/internals/shared-key.js ***!
   \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var shared = __webpack_require__(/*! ../internals/shared */ "./node_modules/core-js/internals/shared.js");
 var uid = __webpack_require__(/*! ../internals/uid */ "./node_modules/core-js/internals/uid.js");
@@ -7492,8 +9343,7 @@ module.exports = function (key) {
 /*!********************************************************!*\
   !*** ./node_modules/core-js/internals/shared-store.js ***!
   \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 var setGlobal = __webpack_require__(/*! ../internals/set-global */ "./node_modules/core-js/internals/set-global.js");
@@ -7510,8 +9360,7 @@ module.exports = store;
 /*!**************************************************!*\
   !*** ./node_modules/core-js/internals/shared.js ***!
   \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var IS_PURE = __webpack_require__(/*! ../internals/is-pure */ "./node_modules/core-js/internals/is-pure.js");
 var store = __webpack_require__(/*! ../internals/shared-store */ "./node_modules/core-js/internals/shared-store.js");
@@ -7531,8 +9380,7 @@ var store = __webpack_require__(/*! ../internals/shared-store */ "./node_modules
 /*!************************************************************!*\
   !*** ./node_modules/core-js/internals/string-multibyte.js ***!
   \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var toInteger = __webpack_require__(/*! ../internals/to-integer */ "./node_modules/core-js/internals/to-integer.js");
 var requireObjectCoercible = __webpack_require__(/*! ../internals/require-object-coercible */ "./node_modules/core-js/internals/require-object-coercible.js");
@@ -7569,8 +9417,7 @@ module.exports = {
 /*!*******************************************************!*\
   !*** ./node_modules/core-js/internals/string-trim.js ***!
   \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var requireObjectCoercible = __webpack_require__(/*! ../internals/require-object-coercible */ "./node_modules/core-js/internals/require-object-coercible.js");
 var whitespaces = __webpack_require__(/*! ../internals/whitespaces */ "./node_modules/core-js/internals/whitespaces.js");
@@ -7608,8 +9455,7 @@ module.exports = {
 /*!*************************************************************!*\
   !*** ./node_modules/core-js/internals/to-absolute-index.js ***!
   \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var toInteger = __webpack_require__(/*! ../internals/to-integer */ "./node_modules/core-js/internals/to-integer.js");
 
@@ -7631,8 +9477,7 @@ module.exports = function (index, length) {
 /*!*************************************************************!*\
   !*** ./node_modules/core-js/internals/to-indexed-object.js ***!
   \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 // toObject with fallback for non-array-like ES3 strings
 var IndexedObject = __webpack_require__(/*! ../internals/indexed-object */ "./node_modules/core-js/internals/indexed-object.js");
@@ -7649,8 +9494,7 @@ module.exports = function (it) {
 /*!******************************************************!*\
   !*** ./node_modules/core-js/internals/to-integer.js ***!
   \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 var ceil = Math.ceil;
 var floor = Math.floor;
@@ -7668,8 +9512,7 @@ module.exports = function (argument) {
 /*!*****************************************************!*\
   !*** ./node_modules/core-js/internals/to-length.js ***!
   \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var toInteger = __webpack_require__(/*! ../internals/to-integer */ "./node_modules/core-js/internals/to-integer.js");
 
@@ -7688,8 +9531,7 @@ module.exports = function (argument) {
 /*!*****************************************************!*\
   !*** ./node_modules/core-js/internals/to-object.js ***!
   \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var requireObjectCoercible = __webpack_require__(/*! ../internals/require-object-coercible */ "./node_modules/core-js/internals/require-object-coercible.js");
 
@@ -7706,8 +9548,7 @@ module.exports = function (argument) {
 /*!********************************************************!*\
   !*** ./node_modules/core-js/internals/to-primitive.js ***!
   \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
 
@@ -7731,8 +9572,7 @@ module.exports = function (input, PREFERRED_STRING) {
 /*!*****************************************************************!*\
   !*** ./node_modules/core-js/internals/to-string-tag-support.js ***!
   \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "./node_modules/core-js/internals/well-known-symbol.js");
 
@@ -7750,8 +9590,7 @@ module.exports = String(test) === '[object z]';
 /*!***********************************************!*\
   !*** ./node_modules/core-js/internals/uid.js ***!
   \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 var id = 0;
 var postfix = Math.random();
@@ -7767,8 +9606,7 @@ module.exports = function (key) {
 /*!*************************************************************!*\
   !*** ./node_modules/core-js/internals/use-symbol-as-uid.js ***!
   \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var NATIVE_SYMBOL = __webpack_require__(/*! ../internals/native-symbol */ "./node_modules/core-js/internals/native-symbol.js");
 
@@ -7785,8 +9623,7 @@ module.exports = NATIVE_SYMBOL
 /*!*************************************************************!*\
   !*** ./node_modules/core-js/internals/well-known-symbol.js ***!
   \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 var shared = __webpack_require__(/*! ../internals/shared */ "./node_modules/core-js/internals/shared.js");
@@ -7813,8 +9650,7 @@ module.exports = function (name) {
 /*!*******************************************************!*\
   !*** ./node_modules/core-js/internals/whitespaces.js ***!
   \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ ((module) => {
 
 // a string of all valid unicode whitespaces
 // eslint-disable-next-line max-len
@@ -7827,8 +9663,7 @@ module.exports = '\u0009\u000A\u000B\u000C\u000D\u0020\u00A0\u1680\u2000\u2001\u
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/modules/es.array.filter.js ***!
   \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -7857,8 +9692,7 @@ $({ target: 'Array', proto: true, forced: !HAS_SPECIES_SUPPORT || !USES_TO_LENGT
 /*!***********************************************************!*\
   !*** ./node_modules/core-js/modules/es.array.for-each.js ***!
   \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -7878,8 +9712,7 @@ $({ target: 'Array', proto: true, forced: [].forEach != forEach }, {
 /*!***********************************************************!*\
   !*** ./node_modules/core-js/modules/es.array.iterator.js ***!
   \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -7943,8 +9776,7 @@ addToUnscopables('entries');
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/modules/es.array.reduce.js ***!
   \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -7976,8 +9808,7 @@ $({ target: 'Array', proto: true, forced: !STRICT_METHOD || !USES_TO_LENGTH || C
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/modules/es.function.name.js ***!
   \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
 var defineProperty = __webpack_require__(/*! ../internals/object-define-property */ "./node_modules/core-js/internals/object-define-property.js").f;
@@ -8009,8 +9840,7 @@ if (DESCRIPTORS && !(NAME in FunctionPrototype)) {
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/modules/es.object.assign.js ***!
   \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
 var assign = __webpack_require__(/*! ../internals/object-assign */ "./node_modules/core-js/internals/object-assign.js");
@@ -8028,8 +9858,7 @@ $({ target: 'Object', stat: true, forced: Object.assign !== assign }, {
 /*!*************************************************************!*\
   !*** ./node_modules/core-js/modules/es.object.to-string.js ***!
   \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 var TO_STRING_TAG_SUPPORT = __webpack_require__(/*! ../internals/to-string-tag-support */ "./node_modules/core-js/internals/to-string-tag-support.js");
 var redefine = __webpack_require__(/*! ../internals/redefine */ "./node_modules/core-js/internals/redefine.js");
@@ -8048,8 +9877,7 @@ if (!TO_STRING_TAG_SUPPORT) {
 /*!******************************************************!*\
   !*** ./node_modules/core-js/modules/es.parse-int.js ***!
   \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
 var parseIntImplementation = __webpack_require__(/*! ../internals/number-parse-int */ "./node_modules/core-js/internals/number-parse-int.js");
@@ -8067,8 +9895,7 @@ $({ global: true, forced: parseInt != parseIntImplementation }, {
 /*!********************************************************!*\
   !*** ./node_modules/core-js/modules/es.regexp.exec.js ***!
   \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -8088,8 +9915,7 @@ $({ target: 'RegExp', proto: true, forced: /./.exec !== exec }, {
 /*!************************************************************!*\
   !*** ./node_modules/core-js/modules/es.string.iterator.js ***!
   \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -8129,8 +9955,7 @@ defineIterator(String, 'String', function (iterated) {
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/modules/es.string.match.js ***!
   \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -8185,8 +10010,7 @@ fixRegExpWellKnownSymbolLogic('match', 1, function (MATCH, nativeMatch, maybeCal
 /*!***********************************************************!*\
   !*** ./node_modules/core-js/modules/es.string.replace.js ***!
   \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -8295,8 +10119,7 @@ fixRegExpWellKnownSymbolLogic('replace', 2, function (REPLACE, nativeReplace, ma
 /*!*****************************************************!*\
   !*** ./node_modules/core-js/modules/es.weak-map.js ***!
   \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -8374,8 +10197,7 @@ if (NATIVE_WEAK_MAP && IS_IE11) {
 /*!**********************************************************************!*\
   !*** ./node_modules/core-js/modules/web.dom-collections.for-each.js ***!
   \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 var DOMIterables = __webpack_require__(/*! ../internals/dom-iterables */ "./node_modules/core-js/internals/dom-iterables.js");
@@ -8400,8 +10222,7 @@ for (var COLLECTION_NAME in DOMIterables) {
 /*!**********************************************************************!*\
   !*** ./node_modules/core-js/modules/web.dom-collections.iterator.js ***!
   \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
 var DOMIterables = __webpack_require__(/*! ../internals/dom-iterables */ "./node_modules/core-js/internals/dom-iterables.js");
@@ -8444,8 +10265,7 @@ for (var COLLECTION_NAME in DOMIterables) {
 /*!**************************************************************!*\
   !*** ./node_modules/jquery-scroll-lock/jquery-scrollLock.js ***!
   \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, exports, __webpack_require__) => {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Scroll Lock v3.1.3
@@ -8458,9 +10278,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   if (true) {
     // AMD. Register as an anonymous module.
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
   } else {}
 }(function ($) {
   'use strict'
@@ -8651,7 +10471,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*!*****************************************************!*\
   !*** ./node_modules/jquery.appear/jquery.appear.js ***!
   \*****************************************************/
-/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -8667,9 +10486,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 (function (root, factory) {
     if (true) {
         !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
     } else {}
 }(this, function ($) {
     $.fn.appear = function(fn, options) {
@@ -8819,8 +10638,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
   \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * jQuery JavaScript Library v3.5.1
@@ -19657,7 +21475,7 @@ if ( true ) {
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
 		return jQuery;
 	}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 }
 
 
@@ -19703,8 +21521,7 @@ return jQuery;
 /*!*************************************************!*\
   !*** ./node_modules/js-cookie/src/js.cookie.js ***!
   \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, exports, __webpack_require__) => {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * JavaScript Cookie v2.2.1
@@ -19717,10 +21534,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	var registeredInModuleLoader;
 	if (true) {
 		!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+		__WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		registeredInModuleLoader = true;
 	}
 	if (true) {
@@ -19881,10 +21698,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /*!***********************************************!*\
   !*** ./node_modules/lodash.debounce/index.js ***!
   \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* WEBPACK VAR INJECTION */(function(global) {/**
+/**
  * lodash (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
  * Copyright jQuery Foundation and other contributors <https://jquery.org/>
@@ -19918,7 +21734,7 @@ var reIsOctal = /^0o[0-7]+$/i;
 var freeParseInt = parseInt;
 
 /** Detect free variable `global` from Node.js. */
-var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+var freeGlobal = typeof __webpack_require__.g == 'object' && __webpack_require__.g && __webpack_require__.g.Object === Object && __webpack_require__.g;
 
 /** Detect free variable `self`. */
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -20262,7 +22078,6 @@ function toNumber(value) {
 
 module.exports = debounce;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -20270,10 +22085,9 @@ module.exports = debounce;
 /*!**********************************************!*\
   !*** ./node_modules/lodash.memoize/index.js ***!
   \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* WEBPACK VAR INJECTION */(function(global) {/**
+/**
  * lodash (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
  * Copyright jQuery Foundation and other contributors <https://jquery.org/>
@@ -20302,7 +22116,7 @@ var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
 var reIsHostCtor = /^\[object .+?Constructor\]$/;
 
 /** Detect free variable `global` from Node.js. */
-var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+var freeGlobal = typeof __webpack_require__.g == 'object' && __webpack_require__.g && __webpack_require__.g.Object === Object && __webpack_require__.g;
 
 /** Detect free variable `self`. */
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -20950,7 +22764,6 @@ function isObject(value) {
 
 module.exports = memoize;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -20958,10 +22771,9 @@ module.exports = memoize;
 /*!***********************************************!*\
   !*** ./node_modules/lodash.throttle/index.js ***!
   \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* WEBPACK VAR INJECTION */(function(global) {/**
+/**
  * lodash (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
  * Copyright jQuery Foundation and other contributors <https://jquery.org/>
@@ -20995,7 +22807,7 @@ var reIsOctal = /^0o[0-7]+$/i;
 var freeParseInt = parseInt;
 
 /** Detect free variable `global` from Node.js. */
-var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+var freeGlobal = typeof __webpack_require__.g == 'object' && __webpack_require__.g && __webpack_require__.g.Object === Object && __webpack_require__.g;
 
 /** Detect free variable `self`. */
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -21401,7 +23213,6 @@ function toNumber(value) {
 
 module.exports = throttle;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -21409,12 +23220,14 @@ module.exports = throttle;
 /*!***************************************************!*\
   !*** ./node_modules/popper.js/dist/esm/popper.js ***!
   \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global) {/**!
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
  * @version 1.16.1
  * @license
@@ -24024,14 +25837,13 @@ var Popper = function () {
  */
 
 
-Popper.Utils = (typeof window !== 'undefined' ? window : global).PopperUtils;
+Popper.Utils = (typeof window !== 'undefined' ? window : __webpack_require__.g).PopperUtils;
 Popper.placements = placements;
 Popper.Defaults = Defaults;
 
-/* harmony default export */ __webpack_exports__["default"] = (Popper);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -24039,12 +25851,14 @@ Popper.Defaults = Defaults;
 /*!*************************************************************************!*\
   !*** ./node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js ***!
   \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global) {/**
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
  * A collection of shims that provide minimal functionality of the ES6 collections.
  *
  * These implementations are not meant to be used outside of the ResizeObserver
@@ -24157,8 +25971,8 @@ var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined'
 
 // Returns global object of a current environment.
 var global$1 = (function () {
-    if (typeof global !== 'undefined' && global.Math === Math) {
-        return global;
+    if (typeof __webpack_require__.g !== 'undefined' && __webpack_require__.g.Math === Math) {
+        return __webpack_require__.g;
     }
     if (typeof self !== 'undefined' && self.Math === Math) {
         return self;
@@ -24971,9 +26785,8 @@ var index = (function () {
     return ResizeObserver;
 })();
 
-/* harmony default export */ __webpack_exports__["default"] = (index);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (index);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -24981,11 +26794,13 @@ var index = (function () {
 /*!******************************************************!*\
   !*** ./node_modules/simplebar/dist/simplebar.esm.js ***!
   \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
@@ -25058,7 +26873,7 @@ __webpack_require__.r(__webpack_exports__);
 var cachedScrollbarWidth = null;
 var cachedDevicePixelRatio = null;
 
-if (can_use_dom__WEBPACK_IMPORTED_MODULE_2___default.a) {
+if ((can_use_dom__WEBPACK_IMPORTED_MODULE_2___default())) {
   window.addEventListener('resize', function () {
     if (cachedDevicePixelRatio !== window.devicePixelRatio) {
       cachedDevicePixelRatio = window.devicePixelRatio;
@@ -25427,7 +27242,7 @@ function () {
     // Save a reference to the instance, so we know this DOM node has already been instancied
     SimpleBar.instances.set(this.el, this); // We stop here on server-side
 
-    if (can_use_dom__WEBPACK_IMPORTED_MODULE_2___default.a) {
+    if ((can_use_dom__WEBPACK_IMPORTED_MODULE_2___default())) {
       this.initDOM();
       this.scrollbarWidth = this.getScrollbarWidth();
       this.recalculate();
@@ -26011,57 +27826,107 @@ SimpleBar.getOptions = getOptions;
  * Called only in a browser env.
  */
 
-if (can_use_dom__WEBPACK_IMPORTED_MODULE_2___default.a) {
+if ((can_use_dom__WEBPACK_IMPORTED_MODULE_2___default())) {
   SimpleBar.initHtmlApi();
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (SimpleBar);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SimpleBar);
 //# sourceMappingURL=simplebar.esm.js.map
 
 
-/***/ }),
+/***/ })
 
-/***/ "./node_modules/webpack/buildin/global.js":
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ "./resources/js/oneui/app.js":
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
 /*!***********************************!*\
   !*** ./resources/js/oneui/app.js ***!
   \***********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return App; });
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ App)
+/* harmony export */ });
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/oneui/bootstrap.js");
 /* harmony import */ var _modules_template__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/template */ "./resources/js/oneui/modules/template.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -26074,11 +27939,11 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -26155,2044 +28020,7 @@ jQuery(function () {
   // Create a new instance of App
   window.One = new App();
 });
+})();
 
-/***/ }),
-
-/***/ "./resources/js/oneui/bootstrap.js":
-/*!*****************************************!*\
-  !*** ./resources/js/oneui/bootstrap.js ***!
-  \*****************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var simplebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! simplebar */ "./node_modules/simplebar/dist/simplebar.esm.js");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var popper_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js");
-/* harmony import */ var jquery_appear__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery.appear */ "./node_modules/jquery.appear/jquery.appear.js");
-/* harmony import */ var jquery_appear__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery_appear__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var jquery_scroll_lock__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery-scroll-lock */ "./node_modules/jquery-scroll-lock/jquery-scrollLock.js");
-/* harmony import */ var jquery_scroll_lock__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery_scroll_lock__WEBPACK_IMPORTED_MODULE_6__);
-/*
- *  Document   : bootstrap.js
- *  Author     : pixelcave
- *  Description: Import global dependencies
- *
- */
-
-/*
- ********************************************************************************************
- *
- * If you would like to use webpack to handle all required core JS files, you can uncomment
- * the following imports and window assignments to have them included in the compiled
- * oneui.app.min.js as well.
- *
- * After that change, you won't have to include oneui.core.min.js in your pages any more
- *
- *********************************************************************************************
- */
-// Import all vital core JS files..
-
-
-
-
-
-
- // ..and assign to window the ones that need it
-
-window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default.a;
-window.SimpleBar = simplebar__WEBPACK_IMPORTED_MODULE_1__["default"];
-window.Cookies = js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a;
-
-/***/ }),
-
-/***/ "./resources/js/oneui/modules/helpers.js":
-/*!***********************************************!*\
-  !*** ./resources/js/oneui/modules/helpers.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Helpers; });
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./resources/js/oneui/modules/tools.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-/*
- *  Document   : helpers.js
- *  Author     : pixelcave
- *  Description: Various jQuery plugins inits as well as custom helpers
- *
- */
-// Import required modules
- // Helper variables
-
-var sparklineResize = false;
-var sparklineTimeout; // Helpers
-
-var Helpers = /*#__PURE__*/function () {
-  function Helpers() {
-    _classCallCheck(this, Helpers);
-  }
-
-  _createClass(Helpers, null, [{
-    key: "run",
-
-    /*
-     * Run helpers
-     *
-     */
-    value: function run(helpers) {
-      var _this = this;
-
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var helperList = {
-        'core-bootstrap-tooltip': function coreBootstrapTooltip() {
-          return _this.coreBootstrapTooltip();
-        },
-        'core-bootstrap-popover': function coreBootstrapPopover() {
-          return _this.coreBootstrapPopover();
-        },
-        'core-bootstrap-tabs': function coreBootstrapTabs() {
-          return _this.coreBootstrapTabs();
-        },
-        'core-bootstrap-custom-file-input': function coreBootstrapCustomFileInput() {
-          return _this.coreBootstrapCustomFileInput();
-        },
-        'core-toggle-class': function coreToggleClass() {
-          return _this.coreToggleClass();
-        },
-        'core-scroll-to': function coreScrollTo() {
-          return _this.coreScrollTo();
-        },
-        'core-year-copy': function coreYearCopy() {
-          return _this.coreYearCopy();
-        },
-        'core-appear': function coreAppear() {
-          return _this.coreAppear();
-        },
-        'core-ripple': function coreRipple() {
-          return _this.coreRipple();
-        },
-        print: function print() {
-          return _this.print();
-        },
-        'table-tools-sections': function tableToolsSections() {
-          return _this.tableToolsSections();
-        },
-        'table-tools-checkable': function tableToolsCheckable() {
-          return _this.tableToolsCheckable();
-        },
-        'magnific-popup': function magnificPopup() {
-          return _this.magnific();
-        },
-        summernote: function summernote() {
-          return _this.summernote();
-        },
-        ckeditor: function ckeditor() {
-          return _this.ckeditor();
-        },
-        ckeditor5: function ckeditor5() {
-          return _this.ckeditor5();
-        },
-        simplemde: function simplemde() {
-          return _this.simpleMDE();
-        },
-        slick: function slick() {
-          return _this.slick();
-        },
-        datepicker: function datepicker() {
-          return _this.datepicker();
-        },
-        colorpicker: function colorpicker() {
-          return _this.colorpicker();
-        },
-        'masked-inputs': function maskedInputs() {
-          return _this.maskedInputs();
-        },
-        select2: function select2() {
-          return _this.select2();
-        },
-        highlightjs: function highlightjs() {
-          return _this.highlightjs();
-        },
-        notify: function notify(options) {
-          return _this.notify(options);
-        },
-        'easy-pie-chart': function easyPieChart() {
-          return _this.easyPieChart();
-        },
-        maxlength: function maxlength() {
-          return _this.maxlength();
-        },
-        rangeslider: function rangeslider() {
-          return _this.rangeslider();
-        },
-        sparkline: function sparkline() {
-          return _this.sparkline();
-        },
-        validation: function validation() {
-          return _this.validation();
-        },
-        flatpickr: function flatpickr() {
-          return _this.flatpickr();
-        }
-      };
-
-      if (helpers instanceof Array) {
-        for (var index in helpers) {
-          if (helperList[helpers[index]]) {
-            helperList[helpers[index]](options);
-          }
-        }
-      } else {
-        if (helperList[helpers]) {
-          helperList[helpers](options);
-        }
-      }
-    }
-    /*
-     ********************************************************************************************
-     *
-     * CORE HELPERS
-     *
-     * Third party plugin inits or various custom user interface helpers to extend functionality
-     * They are called by default and can be used right away
-     *
-     *********************************************************************************************
-     */
-
-    /*
-     * Bootstrap Tooltip, for more examples you can check out https://getbootstrap.com/docs/4.5/components/tooltips/
-     *
-     * Helpers.run('core-bootstrap-tooltip');
-     *
-     * Example usage:
-     *
-     * <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Tooltip Text">Example</button> or
-     * <button type="button" class="btn btn-primary js-tooltip" title="Tooltip Text">Example</button>
-     *
-     */
-
-  }, {
-    key: "coreBootstrapTooltip",
-    value: function coreBootstrapTooltip() {
-      jQuery('[data-toggle="tooltip"]:not(.js-tooltip-enabled)').add('.js-tooltip:not(.js-tooltip-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-tooltip-enabled class to tag it as activated and init it
-
-        el.addClass('js-tooltip-enabled').tooltip({
-          container: el.data('container') || 'body',
-          animation: el.data('animation') || false
-        });
-      });
-    }
-    /*
-     * Bootstrap Popover, for more examples you can check out https://getbootstrap.com/docs/4.5/components/popovers/
-     *
-     * Helpers.run('core-bootstrap-popover');
-     *
-     * Example usage:
-     *
-     * <button type="button" class="btn btn-primary" data-toggle="popover" title="Popover Title" data-content="This is the content of the Popover">Example</button> or
-     * <button type="button" class="btn btn-primary js-popover" title="Popover Title" data-content="This is the content of the Popover">Example</button>
-     *
-     */
-
-  }, {
-    key: "coreBootstrapPopover",
-    value: function coreBootstrapPopover() {
-      jQuery('[data-toggle="popover"]:not(.js-popover-enabled)').add('.js-popover:not(.js-popover-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-popover-enabled class to tag it as activated and init it
-
-        el.addClass('js-popover-enabled').popover({
-          container: el.data('container') || 'body',
-          animation: el.data('animation') || false,
-          trigger: el.data('trigger') || 'hover focus'
-        });
-      });
-    }
-    /*
-     * Bootstrap Tab, for examples you can check out http://getbootstrap.com/docs/4.2/components/navs/#tabs
-     *
-     * Helpers.run('core-bootstrap-tabs');
-     *
-     * Example usage:
-     *
-     * Please check out the Tabs page for complete markup examples
-     *
-     */
-
-  }, {
-    key: "coreBootstrapTabs",
-    value: function coreBootstrapTabs() {
-      jQuery('[data-toggle="tabs"]:not(.js-tabs-enabled)').add('.js-tabs:not(.js-tabs-enabled)').each(function (index, element) {
-        // Add .js-tabs-enabled class to tag it as activated and init it
-        jQuery(element).addClass('js-tabs-enabled').find('a').on('click.pixelcave.helpers.core', function (e) {
-          e.preventDefault();
-          jQuery(e.currentTarget).tab('show');
-        });
-      });
-    }
-    /*
-     * Bootstrap Custom File Input Filename
-     *
-     * Helpers.run('core-bootstrap-custom-file-input');
-     *
-     * Example usage:
-     *
-     * Please check out the Tabs page for complete markup examples
-     *
-     */
-
-  }, {
-    key: "coreBootstrapCustomFileInput",
-    value: function coreBootstrapCustomFileInput() {
-      // Populate custom Bootstrap file inputs with selected filename
-      jQuery('[data-toggle="custom-file-input"]:not(.js-custom-file-input-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-custom-file-input-enabled class to tag it as activated
-
-        el.addClass('js-custom-file-input-enabled').on('change', function (e) {
-          var fileName = e.target.files.length > 1 ? e.target.files.length + ' ' + (el.data('lang-files') || 'Files') : e.target.files[0].name;
-          el.next('.custom-file-label').css('overflow-x', 'hidden').html(fileName);
-        });
-      });
-    }
-    /*
-     * Toggle class on element click
-     *
-     * Helpers.run('core-toggle-class');
-     *
-     * Example usage (on button click, "exampleClass" class is toggled on the element with id "elementID"):
-     *
-     * <button type="button" class="btn btn-primary" data-toggle="class-toggle" data-target="#elementID" data-class="exampleClass">Toggle</button>
-     *
-     * or
-     *
-     * <button type="button" class="btn btn-primary js-class-toggle" data-target="#elementID" data-class="exampleClass">Toggle</button>
-     *
-     */
-
-  }, {
-    key: "coreToggleClass",
-    value: function coreToggleClass() {
-      jQuery('[data-toggle="class-toggle"]:not(.js-class-toggle-enabled)').add('.js-class-toggle:not(.js-class-toggle-enabled)').on('click.pixelcave.helpers.core', function (e) {
-        var el = jQuery(e.currentTarget); // Add .js-class-toggle-enabled class to tag it as activated and then blur it
-
-        el.addClass('js-class-toggle-enabled').trigger('blur'); // Toggle class
-
-        jQuery(el.data('target').toString()).toggleClass(el.data('class').toString());
-      });
-    }
-    /*
-     * Scroll to element with animation
-     *
-     * Helpers.run('core-scroll-to');
-     *
-     * Example usage (on click, the page will scroll to element with id "elementID" in "500" ms):
-     *
-     * <a href="#elementID" data-toggle="scroll-to" data-speed="500">Go</a> or
-     * <button type="button" class="btn btn-primary" data-toggle="scroll-to" data-speed="500" data-target="#elementID">Go</button>
-     *
-     */
-
-  }, {
-    key: "coreScrollTo",
-    value: function coreScrollTo() {
-      jQuery('[data-toggle="scroll-to"]:not(.js-scroll-to-enabled)').on('click.pixelcave.helpers.core', function (e) {
-        e.stopPropagation(); // Set variables
-
-        var lHeader = jQuery('#page-header');
-        var el = jQuery(e.currentTarget);
-        var elTarget = el.data('target') || el.attr('href');
-        var elSpeed = el.data('speed') || 1000;
-        var headerHeight = lHeader.length && jQuery('#page-container').hasClass('page-header-fixed') ? lHeader.outerHeight() : 0; // Add .js-scroll-to-enabled class to tag it as activated
-
-        el.addClass('js-scroll-to-enabled'); // Scroll to element
-
-        jQuery('html, body').animate({
-          scrollTop: jQuery(elTarget).offset().top - headerHeight
-        }, elSpeed);
-      });
-    }
-    /*
-     * Add the correct copyright year to an element
-     *
-     * Helpers.run('core-year-copy');
-     *
-     * Example usage (it will get populated with current year if empty or will append it to specified year if needed):
-     *
-     * <span data-toggle="year-copy"></span> or
-     * <span data-toggle="year-copy">2018</span>
-     *
-     */
-
-  }, {
-    key: "coreYearCopy",
-    value: function coreYearCopy() {
-      var el = jQuery('[data-toggle="year-copy"]:not(.js-year-copy-enabled)');
-
-      if (el.length > 0) {
-        var date = new Date();
-        var curYear = date.getFullYear();
-        var baseYear = el.html().length > 0 ? el.html() : curYear; // Add .js-scroll-to-enabled class to tag it as activated and set the correct year
-
-        el.addClass('js-year-copy-enabled').html(parseInt(baseYear) >= curYear ? curYear : baseYear + '-' + curYear.toString().substr(2, 2));
-      }
-    }
-    /*
-     * jQuery Appear, for more examples you can check out https://github.com/bas2k/jquery.appear
-     *
-     * Helpers.run('core-appear');
-     *
-     * Example usage (the following div will appear on scrolling, remember to add the invisible class):
-     *
-     * <div class="invisible" data-toggle="appear">...</div>
-     *
-     */
-
-  }, {
-    key: "coreAppear",
-    value: function coreAppear() {
-      // Add a specific class on elements (when they become visible on scrolling)
-      jQuery('[data-toggle="appear"]:not(.js-appear-enabled)').each(function (index, element) {
-        var windowW = _tools__WEBPACK_IMPORTED_MODULE_0__["default"].getWidth();
-        var el = jQuery(element);
-        var elCssClass = el.data('class') || 'animated fadeIn';
-        var elOffset = el.data('offset') || 0;
-        var elTimeout = windowW < 992 ? 0 : el.data('timeout') ? el.data('timeout') : 0; // Add .js-appear-enabled class to tag it as activated and init it
-
-        el.addClass('js-appear-enabled').appear(function () {
-          setTimeout(function () {
-            el.removeClass('invisible').addClass(elCssClass);
-          }, elTimeout);
-        }, {
-          accY: elOffset
-        });
-      });
-    }
-    /*
-     * Ripple effect fuctionality
-     *
-     * Helpers.run('core-ripple');
-     *
-     * Example usage:
-     *
-     * <button type="button" class="btn btn-primary" data-toggle="click-ripple">Click Me!</button>
-     *
-     */
-
-  }, {
-    key: "coreRipple",
-    value: function coreRipple() {
-      jQuery('[data-toggle="click-ripple"]:not(.js-click-ripple-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-click-ripple-enabled class to tag it as activated and init it
-
-        el.addClass('js-click-ripple-enabled').css({
-          overflow: 'hidden',
-          position: 'relative',
-          'z-index': 1
-        }).on('click.pixelcave.helpers.core', function (e) {
-          var cssClass = 'click-ripple',
-              ripple,
-              d,
-              x,
-              y; // If the ripple element doesn't exist in this element, add it..
-
-          if (el.children('.' + cssClass).length === 0) {
-            el.prepend('<span class="' + cssClass + '"></span>');
-          } else {
-            // ..else remove .animate class from ripple element
-            el.children('.' + cssClass).removeClass('animate');
-          } // Get the ripple element
-
-
-          ripple = el.children('.' + cssClass); // If the ripple element doesn't have dimensions, set them accordingly
-
-          if (!ripple.height() && !ripple.width()) {
-            d = Math.max(el.outerWidth(), el.outerHeight());
-            ripple.css({
-              height: d,
-              width: d
-            });
-          } // Get coordinates for our ripple element
-
-
-          x = e.pageX - el.offset().left - ripple.width() / 2;
-          y = e.pageY - el.offset().top - ripple.height() / 2; // Position the ripple element and add the class .animate to it
-
-          ripple.css({
-            top: y + 'px',
-            left: x + 'px'
-          }).addClass('animate');
-        });
-      });
-    }
-    /*
-     ********************************************************************************************
-     *
-     * UI HELPERS (ON DEMAND)
-     *
-     * Third party plugin inits or various custom user interface helpers to extend functionality
-     * They need to be called in a page to be initialized. They are included to be easy to
-     * init them on demand on multiple pages (usually repeated init code in common components)
-     *
-     ********************************************************************************************
-     */
-
-    /*
-     * Print Page functionality
-     *
-     * Helpers.run('print');
-     *
-     */
-
-  }, {
-    key: "print",
-    value: function print() {
-      // Store all #page-container classes
-      var lPage = jQuery('#page-container');
-      var pageCls = lPage.prop('class'); // Remove all classes from #page-container
-
-      lPage.prop('class', ''); // Print the page
-
-      window.print(); // Restore all #page-container classes
-
-      lPage.prop('class', pageCls);
-    }
-    /*
-     * Table sections functionality
-     *
-     * Helpers.run('table-tools-sections');
-     *
-     * Example usage:
-     *
-     * Please check out the Table Helpers page for complete markup examples
-     *
-     */
-
-  }, {
-    key: "tableToolsSections",
-    value: function tableToolsSections() {
-      // For each table
-      jQuery('.js-table-sections:not(.js-table-sections-enabled)').each(function (index, element) {
-        var table = jQuery(element); // Add .js-table-sections-enabled class to tag it as activated
-
-        table.addClass('js-table-sections-enabled'); // When a row is clicked in tbody.js-table-sections-header
-
-        jQuery('.js-table-sections-header > tr', table).on('click.pixelcave.helpers', function (e) {
-          if (e.target.type !== 'checkbox' && e.target.type !== 'button' && e.target.tagName.toLowerCase() !== 'a' && !jQuery(e.target).parent('a').length && !jQuery(e.target).parent('button').length && !jQuery(e.target).parent('.custom-control').length && !jQuery(e.target).parent('label').length) {
-            var row = jQuery(e.currentTarget);
-            var tbody = row.parent('tbody');
-
-            if (!tbody.hasClass('show')) {
-              jQuery('tbody', table).removeClass('show table-active');
-            }
-
-            tbody.toggleClass('show table-active');
-          }
-        });
-      });
-    }
-    /*
-     * Checkable table functionality
-     *
-     * Helpers.run('table-tools-checkable');
-     *
-     * Example usage:
-     *
-     * Please check out the Table Helpers page for complete markup examples
-     *
-     */
-
-  }, {
-    key: "tableToolsCheckable",
-    value: function tableToolsCheckable() {
-      var _this2 = this;
-
-      // For each table
-      jQuery('.js-table-checkable:not(.js-table-checkable-enabled)').each(function (index, element) {
-        var table = jQuery(element); // Add .js-table-checkable-enabled class to tag it as activated
-
-        table.addClass('js-table-checkable-enabled'); // When a checkbox is clicked in thead
-
-        jQuery('thead input:checkbox', table).on('click.pixelcave.helpers', function (e) {
-          var checkedStatus = jQuery(e.currentTarget).prop('checked'); // Check or uncheck all checkboxes in tbody
-
-          jQuery('tbody input:checkbox', table).each(function (index, element) {
-            var checkbox = jQuery(element);
-            checkbox.prop('checked', checkedStatus).change();
-
-            _this2.tableToolscheckRow(checkbox, checkedStatus);
-          });
-        }); // When a checkbox is clicked in tbody
-
-        jQuery('tbody input:checkbox, tbody input + label', table).on('click.pixelcave.helpers', function (e) {
-          var checkbox = jQuery(e.currentTarget);
-          var checkedStatus = checkbox.prop('checked');
-
-          if (!checkedStatus) {
-            jQuery('thead input:checkbox', table).prop('checked', false);
-          } else {
-            if (jQuery('tbody input:checkbox:checked', table).length === jQuery('tbody input:checkbox', table).length) {
-              jQuery('thead input:checkbox', table).prop('checked', true);
-            }
-          }
-
-          _this2.tableToolscheckRow(checkbox, checkbox.prop('checked'));
-        }); // When a row is clicked in tbody
-
-        jQuery('tbody > tr', table).on('click.pixelcave.helpers', function (e) {
-          if (e.target.type !== 'checkbox' && e.target.type !== 'button' && e.target.tagName.toLowerCase() !== 'a' && !jQuery(e.target).parent('a').length && !jQuery(e.target).parent('button').length && !jQuery(e.target).parent('.custom-control').length && !jQuery(e.target).parent('label').length) {
-            var checkbox = jQuery('input:checkbox', e.currentTarget);
-            var checkedStatus = checkbox.prop('checked');
-            checkbox.prop('checked', !checkedStatus).change();
-
-            _this2.tableToolscheckRow(checkbox, !checkedStatus);
-
-            if (checkedStatus) {
-              jQuery('thead input:checkbox', table).prop('checked', false);
-            } else {
-              if (jQuery('tbody input:checkbox:checked', table).length === jQuery('tbody input:checkbox', table).length) {
-                jQuery('thead input:checkbox', table).prop('checked', true);
-              }
-            }
-          }
-        });
-      });
-    } // Checkable table functionality helper - Checks or unchecks table row
-
-  }, {
-    key: "tableToolscheckRow",
-    value: function tableToolscheckRow(checkbox, checkedStatus) {
-      if (checkedStatus) {
-        checkbox.closest('tr').addClass('table-active');
-      } else {
-        checkbox.closest('tr').removeClass('table-active');
-      }
-    }
-    /*
-     ********************************************************************************************
-     *
-     * All the following helpers require each plugin's resources (JS, CSS) to be included in order to work
-     *
-     ********************************************************************************************
-     */
-
-    /*
-     * Magnific Popup functionality, for more examples you can check out http://dimsemenov.com/plugins/magnific-popup/
-     *
-     * Helpers.run('magnific-popup');
-     *
-     * Example usage:
-     *
-     * Please check out the Gallery page in Components for complete markup examples
-     *
-     */
-
-  }, {
-    key: "magnific",
-    value: function magnific() {
-      // Gallery init
-      jQuery('.js-gallery:not(.js-gallery-enabled)').each(function (index, element) {
-        // Add .js-gallery-enabled class to tag it as activated and init it
-        jQuery(element).addClass('js-gallery-enabled').magnificPopup({
-          delegate: 'a.img-lightbox',
-          type: 'image',
-          gallery: {
-            enabled: true
-          }
-        });
-      });
-    }
-    /*
-     * Summernote init, for more examples you can check out https://summernote.org/
-     *
-     * Helpers.run('summernote');
-     *
-     * Example usage:
-     *
-     * <div class="js-summernote-air"><p>Hello inline Summernote!</p></div> or
-     * <div class="js-summernote">Hello Summernote!</div>
-     *
-     *
-     */
-
-  }, {
-    key: "summernote",
-    value: function summernote() {
-      // Init text editor in air mode (inline)
-      jQuery('.js-summernote-air:not(.js-summernote-air-enabled)').each(function (index, element) {
-        // Add .js-summernote-air-enabled class to tag it as activated and init it
-        jQuery(element).addClass('js-summernote-air-enabled').summernote({
-          airMode: true,
-          tooltip: false
-        });
-      }); // Init full text editor
-
-      jQuery('.js-summernote:not(.js-summernote-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-summernote-enabled class to tag it as activated and init it
-
-        el.addClass('js-summernote-enabled').summernote({
-          height: el.data('height') || 350,
-          minHeight: el.data('min-height') || null,
-          maxHeight: el.data('max-height') || null
-        });
-      });
-    }
-    /*
-     * CKEditor init, for more examples you can check out http://ckeditor.com/
-     *
-     * Helpers.run('ckeditor');
-     *
-     * Example usage:
-     *
-     * <textarea id="js-ckeditor" name="ckeditor">Hello CKEditor!</textarea> or
-     * <div id="js-ckeditor-inline">Hello inline CKEditor!</div>
-     *
-     */
-
-  }, {
-    key: "ckeditor",
-    value: function ckeditor() {
-      // Init inline text editor
-      if (jQuery('#js-ckeditor-inline:not(.js-ckeditor-inline-enabled)').length) {
-        jQuery('#js-ckeditor-inline').attr('contenteditable', 'true');
-        CKEDITOR.inline('js-ckeditor-inline'); // Add .js-ckeditor-inline-enabled class to tag it as activated
-
-        jQuery('#js-ckeditor-inline').addClass('js-ckeditor-inline-enabled');
-      } // Init full text editor
-
-
-      if (jQuery('#js-ckeditor:not(.js-ckeditor-enabled)').length) {
-        CKEDITOR.replace('js-ckeditor'); // Add .js-ckeditor-enabled class to tag it as activated
-
-        jQuery('#js-ckeditor').addClass('js-ckeditor-enabled');
-      }
-    }
-    /*
-     * CKEditor 5 init, for more examples you can check out http://ckeditor.com/
-     *
-     * Helpers.run('ckeditor5');
-     *
-     * Example usage:
-     *
-     * <div id="js-ckeditor5-classic">Hello classic CKEditor 5!</div>
-     * ..or..
-     * <div id="js-ckeditor5-inline">Hello inline CKEditor 5!</div>
-     *
-     */
-
-  }, {
-    key: "ckeditor5",
-    value: function ckeditor5() {
-      // Init inline text editor
-      if (jQuery('#js-ckeditor5-inline:not(.js-ckeditor5-inline-enabled)').length) {
-        InlineEditor.create(document.querySelector('#js-ckeditor5-inline')).then(function (editor) {
-          window.editor = editor;
-        })["catch"](function (error) {
-          console.error('There was a problem initializing the inline editor.', error);
-        }); // Add .js-ckeditor5-inline-enabled class to tag it as activated
-
-        jQuery('#js-ckeditor5-inline').addClass('js-ckeditor5-inline-enabled');
-      } // Init full text editor
-
-
-      if (jQuery('#js-ckeditor5-classic:not(.js-ckeditor5-classic-enabled)').length) {
-        ClassicEditor.create(document.querySelector('#js-ckeditor5-classic')).then(function (editor) {
-          window.editor = editor;
-        })["catch"](function (error) {
-          console.error('There was a problem initializing the classic editor.', error);
-        }); // Add .js-ckeditor5-classic-enabled class to tag it as activated
-
-        jQuery('#js-ckeditor5-classic').addClass('js-ckeditor5-classic-enabled');
-      }
-    }
-    /*
-     * SimpleMDE init, for more examples you can check out https://github.com/NextStepWebs/simplemde-markdown-editor
-     *
-     * Helpers.run('simplemde');
-     *
-     * Example usage:
-     *
-     * <textarea class="js-simplemde" id="simplemde" name="simplemde">Hello SimpleMDE!</textarea>
-     *
-     */
-
-  }, {
-    key: "simpleMDE",
-    value: function simpleMDE() {
-      // Init markdown editor (with .js-simplemde class)
-      jQuery('.js-simplemde:not(.js-simplemde-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-simplemde-enabled class to tag it as activated
-
-        el.addClass('js-simplemde-enabled'); // Init editor
-
-        new SimpleMDE({
-          element: el[0],
-          autoDownloadFontAwesome: false
-        });
-      });
-    }
-    /*
-     * Slick init, for more examples you can check out http://kenwheeler.github.io/slick/
-     *
-     * Helpers.run('slick');
-     *
-     * Example usage:
-     *
-     * <div class="js-slider">
-     *   <div>Slide #1</div>
-     *   <div>Slide #2</div>
-     *   <div>Slide #3</div>
-     * </div>
-     *
-     */
-
-  }, {
-    key: "slick",
-    value: function slick() {
-      // Get each slider element (with .js-slider class)
-      jQuery('.js-slider:not(.js-slider-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-slider-enabled class to tag it as activated and init it
-
-        el.addClass('js-slider-enabled').slick({
-          arrows: el.data('arrows') || false,
-          dots: el.data('dots') || false,
-          slidesToShow: el.data('slides-to-show') || 1,
-          centerMode: el.data('center-mode') || false,
-          autoplay: el.data('autoplay') || false,
-          autoplaySpeed: el.data('autoplay-speed') || 3000,
-          infinite: typeof el.data('infinite') === 'undefined' ? true : el.data('infinite')
-        });
-      });
-    }
-    /*
-     * Bootstrap Datepicker init, for more examples you can check out https://github.com/eternicode/bootstrap-datepicker
-     *
-     * Helpers.run('datepicker');
-     *
-     * Example usage:
-     *
-     * <input type="text" class="js-datepicker form-control">
-     *
-     */
-
-  }, {
-    key: "datepicker",
-    value: function datepicker() {
-      // Init datepicker (with .js-datepicker and .input-daterange class)
-      jQuery('.js-datepicker:not(.js-datepicker-enabled)').add('.input-daterange:not(.js-datepicker-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-datepicker-enabled class to tag it as activated and init it
-
-        el.addClass('js-datepicker-enabled').datepicker({
-          weekStart: el.data('week-start') || 0,
-          autoclose: el.data('autoclose') || false,
-          todayHighlight: el.data('today-highlight') || false,
-          orientation: 'bottom' // Position issue when using BS4, set it to bottom until officially supported
-
-        });
-      });
-    }
-    /*
-     * Bootstrap Colorpicker init, for more examples you can check out https://github.com/itsjavi/bootstrap-colorpicker/
-     *
-     * Helpers.run('colorpicker');
-     *
-     * Example usage:
-     *
-     * <input type="text" class="js-colorpicker form-control" value="#db4a39">
-     *
-     */
-
-  }, {
-    key: "colorpicker",
-    value: function colorpicker() {
-      // Get each colorpicker element (with .js-colorpicker class)
-      jQuery('.js-colorpicker:not(.js-colorpicker-enabled)').each(function (index, element) {
-        // Add .js-enabled class to tag it as activated and init it
-        jQuery(element).addClass('js-colorpicker-enabled').colorpicker();
-      });
-    }
-    /*
-     * Masked Inputs, for more examples you can check out https://github.com/digitalBush/jquery.maskedinput
-     *
-     * Helpers.run('masked-inputs');
-     *
-     * Example usage:
-     *
-     * Please check out the Form plugins page for complete markup examples
-     *
-     */
-
-  }, {
-    key: "maskedInputs",
-    value: function maskedInputs() {
-      // Init Masked Inputs
-      // a - Represents an alpha character (A-Z,a-z)
-      // 9 - Represents a numeric character (0-9)
-      // * - Represents an alphanumeric character (A-Z,a-z,0-9)
-      jQuery('.js-masked-date:not(.js-masked-enabled)').mask('99/99/9999');
-      jQuery('.js-masked-date-dash:not(.js-masked-enabled)').mask('99-99-9999');
-      jQuery('.js-masked-phone:not(.js-masked-enabled)').mask('(999) 999-9999');
-      jQuery('.js-masked-phone-ext:not(.js-masked-enabled)').mask('(999) 999-9999? x99999');
-      jQuery('.js-masked-taxid:not(.js-masked-enabled)').mask('99-9999999');
-      jQuery('.js-masked-ssn:not(.js-masked-enabled)').mask('999-99-9999');
-      jQuery('.js-masked-pkey:not(.js-masked-enabled)').mask('a*-999-a999');
-      jQuery('.js-masked-time:not(.js-masked-enabled)').mask('99:99');
-      jQuery('.js-masked-date').add('.js-masked-date-dash').add('.js-masked-phone').add('.js-masked-phone-ext').add('.js-masked-taxid').add('.js-masked-ssn').add('.js-masked-pkey').add('.js-masked-time').addClass('js-masked-enabled');
-    }
-    /*
-     * Select2, for more examples you can check out https://github.com/select2/select2
-     *
-     * Helpers.run('select2');
-     *
-     * Example usage:
-     *
-     * <select class="js-select2 form-control" style="width: 100%;" data-placeholder="Choose one..">
-     *   <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-     *   <option value="1">HTML</option>
-     *   <option value="2">CSS</option>
-     *   <option value="3">Javascript</option>
-     * </select>
-     *
-     */
-
-  }, {
-    key: "select2",
-    value: function select2() {
-      // Init Select2 (with .js-select2 class)
-      jQuery('.js-select2:not(.js-select2-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-select2-enabled class to tag it as activated and init it
-
-        el.addClass('js-select2-enabled').select2({
-          placeholder: el.data('placeholder') || false
-        });
-      });
-    }
-    /*
-     * Highlight.js, for more examples you can check out https://highlightjs.org/usage/
-     *
-     * Helpers.run('highlightjs');
-     *
-     * Example usage:
-     *
-     * Please check out the Syntax Highlighting page in Components for complete markup examples
-     *
-     */
-
-  }, {
-    key: "highlightjs",
-    value: function highlightjs() {
-      // Init Highlight.js
-      if (!hljs.isHighlighted) {
-        hljs.initHighlighting();
-      }
-    }
-    /*
-     * Bootstrap Notify, for more examples you can check out http://bootstrap-growl.remabledesigns.com/
-     *
-     * Helpers.run('notify');
-     *
-     * Example usage:
-     *
-     * Please check out the Notifications page for examples
-     *
-     */
-
-  }, {
-    key: "notify",
-    value: function notify() {
-      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-      if (jQuery.isEmptyObject(options)) {
-        // Init notifications (with .js-notify class)
-        jQuery('.js-notify:not(.js-notify-enabled)').each(function (index, element) {
-          // Add .js-notify-enabled class to tag it as activated and init it
-          jQuery(element).addClass('js-notify-enabled').on('click.pixelcave.helpers', function (e) {
-            var el = jQuery(e.currentTarget); // Create notification
-
-            jQuery.notify({
-              icon: el.data('icon') || '',
-              message: el.data('message'),
-              url: el.data('url') || ''
-            }, {
-              element: 'body',
-              type: el.data('type') || 'info',
-              placement: {
-                from: el.data('from') || 'top',
-                align: el.data('align') || 'right'
-              },
-              allow_dismiss: true,
-              newest_on_top: true,
-              showProgressbar: false,
-              offset: 20,
-              spacing: 10,
-              z_index: 1033,
-              delay: 5000,
-              timer: 1000,
-              animate: {
-                enter: 'animated fadeIn',
-                exit: 'animated fadeOutDown'
-              }
-            });
-          });
-        });
-      } else {
-        // Create notification
-        jQuery.notify({
-          icon: options.icon || '',
-          message: options.message,
-          url: options.url || ''
-        }, {
-          element: options.element || 'body',
-          type: options.type || 'info',
-          placement: {
-            from: options.from || 'top',
-            align: options.align || 'right'
-          },
-          allow_dismiss: options.allow_dismiss === false ? false : true,
-          newest_on_top: options.newest_on_top === false ? false : true,
-          showProgressbar: options.show_progress_bar ? true : false,
-          offset: options.offset || 20,
-          spacing: options.spacing || 10,
-          z_index: options.z_index || 1033,
-          delay: options.delay || 5000,
-          timer: options.timer || 1000,
-          animate: {
-            enter: options.animate_enter || 'animated fadeIn',
-            exit: options.animate_exit || 'animated fadeOutDown'
-          }
-        });
-      }
-    }
-    /*
-     * Easy Pie Chart, for more examples you can check out http://rendro.github.io/easy-pie-chart/
-     *
-     * Helpers.run('easy-pie-chart');
-     *
-     * Example usage:
-     *
-     * <div class="js-pie-chart pie-chart" data-percent="25" data-line-width="2" data-size="100">
-     *   <span>..Content..</span>
-     * </div>
-     *
-     */
-
-  }, {
-    key: "easyPieChart",
-    value: function easyPieChart() {
-      // Init Easy Pie Charts (with .js-pie-chart class)
-      jQuery('.js-pie-chart:not(.js-pie-chart-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-pie-chart-enabled class to tag it as activated and init it
-
-        el.addClass('js-pie-chart-enabled').easyPieChart({
-          barColor: el.data('bar-color') || '#777777',
-          trackColor: el.data('track-color') || '#eeeeee',
-          lineWidth: el.data('line-width') || 3,
-          size: el.data('size') || '80',
-          animate: el.data('animate') || 750,
-          scaleColor: el.data('scale-color') || false
-        });
-      });
-    }
-    /*
-     * Bootstrap Maxlength, for more examples you can check out https://github.com/mimo84/bootstrap-maxlength
-     *
-     * Helpers.run('maxlength');
-     *
-     * Example usage:
-     *
-     * <input type="text" class="js-maxlength form-control" maxlength="20">
-     *
-     */
-
-  }, {
-    key: "maxlength",
-    value: function maxlength() {
-      // Init Bootstrap Maxlength (with .js-maxlength class)
-      jQuery('.js-maxlength:not(.js-maxlength-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-maxlength-enabled class to tag it as activated and init it
-
-        el.addClass('js-maxlength-enabled').maxlength({
-          alwaysShow: el.data('always-show') ? true : false,
-          threshold: el.data('threshold') || 10,
-          warningClass: el.data('warning-class') || 'badge badge-warning',
-          limitReachedClass: el.data('limit-reached-class') || 'badge badge-danger',
-          placement: el.data('placement') || 'bottom',
-          preText: el.data('pre-text') || '',
-          separator: el.data('separator') || '/',
-          postText: el.data('post-text') || ''
-        });
-      });
-    }
-    /*
-     * Ion Range Slider, for more examples you can check out https://github.com/IonDen/ion.rangeSlider
-     *
-     * Helpers.run('rangeslider');
-     *
-     * Example usage:
-     *
-     * <input type="text" class="js-rangeslider form-control" value="50">
-     *
-     */
-
-  }, {
-    key: "rangeslider",
-    value: function rangeslider() {
-      // Init Ion Range Slider (with .js-rangeslider class)
-      jQuery('.js-rangeslider:not(.js-rangeslider-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-rangeslider-enabled class to tag it as activated and init it
-
-        jQuery(element).addClass('js-rangeslider-enabled').ionRangeSlider({
-          input_values_separator: ';',
-          skin: el.data('skin') || 'round'
-        });
-      });
-    }
-    /*
-     * jQuery Sparkline Charts, for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-docs
-     *
-     * Helpers.run('sparkline');
-     *
-     * Example usage:
-     *
-     * <span class="js-sparkline" data-type="line" data-points="[10,20,30,25,15,40,45]"></span>
-     *
-     */
-
-  }, {
-    key: "sparkline",
-    value: function sparkline() {
-      var self = this; // Init jQuery Sparkline Charts (with .js-sparkline class)
-
-      jQuery('.js-sparkline:not(.js-sparkline-enabled)').each(function (index, element) {
-        var el = jQuery(element);
-        var type = el.data('type');
-        var options = {}; // Sparkline types
-
-        var types = {
-          line: function line() {
-            options['type'] = type;
-            options['lineWidth'] = el.data('line-width') || 2;
-            options['lineColor'] = el.data('line-color') || '#0665d0';
-            options['fillColor'] = el.data('fill-color') || '#0665d0';
-            options['spotColor'] = el.data('spot-color') || '#495057';
-            options['minSpotColor'] = el.data('min-spot-color') || '#495057';
-            options['maxSpotColor'] = el.data('max-spot-color') || '#495057';
-            options['highlightSpotColor'] = el.data('highlight-spot-color') || '#495057';
-            options['highlightLineColor'] = el.data('highlight-line-color') || '#495057';
-            options['spotRadius'] = el.data('spot-radius') || 2;
-            options['tooltipFormat'] = '{{prefix}}{{y}}{{suffix}}';
-          },
-          bar: function bar() {
-            options['type'] = type;
-            options['barWidth'] = el.data('bar-width') || 8;
-            options['barSpacing'] = el.data('bar-spacing') || 6;
-            options['barColor'] = el.data('bar-color') || '#0665d0';
-            options['tooltipFormat'] = '{{prefix}}{{value}}{{suffix}}';
-          },
-          pie: function pie() {
-            options['type'] = type;
-            options['sliceColors'] = ['#fadb7d', '#faad7d', '#75b0eb', '#abe37d'];
-            options['highlightLighten'] = el.data('highlight-lighten') || 1.1;
-            options['tooltipFormat'] = '{{prefix}}{{value}}{{suffix}}';
-          },
-          tristate: function tristate() {
-            options['type'] = type;
-            options['barWidth'] = el.data('bar-width') || 8;
-            options['barSpacing'] = el.data('bar-spacing') || 6;
-            options['posBarColor'] = el.data('pos-bar-color') || '#82b54b';
-            options['negBarColor'] = el.data('neg-bar-color') || '#e04f1a';
-          }
-        }; // If the correct type is set init the chart
-
-        if (types[type]) {
-          types[type](); // Extra options added only if specified
-
-          if (type === 'line') {
-            if (el.data('chart-range-min') >= 0 || el.data('chart-range-min')) {
-              options['chartRangeMin'] = el.data('chart-range-min');
-            }
-
-            if (el.data('chart-range-max') >= 0 || el.data('chart-range-max')) {
-              options['chartRangeMax'] = el.data('chart-range-max');
-            }
-          } // Add common options used in all types
-
-
-          options['width'] = el.data('width') || '120px';
-          options['height'] = el.data('height') || '80px';
-          options['tooltipPrefix'] = el.data('tooltip-prefix') ? el.data('tooltip-prefix') + ' ' : '';
-          options['tooltipSuffix'] = el.data('tooltip-suffix') ? ' ' + el.data('tooltip-suffix') : ''; // If we need a responsive width for the chart, then don't add .js-sparkline-enabled class and re-run the helper on window resize
-
-          if (options['width'] === '100%') {
-            if (!sparklineResize) {
-              // Make sure that we bind the event only once
-              sparklineResize = true; // On window resize, re-run the Sparkline helper
-
-              jQuery(window).on('resize.pixelcave.helpers.sparkline', function (e) {
-                clearTimeout(sparklineTimeout);
-                sparklineTimeout = setTimeout(function () {
-                  self.sparkline();
-                }, 500);
-              });
-            }
-          } else {
-            // It has a specific width (it doesn't need to re-init again on resize), so add .js-sparkline-enabled class to tag it as activated
-            jQuery(element).addClass('js-sparkline-enabled');
-          } // Finally init it
-
-
-          jQuery(element).sparkline(el.data('points') || [0], options);
-        } else {
-          console.log('[jQuery Sparkline JS Helper] Please add a correct type (line, bar, pie or tristate) in all your elements with \'js-sparkline\' class.');
-        }
-      });
-    }
-    /*
-     * jQuery Validation, for more examples you can check out https://github.com/jzaefferer/jquery-validation
-     *
-     * Helpers.run('validation');
-     *
-     * Example usage:
-     *
-     * By calling the helper, you set up the default options that will be used for jQuery Validation
-     *
-     */
-
-  }, {
-    key: "validation",
-    value: function validation() {
-      // Set default options for jQuery Validation plugin
-      jQuery.validator.setDefaults({
-        errorClass: 'invalid-feedback animated fadeIn',
-        errorElement: 'div',
-        errorPlacement: function errorPlacement(error, el) {
-          jQuery(el).addClass('is-invalid');
-          jQuery(el).parents('.form-group').append(error);
-        },
-        highlight: function highlight(el) {
-          jQuery(el).parents('.form-group').find('.is-invalid').removeClass('is-invalid').addClass('is-invalid');
-        },
-        success: function success(el) {
-          jQuery(el).parents('.form-group').find('.is-invalid').removeClass('is-invalid');
-          jQuery(el).remove();
-        }
-      });
-    }
-    /*
-     * Flatpickr init, for more examples you can check out https://github.com/flatpickr/flatpickr
-     *
-     * Helpers.run('flatpickr');
-     *
-     * Example usage:
-     *
-     * <input type="text" class="js-flatpickr form-control">
-     *
-     */
-
-  }, {
-    key: "flatpickr",
-    value: function (_flatpickr) {
-      function flatpickr() {
-        return _flatpickr.apply(this, arguments);
-      }
-
-      flatpickr.toString = function () {
-        return _flatpickr.toString();
-      };
-
-      return flatpickr;
-    }(function () {
-      // Init Flatpickr (with .js-flatpickr class)
-      jQuery('.js-flatpickr:not(.js-flatpickr-enabled)').each(function (index, element) {
-        var el = jQuery(element); // Add .js-flatpickr-enabled class to tag it as activated
-
-        el.addClass('js-flatpickr-enabled'); // Init it
-
-        flatpickr(el, {});
-      });
-    })
-  }]);
-
-  return Helpers;
-}();
-
-
-
-/***/ }),
-
-/***/ "./resources/js/oneui/modules/template.js":
-/*!************************************************!*\
-  !*** ./resources/js/oneui/modules/template.js ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Template; });
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./resources/js/oneui/modules/tools.js");
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./resources/js/oneui/modules/helpers.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-/*
- *  Document   : template.js
- *  Author     : pixelcave
- *  Description: UI Framework custom functionality
- *
- */
-// Import required modules
-
- // Template
-
-var Template = /*#__PURE__*/function () {
-  /*
-   * Auto called when creating a new instance
-   *
-   */
-  function Template() {
-    _classCallCheck(this, Template);
-
-    this._uiInit();
-  }
-  /*
-   * Init all vital functionality
-   *
-   */
-
-
-  _createClass(Template, [{
-    key: "_uiInit",
-    value: function _uiInit() {
-      // Layout variables
-      this._lHtml = jQuery('html');
-      this._lBody = jQuery('body');
-      this._lpageLoader = jQuery('#page-loader');
-      this._lPage = jQuery('#page-container');
-      this._lSidebar = jQuery('#sidebar');
-      this._lSidebarScrollCon = jQuery('.js-sidebar-scroll', '#sidebar');
-      this._lSideOverlay = jQuery('#side-overlay');
-      this._lHeader = jQuery('#page-header');
-      this._lHeaderSearch = jQuery('#page-header-search');
-      this._lHeaderSearchInput = jQuery('#page-header-search-input');
-      this._lHeaderLoader = jQuery('#page-header-loader');
-      this._lMain = jQuery('#main-container');
-      this._lFooter = jQuery('#page-footer'); // Helper variables
-
-      this._lSidebarScroll = false;
-      this._lSideOverlayScroll = false;
-      this._windowW = _tools__WEBPACK_IMPORTED_MODULE_0__["default"].getWidth(); // Base UI Init
-
-      this._uiHandleSidebars('init');
-
-      this._uiHandleNav();
-
-      this._uiHandleTheme(); // API Init
-
-
-      this._uiApiLayout();
-
-      this._uiApiBlocks(); // Core Helpers Init
-
-
-      this.helpers(['core-bootstrap-tooltip', 'core-bootstrap-popover', 'core-bootstrap-tabs', 'core-bootstrap-custom-file-input', 'core-toggle-class', 'core-scroll-to', 'core-year-copy', 'core-appear', 'core-ripple']); // Page Loader (hide it)
-
-      this._uiHandlePageLoader();
-    }
-    /*
-     * Handles sidebar and side overlay scrolling functionality/styles
-     *
-     */
-
-  }, {
-    key: "_uiHandleSidebars",
-    value: function _uiHandleSidebars(mode) {
-      var self = this;
-
-      if (mode === 'init') {
-        // Add 'side-trans-enabled' class to #page-container (enables sidebar and side overlay transition on open/close)
-        // Fixes IE10, IE11 and Edge bug in which animation was executed on each page load - really annoying!
-        self._lPage.addClass('side-trans-enabled'); // Init custom scrolling
-
-
-        this._uiHandleSidebars();
-      } else {
-        // If .side-scroll is added to #page-container enable custom scrolling
-        if (self._lPage.hasClass('side-scroll')) {
-          // Init custom scrolling on Sidebar
-          if (self._lSidebar.length > 0 && !self._lSidebarScroll) {
-            self._lSidebarScroll = new SimpleBar(self._lSidebarScrollCon[0]); // Enable scrolling lock
-
-            jQuery('.simplebar-content-wrapper', self._lSidebar).scrollLock('enable');
-          } // Init custom scrolling on Side Overlay
-
-
-          if (self._lSideOverlay.length > 0 && !self._lSideOverlayScroll) {
-            self._lSideOverlayScroll = new SimpleBar(self._lSideOverlay[0]); // Enable scrolling lock
-
-            jQuery('.simplebar-content-wrapper', self._lSideOverlay).scrollLock('enable');
-          }
-        } else {
-          // If custom scrolling exists on Sidebar remove it
-          if (self._lSidebar && self._lSidebarScroll) {
-            // Disable scrolling lock
-            jQuery('.simplebar-content-wrapper', self._lSidebar).scrollLock('disable'); // Unmount Simplebar
-
-            self._lSidebarScroll.unMount();
-
-            self._lSidebarScroll = null; // Remove Simplebar leftovers
-
-            self._lSidebarScrollCon.removeAttr('data-simplebar').html(jQuery('.simplebar-content', self._lSidebar).html());
-          } // If custom scrolling exists on Side Overlay remove it
-
-
-          if (self._lSideOverlay && self._lSideOverlayScroll) {
-            // Disable scrolling lock
-            jQuery('.simplebar-content-wrapper', self._lSideOverlay).scrollLock('disable'); // Unmount Simplebar
-
-            self._lSideOverlayScroll.unMount();
-
-            self._lSideOverlayScroll = null; // Remove Simplebar leftovers
-
-            self._lSideOverlay.removeAttr('data-simplebar').html(jQuery('.simplebar-content', self._lSideOverlay).html());
-          }
-        }
-      }
-    }
-    /*
-     * Toggle Submenu functionality
-     *
-     */
-
-  }, {
-    key: "_uiHandleNav",
-    value: function _uiHandleNav() {
-      // Unbind event in case it is already enabled
-      this._lPage.off('click.pixelcave.menu'); // When a submenu link is clicked
-
-
-      this._lPage.on('click.pixelcave.menu', '[data-toggle="submenu"]', function (e) {
-        // Get link
-        var link = jQuery(e.currentTarget); // Check if we are in horizontal navigation, large screen and hover is enabled
-
-        if (!(_tools__WEBPACK_IMPORTED_MODULE_0__["default"].getWidth() > 991 && link.parents('.nav-main').hasClass('nav-main-horizontal nav-main-hover'))) {
-          // Get link's parent
-          var parentLi = link.parent('li');
-
-          if (parentLi.hasClass('open')) {
-            // If submenu is open, close it..
-            parentLi.removeClass('open');
-            link.attr('aria-expanded', 'false');
-          } else {
-            // .. else if submenu is closed, close all other (same level) submenus first before open it
-            link.closest('ul').children('li').removeClass('open');
-            parentLi.addClass('open');
-            link.attr('aria-expanded', 'true');
-          } // Remove focus from submenu link
-
-
-          link.trigger('blur');
-        }
-
-        return false;
-      });
-    }
-    /*
-     * Page loading screen functionality
-     *
-     */
-
-  }, {
-    key: "_uiHandlePageLoader",
-    value: function _uiHandlePageLoader() {
-      var mode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'hide';
-
-      if (mode === 'show') {
-        if (this._lpageLoader.length) {
-          this._lpageLoader.addClass('show');
-        } else {
-          this._lBody.prepend("<div id=\"page-loader\" class=\"show\"></div>");
-        }
-      } else if (mode === 'hide') {
-        if (this._lpageLoader.length) {
-          this._lpageLoader.removeClass('show');
-        }
-      }
-    }
-    /*
-     * Set active color theme functionality
-     *
-     */
-
-  }, {
-    key: "_uiHandleTheme",
-    value: function _uiHandleTheme() {
-      var themeEl = jQuery('#css-theme');
-      var cookies = this._lPage.hasClass('enable-cookies') ? true : false; // If cookies are enabled
-
-      if (cookies) {
-        var themeName = Cookies.get('oneuiThemeName') || false; // Update color theme
-
-        if (themeName) {
-          _tools__WEBPACK_IMPORTED_MODULE_0__["default"].updateTheme(themeEl, themeName);
-        } // Update theme element
-
-
-        themeEl = jQuery('#css-theme');
-      } // Set the active color theme link as active
-
-
-      jQuery('[data-toggle="theme"][data-theme="' + (themeEl.length ? themeEl.attr('href') : 'default') + '"]').addClass('active'); // Unbind event in case it is already enabled
-
-      this._lPage.off('click.pixelcave.themes'); // When a color theme link is clicked
-
-
-      this._lPage.on('click.pixelcave.themes', '[data-toggle="theme"]', function (e) {
-        e.preventDefault(); // Get element and data
-
-        var el = jQuery(e.currentTarget);
-        var themeName = el.data('theme'); // Set this color theme link as active
-
-        jQuery('[data-toggle="theme"]').removeClass('active');
-        jQuery('[data-toggle="theme"][data-theme="' + themeName + '"]').addClass('active'); // Update color theme
-
-        _tools__WEBPACK_IMPORTED_MODULE_0__["default"].updateTheme(themeEl, themeName); // Update theme element
-
-        themeEl = jQuery('#css-theme'); // If cookies are enabled, save the new active color theme
-
-        if (cookies) {
-          Cookies.set('oneuiThemeName', themeName, {
-            expires: 7
-          });
-        } // Blur the link/button
-
-
-        el.trigger('blur');
-      });
-    }
-    /*
-     * Layout API
-     *
-     */
-
-  }, {
-    key: "_uiApiLayout",
-    value: function _uiApiLayout() {
-      var mode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'init';
-      var self = this; // Get current window width
-
-      self._windowW = _tools__WEBPACK_IMPORTED_MODULE_0__["default"].getWidth(); // API with object literals
-
-      var layoutAPI = {
-        init: function init() {
-          // Unbind events in case they are already enabled
-          self._lPage.off('click.pixelcave.layout');
-
-          self._lPage.off('click.pixelcave.overlay'); // Call layout API on button click
-
-
-          self._lPage.on('click.pixelcave.layout', '[data-toggle="layout"]', function (e) {
-            var el = jQuery(e.currentTarget);
-
-            self._uiApiLayout(el.data('action'));
-
-            el.trigger('blur');
-          }); // Prepend Page Overlay div if enabled (used when Side Overlay opens)
-
-
-          if (self._lPage.hasClass('enable-page-overlay')) {
-            self._lPage.prepend('<div id="page-overlay"></div>');
-
-            jQuery('#page-overlay').on('click.pixelcave.overlay', function (e) {
-              self._uiApiLayout('side_overlay_close');
-            });
-          }
-        },
-        sidebar_pos_toggle: function sidebar_pos_toggle() {
-          self._lPage.toggleClass('sidebar-r');
-        },
-        sidebar_pos_left: function sidebar_pos_left() {
-          self._lPage.removeClass('sidebar-r');
-        },
-        sidebar_pos_right: function sidebar_pos_right() {
-          self._lPage.addClass('sidebar-r');
-        },
-        sidebar_toggle: function sidebar_toggle() {
-          if (self._windowW > 991) {
-            self._lPage.toggleClass('sidebar-o');
-          } else {
-            self._lPage.toggleClass('sidebar-o-xs');
-          }
-        },
-        sidebar_open: function sidebar_open() {
-          if (self._windowW > 991) {
-            self._lPage.addClass('sidebar-o');
-          } else {
-            self._lPage.addClass('sidebar-o-xs');
-          }
-        },
-        sidebar_close: function sidebar_close() {
-          if (self._windowW > 991) {
-            self._lPage.removeClass('sidebar-o');
-          } else {
-            self._lPage.removeClass('sidebar-o-xs');
-          }
-        },
-        sidebar_mini_toggle: function sidebar_mini_toggle() {
-          if (self._windowW > 991) {
-            self._lPage.toggleClass('sidebar-mini');
-          }
-        },
-        sidebar_mini_on: function sidebar_mini_on() {
-          if (self._windowW > 991) {
-            self._lPage.addClass('sidebar-mini');
-          }
-        },
-        sidebar_mini_off: function sidebar_mini_off() {
-          if (self._windowW > 991) {
-            self._lPage.removeClass('sidebar-mini');
-          }
-        },
-        sidebar_style_toggle: function sidebar_style_toggle() {
-          self._lPage.toggleClass('sidebar-dark');
-        },
-        sidebar_style_dark: function sidebar_style_dark() {
-          self._lPage.addClass('sidebar-dark');
-        },
-        sidebar_style_light: function sidebar_style_light() {
-          self._lPage.removeClass('sidebar-dark');
-        },
-        side_overlay_toggle: function side_overlay_toggle() {
-          if (self._lPage.hasClass('side-overlay-o')) {
-            self._uiApiLayout('side_overlay_close');
-          } else {
-            self._uiApiLayout('side_overlay_open');
-          }
-        },
-        side_overlay_open: function side_overlay_open() {
-          // When ESCAPE key is hit close the side overlay
-          jQuery(document).on('keydown.pixelcave.sideOverlay', function (e) {
-            if (e.which === 27) {
-              e.preventDefault();
-
-              self._uiApiLayout('side_overlay_close');
-            }
-          });
-
-          self._lPage.addClass('side-overlay-o');
-        },
-        side_overlay_close: function side_overlay_close() {
-          // Unbind ESCAPE key
-          jQuery(document).off('keydown.pixelcave.sideOverlay');
-
-          self._lPage.removeClass('side-overlay-o');
-        },
-        side_overlay_mode_hover_toggle: function side_overlay_mode_hover_toggle() {
-          self._lPage.toggleClass('side-overlay-hover');
-        },
-        side_overlay_mode_hover_on: function side_overlay_mode_hover_on() {
-          self._lPage.addClass('side-overlay-hover');
-        },
-        side_overlay_mode_hover_off: function side_overlay_mode_hover_off() {
-          self._lPage.removeClass('side-overlay-hover');
-        },
-        header_mode_toggle: function header_mode_toggle() {
-          self._lPage.toggleClass('page-header-fixed');
-        },
-        header_mode_static: function header_mode_static() {
-          self._lPage.removeClass('page-header-fixed');
-        },
-        header_mode_fixed: function header_mode_fixed() {
-          self._lPage.addClass('page-header-fixed');
-        },
-        header_style_toggle: function header_style_toggle() {
-          self._lPage.toggleClass('page-header-dark');
-        },
-        header_style_dark: function header_style_dark() {
-          self._lPage.addClass('page-header-dark');
-        },
-        header_style_light: function header_style_light() {
-          self._lPage.removeClass('page-header-dark');
-        },
-        header_search_on: function header_search_on() {
-          self._lHeaderSearch.addClass('show');
-
-          self._lHeaderSearchInput.focus(); // When ESCAPE key is hit close the search section
-
-
-          jQuery(document).on('keydown.pixelcave.header.search', function (e) {
-            if (e.which === 27) {
-              e.preventDefault();
-
-              self._uiApiLayout('header_search_off');
-            }
-          });
-        },
-        header_search_off: function header_search_off() {
-          self._lHeaderSearch.removeClass('show');
-
-          self._lHeaderSearchInput.trigger('blur'); // Unbind ESCAPE key
-
-
-          jQuery(document).off('keydown.pixelcave.header.search');
-        },
-        header_loader_on: function header_loader_on() {
-          self._lHeaderLoader.addClass('show');
-        },
-        header_loader_off: function header_loader_off() {
-          self._lHeaderLoader.removeClass('show');
-        },
-        side_scroll_toggle: function side_scroll_toggle() {
-          self._lPage.toggleClass('side-scroll');
-
-          self._uiHandleSidebars();
-        },
-        side_scroll_native: function side_scroll_native() {
-          self._lPage.removeClass('side-scroll');
-
-          self._uiHandleSidebars();
-        },
-        side_scroll_custom: function side_scroll_custom() {
-          self._lPage.addClass('side-scroll');
-
-          self._uiHandleSidebars();
-        },
-        content_layout_toggle: function content_layout_toggle() {
-          if (self._lPage.hasClass('main-content-boxed')) {
-            self._uiApiLayout('content_layout_narrow');
-          } else if (self._lPage.hasClass('main-content-narrow')) {
-            self._uiApiLayout('content_layout_full_width');
-          } else {
-            self._uiApiLayout('content_layout_boxed');
-          }
-        },
-        content_layout_boxed: function content_layout_boxed() {
-          self._lPage.removeClass('main-content-narrow').addClass('main-content-boxed');
-        },
-        content_layout_narrow: function content_layout_narrow() {
-          self._lPage.removeClass('main-content-boxed').addClass('main-content-narrow');
-        },
-        content_layout_full_width: function content_layout_full_width() {
-          self._lPage.removeClass('main-content-boxed main-content-narrow');
-        }
-      }; // Call layout API
-
-      if (layoutAPI[mode]) {
-        layoutAPI[mode]();
-      }
-    }
-    /*
-     * Blocks API
-     *
-     */
-
-  }, {
-    key: "_uiApiBlocks",
-    value: function _uiApiBlocks() {
-      var _this = this;
-
-      var mode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'init';
-      var block = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var self = this; // Helper variables
-
-      var elBlock, btnFullscreen, btnContentToggle; // Set default icons for fullscreen and content toggle buttons
-
-      var iconFullscreen = 'si si-size-fullscreen';
-      var iconFullscreenActive = 'si si-size-actual';
-      var iconContent = 'si si-arrow-up';
-      var iconContentActive = 'si si-arrow-down'; // API with object literals
-
-      var blockAPI = {
-        init: function init() {
-          // Auto add the default toggle icons to fullscreen and content toggle buttons
-          jQuery('[data-toggle="block-option"][data-action="fullscreen_toggle"]').each(function (index, element) {
-            var el = jQuery(element);
-            el.html('<i class="' + (jQuery(el).closest('.block').hasClass('block-mode-fullscreen') ? iconFullscreenActive : iconFullscreen) + '"></i>');
-          });
-          jQuery('[data-toggle="block-option"][data-action="content_toggle"]').each(function (index, element) {
-            var el = jQuery(element);
-            el.html('<i class="' + (el.closest('.block').hasClass('block-mode-hidden') ? iconContentActive : iconContent) + '"></i>');
-          }); // Unbind event in case it is already enabled
-
-          self._lPage.off('click.pixelcave.blocks'); // Call blocks API on option button click
-
-
-          self._lPage.on('click.pixelcave.blocks', '[data-toggle="block-option"]', function (e) {
-            _this._uiApiBlocks(jQuery(e.currentTarget).data('action'), jQuery(e.currentTarget).closest('.block'));
-          });
-        },
-        fullscreen_toggle: function fullscreen_toggle() {
-          elBlock.removeClass('block-mode-pinned').toggleClass('block-mode-fullscreen'); // Enable/disable scroll lock to block
-
-          if (elBlock.hasClass('block-mode-fullscreen')) {
-            jQuery(elBlock).scrollLock('enable');
-          } else {
-            jQuery(elBlock).scrollLock('disable');
-          } // Update block option icon
-
-
-          if (btnFullscreen.length) {
-            if (elBlock.hasClass('block-mode-fullscreen')) {
-              jQuery('i', btnFullscreen).removeClass(iconFullscreen).addClass(iconFullscreenActive);
-            } else {
-              jQuery('i', btnFullscreen).removeClass(iconFullscreenActive).addClass(iconFullscreen);
-            }
-          }
-        },
-        fullscreen_on: function fullscreen_on() {
-          elBlock.removeClass('block-mode-pinned').addClass('block-mode-fullscreen'); // Enable scroll lock to block
-
-          jQuery(elBlock).scrollLock('enable'); // Update block option icon
-
-          if (btnFullscreen.length) {
-            jQuery('i', btnFullscreen).removeClass(iconFullscreen).addClass(iconFullscreenActive);
-          }
-        },
-        fullscreen_off: function fullscreen_off() {
-          elBlock.removeClass('block-mode-fullscreen'); // Disable scroll lock to block
-
-          jQuery(elBlock).scrollLock('disable'); // Update block option icon
-
-          if (btnFullscreen.length) {
-            jQuery('i', btnFullscreen).removeClass(iconFullscreenActive).addClass(iconFullscreen);
-          }
-        },
-        content_toggle: function content_toggle() {
-          elBlock.toggleClass('block-mode-hidden'); // Update block option icon
-
-          if (btnContentToggle.length) {
-            if (elBlock.hasClass('block-mode-hidden')) {
-              jQuery('i', btnContentToggle).removeClass(iconContent).addClass(iconContentActive);
-            } else {
-              jQuery('i', btnContentToggle).removeClass(iconContentActive).addClass(iconContent);
-            }
-          }
-        },
-        content_hide: function content_hide() {
-          elBlock.addClass('block-mode-hidden'); // Update block option icon
-
-          if (btnContentToggle.length) {
-            jQuery('i', btnContentToggle).removeClass(iconContent).addClass(iconContentActive);
-          }
-        },
-        content_show: function content_show() {
-          elBlock.removeClass('block-mode-hidden'); // Update block option icon
-
-          if (btnContentToggle.length) {
-            jQuery('i', btnContentToggle).removeClass(iconContentActive).addClass(iconContent);
-          }
-        },
-        state_toggle: function state_toggle() {
-          elBlock.toggleClass('block-mode-loading'); // Return block to normal state if the demostration mode is on in the refresh option button - data-action-mode="demo"
-
-          if (jQuery('[data-toggle="block-option"][data-action="state_toggle"][data-action-mode="demo"]', elBlock).length) {
-            setTimeout(function () {
-              elBlock.removeClass('block-mode-loading');
-            }, 2000);
-          }
-        },
-        state_loading: function state_loading() {
-          elBlock.addClass('block-mode-loading');
-        },
-        state_normal: function state_normal() {
-          elBlock.removeClass('block-mode-loading');
-        },
-        pinned_toggle: function pinned_toggle() {
-          elBlock.removeClass('block-mode-fullscreen').toggleClass('block-mode-pinned');
-        },
-        pinned_on: function pinned_on() {
-          elBlock.removeClass('block-mode-fullscreen').addClass('block-mode-pinned');
-        },
-        pinned_off: function pinned_off() {
-          elBlock.removeClass('block-mode-pinned');
-        },
-        close: function close() {
-          elBlock.addClass('d-none');
-        },
-        open: function open() {
-          elBlock.removeClass('d-none');
-        }
-      };
-
-      if (mode === 'init') {
-        // Call Block API
-        blockAPI[mode]();
-      } else {
-        // Get block element
-        elBlock = block instanceof jQuery ? block : jQuery(block); // If element exists, procceed with block functionality
-
-        if (elBlock.length) {
-          // Get block option buttons if exist (need them to update their icons)
-          btnFullscreen = jQuery('[data-toggle="block-option"][data-action="fullscreen_toggle"]', elBlock);
-          btnContentToggle = jQuery('[data-toggle="block-option"][data-action="content_toggle"]', elBlock); // Call Block API
-
-          if (blockAPI[mode]) {
-            blockAPI[mode]();
-          }
-        }
-      }
-    }
-    /*
-     ********************************************************************************************
-     *
-     * Create aliases for easier/quicker access to vital methods
-     *
-     *********************************************************************************************
-     */
-
-    /*
-     * Init base functionality
-     *
-     */
-
-  }, {
-    key: "init",
-    value: function init() {
-      this._uiInit();
-    }
-    /*
-     * Layout API
-     *
-     */
-
-  }, {
-    key: "layout",
-    value: function layout(mode) {
-      this._uiApiLayout(mode);
-    }
-    /*
-     * Blocks API
-     *
-     */
-
-  }, {
-    key: "block",
-    value: function block(mode, _block) {
-      this._uiApiBlocks(mode, _block);
-    }
-    /*
-     * Handle Page Loader
-     *
-     */
-
-  }, {
-    key: "loader",
-    value: function loader(mode, colorClass) {
-      this._uiHandlePageLoader(mode, colorClass);
-    }
-    /*
-     * Run Helpers
-     *
-     */
-
-  }, {
-    key: "helpers",
-    value: function helpers(_helpers) {
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      _helpers__WEBPACK_IMPORTED_MODULE_1__["default"].run(_helpers, options);
-    }
-  }]);
-
-  return Template;
-}();
-
-
-
-/***/ }),
-
-/***/ "./resources/js/oneui/modules/tools.js":
-/*!*********************************************!*\
-  !*** ./resources/js/oneui/modules/tools.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Tools; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-/*
- *  Document   : tools.js
- *  Author     : pixelcave
- *  Description: Various small tools
- *
- */
-// Tools
-var Tools = /*#__PURE__*/function () {
-  function Tools() {
-    _classCallCheck(this, Tools);
-  }
-
-  _createClass(Tools, null, [{
-    key: "updateTheme",
-
-    /*
-     * Updates the color theme
-     *
-     */
-    value: function updateTheme(themeEl, themeName) {
-      if (themeName === 'default') {
-        if (themeEl.length) {
-          themeEl.remove();
-        }
-      } else {
-        if (themeEl.length) {
-          themeEl.attr('href', themeName);
-        } else {
-          jQuery('#css-main').after('<link rel="stylesheet" id="css-theme" href="' + themeName + '">');
-        }
-      }
-    }
-    /*
-     * Returns current browser's window width
-     *
-     */
-
-  }, {
-    key: "getWidth",
-    value: function getWidth() {
-      return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    }
-  }]);
-
-  return Tools;
-}();
-
-
-
-/***/ }),
-
-/***/ 1:
-/*!*****************************************!*\
-  !*** multi ./resources/js/oneui/app.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\KodeStudio-Login\resources\js\oneui\app.js */"./resources/js/oneui/app.js");
-
-
-/***/ })
-
-/******/ });
+/******/ })()
+;
