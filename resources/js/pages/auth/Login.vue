@@ -26,7 +26,7 @@
                                 <!-- Sign In Form -->
                                 <!-- jQuery Validation (.js-validation-signin class is initialized in js/pages/op_auth_signin.min.js which was auto compiled from _js/pages/op_auth_signin.js) -->
                                 <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                                <form method="POST" @submit.prevent="handleSubmit">
+                                <form method="POST" @submit.prevent="handleLogin">
 
                                     <div class="py-3">
                                         <div class="form-group">
@@ -65,8 +65,25 @@
 </template>
 
 <script>
+import {authLogin} from '../../composables/auth'
+
 export default {
-    name: "Login"
+    name: "Login",
+    props: {
+        token: String,
+    },
+    setup(props) {
+        const {
+            email,
+            password,
+            handleLogin
+        } = authLogin(props);
+        return {
+            email,
+            password,
+            handleLogin
+        }
+    },
 }
 </script>
 

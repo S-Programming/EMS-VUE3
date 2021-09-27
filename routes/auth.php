@@ -22,12 +22,12 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
 Route::post('/check_email', [RegisteredUserController::class, 'checkEmail'])->name('check.email');
 
 
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])
-    ->middleware('guest')
-    ->name('login');
+//Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+//    ->middleware('guest')
+//    ->name('login');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-    ->middleware('guest');
+    ->middleware('guest')->name('login');
 
 Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
     ->middleware('guest')

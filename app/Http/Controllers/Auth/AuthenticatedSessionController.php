@@ -24,19 +24,20 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      *
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return array
      */
     public function store(LoginRequest $request)
     {
         $request->authenticate();
         $request->session()->regenerate();
         $user = $this->getAuthUser();
+        $token = $user->createToken('auth_token')->plainTextToken;
+
         $userData = $user ? $user->toArray() : [];
         $userId = $userData['id'] ?? 0;
-        $responseData = ['user_data' => $userData, 'user_id' => $userId, 'expiresIn' => 3600, 'redirect_to' => '/'];
-        return $request->wantsJson()
-            ? $this->success('Logged-in successfully', $responseData)
-            : redirect(RouteServiceProvider::HOME);
+
+        $responseData = ['token'=>$token,'user_data' => $userData, 'user_id' => $userId, 'expiresIn' => 3600, 'redirect_to' => '/'];
+        return $responseData;
     }
 
     /**

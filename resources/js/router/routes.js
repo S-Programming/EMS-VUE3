@@ -5,12 +5,28 @@ function page(path) {
 
 export default [
     {
-        path: '/login/:token?',
-        name: 'login',
-        meta: {login: true, meta_title: 'User Login'},
-        component: page('auth/Login'),
+        path: '/',
+        component:  page('auth/Login'),
         props: true
+        // beforeEnter: (to, from, next) => {
+        //     let token = localStorage.getItem("token");
+        //     if (typeof token!=='undefined' && token){
+        //         return next({
+        //             name: 'userDashboard'
+        //         })
+        //
+        //     }
+        //     return next()
+        // },
+
     },
+    // {
+    //     path: '/login/:token?',
+    //     name: 'login',
+    //     meta: {login: true, meta_title: 'User Login'},
+    //     component: page('auth/Login'),
+    //     props: true
+    // },
     {
         path: '/logout',
         name: 'logout',
