@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-<!--        <transition name="page" mode="out-in">-->
-<!--            <component :is="defaultLayout" v-if="defaultLayout" />-->
-<!--        </transition>-->
-        <Login></Login>
+        <transition name="page" mode="out-in">
+            <component :is="defaultLayout" v-if="defaultLayout" />
+        </transition>
+
     </div>
 </template>
 

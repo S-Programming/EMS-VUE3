@@ -26,7 +26,7 @@ class UserController extends Controller
         $this->userService = $userService;
     }
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource.userReportHistory
      *
      * @return \Illuminate\Http\Response
      */

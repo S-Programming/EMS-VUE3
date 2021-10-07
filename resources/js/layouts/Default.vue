@@ -1,25 +1,34 @@
 <template>
     <div id="app">
 <!--        <div>-->
-<!--            <TopBar></TopBar>-->
-<!--            <SideBar></SideBar>-->
+<!--            <AuthHeader></AuthHeader>-->
+<!--            <Sidebar></Sidebar>-->
 <!--        </div>-->
-<!--        &lt;!&ndash;        <slot name="top-bar" />&ndash;&gt;-->
+                <slot name="top-bar" />
 
-<!--        &lt;!&ndash;        <child></child>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <component v-bind:is="componentName"></component>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <slot name="main-content" />&ndash;&gt;-->
+                <child></child>
+                <component v-bind:is="'userDashboard'"></component>
+        <!--        <slot name="main-content" />-->
 <!--        <UserList></UserList>-->
-        <Login></Login>
+<!--        <Login></Login>-->
     </div>
 </template>
 
 
 <script>
 import Login from "../pages/auth/Login";
+import AuthHeader from "../components/ui/base/AuthHeader";
+import Sidebar from "../components/ui/base/Sidebar";
+import Child from "../components/utilities/Child";
 export default {
     name: "Default",
-    components: {Login}
+    components: {Child, Sidebar, AuthHeader, Login},
+    setup(props) {
+        // const componentName = ref('')
+        return{
+
+        }
+    }
 }
 </script>
 
