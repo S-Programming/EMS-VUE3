@@ -26,6 +26,13 @@ class AuthService extends EventEmitter{
                 console.log('Error on cache reset (login)', e.message)
         }
     }
+    isAuthenticated() {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            localStorage.removeItem(localStorageKey);
+        }
+        return (localStorage.getItem(localStorageKey) === "true");
+    }
 }
 const service = new AuthService();
 export default service;

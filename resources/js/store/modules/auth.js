@@ -4,6 +4,9 @@ const state = {
     accessToken: localStorage.getItem('accessToken') || null,
 }
 const getters = {
+    isAuthenticated(state){
+        return state.accessToken;
+    },
     getProfile(state) {
         return state.profile;
     },

@@ -1,5 +1,3 @@
-import UserDashboard from "../pages/user/UserDashboard";
-
 function page(path) {
     return () => import(/* webpackChunkName: '' */ `../pages/${path}`).then(
         m => m.default || m)
@@ -8,35 +6,36 @@ function page(path) {
 export default [
     {
         path: '/',
-        name:'login',
-        component:  page('auth/Login'),
+        name: 'login',
+        component: page('auth/Login'),
+        meta:{login: true, meta_title: 'User Login'},
         props: true,
-        beforeEnter: (to, from, next) => {
-                    let token = localStorage.getItem("accessToken");
-                    if (typeof token!=='undefined' && token){
-                        return next({
-                            name: 'userDashboard'
-                         })
-
-                    }
-                    return next()
-                },
-
+        // beforeEnter: (to, from, next) => {
+        //     let token = localStorage.getItem("accessToken");
+        //     if (typeof token !== 'undefined' && token) {
+        //         return next({
+        //             name: 'userDashboard'
+        //         })
+        //
+        //     }
+        //     return next()
+        // },
     },
     {
         name: 'userDashboard',
         path: '/v/dashboard',
-        component: UserDashboard,
-        beforeEnter:(to,from,next) => {
-                    let token = localStorage.getItem("accessToken");
-                    console.log(token)
-                if(!token){
-                    return next({
-                          name:'login'
-                        })
-                    }
-                    return  next()
-                }
+        meta:{public:false,meta_title:'User Dashboard'},
+        component: page('user/UserDashboard'),
+        // beforeEnter: (to, from, next) => {
+        //     let token = localStorage.getItem("accessToken");
+        //     console.log(token)
+        //     if (!token) {
+        //         return next({
+        //             name: 'login'
+        //         })
+        //     }
+        //     return next()
+        // }
     },
     // {
     //     path: '/login/:token?',
